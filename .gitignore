@@ -1,0 +1,10 @@
+# Exported files
+*.nes
+*.o
+
+# Debug stuff
+*.dbg
+*.labels.txt
+*.map.txt
+*.cdl
+*.nl
