@@ -41,8 +41,8 @@ STA a: ram_0009
 LDA a: ram_000A
 CMP a: ram_0009
 BEQ :+ ;$C069
-:
 JSR $E679
+:
 JSR $C17F
 JSR $E816
 JSR $DB8E
@@ -126,7 +126,8 @@ STA a: ram_0009
 LDA a: ram_000C
 AND #$F8
 CMP a: ram_0009
-BEQ $C13C
+BEQ :+ ;$C13C
+:
 JMP $C118
 LDA #$1E
 STA a: ram_000E
@@ -137,7 +138,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $C15A
+BEQ :+ ;$C15A
+:
 JMP $C141
 JMP $C15D
 INC a: ram_0006
@@ -252,7 +254,8 @@ LDA #$0F
 STA a: ram_0009
 LDA a: ram_0022
 CMP a: ram_0009
-BPL $C25C
+BPL :+ ; $C25C
+:
 RTS
 LDX a: ram_0022
 LDA #$F5
@@ -396,7 +399,8 @@ LDA #$FF
 STA a: ram_0009
 LDA a: ram_0052
 CMP a: ram_0009
-BEQ $C3BC
+BEQ :+ ;$C3BC
+:
 JMP $C397
 LDA #$00
 STA a: ram_0052
@@ -407,7 +411,8 @@ LDA #$05
 STA a: ram_0009
 LDA a: ram_0052
 CMP a: ram_0009
-BEQ $C3DA
+BEQ :+ ; $C3DA
+:
 JMP $C3C1
 JSR $DB8E
 JSR $C414
@@ -601,7 +606,8 @@ STA $2007
 INY
 CLC
 CPY #$20
-BEQ $C5A9
+BEQ :+ ; $C5A9
+:
 CLC
 LDA a: ram_0057
 ADC #$20
@@ -706,7 +712,8 @@ STA $2007
 INY
 CLC
 CPY #$3C
-BEQ $C69F
+BEQ :+ ; $C69F
+:
 CLC
 LDA a: ram_0057
 ADC #$20
@@ -750,7 +757,8 @@ LDA (ram_0000),Y
 STA $2007
 INY
 CPY #$4C
-BEQ $C705
+BEQ :+ ; $C705
+:
 CLC
 LDA a: ram_0057
 ADC #$08
@@ -878,13 +886,15 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BEQ $C810
+BEQ :+ ; $C810
+:
 JSR $C99E
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0015
 CMP a: ram_0009
-BEQ $C820
+BEQ :+ ; $C820
+:
 JSR $DD2D
 LDA #$00
 STA a: ram_0009
@@ -911,14 +921,16 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0016
 CMP a: ram_0009
-BEQ $C862
+BEQ :+ ; $C862
+:
 LDA #$01
 STA a: ram_0012
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0017
 CMP a: ram_0009
-BEQ $C88C
+BEQ :+ ; $C88C
+:
 LDA #$01
 STA a: ram_001C
 JSR $CBAA
@@ -926,7 +938,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0014
 CMP a: ram_0009
-BEQ $C887
+BEQ :+ ; $C887
+:
 JSR $CBAA
 LDA #$01
 STA a: ram_0059
@@ -934,7 +947,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0018
 CMP a: ram_0009
-BEQ $C8B6
+BEQ :+ ; $C8B6
+:
 LDA #$00
 STA a: ram_001C
 JSR $CCFA
@@ -942,7 +956,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0014
 CMP a: ram_0009
-BEQ $C8B1
+BEQ :+ ; $C8B1
+:
 JSR $CCFA
 LDA #$01
 STA a: ram_0059
@@ -956,7 +971,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_005B
 CMP a: ram_0009
-BEQ $C8D5
+BEQ :+ ; $C8D5
+:
 LDA #$0A
 STA a: ram_0010
 LDA #$00
@@ -966,7 +982,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0013
 CMP a: ram_0009
-BEQ $C90C
+BEQ :+ ; $C90C
+:
 LDA #$01
 STA a: ram_0009
 LDA a: ram_005C
@@ -998,24 +1015,28 @@ STA a: ram_000F
 .byte $00   ; 
 .byte $CD   ; 
 ORA #$00
-BEQ $C92C
+BEQ :+ ; $C92C
+:
 LDA #$00
 STA a: ram_0009
 LDA a: ram_005B
 CMP a: ram_0009
-BEQ $C92C
+BEQ :+ ; $C92C
+:
 DEC a: ram_005B
 JMP $C984
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0013
 CMP a: ram_0009
-BEQ $C984
+BEQ :+ ; $C984
+:
 LDA #$00
 STA a: ram_0009
 LDA a: ram_005D
 CMP a: ram_0009
-BEQ $C984
+BEQ :+ ; $C984
+:
 JSR $D584
 LDA #$01
 STA a: ram_000F
@@ -1036,7 +1057,8 @@ STA a: ram_0009
 .byte $00   ; 
 .byte $CD   ; 
 ORA #$00
-BEQ $C977
+BEQ :+ ; $C977
+:
 LDA #$26
 STA a: ram_0010
 LDA #$00
@@ -1049,7 +1071,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_000D
 CMP a: ram_0009
-BEQ $C997
+BEQ :+ ; $C997
+:
 DEC a: ram_000D
 JSR $EE7E
 JSR $D4D9
@@ -1061,7 +1084,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BEQ $C9B6
+BEQ :+ ; $C9B6
+:
 JMP $C99E
 JSR $D539
 LDA #$00
@@ -1076,7 +1100,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BEQ $C9DC
+BEQ :+ ; $C9DC
+:
 JMP $C9C9
 LDA #$0F
 STA $4015
@@ -1114,7 +1139,8 @@ ASL $098D,X
 BRK
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $CA33
+BEQ :+ ; $CA33
+:
 JMP $CA1A
 JMP $CAB7
 JSR $DC26
@@ -1122,7 +1148,8 @@ LDA $805F
 STA a: ram_0009
 LDA a: ram_005E
 CMP a: ram_0009
-BEQ $CA6C
+BEQ :+ ; $CA6C
+:
 JSR $E679
 JSR $D204
 JSR $D204
@@ -1166,7 +1193,8 @@ JSR $D204
 ORA #$00
 LDA a: ram_000D
 CMP a: ram_0009
-BEQ $CA80
+BEQ :+ ; $CA80
+:
 RTS
 LDA #$96
 STA a: ram_000D
@@ -1235,7 +1263,8 @@ LDA #$78
 STA a: ram_0009
 LDA a: ram_0061
 CMP a: ram_0009
-BPL $CB22
+BPL :+ ; $CB22
+:
 JMP $CB0C
 LDA #$00
 STA a: ram_0061
@@ -1260,13 +1289,15 @@ LDA a: ram_005E
 SEC
 SBC #$06
 CMP a: ram_0009
-BMI $CB75
+BMI :+ ; $CB75
+:
 JSR $D6E5
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0058
 CMP a: ram_0009
-BEQ $CB72
+BEQ :+ ; $CB72
+:
 JSR $D629
 JMP $CB4E
 JSR $C28B
@@ -1296,7 +1327,8 @@ STA a: ram_0009
 LDA a: ram_005F
 .byte $CD   ; 
 ORA #$00
-BPL $CBBA
+BPL :+ ; $CBBA
+:
 JMP $D204
 LDA a: ram_005E
 ASL
@@ -1309,12 +1341,14 @@ LDA #$7F
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BMI $CC2B
+BMI :+ ; $CC2B
+:
 LDA #$81
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BPL $CC2B
+BPL :+ ; $CC2B
+:
 LDX a: ram_0063
 LDA ram_0200,X
 STA a: ram_0064
@@ -1323,13 +1357,15 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CBFA
+BEQ :+ ; $CBFA
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CC0A
+BEQ :+ ; $CC0A
+:
 JMP $D204
 LDA a: ram_0063
 CLC
@@ -1344,7 +1380,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CC28
+BEQ :+ ; $CC28
+:
 RTS
 JMP $D204
 LDA #$7F
@@ -1353,7 +1390,8 @@ STA a: ram_0009
 UNDEFINED
 BRK
 CMP a: ram_0009
-BPL $CC97
+BPL :+ ; $CC97
+:
 LDA a: ram_000C
 LSR
 LSR
@@ -1372,13 +1410,15 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CC66
+BEQ :+ ; $CC66
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CC76
+BEQ :+ ; $CC76
+:
 JMP $D204
 LDA a: ram_0066
 SEC
@@ -1393,7 +1433,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CC94
+BEQ :+ ; $CC94
+:
 RTS
 JMP $D204
 LDA a: ram_000C
@@ -1416,13 +1457,15 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CCC8
+BEQ :+ ; $CCC8
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CCD8
+BEQ :+ ; $CCD8
+:
 JMP $D204
 LDA a: ram_0066
 SEC
@@ -1435,7 +1478,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CCF6
+BEQ :+ ; $CCF6
+:
 RTS
 JSR $D204
 RTS
@@ -1443,7 +1487,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BEQ $CD0A
+BEQ :+ ; $CD0A
+:
 JMP $D255
 LDA a: ram_005E
 SEC
@@ -1456,12 +1501,14 @@ LDA #$7F
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BMI $CD7B
+BMI :+ ; $CD7B
+:
 LDA #$81
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BPL $CD7B
+BPL :+ ; $CD7B
+:
 LDX a: ram_0063
 LDA ram_0200,X
 STA a: ram_0067
@@ -1470,13 +1517,15 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CD4A
+BEQ :+ ; $CD4A
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CD5A
+BEQ :+ ; $CD5A
+:
 JMP $D255
 LDA a: ram_0063
 CLC
@@ -1491,7 +1540,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CD78
+BEQ :+ ; $CD78
+:
 RTS
 JMP $D255
 LDA #$7F
@@ -1500,7 +1550,8 @@ STA a: ram_0009
 UNDEFINED
 BRK
 CMP a: ram_0009
-BPL $CDE7
+BPL :+ ; $CDE7
+:
 LDA a: ram_000C
 LSR
 LSR
@@ -1519,13 +1570,15 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CDB6
+BEQ :+ ; $CDB6
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CDC6
+BEQ :+ ; $CDC6
+:
 JMP $D255
 LDA a: ram_0066
 SEC
@@ -1540,7 +1593,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CDE4
+BEQ :+ ; $CDE4
+:
 RTS
 JMP $D255
 LDA a: ram_000C
@@ -1563,13 +1617,15 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CE18
+BEQ :+ ; $CE18
+:
 RTS
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CE28
+BEQ :+ ; $CE28
+:
 JMP $D255
 LDA a: ram_0066
 SEC
@@ -1582,7 +1638,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CE46
+BEQ :+ ; $CE46
+:
 RTS
 JMP $D255
 RTS
@@ -1634,7 +1691,8 @@ LDA #$97
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BMI $CEB8
+BMI :+ ; $CEB8
+:
 JMP $CF71
 LDA a: ram_000C
 PHA
@@ -1654,7 +1712,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CEF7
+BEQ :+ ; $CEF7
+:
 LDA a: ram_000C
 PHA
 LDA #$EF
@@ -1681,7 +1740,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CF1D
+BEQ :+ ; $CF1D
+:
 JMP $D01A
 LDA #$00
 STA a: ram_0064
@@ -1689,8 +1749,10 @@ LDA #$04
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $CF3E
-BEQ $CF3E
+BMI :+ ; $CF3E
+:
+BEQ :+ ; $CF3E
+:
 LDA a: ram_0066
 CLC
 ADC #$08
@@ -1702,7 +1764,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CF51
+BEQ :+ ; $CF51
+:
 JMP $D01A
 LDA a: ram_000C
 SEC
@@ -1732,7 +1795,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $CFA0
+BEQ :+ ; $CFA0
+:
 LDA a: ram_000C
 CLC
 ADC #$7F
@@ -1755,7 +1819,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CFC6
+BEQ :+ ; $CFC6
+:
 JMP $D01A
 LDA #$00
 STA a: ram_0064
@@ -1763,8 +1828,10 @@ LDA #$04
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $CFE7
-BEQ $CFE7
+BMI :+ ; $CFE7
+:
+BEQ :+ ; $CFE7
+:
 LDA a: ram_0066
 CLC
 ADC #$08
@@ -1776,7 +1843,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $CFFA
+BEQ :+ ; $CFFA
+:
 JMP $D01A
 LDA a: ram_000C
 SEC
@@ -1810,14 +1878,16 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0062
 CMP a: ram_0009
-BEQ $D04C
+BEQ :+ ; $D04C
+:
 LDA #$00
 STA a: ram_000F
 LDA #$3C
 STA a: ram_0009
 LDA a: ram_0010
 CMP a: ram_0009
-BPL $D05C
+BPL :+ ; $D05C
+:
 INC a: ram_0010
 RTS
 LDA a: ram_005E
@@ -1853,7 +1923,8 @@ LDA #$7F
 STA a: ram_0009
 LDA a: ram_000C
 CMP a: ram_0009
-BMI $D0AA
+BMI :+ ; $D0AA
+:
 JMP $D144
 LDA a: ram_000C
 CLC
@@ -1875,7 +1946,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $D0DE
+BEQ :+ ; $D0DE
+:
 JMP $D1E1
 LDA #$00
 STA a: ram_0064
@@ -1883,8 +1955,10 @@ LDA #$04
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $D0FF
-BEQ $D0FF
+BMI :+ ; $D0FF
+:
+BEQ :+ ; $D0FF
+:
 LDA a: ram_0066
 CLC
 ADC #$08
@@ -1896,7 +1970,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $D112
+BEQ :+ ; $D112
+:
 JMP $D1E1
 LDA a: ram_000C
 CLC
@@ -1906,14 +1981,16 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0062
 CMP a: ram_0009
-BEQ $D12E
+BEQ :+ ; $D12E
+:
 LDA #$00
 STA a: ram_000F
 LDA #$3C
 STA a: ram_0009
 LDA a: ram_0010
 CMP a: ram_0009
-BPL $D13E
+BPL :+ ; $D13E
+:
 INC a: ram_0010
 LDA #$00
 STA a: ram_005D
@@ -1940,7 +2017,8 @@ STA a: ram_0009
 LDA a: ram_0067
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $D17B
+BEQ :+ ; $D17B
+:
 JMP $D1E1
 LDA #$00
 STA a: ram_0064
@@ -1948,8 +2026,10 @@ LDA #$04
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $D19C
-BEQ $D19C
+BMI :+ ; $D19C
+:
+BEQ :+ ; $D19C
+:
 LDA a: ram_0066
 CLC
 ADC #$08
@@ -1961,7 +2041,8 @@ STA a: ram_0009
 LDA a: ram_0064
 AND a: ram_0054
 CMP a: ram_0009
-BEQ $D1AF
+BEQ :+ ; $D1AF
+:
 JMP $D1E1
 LDA a: ram_000C
 CLC
@@ -1971,14 +2052,16 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0062
 CMP a: ram_0009
-BEQ $D1CB
+BEQ :+ ; $D1CB
+:
 LDA #$00
 STA a: ram_000F
 LDA #$3C
 STA a: ram_0009
 LDA a: ram_0010
 CMP a: ram_0009
-BPL $D1DB
+BPL :+ ; $D1DB
+:
 INC a: ram_0010
 LDA #$00
 STA a: ram_005D
@@ -1989,7 +2072,8 @@ LDA #$11
 STA a: ram_0009
 LDA a: ram_0010
 CMP a: ram_0009
-BMI $D1F9
+BMI :+ ; $D1F9
+:
 LDA #$0C
 STA a: ram_0010
 RTS
@@ -2029,8 +2113,10 @@ LDA a: ram_005E
 SEC
 SBC a: ram_0020
 CMP a: ram_0009
-BMI $D254
-BEQ $D254
+BMI :+ ; $D254
+:
+BEQ :+ ; $D254
+:
 JSR $D6E5
 RTS
 LDA #$00
@@ -2043,7 +2129,8 @@ LDA #$08
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BPL $D270
+BPL :+ ; $D270
+:
 RTS
 LDA $805A
 STA a: ram_0009
@@ -2081,8 +2168,10 @@ LDA a: ram_005E
 SEC
 SBC a: ram_0020
 CMP a: ram_0009
-BPL $D2BA
-BEQ $D2BA
+BPL :+ ; $D2BA
+:
+BEQ :+ ; $D2BA
+:
 JSR $D773
 RTS
 LDA #$20
@@ -2093,7 +2182,8 @@ STA a: ram_0009
 LDA a: ram_0025
 AND #$08
 CMP a: ram_0009
-BEQ $D2D7
+BEQ :+ ; $D2D7
+:
 LDA #$28
 STA a: ram_0024
 LDA #$00
@@ -2108,14 +2198,16 @@ LDA #$02
 STA a: ram_0009
 LDA a: ram_000F
 CMP a: ram_0009
-BEQ $D2FB
+BEQ :+ ; $D2FB
+:
 LDA #$30
 STA a: ram_0024
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0012
 CMP a: ram_0009
-BEQ $D30D
+BEQ :+ ; $D30D
+:
 LDA #$38
 STA a: ram_0024
 LDA a: ram_000C
@@ -2146,7 +2238,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_000D
 CMP a: ram_0009
-BEQ $D351
+BEQ :+ ; $D351
+:
 LDA a: ram_000D
 AND #$03
 STA a: ram_006A
@@ -2154,7 +2247,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_005A
 CMP a: ram_0009
-BEQ $D391
+BEQ :+ ; $D391
+:
 LDA a: ram_0069
 CLC
 ADC #$04
@@ -2351,7 +2445,8 @@ LDA a: ram_000A
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BMI $D4ED
+BMI :+ ; $D4ED
+:
 RTS
 LDX a: ram_0022
 LDA #$08
@@ -2508,7 +2603,8 @@ STA $400D
 .byte $29   ; 
 UNDEFINED
 CMP a: ram_0009
-BEQ $D609
+BEQ :+ ; $D609
+:
 LDA #$31
 STA $2000
 LDA #$1C
@@ -2542,7 +2638,8 @@ LDA #$06
 STA a: ram_0009
 LDA a: ram_0058
 CMP a: ram_0009
-BMI $D647
+BMI :+ ; $D647
+:
 JMP $D696
 LDA a: ram_001E
 CLC
@@ -2687,7 +2784,8 @@ LDA #$01
 STA a: ram_0009
 LDA a: ram_001F
 CMP a: ram_0009
-BPL $D78E
+BPL :+ ; $D78E
+:
 RTS
 LDA $805B
 STA a: ram_0009
@@ -2797,7 +2895,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $D886
+BEQ :+ ; $D886
+:
 JMP $D869
 LDA a: ram_0008
 STA a: ram_000E
@@ -2814,7 +2913,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $D8B3
+BEQ :+ ; $D8B3
+:
 JMP $D896
 JSR $DB09
 RTS
@@ -3310,7 +3410,8 @@ LDA #$09
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $DAC3
+BEQ :+ ; $DAC3
+:
 JMP $DAA7
 JSR $DB09
 JSR $C241
@@ -3324,7 +3425,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0071
 CMP a: ram_0009
-BEQ $DAE8
+BEQ :+ ; $DAE8
+:
 JMP $DAD2
 RTS
 JSR $DB80
@@ -3430,9 +3532,11 @@ UNDEFINED
 STA $2001
 RTS
 LDA $2002
-BPL $DB8E
+BPL :+ ; $DB8E
+:
 LDA $2002
-BMI $DB93
+BMI :+ ; $DB93
+:
 LDA #$00
 STA $2005
 LDA #$00
@@ -3444,9 +3548,11 @@ STA $2006
 INC a: ram_001B
 RTS
 LDA $2002
-BPL $DBB0
+BPL :+ ; $DBB0
+:
 LDA $2002
-BMI $DBB5
+BMI :+ ; $DBB5
+:
 .byte $AD   ; 
 .byte $02   ; 
 .byte $20   ; 
@@ -3515,7 +3621,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0066
 CMP a: ram_0009
-BEQ $DC48
+BEQ :+ ; $DC48
+:
 JMP $DC30
 RTS
 LDA #$00
@@ -3564,7 +3671,8 @@ LDA #$0C
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $DC91
+BEQ :+ ; $DC91
+:
 JMP $DC76
 RTS
 LDA #$00
@@ -3576,7 +3684,8 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0080
 CMP a: ram_0009
-BEQ $DCB0
+BEQ :+ ; $DCB0
+:
 JMP $DD19
 LDX a: ram_007F
 LDA $8070,X
@@ -3594,7 +3703,8 @@ LSR
 LSR
 LSR
 CMP a: ram_0009
-BEQ $DCDA
+BEQ :+ ; $DCDA
+:
 JMP $DD19
 LDA a: ram_0081
 STA a: ram_0009
@@ -3606,7 +3716,8 @@ LDA #$06
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BPL $DCF8
+BPL :+ ; $DCF8
+:
 JMP $DDD8
 LDA a: ram_0081
 STA a: ram_0009
@@ -3620,14 +3731,16 @@ LDA #$0A
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $DD19
+BMI :+ ; $DD19
+:
 JMP $DDD8
 INC a: ram_007F
 LDA #$0C
 STA a: ram_0009
 LDA a: ram_007F
 CMP a: ram_0009
-BEQ $DD2C
+BEQ :+ ; $DD2C
+:
 JMP $DC97
 RTS
 LDA #$00
@@ -3648,7 +3761,8 @@ LSR
 LSR
 LSR
 CMP a: ram_0009
-BEQ $DD5C
+BEQ :+ ; $DD5C
+:
 JMP $DD9B
 LDA a: ram_0084
 STA a: ram_0009
@@ -3660,7 +3774,8 @@ LDA #$04
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BPL $DD7A
+BPL :+ ; $DD7A
+:
 JMP $DDB0
 LDA a: ram_0084
 STA a: ram_0009
@@ -3674,14 +3789,16 @@ LDA #$0C
 STA a: ram_0009
 LDA a: ram_005F
 CMP a: ram_0009
-BMI $DD9B
+BMI :+ ; $DD9B
+:
 JMP $DDB0
 INC a: ram_0083
 LDA a: ram_007E
 STA a: ram_0009
 LDA a: ram_0083
 CMP a: ram_0009
-BPL $DDAF
+BPL :+ ; $DDAF
+:
 JMP $DD32
 RTS
 JSR $C3EB
@@ -3695,7 +3812,8 @@ LDA #$15
 STA a: ram_0009
 LDA a: ram_0086
 CMP a: ram_0009
-BEQ $DDD4
+BEQ :+ ; $DDD4
+:
 JMP $DDB8
 JSR $C3EB
 RTS
@@ -3733,14 +3851,16 @@ LDA #$40
 STA a: ram_0009
 LDA a: ram_0087
 CMP a: ram_0009
-BEQ $DE2A
+BEQ :+ ; $DE2A
+:
 JMP $DE17
 INC a: ram_000E
 LDA #$11
 STA a: ram_0009
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ $DE3D
+BEQ :+ ; $DE3D
+:
 JMP $DE12
 RTS
 UNDEFINED
