@@ -20,7 +20,7 @@
 			"label": "Run in Mesen",
 			"command": "mesen flowerforce.nes",
 			"osx": {
-				"command": "open -n /Applications/Mesen.app --args ~/Documents/GitHub/sack-of-flour/flowerforce.nes"
+				"command": "echo 9f637a7a; crc32 flowerforce.nes; open -n /Applications/Mesen.app --args ~/Documents/GitHub/sack-of-flour/flowerforce.nes"
 			},
 			"windows": {
 				"command": "start flowerforce.nes"
