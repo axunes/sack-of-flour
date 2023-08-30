@@ -1,3 +1,8 @@
+.macro UNDEFINED
+.endmacro
+
+.include "bank_ram.inc"
+
 .segment "ZP"
 	.res $100
 .segment "OAM"
