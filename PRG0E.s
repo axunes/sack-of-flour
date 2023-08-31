@@ -994,27 +994,14 @@ LDA #$23
 STA a: ram_0010
 LDA #$01
 STA a: ram_000F
-.byte $A9   ; 
-.byte $01   ; 
-.byte $8D   ; 
-.byte $5A   ; 
-.byte $00   ; 
-.byte $20   ; 
-.byte $D8   ; 
-.byte $D5   ; 
-.byte $4C   ; 
-.byte $84   ; 
-.byte $C9   ; 
-.byte $A9   ; 
-.byte $00   ; 
-.byte $8D   ; 
-.byte $09   ; 
-.byte $00   ; 
-.byte $AD   ; 
-.byte $13   ; 
-.byte $00   ; 
-.byte $CD   ; 
-ORA #$00
+LDA #01
+STA $005A
+JSR $D5D8
+JMP $C984
+LDA #$00
+STA $0009
+LDA $0013 
+CMP $0009
 BEQ :+ ;! $C92C
 :
 LDA #$00
