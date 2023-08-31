@@ -982,26 +982,26 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_0013
 CMP a: ram_0009
-BEQ :+ ;! $C90C
-:
+BEQ :+ ; $C90C
 LDA #$01
 STA a: ram_0009
 LDA a: ram_005C
 CMP a: ram_0009
-BNE :+ ;!$C90C
-:
+BNE :+ ;$C90C
 LDA #$23
 STA a: ram_0010
 LDA #$01
 STA a: ram_000F
 LDA #01
-STA $005A
-JSR $D5D8
+STA a: $005A
+JSR a: $D5D8
 JMP $C984
+:
+; THERE PROBLM AT C8E8 NO C905
 LDA #$00
-STA $0009
-LDA $0013 
-CMP $0009
+STA a: $0009
+LDA a: $0013 
+CMP a: $0009
 BEQ :+ ;! $C92C
 :
 LDA #$00
