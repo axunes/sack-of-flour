@@ -1130,52 +1130,30 @@ LDA $805F
 STA a: ram_0009
 LDA a: ram_005E
 CMP a: ram_0009
-BEQ :+ ;! $CA6C
+BEQ :++ ; $CA6C
 JSR $E679
+JSR $D204
+JSR $D204
+JSR $D204
+JSR $DB8E
+LDA #$00
+STA a: $0009
+LDA a: $0058
+CMP a: $0009
+BEQ :+ ; $CA66
+JSR $D629
 :
-JSR $D204
-JSR $D204
-.byte $20   ; 
-.byte $04   ; 
-.byte $D2   ; 
-.byte $20   ; 
-.byte $8E   ; 
-.byte $DB   ; 
-.byte $A9   ; 
-.byte $00   ; 
-.byte $8D   ; 
-.byte $09   ; 
-.byte $00   ; 
-.byte $AD   ; 
-.byte $58   ; 
-.byte $00   ; 
-.byte $CD   ; 
-.byte $09   ; 
-.byte $00   ; 
-.byte $F0   ; 
-.byte $03   ; 
-.byte $20   ; 
-.byte $29   ; 
-.byte $D6   ; 
-.byte $20   ; 
-.byte $ED   ; 
-.byte $D5   ; 
-.byte $4C   ; 
-.byte $39   ; 
-.byte $CA   ; 
-.byte $A9   ; 
-.byte $02   ; 
-.byte $8D   ; 
-.byte $0C   ; 
-.byte $00   ; 
-.byte $60   ; 
-.byte $A9   ; 
-.byte $00   ; 
-.byte $8D   ; 
-ORA #$00
+JSR $D5ED
+JMP $CA39
+:
+LDA #$02
+STA a: $000C
+RTS
+LDA #$00
+STA a: $0009
 LDA a: ram_000D
 CMP a: ram_0009
-BEQ :+ ;! $CA80
+BEQ :+ ; $CA80
 RTS
 :
 LDA #$96
