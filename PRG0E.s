@@ -1002,28 +1002,25 @@ LDA #$00
 STA a: $0009
 LDA a: $0013 
 CMP a: $0009
-BEQ :+ ;! $C92C
-:
+BEQ :+ ; $C92C
 LDA #$00
 STA a: ram_0009
 LDA a: ram_005B
 CMP a: ram_0009
-BEQ :+ ;! $C92C
-:
+BEQ :+ ; $C92C
 DEC a: ram_005B
 JMP $C984
+:
 LDA #$00
 STA a: ram_0009
 LDA a: ram_0013
 CMP a: ram_0009
-BEQ :+ ;! $C984
-:
+BEQ :+++ ; $C984
 LDA #$00
 STA a: ram_0009
 LDA a: ram_005D
 CMP a: ram_0009
-BEQ :+ ;! $C984
-:
+BEQ :+++ ; $C984
 JSR $D584
 LDA #$01
 STA a: ram_000F
@@ -1033,34 +1030,32 @@ LDA #$03
 STA a: ram_0009
 LDA a: ram_0006
 CMP a: ram_0009
-BNE :+ ;!$C965
-:
+BNE :+ ;$C965
 LDA #$2D
 STA a: ram_0010
+:
 LDA #$00
 STA a: ram_0009
-.byte $AD   ; 
-.byte $12   ; 
-.byte $00   ; 
-.byte $CD   ; 
-ORA #$00
-BEQ :+ ;! $C977
-:
+LDA a: $0012
+CMP a: $0009
+BEQ :+ ; $C977
 LDA #$26
 STA a: ram_0010
+:
 LDA #$00
 STA a: ram_005D
 LDA #$0F
 STA a: ram_005B
 JMP $C984
+:
 JSR $CB8C
 LDA #$00
 STA a: ram_0009
 LDA a: ram_000D
 CMP a: ram_0009
-BEQ :+ ;! $C997
-:
+BEQ :+ ; $C997
 DEC a: ram_000D
+:
 JSR $EE7E
 JSR $D4D9
 RTS
@@ -1071,25 +1066,25 @@ LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BEQ :+ ;! $C9B6
-:
+BEQ :+ ; $C9B6
 JMP $C99E
+:
 JSR $D539
 LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BNE :+ ;!$C9C9
-:
+BNE :+ ;$C9C9
 JMP $C9B6
+:
 JSR $D539
 LDA #$00
 STA a: ram_0009
 LDA a: ram_001A
 CMP a: ram_0009
-BEQ :+ ;! $C9DC
-:
+BEQ :+ ; $C9DC
 JMP $C9C9
+:
 LDA #$0F
 STA $4015
 RTS
@@ -1097,25 +1092,25 @@ LDA $805C
 STA a: ram_0009
 LDA a: ram_005E
 CMP a: ram_0009
-BNE :+ ;!$C9F3
-:
+BNE :+ ;$C9F3
 JMP $CA36
+:
 LDA $805D
 STA a: ram_0009
 LDA a: ram_005E
 CMP a: ram_0009
-BNE :+ ;!$CA04
-:
+BNE :+ ;$CA04
 JMP $CA36
+:
 LDA $805E
 STA a: ram_0009
 .byte $AD   ; 
 .byte $5E   ; 
 .byte $00   ; 
 CMP a: ram_0009
-BNE :+ ;!$CA15
-:
+BNE :+ ;$CA15
 JMP $CA36
+:
 LDA #$00
 STA a: ram_000E
 JSR $DB8E
@@ -1126,9 +1121,9 @@ ASL $098D,X
 BRK
 LDA a: ram_000E
 CMP a: ram_0009
-BEQ :+ ;! $CA33
-:
+BEQ :+ ; $CA33
 JMP $CA1A
+:
 JMP $CAB7
 JSR $DC26
 LDA $805F
@@ -1136,8 +1131,8 @@ STA a: ram_0009
 LDA a: ram_005E
 CMP a: ram_0009
 BEQ :+ ;! $CA6C
-:
 JSR $E679
+:
 JSR $D204
 JSR $D204
 .byte $20   ; 
@@ -1181,8 +1176,8 @@ ORA #$00
 LDA a: ram_000D
 CMP a: ram_0009
 BEQ :+ ;! $CA80
-:
 RTS
+:
 LDA #$96
 STA a: ram_000D
 LDA #$01
@@ -1195,8 +1190,8 @@ STA a: ram_0009
 LDA a: ram_000A
 CMP a: ram_0009
 BNE :+ ;!$CAA4
-:
 LDA #$00
+:
 STA a: ram_000A
 LDA #$00
 STA a: ram_0009
@@ -1206,8 +1201,8 @@ STA a: ram_0009
 .byte $CD   ; 
 ORA #$00
 BNE :+ ;!$CAB6
-:
 LDA #$37
+:
 STA a: ram_0010
 RTS
 DEC a: ram_0008
