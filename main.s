@@ -99033,7 +99033,7 @@
 .segment "PRG0E"
 	.include "PRG0E.s"
 .segment "PRG0F"
-	;.include "PRG0F.s"
+	.include "PRG0F.s"
 .segment "PRG10"
 	.byt $0
 	.byt $0
