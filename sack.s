@@ -384,7 +384,7 @@
 	sta $8001
 	rts
 	jmp $c31d
-	.byte $60
+	rts
 	jsr $dc6b
 	jsr $db8e
 	jsr $dbc3
@@ -476,7 +476,7 @@
 	bne $c447
 	rts
 	jmp $c42d
-	.byte $60
+	rts
 	lda #$01
 	clc
 	adc ram_0053
@@ -497,7 +497,7 @@
 	bne $c479
 	rts
 	jmp $c463
-	.byte $60
+	rts
 	lda #$aa
 	sta ram_0054
 	lda #$02
@@ -519,7 +519,7 @@
 	bne $c4b0
 	rts
 	jmp $c496
-	.byte $60
+	rts
 	lda ram_0052
 	and #$07
 	sta ram_0055
@@ -1216,9 +1216,9 @@
 	cmp ram_0009
 	bne $cba6
 	jmp $ce4a
-	.byte $60
+	rts
 	jmp $d023
-	.byte $60
+	rts
 	lda #$03
 	sta ram_0009
 	lda ram_005f
@@ -1500,7 +1500,7 @@
 	beq $ce46
 	rts
 	jmp $d255
-	.byte $60
+	rts
 	lda #$00
 	sta ram_0009
 	lda ram_000c
@@ -2238,7 +2238,8 @@
 	sta ram_0022
 	inc ram_000e
 	jmp $d4de
-	.byte $60, $60
+	rts
+	rts
 	lda #$01
 	sta APU_PAD1
 	lda #$00
@@ -3726,7 +3727,7 @@
 	lda #$42
 	sta ram_006d
 	jmp $f44f
-	.byte $60
+	rts
 	jmp $f3db
 	rts
 	lda ram_0020
@@ -3784,7 +3785,7 @@
 	lda #$40
 	sta ram_006d
 	jmp $f4dc
-	.byte $60
+	rts
 	jmp $f4c3
 	rts
 	lda #$02
@@ -3996,12 +3997,12 @@
 	lda #$40
 	sta ram_006d
 	jmp $f44f
-	.byte $60
+	rts
 	jmp $f3db
 	lda #$f5
 	sta ram_006c
 	jmp $f3db
-	.byte $60
+	rts
 	ldx ram_00b2
 	lda ram_00aa,x
 	sta ram_00b3
@@ -5097,7 +5098,7 @@
 	beq $f854
 	rts
 	.byte $A9, $01, $8D, $5C, $00, $20, $D8, $D5
-	.byte $60
+	rts
 	lda #$00
 	sta ram_0009
 	lda ram_00c3
