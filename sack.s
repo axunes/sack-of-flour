@@ -4,6 +4,21 @@
 	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
 .segment "ZEROPAGE"
+.res 1
+.res 1
+.res 1
+.res 1
+.res 1
+.res 1
+.res 1
+.res 1
+player_lives: .res 1 ; 08
+.res 1
+player_health: .res 1 ; 0A
+.res 1
+.res 1
+.res 1
+unknown_1: .res 1 ; 0E related to player_health
 
 .segment "OAM"
 OAM:
@@ -75,7 +90,7 @@ OAM:
 	jsr $c24e
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	beq $c069
 	jsr $e679
@@ -105,7 +120,7 @@ OAM:
 	jmp $c0cd
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $c0ca
 	lda #$00
@@ -898,7 +913,7 @@ OAM:
 	jsr $dd2d
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $c850
 	lda #$00
@@ -1111,17 +1126,17 @@ OAM:
 	sta a: $0f
 	lda #$0a
 	sta a: $10
-	dec a: $0a
+	dec a: player_health
 	lda #$ff
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $caa4
 	lda #$00
-	sta a: $0a
+	sta a: player_health
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $cab6
 	lda #$37
@@ -1133,7 +1148,7 @@ OAM:
 	jsr $dbc3
 	jsr $dbda
 	lda #$03
-	sta a: $0a
+	sta a: player_health
 	lda #$64
 	sta a: $0d
 	lda #$01
@@ -1520,7 +1535,7 @@ OAM:
 	rts
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $ce9f
 	jsr $c241
@@ -1699,7 +1714,7 @@ OAM:
 	rts
 	lda #$00
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $d05d
 	lda a: $0c
@@ -2198,7 +2213,7 @@ OAM:
 	rts
 	lda #$00
 	sta a: $0e
-	lda a: $0a
+	lda a: player_health
 	sta a: $09
 	lda a: $0e
 	cmp a: $09
@@ -4274,13 +4289,13 @@ OAM:
 	ldx a: $b2
 	lda #$00
 	sta a: $a4,x
-	inc a: $0a
+	inc a: player_health
 	lda #$06
 	sta a: $09
-	lda a: $0a
+	lda a: player_health
 	cmp a: $09
 	bne $f082
-	dec a: $0a
+	dec a: player_health
 	rts
 	lda #$02
 	sta a: $09
