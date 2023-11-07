@@ -4,24 +4,41 @@
 	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
 .segment "ZEROPAGE"
-.res 1
-.res 1
-.res 1
-.res 1
-.res 1
-.res 1
-.res 1
-.res 1
-player_lives: .res 1 ; 08
-.res 1
-player_health: .res 1 ; 0A
-.res 1
-.res 1
-.res 1
-unknown_1: .res 1 ; 0E related to player_health
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	player_lives: .res 1 ; 08
+	.res 1
+	player_health: .res 1 ; 0A
+	.res 1
+	.res 1
+	.res 1
+	unknown_1: .res 1 ; 0E related to player_health
 
 .segment "OAM"
-OAM:
+	OAM:
+
+.segment "BSS"
+	player_pos_y: .res 1
+	player_sprite: .res 1
+	.res 1 ; player dir = bit 6? (left $41 right $01)
+	player_pos_x: .res 1
+	player_pos_y_again : .res 1 ; ???
+
+	.res $17
+
+	;.repeat 
+	enemy_0_y: .res 1
+	enemy_0_frame: .res 1
+	.res 1
+	enemy_0_x: .res 1
+
+; enemies start at 31C?
 
 .segment "PRG0"
 	.incbin "SOF_v1d.nes", $00010, $2000
