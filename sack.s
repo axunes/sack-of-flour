@@ -25,21 +25,21 @@
 	.res 1
 	.res 1
 
-	button_a: .res 1
-	button_b: .res 1
-	button_up: .res 1
-	button_down: .res 1
-	button_right: .res 1
-	button_left: .res 1
-	button_select: .res 1
-	button_start: .res 1
+	button_a_down: .res 1
+	button_b_down: .res 1
+	button_up_down: .res 1
+	button_down_down: .res 1
+	button_right_down: .res 1
+	button_left_down: .res 1
+	button_select_down: .res 1
+	button_start_down: .res 1
 
 
 	.res 166
 	
 	konami_code_correct_presses: .res 1
 	konami_code_active: .res 1
-	konami_code_held_correct_button: .res 1
+	konami_code_correct_button_down: .res 1
 	button_mask: .res 1
 
 .segment "OAM"
@@ -270,21 +270,21 @@
 	sta a: $05
 	rts
 	lda #$00
-	sta a: $13
+	sta a: button_a_down
 	lda #$00
-	sta a: $14
+	sta a: button_b_down
 	lda #$00
-	sta a: $15
+	sta a: button_up_down
 	lda #$00
-	sta a: $16
+	sta a: button_down_down
 	lda #$00
-	sta a: $17
+	sta a: button_right_down
 	lda #$00
-	sta a: $18
+	sta a: button_left_down
 	lda #$00
-	sta a: $19
+	sta a: button_select_down
 	lda #$00
-	sta a: $1a
+	sta a: button_start_down
 	lda #$00
 	sta a: $1b
 	lda #$01
@@ -941,13 +941,13 @@
 	sta a: $5a
 	lda #$00
 	sta a: $09
-	lda a: $1a
+	lda a: button_start_down
 	cmp a: $09
 	beq $c810
 	jsr $c99e
 	lda #$00
 	sta a: $09
-	lda a: $15
+	lda a: button_up_down
 	cmp a: $09
 	beq $c820
 	jsr $dd2d
@@ -967,14 +967,14 @@
 	.byte $4C, $84, $C9
 	lda #$00
 	sta a: $09
-	lda a: $16
+	lda a: button_down_down
 	cmp a: $09
 	beq $c862
 	lda #$01
 	sta a: $12
 	lda #$00
 	sta a: $09
-	lda a: $17
+	lda a: button_right_down
 	cmp a: $09
 	beq $c88c
 	lda #$01
@@ -982,7 +982,7 @@
 	jsr $cbaa
 	lda #$00
 	sta a: $09
-	lda a: $14
+	lda a: button_b_down
 	cmp a: $09
 	beq $c887
 	jsr $cbaa
@@ -990,7 +990,7 @@
 	sta a: $59
 	lda #$00
 	sta a: $09
-	lda a: $18
+	lda a: button_left_down
 	cmp a: $09
 	beq $c8b6
 	lda #$00
@@ -998,7 +998,7 @@
 	jsr $ccfa
 	lda #$00
 	sta a: $09
-	lda a: $14
+	lda a: button_b_down
 	cmp a: $09
 	beq $c8b1
 	jsr $ccfa
@@ -1006,7 +1006,7 @@
 	sta a: $59
 	lda #$00
 	sta a: $09
-	lda a: $13
+	lda a: button_a_down
 	cmp a: $09
 	bne $c8dd
 	lda #$00
@@ -1021,7 +1021,7 @@
 	jmp $c984
 	lda #$00
 	sta a: $09
-	lda a: $13
+	lda a: button_a_down
 	cmp a: $09
 	beq $c90c
 	lda #$01
@@ -1039,7 +1039,7 @@
 	.byte $4C, $84, $C9
 	lda #$00
 	sta a: $09
-	lda a: $13
+	lda a: button_a_down
 	cmp a: $09
 	beq $c92c
 	lda #$00
@@ -1051,7 +1051,7 @@
 	jmp $c984
 	lda #$00
 	sta a: $09
-	lda a: $13
+	lda a: button_a_down
 	cmp a: $09
 	beq $c984
 	lda #$00
@@ -2303,28 +2303,28 @@
 	sta APU_PAD1
 	lda APU_PAD1
 	and #$01
-	sta a: $13
+	sta a: button_a_down
 	lda APU_PAD1
 	and #$01
-	sta a: $14
+	sta a: button_b_down
 	lda APU_PAD1
 	and #$01
-	sta a: $19
+	sta a: button_select_down
 	lda APU_PAD1
 	and #$01
-	sta a: $1a
+	sta a: button_start_down
 	lda APU_PAD1
 	and #$01
-	sta a: $15
+	sta a: button_up_down
 	lda APU_PAD1
 	and #$01
-	sta a: $16
+	sta a: button_down_down
 	lda APU_PAD1
 	and #$01
-	sta a: $18
+	sta a: button_left_down
 	lda APU_PAD1
 	and #$01
-	sta a: $17
+	sta a: button_right_down
 	rts
 	lda #$9f
 	sta APU_PULSE2CTRL
@@ -4316,7 +4316,7 @@
 	sta a: $10
 	lda #$00
 	sta a: $09
-	lda a: $13
+	lda a: button_a_down
 	cmp a: $09
 	beq $f05e
 	lda #$37
@@ -4998,14 +4998,14 @@
 	jsr $f836
 	lda #$00
 	sta a: $09
-	lda a: $19
+	lda a: button_select_down
 	cmp a: $09
 	beq $f6bf
 	lda #$01
 	sta a: $c2
 	lda #$00
 	sta a: $09
-	lda a: $1a
+	lda a: button_start_down
 	cmp a: $09
 	beq $f6cf
 	jmp $f6d2
@@ -5193,42 +5193,42 @@
 	sta a: $c1
 	rts
 	jsr $d539
-	lda a: $13
+	lda a: button_a_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $14
+	adc a: button_b_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $15
+	adc a: button_up_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $16
+	adc a: button_down_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $18
+	adc a: button_left_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $17
+	adc a: button_right_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $19
+	adc a: button_select_down
 	sta a: $c4
 	lda a: $c4
 	asl a
 	clc
-	adc a: $1a
+	adc a: button_start_down
 	sta a: $c4
 	rts
 	.byte $20
