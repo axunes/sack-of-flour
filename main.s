@@ -3045,7 +3045,7 @@
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF
+	.byte $FF, $FF
 .segment "PRGF"
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
