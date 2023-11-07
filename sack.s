@@ -80,7 +80,7 @@ OAM:
 	sta a: $07
 	jsr $e5eb
 	lda #$03
-	sta a: $08
+	sta a: player_lives
 	jsr $dc71
 	jsr $cabb
 	jsr $d539
@@ -133,7 +133,7 @@ OAM:
 	jmp $c04a
 	lda #$00
 	sta a: $09
-	lda a: $08
+	lda a: player_lives
 	cmp a: $09
 	bne $c0e3
 	jsr $da95
@@ -1142,7 +1142,7 @@ OAM:
 	lda #$37
 	sta a: $10
 	rts
-	dec a: $08
+	dec a: player_lives
 	rts
 	jsr $c241
 	jsr $dbc3
@@ -2564,7 +2564,7 @@ OAM:
 	cpx #$20
 	bne $d84b
 	jsr $db8e
-	lda a: $08
+	lda a: player_lives
 	sta a: $0e
 	lda #$22
 	sta PPU_VRAM_ADDR2
@@ -2581,7 +2581,7 @@ OAM:
 	cmp a: $09
 	beq $d886
 	jmp $d869
-	lda a: $08
+	lda a: player_lives
 	sta a: $0e
 	lda #$22
 	sta PPU_VRAM_ADDR2
