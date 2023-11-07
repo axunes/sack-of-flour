@@ -3,6 +3,11 @@
 .segment "HEADER"
 	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
+.segment "ZP"
+.repeat $ff, i
+.ident(.sprintf("ram_%04x", i)): .res 1
+.endrepeat
+
 .segment "PRG0"
 	.byte $00, $00, $00, $00, $AA, $E2, $00, $00
 	.byte $00, $00, $00, $00, $00, $00, $00, $00
@@ -4138,6 +4143,7 @@
 	.byte $00, $00, $FF, $FF, $FF, $FF, $FF, $FF
 
 .segment "PRGE"
+.org $c000
 	jsr $c35a
 	jsr $c236
 	jsr $db8e
@@ -4156,13 +4162,13 @@
 	lda #$1c
 	sta PpuMask_2001
 	lda #$00
-	sta $0006
+	sta ram_0006
 	jsr $c26a
 	lda #$00
-	sta $0007
+	sta ram_0007
 	jsr $e5eb
 	lda #$03
-	sta $0008
+	sta ram_0008
 	jsr $dc71
 	jsr $cabb
 	jsr $d539
@@ -4171,9 +4177,9 @@
 	jsr $e8ed
 	jsr $c24e
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	beq $c069
 	jsr $e679
 	jsr $c17f
@@ -4181,42 +4187,42 @@
 	jsr $db8e
 	jsr $db61
 	lda #$00
-	sta $0009
-	lda $000b
-	cmp $0009
+	sta ram_0009
+	lda ram_000b
+	cmp ram_0009
 	beq $c085
 	jmp $c0e9
 	lda #$fc
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$fc
-	cmp $0009
+	cmp ram_0009
 	bne $c0aa
 	jsr $c9e2
 	lda #$02
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bne $c0a7
 	jmp $c04a
 	jmp $c0cd
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $c0ca
 	lda #$00
-	sta $0009
-	lda $000d
-	cmp $0009
+	sta ram_0009
+	lda ram_000d
+	cmp ram_0009
 	bne $c0ca
 	jsr $cab7
 	.byte $4C, $CD, $C0
 	jmp $c04a
 	lda #$00
-	sta $0009
-	lda $0008
-	cmp $0009
+	sta ram_0009
+	lda ram_0008
+	cmp ram_0009
 	bne $c0e3
 	jsr $da95
 	jsr $c3eb
@@ -4227,50 +4233,50 @@
 	jmp $c0ef
 	jsr $c241
 	lda #$1e
-	sta $000e
+	sta ram_000e
 	jsr $db8e
 	jsr $d5ed
-	dec $000e
+	dec ram_000e
 	lda #$00
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $c110
 	jmp $c0f7
 	jsr $d5c3
 	lda #$01
-	sta $000f
+	sta ram_000f
 	jsr $db8e
 	jsr $d2bb
 	jsr $db61
-	lda $000c
+	lda ram_000c
 	sec
 	sbc #$03
-	sta $000c
+	sta ram_000c
 	lda #$00
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$f8
-	cmp $0009
+	cmp ram_0009
 	beq $c13c
 	jmp $c118
 	lda #$1e
-	sta $000e
+	sta ram_000e
 	jsr $db8e
 	jsr $d5ed
-	dec $000e
+	dec ram_000e
 	lda #$00
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $c15a
 	jmp $c141
 	jmp $c15d
-	inc $0006
+	inc ram_0006
 	lda #$05
-	sta $0009
-	lda $0006
-	cmp $0009
+	sta ram_0009
+	lda ram_0006
+	cmp ram_0009
 	bne $c170
 	jmp $d8b7
 	jsr $c26a
@@ -4278,85 +4284,85 @@
 	jsr $dc71
 	jsr $cabb
 	jmp $c04a
-	lda $0004
+	lda ram_0004
 	pha
 	lda #$0d
 	pha
-	lda $0010
+	lda ram_0010
 	clc
-	adc $0086
-	sta $0011
+	adc ram_0086
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $0011
+	adc ram_0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $0004
-	lda $0005
+	adc ram_0011
+	sta ram_0004
+	lda ram_0005
 	pha
 	lda #$11
 	pha
-	lda $0012
+	lda ram_0012
 	clc
-	adc $005b
-	sta $0011
+	adc ram_005b
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $0011
+	adc ram_0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $0005
+	adc ram_0011
+	sta ram_0005
 	rts
 	lda #$00
-	sta $0013
+	sta ram_0013
 	lda #$00
-	sta $0014
+	sta ram_0014
 	lda #$00
-	sta $0015
+	sta ram_0015
 	lda #$00
-	sta $0016
+	sta ram_0016
 	lda #$00
-	sta $0017
+	sta ram_0017
 	lda #$00
-	sta $0018
+	sta ram_0018
 	lda #$00
-	sta $0019
+	sta ram_0019
 	lda #$00
-	sta $001a
+	sta ram_001a
 	lda #$00
-	sta $001b
+	sta ram_001b
 	lda #$01
-	sta $001c
+	sta ram_001c
 	lda #$00
-	sta $000e
+	sta ram_000e
 	lda #$00
-	sta $001d
+	sta ram_001d
 	lda #$00
-	sta $001e
+	sta ram_001e
 	lda #$00
-	sta $001f
+	sta ram_001f
 	lda #$00
-	sta $0020
+	sta ram_0020
 	lda #$00
-	sta $0021
+	sta ram_0021
 	lda #$10
-	sta $0022
+	sta ram_0022
 	lda #$00
-	sta $000b
+	sta ram_000b
 	lda #$00
-	sta $0023
+	sta ram_0023
 	lda #$20
-	sta $0024
+	sta ram_0024
 	lda #$00
-	sta $0025
+	sta ram_0025
 	lda #$00
-	sta $0026
+	sta ram_0026
 	lda #$00
-	sta $0027
+	sta ram_0027
 	rts
 	lda #$00
 	sta ApuStatus_4015
@@ -4371,26 +4377,26 @@
 	bne $c245
 	rts
 	lda #$0f
-	sta $0009
-	lda $0022
-	cmp $0009
+	sta ram_0009
+	lda ram_0022
+	cmp ram_0009
 	bpl $c25c
 	rts
-	ldx $0022
+	ldx ram_0022
 	lda #$f5
 	sta $0300,x
-	inc $0022
+	inc ram_0022
 	jmp $c24e
-	lda $0006
+	lda ram_0006
 	asl a
-	sta $0028
+	sta ram_0028
 	lda #$06
 	sta $8000
-	lda $0028
+	lda ram_0028
 	sta $8001
 	lda #$07
 	sta $8000
-	lda $0028
+	lda ram_0028
 	clc
 	adc #$01
 	sta $8001
@@ -4403,31 +4409,31 @@
 	sta $8000
 	lda #$0a
 	sta $8001
-	lda $0006
+	lda ram_0006
 	asl a
 	asl a
 	clc
 	adc #$0c
-	sta $0028
+	sta ram_0028
 	lda #$02
 	sta $8000
-	lda $0028
+	lda ram_0028
 	sta $8001
 	lda #$03
 	sta $8000
-	lda $0028
+	lda ram_0028
 	clc
 	adc #$01
 	sta $8001
 	lda #$04
 	sta $8000
-	lda $0028
+	lda ram_0028
 	clc
 	adc #$02
 	sta $8001
 	lda #$05
 	sta $8000
-	lda $0028
+	lda ram_0028
 	clc
 	adc #$03
 	sta $8001
@@ -4491,43 +4497,43 @@
 	jsr $db8e
 	ldx #$00
 	lda #$f5
-	sta $002a,x
-	sta $0032,x
-	sta $0042,x
-	sta $004a,x
-	sta $003a,x
+	sta ram_002a,x
+	sta ram_0032,x
+	sta ram_0042,x
+	sta ram_004a,x
+	sta ram_003a,x
 	inx
 	cpx #$08
 	bne $c371
 	lda #$07
-	sta $0052
+	sta ram_0052
 	lda #$0b
-	sta $0029
+	sta ram_0029
 	jsr $db8e
 	lda #$07
-	sta $0052
+	sta ram_0052
 	jsr $db8e
 	jsr $c4b4
 	jsr $db8e
 	jsr $c5aa
 	jsr $db8e
 	jsr $c6a0
-	dec $0052
+	dec ram_0052
 	lda #$ff
-	sta $0009
-	lda $0052
-	cmp $0009
+	sta ram_0009
+	lda ram_0052
+	cmp ram_0009
 	beq $c3bc
 	jmp $c397
 	lda #$00
-	sta $0052
+	sta ram_0052
 	jsr $db8e
 	jsr $c706
-	inc $0052
+	inc ram_0052
 	lda #$05
-	sta $0009
-	lda $0052
-	cmp $0009
+	sta ram_0009
+	lda ram_0052
+	cmp ram_0009
 	beq $c3da
 	jmp $c3c1
 	jsr $db8e
@@ -4539,120 +4545,120 @@
 	rts
 	jsr $db8e
 	lda #$01
-	sta $0009
-	lda $0053
-	cmp $0009
+	sta ram_0009
+	lda ram_0053
+	cmp ram_0009
 	bne $c3ff
 	jsr $c47d
 	rts
 	lda #$03
-	sta $0009
-	lda $0053
-	cmp $0009
+	sta ram_0009
+	lda ram_0053
+	cmp ram_0009
 	bne $c410
 	jsr $c414
 	rts
 	jsr $c44b
 	rts
 	lda #$55
-	sta $0054
+	sta ram_0054
 	lda #$00
-	sta $0053
+	sta ram_0053
 	lda #$3f
 	sta PpuAddr_2006
 	lda #$00
 	sta PpuAddr_2006
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda $8004,x
 	sta PpuData_2007
-	inc $000e
+	inc ram_000e
 	lda #$20
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bne $c447
 	rts
 	jmp $c42d
 	.byte $60
 	lda #$01
 	clc
-	adc $0053
-	sta $0053
+	adc ram_0053
+	sta ram_0053
 	lda #$3f
 	sta PpuAddr_2006
 	lda #$00
 	sta PpuAddr_2006
 	lda #$00
-	sta $000e
+	sta ram_000e
 	lda #$0e
 	sta PpuData_2007
-	inc $000e
+	inc ram_000e
 	lda #$20
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bne $c479
 	rts
 	jmp $c463
 	.byte $60
 	lda #$aa
-	sta $0054
+	sta ram_0054
 	lda #$02
-	sta $0053
+	sta ram_0053
 	lda #$3f
 	sta PpuAddr_2006
 	lda #$00
 	sta PpuAddr_2006
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda $8024,x
 	sta PpuData_2007
-	inc $000e
+	inc ram_000e
 	lda #$20
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bne $c4b0
 	rts
 	jmp $c496
 	.byte $60
-	lda $0052
+	lda ram_0052
 	and #$07
-	sta $0055
-	ldx $0055
-	lda $002a,x
-	sta $0011
-	lda $0052
-	sta $0009
-	lda $0011
-	cmp $0009
+	sta ram_0055
+	ldx ram_0055
+	lda ram_002a,x
+	sta ram_0011
+	lda ram_0052
+	sta ram_0009
+	lda ram_0011
+	cmp ram_0009
 	bne $c4d4
 	rts
-	ldx $0055
-	lda $0052
-	sta $002a,x
-	lda $0052
+	ldx ram_0055
+	lda ram_0052
+	sta ram_002a,x
+	lda ram_0052
 	asl a
 	tax
 	lda $e13a,x
-	sta $0000
+	sta ram_0000
 	inx
 	lda $e13a,x
-	sta $0001
-	ldx $0055
+	sta ram_0001
+	ldx ram_0055
 	lda $e10a,x
-	sta $0056
-	ldx $0055
+	sta ram_0056
+	ldx ram_0055
 	lda $e112,x
-	sta $0057
+	sta ram_0057
 	ldy #$00
 	ldx #$00
-	lda $0056
+	lda ram_0056
 	sta PpuAddr_2006
-	lda $0057
+	lda ram_0057
 	sta PpuAddr_2006
 	lda ($00),y
 	sta PpuData_2007
@@ -4677,15 +4683,15 @@
 	dey
 	dey
 	clc
-	lda $0057
+	lda ram_0057
 	adc #$20
-	sta $0057
-	lda $0056
+	sta ram_0057
+	lda ram_0056
 	adc #$00
-	sta $0056
-	lda $0056
+	sta ram_0056
+	lda ram_0056
 	sta PpuAddr_2006
-	lda $0057
+	lda ram_0057
 	sta PpuAddr_2006
 	lda ($00),y
 	adc #$10
@@ -4715,48 +4721,48 @@
 	cpy #$20
 	beq $c5a9
 	clc
-	lda $0057
+	lda ram_0057
 	adc #$20
-	sta $0057
-	lda $0056
+	sta ram_0057
+	lda ram_0056
 	adc #$00
-	sta $0056
+	sta ram_0056
 	jmp $c505
 	rts
-	lda $0052
+	lda ram_0052
 	and #$07
-	sta $0055
-	ldx $0055
-	lda $0032,x
-	sta $0011
-	lda $0052
-	sta $0009
-	lda $0011
-	cmp $0009
+	sta ram_0055
+	ldx ram_0055
+	lda ram_0032,x
+	sta ram_0011
+	lda ram_0052
+	sta ram_0009
+	lda ram_0011
+	cmp ram_0009
 	bne $c5ca
 	rts
-	ldx $0055
-	lda $0052
-	sta $0032,x
-	lda $0052
+	ldx ram_0055
+	lda ram_0052
+	sta ram_0032,x
+	lda ram_0052
 	asl a
 	tax
 	lda $e13a,x
-	sta $0000
+	sta ram_0000
 	inx
 	lda $e13a,x
-	sta $0001
-	ldx $0055
+	sta ram_0001
+	ldx ram_0055
 	lda $e11a,x
-	sta $0056
-	ldx $0055
+	sta ram_0056
+	ldx ram_0055
 	lda $e122,x
-	sta $0057
+	sta ram_0057
 	ldy #$20
 	ldx #$00
-	lda $0056
+	lda ram_0056
 	sta PpuAddr_2006
-	lda $0057
+	lda ram_0057
 	sta PpuAddr_2006
 	lda ($00),y
 	sta PpuData_2007
@@ -4781,15 +4787,15 @@
 	dey
 	dey
 	clc
-	lda $0057
+	lda ram_0057
 	adc #$20
-	sta $0057
-	lda $0056
+	sta ram_0057
+	lda ram_0056
 	adc #$00
-	sta $0056
-	lda $0056
+	sta ram_0056
+	lda ram_0056
 	sta PpuAddr_2006
-	lda $0057
+	lda ram_0057
 	sta PpuAddr_2006
 	lda ($00),y
 	adc #$10
@@ -4819,39 +4825,39 @@
 	cpy #$3c
 	beq $c69f
 	clc
-	lda $0057
+	lda ram_0057
 	adc #$20
-	sta $0057
-	lda $0056
+	sta ram_0057
+	lda ram_0056
 	adc #$00
-	sta $0056
+	sta ram_0056
 	jmp $c5fb
 	rts
-	lda $0052
+	lda ram_0052
 	and #$07
-	sta $0055
-	ldx $0055
-	lda $003a,x
-	sta $0011
-	lda $0052
-	sta $0009
-	lda $0011
-	cmp $0009
+	sta ram_0055
+	ldx ram_0055
+	lda ram_003a,x
+	sta ram_0011
+	lda ram_0052
+	sta ram_0009
+	lda ram_0011
+	cmp ram_0009
 	bne $c6c0
 	rts
-	ldx $0055
-	lda $0052
-	sta $003a,x
-	ldx $0055
+	ldx ram_0055
+	lda ram_0052
+	sta ram_003a,x
+	ldx ram_0055
 	lda $e12a,x
-	sta $0056
-	ldx $0055
+	sta ram_0056
+	ldx ram_0055
 	lda $e132,x
-	sta $0057
+	sta ram_0057
 	ldy #$3c
-	lda $0056
+	lda ram_0056
 	sta PpuAddr_2006
-	lda $0057
+	lda ram_0057
 	sta PpuAddr_2006
 	lda ($00),y
 	sta PpuData_2007
@@ -4862,107 +4868,107 @@
 	cpy #$4c
 	beq $c705
 	clc
-	lda $0057
+	lda ram_0057
 	adc #$08
-	sta $0057
+	sta ram_0057
 	jmp $c6dd
 	rts
-	lda $0052
+	lda ram_0052
 	and #$07
-	sta $0055
-	ldx $0055
-	lda $0042,x
-	sta $0011
-	lda $0052
-	sta $0009
-	lda $0011
-	cmp $0009
+	sta ram_0055
+	ldx ram_0055
+	lda ram_0042,x
+	sta ram_0011
+	lda ram_0052
+	sta ram_0009
+	lda ram_0011
+	cmp ram_0009
 	bne $c726
 	rts
-	ldx $0055
-	lda $0052
-	sta $0042,x
-	lda $0052
+	ldx ram_0055
+	lda ram_0052
+	sta ram_0042,x
+	lda ram_0052
 	asl a
 	tax
 	lda $e13a,x
-	sta $0000
+	sta ram_0000
 	inx
 	lda $e13a,x
-	sta $0001
+	sta ram_0001
 	ldy #$4c
 	clc
-	lda $0052
+	lda ram_0052
 	asl a
 	asl a
 	asl a
 	asl a
 	asl a
-	sta $0026
+	sta ram_0026
 	tax
 	lda ($00),y
 	iny
-	sta $0011
+	sta ram_0011
 	and #$03
 	sta $0400,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0400,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0400,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0400,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
 	cpy #$54
 	bne $c750
 	ldy #$54
 	clc
-	lda $0052
+	lda ram_0052
 	asl a
 	asl a
 	asl a
 	asl a
 	asl a
-	sta $0026
+	sta ram_0026
 	tax
 	lda ($00),y
 	iny
-	sta $0011
+	sta ram_0011
 	and #$03
 	sta $0200,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0200,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0200,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
-	lda $0011
+	lda ram_0011
 	and #$03
 	sta $0200,x
-	lsr $0011
-	lsr $0011
+	lsr ram_0011
+	lsr ram_0011
 	inx
 	cpy #$5c
 	bne $c7a2
@@ -4974,164 +4980,164 @@
 	nop
 	rts
 	lda #$00
-	sta $0058
+	sta ram_0058
 	lda #$00
-	sta $0059
+	sta ram_0059
 	lda #$00
-	sta $0012
+	sta ram_0012
 	lda #$00
-	sta $005a
+	sta ram_005a
 	lda #$00
-	sta $0009
-	lda $001a
-	cmp $0009
+	sta ram_0009
+	lda ram_001a
+	cmp ram_0009
 	beq $c810
 	jsr $c99e
 	lda #$00
-	sta $0009
-	lda $0015
-	cmp $0009
+	sta ram_0009
+	lda ram_0015
+	cmp ram_0009
 	beq $c820
 	jsr $dd2d
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $c850
 	lda #$00
-	sta $0009
-	lda $001c
-	cmp $0009
+	sta ram_0009
+	lda ram_001c
+	cmp ram_0009
 	bne $c83d
 	jsr $d204
 	.byte $A9, $01, $8D, $09, $00, $AD, $1C, $00
 	.byte $CD, $09, $00, $D0, $03, $20, $55, $D2
 	.byte $4C, $84, $C9
 	lda #$00
-	sta $0009
-	lda $0016
-	cmp $0009
+	sta ram_0009
+	lda ram_0016
+	cmp ram_0009
 	beq $c862
 	lda #$01
-	sta $0012
+	sta ram_0012
 	lda #$00
-	sta $0009
-	lda $0017
-	cmp $0009
+	sta ram_0009
+	lda ram_0017
+	cmp ram_0009
 	beq $c88c
 	lda #$01
-	sta $001c
+	sta ram_001c
 	jsr $cbaa
 	lda #$00
-	sta $0009
-	lda $0014
-	cmp $0009
+	sta ram_0009
+	lda ram_0014
+	cmp ram_0009
 	beq $c887
 	jsr $cbaa
 	lda #$01
-	sta $0059
+	sta ram_0059
 	lda #$00
-	sta $0009
-	lda $0018
-	cmp $0009
+	sta ram_0009
+	lda ram_0018
+	cmp ram_0009
 	beq $c8b6
 	lda #$00
-	sta $001c
+	sta ram_001c
 	jsr $ccfa
 	lda #$00
-	sta $0009
-	lda $0014
-	cmp $0009
+	sta ram_0009
+	lda ram_0014
+	cmp ram_0009
 	beq $c8b1
 	jsr $ccfa
 	lda #$01
-	sta $0059
+	sta ram_0059
 	lda #$00
-	sta $0009
-	lda $0013
-	cmp $0009
+	sta ram_0009
+	lda ram_0013
+	cmp ram_0009
 	bne $c8dd
 	lda #$00
-	sta $0009
-	lda $005b
-	cmp $0009
+	sta ram_0009
+	lda ram_005b
+	cmp ram_0009
 	beq $c8d5
 	lda #$0a
-	sta $0010
+	sta ram_0010
 	lda #$00
-	sta $005b
+	sta ram_005b
 	jmp $c984
 	lda #$00
-	sta $0009
-	lda $0013
-	cmp $0009
+	sta ram_0009
+	lda ram_0013
+	cmp ram_0009
 	beq $c90c
 	lda #$01
-	sta $0009
-	lda $005c
-	cmp $0009
+	sta ram_0009
+	lda ram_005c
+	cmp ram_0009
 	bne $c90c
 	lda #$23
-	sta $0010
+	sta ram_0010
 	lda #$01
-	sta $000f
+	sta ram_000f
 	lda #$01
-	sta $005a
+	sta ram_005a
 	jsr $d5d8
 	.byte $4C, $84, $C9
 	lda #$00
-	sta $0009
-	lda $0013
-	cmp $0009
+	sta ram_0009
+	lda ram_0013
+	cmp ram_0009
 	beq $c92c
 	lda #$00
-	sta $0009
-	lda $005b
-	cmp $0009
+	sta ram_0009
+	lda ram_005b
+	cmp ram_0009
 	beq $c92c
-	dec $005b
+	dec ram_005b
 	jmp $c984
 	lda #$00
-	sta $0009
-	lda $0013
-	cmp $0009
+	sta ram_0009
+	lda ram_0013
+	cmp ram_0009
 	beq $c984
 	lda #$00
-	sta $0009
-	lda $005d
-	cmp $0009
+	sta ram_0009
+	lda ram_005d
+	cmp ram_0009
 	beq $c984
 	jsr $d584
 	lda #$01
-	sta $000f
+	sta ram_000f
 	lda #$28
-	sta $0010
+	sta ram_0010
 	lda #$03
-	sta $0009
-	lda $0006
-	cmp $0009
+	sta ram_0009
+	lda ram_0006
+	cmp ram_0009
 	bne $c965
 	lda #$2d
-	sta $0010
+	sta ram_0010
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $c977
 	lda #$26
-	sta $0010
+	sta ram_0010
 	lda #$00
-	sta $005d
+	sta ram_005d
 	lda #$0f
-	sta $005b
+	sta ram_005b
 	jmp $c984
 	jsr $cb8c
 	lda #$00
-	sta $0009
-	lda $000d
-	cmp $0009
+	sta ram_0009
+	lda ram_000d
+	cmp ram_0009
 	beq $c997
-	dec $000d
+	dec ram_000d
 	jsr $ee7e
 	jsr $d4d9
 	rts
@@ -5145,40 +5151,40 @@
 	.byte $00, $F0, $03, $4C, $C9, $C9, $A9, $0F
 	.byte $8D, $15, $40, $60
 	lda $805c
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $c9f3
 	jmp $ca36
 	lda $805d
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $ca04
 	jmp $ca36
 	lda $805e
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $ca15
 	jmp $ca36
 	lda #$00
-	sta $000e
+	sta ram_000e
 	jsr $db8e
 	jsr $d5ed
-	inc $000e
+	inc ram_000e
 	lda #$1e
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $ca33
 	jmp $ca1a
 	jmp $cab7
 	jsr $dc26
 	lda $805f
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	beq $ca6c
 	jsr $e679
 	jsr $d204
@@ -5186,114 +5192,114 @@
 	jsr $d204
 	jsr $db8e
 	lda #$00
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	beq $ca66
 	jsr $d629
 	jsr $d5ed
 	jmp $ca39
 	lda #$02
-	sta $000c
+	sta ram_000c
 	rts
 	lda #$00
-	sta $0009
-	lda $000d
-	cmp $0009
+	sta ram_0009
+	lda ram_000d
+	cmp ram_0009
 	beq $ca80
 	rts
 	lda #$96
-	sta $000d
+	sta ram_000d
 	lda #$01
-	sta $000f
+	sta ram_000f
 	lda #$0a
-	sta $0010
-	dec $000a
+	sta ram_0010
+	dec ram_000a
 	lda #$ff
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $caa4
 	lda #$00
-	sta $000a
+	sta ram_000a
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $cab6
 	lda #$37
-	sta $0010
+	sta ram_0010
 	rts
-	dec $0008
+	dec ram_0008
 	rts
 	jsr $c241
 	jsr $dbc3
 	jsr $dbda
 	lda #$03
-	sta $000a
+	sta ram_000a
 	lda #$64
-	sta $000d
+	sta ram_000d
 	lda #$01
-	sta $001c
+	sta ram_001c
 	lda #$0a
-	sta $000c
+	sta ram_000c
 	lda #$00
-	sta $005f
+	sta ram_005f
 	lda #$02
-	sta $005e
+	sta ram_005e
 	lda #$01
-	sta $0009
-	lda $0027
-	cmp $0009
+	sta ram_0009
+	lda ram_0027
+	cmp ram_0009
 	bne $caf5
 	lda $8059
-	sta $005e
+	sta ram_005e
 	lda #$00
-	sta $0010
+	sta ram_0010
 	lda #$00
-	sta $000f
+	sta ram_000f
 	lda #$ff
-	sta $0060
+	sta ram_0060
 	jsr $d825
 	lda #$00
-	sta $0061
+	sta ram_0061
 	jsr $db8e
-	inc $0061
+	inc ram_0061
 	lda #$78
-	sta $0009
-	lda $0061
-	cmp $0009
+	sta ram_0009
+	lda ram_0061
+	cmp ram_0009
 	bpl $cb22
 	jmp $cb0c
 	lda #$00
-	sta $0061
+	sta ram_0061
 	jsr $dbc3
 	jsr $c35e
 	lda #$00
-	sta $0007
+	sta ram_0007
 	jsr $e5eb
 	lda #$0f
 	sta ApuStatus_4015
 	lda #$00
-	sta $001e
+	sta ram_001e
 	lda #$00
-	sta $001f
+	sta ram_001f
 	lda #$00
-	sta $0020
+	sta ram_0020
 	lda #$00
-	sta $0021
-	lda $0020
-	sta $0009
-	lda $005e
+	sta ram_0021
+	lda ram_0020
+	sta ram_0009
+	lda ram_005e
 	sec
 	sbc #$06
-	cmp $0009
+	cmp ram_0009
 	bmi $cb75
 	jsr $d6e5
 	lda #$00
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	beq $cb72
 	jsr $d629
 	jmp $cb4e
@@ -5301,1041 +5307,1041 @@
 	jsr $db8e
 	jsr $e7c4
 	lda #$00
-	sta $005d
+	sta ram_005d
 	lda #$00
-	sta $0025
+	sta ram_0025
 	jsr $d2bb
 	rts
-	ldx $0010
+	ldx ram_0010
 	lda $e040,x
-	sta $0062
+	sta ram_0062
 	lda #$01
-	sta $0009
-	lda $000f
-	cmp $0009
+	sta ram_0009
+	lda ram_000f
+	cmp ram_0009
 	bne $cba6
 	jmp $ce4a
 	.byte $60
 	jmp $d023
 	.byte $60
 	lda #$03
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $cbba
 	jmp $d204
-	lda $005e
+	lda ram_005e
 	asl a
 	asl a
 	asl a
 	clc
 	adc #$08
-	sta $0063
+	sta ram_0063
 	lda #$7f
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bmi $cc2b
 	lda #$81
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bpl $cc2b
-	ldx $0063
+	ldx ram_0063
 	lda $0200,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cbfa
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cc0a
 	jmp $d204
-	lda $0063
+	lda ram_0063
 	clc
 	adc #$06
 	tax
 	lda $0400,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cc28
 	rts
 	jmp $d204
 	lda #$7f
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bpl $cc97
-	lda $000c
+	lda ram_000c
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0400,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cc66
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cc76
 	jmp $d204
-	lda $0066
+	lda ram_0066
 	sec
 	sbc #$01
 	tax
 	lda $0400,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cc94
 	rts
 	jmp $d204
-	lda $000c
+	lda ram_000c
 	sec
 	sbc #$70
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0200,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $ccc8
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $ccd8
 	jmp $d204
-	lda $0066
+	lda ram_0066
 	sec
 	sbc #$01
 	tax
 	lda $0200,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $ccf6
 	rts
 	jsr $d204
 	rts
 	lda #$00
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	beq $cd0a
 	jmp $d255
-	lda $005e
+	lda ram_005e
 	sec
 	sbc #$01
 	asl a
 	asl a
 	asl a
-	sta $0063
+	sta ram_0063
 	lda #$7f
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bmi $cd7b
 	lda #$81
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bpl $cd7b
-	ldx $0063
+	ldx ram_0063
 	lda $0200,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cd4a
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cd5a
 	jmp $d255
-	lda $0063
+	lda ram_0063
 	clc
 	adc #$06
 	tax
 	lda $0400,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cd78
 	rts
 	jmp $d255
 	lda #$7f
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bpl $cde7
-	lda $000c
+	lda ram_000c
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0400,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cdb6
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cdc6
 	jmp $d255
-	lda $0066
+	lda ram_0066
 	sec
 	sbc #$01
 	tax
 	lda $0400,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cde4
 	rts
 	jmp $d255
-	lda $000c
+	lda ram_000c
 	clc
 	adc #$90
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0200,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $ce18
 	rts
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $ce28
 	jmp $d255
-	lda $0066
+	lda ram_0066
 	sec
 	sbc #$01
 	tax
 	lda $0200,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $ce46
 	rts
 	jmp $d255
 	.byte $60
 	lda #$00
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$f8
-	cmp $0009
+	cmp ram_0009
 	bne $ce6f
-	dec $0010
+	dec ram_0010
 	lda #$00
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bne $ce6e
 	lda #$00
-	sta $000f
+	sta ram_000f
 	rts
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $ce9f
 	jsr $c241
 	.byte $AD, $0C, $00, $38, $ED, $62, $00, $8D
 	.byte $0C, $00, $CE, $10, $00, $A9, $00, $8D
 	.byte $09, $00, $AD, $10, $00, $CD, $09, $00
 	.byte $D0, $05, $A9, $00, $8D, $0F, $00, $60
-	lda $005e
+	lda ram_005e
 	asl a
 	asl a
 	asl a
-	sta $0063
+	sta ram_0063
 	lda #$97
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bmi $ceb8
 	jmp $cf71
-	lda $000c
+	lda ram_000c
 	pha
 	lda #$e8
 	sec
-	sbc $0062
-	sta $0011
+	sbc ram_0062
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
+	sta ram_0065
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cef7
-	lda $000c
+	lda ram_000c
 	pha
 	lda #$ef
 	sec
-	sbc $0062
-	sta $0011
+	sbc ram_0062
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0400,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cf1d
 	jmp $d01a
 	lda #$00
-	sta $0064
+	sta ram_0064
 	lda #$04
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $cf3e
 	beq $cf3e
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0400,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cf51
 	jmp $d01a
-	lda $000c
+	lda ram_000c
 	sec
-	sbc $0062
-	sta $000c
-	dec $0010
+	sbc ram_0062
+	sta ram_000c
+	dec ram_0010
 	lda #$00
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bne $cf70
 	lda #$00
-	sta $000f
+	sta ram_000f
 	rts
-	lda $000c
+	lda ram_000c
 	clc
 	adc #$79
 	sec
-	sbc $0062
+	sbc ram_0062
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
+	sta ram_0065
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $cfa0
-	lda $000c
+	lda ram_000c
 	clc
 	adc #$7f
 	sec
-	sbc $0062
+	sbc ram_0062
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0200,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $cfc6
 	jmp $d01a
 	lda #$00
-	sta $0064
+	sta ram_0064
 	lda #$04
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $cfe7
 	beq $cfe7
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0200,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $cffa
 	jmp $d01a
-	lda $000c
+	lda ram_000c
 	sec
-	sbc $0062
-	sta $000c
-	dec $0010
+	sbc ram_0062
+	sta ram_000c
+	dec ram_0010
 	lda #$00
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bne $d019
 	lda #$00
-	sta $000f
+	sta ram_000f
 	rts
 	lda #$00
-	sta $000f
+	sta ram_000f
 	jsr $dc92
 	rts
 	lda #$00
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $d05d
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
-	sta $000c
+	adc ram_0062
+	sta ram_000c
 	lda #$00
-	sta $0009
-	lda $0062
-	cmp $0009
+	sta ram_0009
+	lda ram_0062
+	cmp ram_0009
 	beq $d04c
 	lda #$00
-	sta $000f
+	sta ram_000f
 	lda #$3c
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bpl $d05c
-	inc $0010
+	inc ram_0010
 	rts
-	lda $005e
+	lda ram_005e
 	asl a
 	asl a
 	asl a
-	sta $0063
+	sta ram_0063
 	lda #$e8
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$f8
-	cmp $0009
+	cmp ram_0009
 	bne $d080
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
-	sta $000c
+	adc ram_0062
+	sta ram_000c
 	rts
 	lda #$f0
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$f0
-	cmp $0009
+	cmp ram_0009
 	bne $d09a
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
-	sta $000c
+	adc ram_0062
+	sta ram_000c
 	rts
 	lda #$7f
-	sta $0009
-	lda $000c
-	cmp $0009
+	sta ram_0009
+	lda ram_000c
+	cmp ram_0009
 	bmi $d0aa
 	jmp $d144
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
+	adc ram_0062
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0400,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $d0de
 	jmp $d1e1
 	lda #$00
-	sta $0064
+	sta ram_0064
 	lda #$04
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $d0ff
 	beq $d0ff
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0400,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $d112
 	jmp $d1e1
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
-	sta $000c
+	adc ram_0062
+	sta ram_000c
 	lda #$00
-	sta $0009
-	lda $0062
-	cmp $0009
+	sta ram_0009
+	lda ram_0062
+	cmp ram_0009
 	beq $d12e
 	lda #$00
-	sta $000f
+	sta ram_000f
 	lda #$3c
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bpl $d13e
-	inc $0010
+	inc ram_0010
 	lda #$00
-	sta $005d
+	sta ram_005d
 	rts
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
+	adc ram_0062
 	clc
 	adc #$90
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0200,x
-	sta $0067
+	sta ram_0067
 	lda #$00
-	sta $0009
-	lda $0067
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	and ram_0054
+	cmp ram_0009
 	beq $d17b
 	jmp $d1e1
 	lda #$00
-	sta $0064
+	sta ram_0064
 	lda #$04
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $d19c
 	beq $d19c
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0200,x
-	sta $0064
+	sta ram_0064
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $d1af
 	jmp $d1e1
-	lda $000c
+	lda ram_000c
 	clc
-	adc $0062
-	sta $000c
+	adc ram_0062
+	sta ram_000c
 	lda #$00
-	sta $0009
-	lda $0062
-	cmp $0009
+	sta ram_0009
+	lda ram_0062
+	cmp ram_0009
 	beq $d1cb
 	lda #$00
-	sta $000f
+	sta ram_000f
 	lda #$3c
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bpl $d1db
-	inc $0010
+	inc ram_0010
 	lda #$00
-	sta $005d
+	sta ram_005d
 	rts
 	lda #$02
-	sta $000f
+	sta ram_000f
 	lda #$11
-	sta $0009
-	lda $0010
-	cmp $0009
+	sta ram_0009
+	lda ram_0010
+	cmp ram_0009
 	bmi $d1f9
 	lda #$0c
-	sta $0010
+	sta ram_0010
 	rts
 	lda #$00
-	sta $0010
+	sta ram_0010
 	lda #$01
-	sta $005d
+	sta ram_005d
 	rts
 	lda $8058
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $d213
 	rts
 	lda $8059
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $d226
 	lda #$01
-	sta $0027
-	inc $005f
+	sta ram_0027
+	inc ram_005f
 	lda #$10
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bne $d23e
 	lda #$00
-	sta $005f
-	inc $005e
+	sta ram_005f
+	inc ram_005e
 	lda #$0a
-	sta $0009
-	lda $005e
+	sta ram_0009
+	lda ram_005e
 	sec
-	sbc $0020
-	cmp $0009
+	sbc ram_0020
+	cmp ram_0009
 	bmi $d254
 	beq $d254
 	jsr $d6e5
 	rts
 	lda #$00
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $d270
 	lda #$08
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $d270
 	rts
 	lda $805a
-	sta $0009
-	lda $005e
-	cmp $0009
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $d28c
 	lda #$01
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $d28c
 	rts
-	dec $005f
+	dec ram_005f
 	lda #$ff
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bne $d2a4
 	lda #$0f
-	sta $005f
-	dec $005e
+	sta ram_005f
+	dec ram_005e
 	lda #$06
-	sta $0009
-	lda $005e
+	sta ram_0009
+	lda ram_005e
 	sec
-	sbc $0020
-	cmp $0009
+	sbc ram_0020
+	cmp ram_0009
 	bpl $d2ba
 	beq $d2ba
 	jsr $d773
 	rts
 	lda #$20
-	sta $0024
-	inc $0025
+	sta ram_0024
+	inc ram_0025
 	lda #$00
-	sta $0009
-	lda $0025
+	sta ram_0009
+	lda ram_0025
 	and #$08
-	cmp $0009
+	cmp ram_0009
 	beq $d2d7
 	lda #$28
-	sta $0024
+	sta ram_0024
 	lda #$00
-	sta $0009
-	lda $0059
-	cmp $0009
+	sta ram_0009
+	lda ram_0059
+	cmp ram_0009
 	bne $d2e9
 	lda #$00
-	sta $0025
+	sta ram_0025
 	lda #$02
-	sta $0009
-	lda $000f
-	cmp $0009
+	sta ram_0009
+	lda ram_000f
+	cmp ram_0009
 	beq $d2fb
 	lda #$30
-	sta $0024
+	sta ram_0024
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $d30d
 	lda #$38
-	sta $0024
-	lda $000c
+	sta ram_0024
+	lda ram_000c
 	sec
 	sbc #$20
-	sta $0068
-	lda $005e
+	sta ram_0068
+	lda ram_005e
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $005f
+	lda ram_005f
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	sec
 	sbc #$01
-	sta $0069
+	sta ram_0069
 	lda #$01
-	sta $006a
+	sta ram_006a
 	lda #$00
-	sta $0009
-	lda $000d
-	cmp $0009
+	sta ram_0009
+	lda ram_000d
+	cmp ram_0009
 	beq $d351
-	lda $000d
+	lda ram_000d
 	and #$03
-	sta $006a
+	sta ram_006a
 	lda #$00
-	sta $0009
-	lda $005a
-	cmp $0009
+	sta ram_0009
+	lda ram_005a
+	cmp ram_0009
 	beq $d391
-	lda $0069
+	lda ram_0069
 	clc
 	adc #$04
-	sta $006b
-	lda $000c
+	sta ram_006b
+	lda ram_000c
 	sec
 	sbc #$02
-	sta $006c
+	sta ram_006c
 	lda #$03
-	sta $006d
+	sta ram_006d
 	lda #$00
-	sta $0009
-	lda $001b
+	sta ram_0009
+	lda ram_001b
 	and #$02
-	cmp $0009
+	cmp ram_0009
 	beq $d389
 	lda #$43
-	sta $006d
+	sta ram_006d
 	lda #$1e
-	sta $006e
+	sta ram_006e
 	jsr $f4f5
 	lda #$01
-	sta $0009
-	lda $001c
-	cmp $0009
+	sta ram_0009
+	lda ram_001c
+	cmp ram_0009
 	bne $d3a1
 	jmp $d3a4
 	jmp $d43a
 	ldx #$00
-	lda $0068
+	lda ram_0068
 	sta $0300,x
 	ldx #$01
-	lda $0024
+	lda ram_0024
 	sta $0300,x
 	ldx #$02
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$03
-	lda $0069
+	lda ram_0069
 	sta $0300,x
 	ldx #$04
 	lda #$10
 	clc
-	adc $0068
+	adc ram_0068
 	sta $0300,x
 	ldx #$05
 	lda #$02
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$06
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$07
-	lda $0069
+	lda ram_0069
 	sta $0300,x
 	ldx #$08
-	lda $0068
+	lda ram_0068
 	sta $0300,x
 	ldx #$09
 	lda #$04
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$0a
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$0b
 	lda #$08
 	clc
-	adc $0069
+	adc ram_0069
 	sta $0300,x
 	ldx #$0c
 	lda #$10
 	clc
-	adc $0068
+	adc ram_0068
 	sta $0300,x
 	ldx #$0d
 	lda #$06
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$0e
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$0f
 	lda #$08
 	clc
-	adc $0069
+	adc ram_0069
 	sta $0300,x
 	rts
-	lda $006a
+	lda ram_006a
 	clc
 	adc #$40
-	sta $006a
+	sta ram_006a
 	ldx #$00
-	lda $0068
+	lda ram_0068
 	sta $0300,x
 	ldx #$01
 	lda #$04
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$02
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$03
-	lda $0069
+	lda ram_0069
 	sta $0300,x
 	ldx #$04
 	lda #$10
 	clc
-	adc $0068
+	adc ram_0068
 	sta $0300,x
 	ldx #$05
 	lda #$06
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$06
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$07
-	lda $0069
+	lda ram_0069
 	sta $0300,x
 	ldx #$08
-	lda $0068
+	lda ram_0068
 	sta $0300,x
 	ldx #$09
-	lda $0024
+	lda ram_0024
 	sta $0300,x
 	ldx #$0a
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$0b
 	lda #$08
 	clc
-	adc $0069
+	adc ram_0069
 	sta $0300,x
 	ldx #$0c
 	lda #$10
 	clc
-	adc $0068
+	adc ram_0068
 	sta $0300,x
 	ldx #$0d
 	lda #$02
 	clc
-	adc $0024
+	adc ram_0024
 	sta $0300,x
 	ldx #$0e
-	lda $006a
+	lda ram_006a
 	sta $0300,x
 	ldx #$0f
 	lda #$08
 	clc
-	adc $0069
+	adc ram_0069
 	sta $0300,x
 	rts
 	lda #$00
-	sta $000e
-	lda $000a
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_000e
+	lda ram_000a
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bmi $d4ed
 	rts
-	ldx $0022
+	ldx ram_0022
 	lda #$08
 	sta $0300,x
 	lda #$01
 	clc
-	adc $0022
+	adc ram_0022
 	tax
 	lda #$02
 	sta $0300,x
 	lda #$02
 	clc
-	adc $0022
+	adc ram_0022
 	tax
 	lda #$02
 	sta $0300,x
 	lda #$03
 	clc
-	adc $0022
+	adc ram_0022
 	tax
 	lda #$10
 	pha
-	lda $000e
+	lda ram_000e
 	asl a
 	asl a
 	asl a
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	sta $0300,x
-	lda $0022
+	lda ram_0022
 	clc
 	adc #$04
-	sta $0022
-	inc $000e
+	sta ram_0022
+	inc ram_000e
 	jmp $d4de
 	.byte $60, $60
 	lda #$01
@@ -6344,28 +6350,28 @@
 	sta Ctrl1_4016
 	lda Ctrl1_4016
 	and #$01
-	sta $0013
+	sta ram_0013
 	lda Ctrl1_4016
 	and #$01
-	sta $0014
+	sta ram_0014
 	lda Ctrl1_4016
 	and #$01
-	sta $0019
+	sta ram_0019
 	lda Ctrl1_4016
 	and #$01
-	sta $001a
+	sta ram_001a
 	lda Ctrl1_4016
 	and #$01
-	sta $0015
+	sta ram_0015
 	lda Ctrl1_4016
 	and #$01
-	sta $0016
+	sta ram_0016
 	lda Ctrl1_4016
 	and #$01
-	sta $0018
+	sta ram_0018
 	lda Ctrl1_4016
 	and #$01
-	sta $0017
+	sta ram_0017
 	rts
 	lda #$9f
 	sta Sq1Duty_4004
@@ -6395,10 +6401,10 @@
 	.byte $0D, $40, $A9, $F9, $8D, $0E, $40, $A9
 	.byte $08, $8D, $0F, $40, $60
 	lda #$00
-	sta $0009
-	lda $001e
+	sta ram_0009
+	lda ram_001e
 	and #$04
-	cmp $0009
+	cmp ram_0009
 	beq $d609
 	lda #$31
 	sta PpuControl_2000
@@ -6409,7 +6415,7 @@
 	sta PpuControl_2000
 	lda #$1c
 	sta PpuMask_2001
-	lda $001e
+	lda ram_001e
 	asl a
 	asl a
 	asl a
@@ -6417,211 +6423,211 @@
 	asl a
 	asl a
 	clc
-	adc $001f
+	adc ram_001f
 	sta PpuScroll_2005
 	lda #$00
 	sta PpuScroll_2005
 	rts
 	lda #$00
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d637
 	rts
 	lda #$06
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bmi $d647
 	jmp $d696
-	lda $001e
+	lda ram_001e
 	clc
 	adc #$05
-	sta $0052
+	sta ram_0052
 	lda #$01
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d660
 	jsr $c4b4
 	lda #$03
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d670
 	jsr $c5aa
 	lda #$04
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d680
 	jsr $c6a0
 	lda #$05
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d690
 	jsr $c706
 	lda #$00
-	sta $0058
+	sta ram_0058
 	rts
-	lda $001e
+	lda ram_001e
 	sec
 	sbc #$01
-	sta $0052
+	sta ram_0052
 	lda #$06
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d6af
 	jsr $c4b4
 	lda #$08
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d6bf
 	jsr $c5aa
 	lda #$09
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d6cf
 	jsr $c6a0
 	lda #$0a
-	sta $0009
-	lda $0058
-	cmp $0009
+	sta ram_0009
+	lda ram_0058
+	cmp ram_0009
 	bne $d6df
 	jsr $c706
 	lda #$00
-	sta $0058
+	sta ram_0058
 	rts
 	lda $805b
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bne $d6f9
 	lda #$01
-	sta $000b
+	sta ram_000b
 	rts
-	inc $0021
+	inc ram_0021
 	lda #$10
-	sta $0009
-	lda $0021
-	cmp $0009
+	sta ram_0009
+	lda ram_0021
+	cmp ram_0009
 	bne $d711
 	lda #$00
-	sta $0021
-	inc $0020
+	sta ram_0021
+	inc ram_0020
 	lda #$3f
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d727
 	lda #$00
-	sta $001f
-	inc $001e
+	sta ram_001f
+	inc ram_001e
 	rts
-	inc $001f
+	inc ram_001f
 	lda #$0a
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d73c
 	lda #$01
-	sta $0058
+	sta ram_0058
 	lda #$1e
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d74e
 	lda #$03
-	sta $0058
+	sta ram_0058
 	lda #$28
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d760
 	lda #$04
-	sta $0058
+	sta ram_0058
 	lda #$32
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d772
 	lda #$05
-	sta $0058
+	sta ram_0058
 	rts
 	lda #$00
-	sta $0009
-	lda $001e
-	cmp $0009
+	sta ram_0009
+	lda ram_001e
+	cmp ram_0009
 	bne $d78e
 	lda #$01
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bpl $d78e
 	rts
 	lda $805b
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bne $d79d
 	rts
-	dec $0021
+	dec ram_0021
 	lda #$ff
-	sta $0009
-	lda $0021
-	cmp $0009
+	sta ram_0009
+	lda ram_0021
+	cmp ram_0009
 	bne $d7b5
 	lda #$0f
-	sta $0021
-	dec $0020
+	sta ram_0021
+	dec ram_0020
 	lda #$00
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d7cb
 	lda #$3f
-	sta $001f
-	dec $001e
+	sta ram_001f
+	dec ram_001e
 	rts
-	dec $001f
+	dec ram_001f
 	lda #$00
-	sta $0009
-	lda $001e
-	cmp $0009
+	sta ram_0009
+	lda ram_001e
+	cmp ram_0009
 	bne $d7dc
 	rts
 	lda #$08
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d7ee
 	lda #$06
-	sta $0058
+	sta ram_0058
 	lda #$1c
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d800
 	lda #$08
-	sta $0058
+	sta ram_0058
 	lda #$26
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d812
 	lda #$09
-	sta $0058
+	sta ram_0058
 	lda #$30
-	sta $0009
-	lda $001f
-	cmp $0009
+	sta ram_0009
+	lda ram_001f
+	cmp ram_0009
 	bne $d824
 	lda #$0a
-	sta $0058
+	sta ram_0058
 	rts
 	jsr $dae9
 	lda #$21
@@ -6645,8 +6651,8 @@
 	cpx #$20
 	bne $d84b
 	jsr $db8e
-	lda $0008
-	sta $000e
+	lda ram_0008
+	sta ram_000e
 	lda #$22
 	sta PpuAddr_2006
 	lda #$04
@@ -6655,15 +6661,15 @@
 	sta PpuData_2007
 	lda #$ef
 	sta PpuData_2007
-	dec $000e
+	dec ram_000e
 	lda #$00
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $d886
 	jmp $d869
-	lda $0008
-	sta $000e
+	lda ram_0008
+	sta ram_000e
 	lda #$22
 	sta PpuAddr_2006
 	lda #$24
@@ -6672,11 +6678,11 @@
 	sta PpuData_2007
 	lda #$ff
 	sta PpuData_2007
-	dec $000e
+	dec ram_000e
 	lda #$00
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $d8b3
 	jmp $d896
 	jsr $db09
@@ -6747,29 +6753,29 @@
 	lda #$08
 	sta PpuAddr_2006
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda $e3f8,x
 	sta PpuData_2007
-	inc $000e
+	inc ram_000e
 	lda #$09
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $dac3
 	jmp $daa7
 	jsr $db09
 	jsr $c241
 	lda #$c8
-	sta $0071
+	sta ram_0071
 	jsr $dad2
 	rts
 	jsr $db8e
-	dec $0071
+	dec ram_0071
 	lda #$00
-	sta $0009
-	lda $0071
-	cmp $0009
+	sta ram_0009
+	lda ram_0071
+	cmp ram_0009
 	beq $dae8
 	jmp $dad2
 	rts
@@ -6790,15 +6796,15 @@
 	lda #$00
 	sta PpuAddr_2006
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda $e25a,x
 	sta PpuData_2007
-	inc $000e
+	inc ram_000e
 	lda #$10
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bne $db32
 	rts
 	jmp $db18
@@ -6813,7 +6819,7 @@
 	lda #$03
 	sta SpriteDma_4014
 	lda #$10
-	sta $0022
+	sta ram_0022
 	rts
 	.byte $20, $8E, $DB, $A9, $30, $8D, $00, $20
 	.byte $A9, $1C, $8D, $01, $20, $60
@@ -6835,7 +6841,7 @@
 	sta PpuAddr_2006
 	lda #$00
 	sta PpuAddr_2006
-	inc $001b
+	inc ram_001b
 	rts
 	.byte $AD, $02, $20, $10, $FB, $AD, $02, $20
 	.byte $30, $FB, $AD, $02, $20, $10, $FB, $EE
@@ -6882,16 +6888,16 @@
 	bne $dc1d
 	rts
 	lda #$00
-	sta $0066
+	sta ram_0066
 	lda #$00
 	sta OamAddr_2003
 	lda #$f5
 	sta OamData_2004
-	inc $0066
+	inc ram_0066
 	lda #$00
-	sta $0009
-	lda $0066
-	cmp $0009
+	sta ram_0009
+	lda ram_0066
+	cmp ram_0009
 	beq $dc48
 	jmp $dc30
 	rts
@@ -6901,190 +6907,190 @@
 	.byte $CD, $09, $00, $F0, $03, $4C, $4E, $DC
 	.byte $60, $40
 	lda #$05
-	sta $007e
+	sta ram_007e
 	rts
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda #$00
-	sta $0072,x
-	inc $000e
+	sta ram_0072,x
+	inc ram_000e
 	lda #$0c
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $dc91
 	jmp $dc76
 	rts
 	lda #$00
-	sta $007f
-	ldx $007f
-	lda $0072,x
-	sta $0080
+	sta ram_007f
+	ldx ram_007f
+	lda ram_0072,x
+	sta ram_0080
 	lda #$00
-	sta $0009
-	lda $0080
-	cmp $0009
+	sta ram_0009
+	lda ram_0080
+	cmp ram_0009
 	beq $dcb0
 	jmp $dd19
-	ldx $007f
+	ldx ram_007f
 	lda $8070,x
-	sta $0081
-	ldx $007f
+	sta ram_0081
+	ldx ram_007f
 	lda $807c,x
-	sta $0082
-	lda $0082
-	sta $0009
-	lda $000c
+	sta ram_0082
+	lda ram_0082
+	sta ram_0009
+	lda ram_000c
 	sec
 	sbc #$20
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	cmp $0009
+	cmp ram_0009
 	beq $dcda
 	jmp $dd19
-	lda $0081
-	sta $0009
-	lda $005e
-	cmp $0009
+	lda ram_0081
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $dcf8
 	lda #$06
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $dcf8
 	jmp $ddd8
-	lda $0081
-	sta $0009
-	lda $005e
+	lda ram_0081
+	sta ram_0009
+	lda ram_005e
 	clc
 	adc #$01
-	cmp $0009
+	cmp ram_0009
 	bne $dd19
 	lda #$0a
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $dd19
 	jmp $ddd8
-	inc $007f
+	inc ram_007f
 	lda #$0c
-	sta $0009
-	lda $007f
-	cmp $0009
+	sta ram_0009
+	lda ram_007f
+	cmp ram_0009
 	beq $dd2c
 	jmp $dc97
 	rts
 	lda #$00
-	sta $0083
-	ldx $0083
+	sta ram_0083
+	ldx ram_0083
 	lda $8044,x
-	sta $0084
-	ldx $0083
+	sta ram_0084
+	ldx ram_0083
 	lda $8049,x
-	sta $0085
-	lda $0085
-	sta $0009
-	lda $000c
+	sta ram_0085
+	lda ram_0085
+	sta ram_0009
+	lda ram_000c
 	sec
 	sbc #$02
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	cmp $0009
+	cmp ram_0009
 	beq $dd5c
 	jmp $dd9b
-	lda $0084
-	sta $0009
-	lda $005e
-	cmp $0009
+	lda ram_0084
+	sta ram_0009
+	lda ram_005e
+	cmp ram_0009
 	bne $dd7a
 	lda #$04
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $dd7a
 	jmp $ddb0
-	lda $0084
-	sta $0009
-	lda $005e
+	lda ram_0084
+	sta ram_0009
+	lda ram_005e
 	clc
 	adc #$01
-	cmp $0009
+	cmp ram_0009
 	bne $dd9b
 	lda #$0c
-	sta $0009
-	lda $005f
-	cmp $0009
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bmi $dd9b
 	jmp $ddb0
-	inc $0083
-	lda $007e
-	sta $0009
-	lda $0083
-	cmp $0009
+	inc ram_0083
+	lda ram_007e
+	sta ram_0009
+	lda ram_0083
+	cmp ram_0009
 	bpl $ddaf
 	jmp $dd32
 	rts
 	jsr $c3eb
 	lda #$00
-	sta $0086
+	sta ram_0086
 	jsr $db8e
 	jsr $e679
 	jsr $de0d
-	inc $0086
+	inc ram_0086
 	lda #$15
-	sta $0009
-	lda $0086
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	cmp ram_0009
 	beq $ddd4
 	jmp $ddb8
 	jsr $c3eb
 	rts
-	ldx $007f
+	ldx ram_007f
 	lda #$01
-	sta $0072,x
+	sta ram_0072,x
 	ldx #$05
 	lda #$08
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$05
-	lda $0082
+	lda ram_0082
 	asl a
 	asl a
 	asl a
 	asl a
 	sec
 	sbc #$08
-	sta $009e,x
+	sta ram_009e,x
 	ldx #$05
-	lda $0081
-	sta $0092,x
+	lda ram_0081
+	sta ram_0092,x
 	ldx #$05
 	lda #$00
-	sta $0098,x
+	sta ram_0098,x
 	ldx #$05
 	lda #$01
-	sta $00aa,x
+	sta ram_00aa,x
 	rts
 	lda #$00
-	sta $000e
+	sta ram_000e
 	lda #$00
-	sta $0087
-	inc $0087
+	sta ram_0087
+	inc ram_0087
 	lda #$40
-	sta $0009
-	lda $0087
-	cmp $0009
+	sta ram_0009
+	lda ram_0087
+	cmp ram_0009
 	beq $de2a
 	jmp $de17
-	inc $000e
+	inc ram_000e
 	lda #$11
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	beq $de3d
 	jmp $de12
 	rts
@@ -7341,68 +7347,68 @@
 	.byte $02, $02, $02, $02, $02, $02, $03, $03
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
 	lda #$00
-	sta $008e
+	sta ram_008e
 	lda #$00
-	sta $008f
+	sta ram_008f
 	lda #$1f
 	sta ApuStatus_4015
 	lda #$00
-	sta $0090
-	lda $0007
+	sta ram_0090
+	lda ram_0007
 	asl a
 	asl a
-	sta $0091
-	ldx $0091
+	sta ram_0091
+	ldx ram_0091
 	lda $8000,x
-	sta $0088
-	sta $0002
+	sta ram_0088
+	sta ram_0002
 	inx
 	lda $8000,x
-	sta $0089
-	sta $0003
+	sta ram_0089
+	sta ram_0003
 	inx
 	lda $8000,x
-	sta $008a
+	sta ram_008a
 	inx
 	lda $8000,x
-	sta $008b
+	sta ram_008b
 	rts
 	iny
 	lda ($02),y
-	sta $008e
+	sta ram_008e
 	clc
-	lda $0002
+	lda ram_0002
 	adc #$02
-	sta $0002
-	sta $008c
-	lda $0003
+	sta ram_0002
+	sta ram_008c
+	lda ram_0003
 	adc #$00
-	sta $0003
-	sta $008d
+	sta ram_0003
+	sta ram_008d
 	jmp $e679
-	dec $008e
-	lda $008e
+	dec ram_008e
+	lda ram_008e
 	cmp #$00
 	beq $e665
-	lda $008c
-	sta $0002
-	lda $008d
-	sta $0003
+	lda ram_008c
+	sta ram_0002
+	lda ram_008d
+	sta ram_0003
 	jmp $e679
 	clc
-	lda $0002
+	lda ram_0002
 	adc #$01
-	sta $0002
-	lda $0003
+	sta ram_0002
+	lda ram_0003
 	adc #$00
-	sta $0003
+	sta ram_0003
 	jmp $e679
 	lda #$00
-	sta $0009
-	lda $008f
-	cmp $0009
+	sta ram_0009
+	lda ram_008f
+	cmp ram_0009
 	beq $e68a
-	dec $008f
+	dec ram_008f
 	rts
 	ldy #$00
 	lda ($02),y
@@ -7410,23 +7416,23 @@
 	beq $e62c
 	cmp #$fe
 	beq $e64c
-	sta $008f
+	sta ram_008f
 	iny
 	lda ($02),y
-	sta $0090
+	sta ram_0090
 	iny
 	lda #$00
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$03
-	cmp $0009
+	cmp ram_0009
 	bne $e6b2
 	jmp $e6dc
 	lda #$03
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$03
-	cmp $0009
+	cmp ram_0009
 	bne $e6c4
 	jmp $e6c4
 	lda ($02),y
@@ -7442,17 +7448,17 @@
 	sta Sq0Length_4003
 	iny
 	lda #$00
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$0c
-	cmp $0009
+	cmp ram_0009
 	bne $e6ee
 	jmp $e718
 	lda #$0c
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$0c
-	cmp $0009
+	cmp ram_0009
 	bne $e700
 	jmp $e700
 	lda ($02),y
@@ -7468,17 +7474,17 @@
 	sta Sq1Length_4007
 	iny
 	lda #$00
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$30
-	cmp $0009
+	cmp ram_0009
 	bne $e72a
 	jmp $e754
 	lda #$30
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$30
-	cmp $0009
+	cmp ram_0009
 	bne $e73c
 	jmp $e73c
 	lda ($02),y
@@ -7494,17 +7500,17 @@
 	sta TrgLength_400B
 	iny
 	lda #$00
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$c0
-	cmp $0009
+	cmp ram_0009
 	bne $e766
 	jmp $e790
 	lda #$c0
-	sta $0009
-	lda $0090
+	sta ram_0009
+	lda ram_0090
 	and #$c0
-	cmp $0009
+	cmp ram_0009
 	bne $e778
 	jmp $e778
 	lda ($02),y
@@ -7520,1518 +7526,1518 @@
 	sta NoiseLength_400F
 	iny
 	tya
-	sta $0011
+	sta ram_0011
 	clc
-	lda $0002
-	adc $0011
-	sta $0002
-	lda $0003
+	lda ram_0002
+	adc ram_0011
+	sta ram_0002
+	lda ram_0003
 	adc #$00
-	sta $0003
+	sta ram_0003
 	clc
-	lda $0002
+	lda ram_0002
 	cmp $008a
 	bne $e7c3
-	lda $0003
+	lda ram_0003
 	cmp $008b
 	bne $e7c3
-	lda $0088
-	sta $0002
-	lda $0089
-	sta $0003
+	lda ram_0088
+	sta ram_0002
+	lda ram_0089
+	sta ram_0003
 	rts
 	ldx #$00
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$01
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$02
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$03
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$04
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	ldx #$05
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	lda #$05
-	sta $00b0
+	sta ram_00b0
 	rts
 	lda #$00
-	sta $000e
-	ldx $000e
+	sta ram_000e
+	ldx ram_000e
 	lda #$00
-	sta $00a4,x
-	inc $000e
-	lda $00b0
-	sta $0009
-	lda $000e
-	cmp $0009
+	sta ram_00a4,x
+	inc ram_000e
+	lda ram_00b0
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bpl $e815
 	jmp $e7f9
 	rts
 	lda #$01
-	sta $0009
-	lda $0004
-	cmp $0009
+	sta ram_0009
+	lda ram_0004
+	cmp ram_0009
 	beq $e824
 	rts
 	lda #$00
-	sta $000e
-	ldx $000e
-	lda $00a4,x
-	sta $00b1
+	sta ram_000e
+	ldx ram_000e
+	lda ram_00a4,x
+	sta ram_00b1
 	lda #$00
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e842
 	jmp $e85e
-	inc $000e
-	lda $00b0
-	sta $0009
-	lda $000e
-	cmp $0009
+	inc ram_000e
+	lda ram_00b0
+	sta ram_0009
+	lda ram_000e
+	cmp ram_0009
 	bpl $e858
 	beq $e858
 	jmp $e829
 	.byte $60, $A9, $00, $8D, $0E, $00
-	lda $0005
+	lda ram_0005
 	and #$0f
-	sta $00b1
-	ldx $00b1
+	sta ram_00b1
+	ldx ram_00b1
 	lda $8060,x
-	sta $00b1
+	sta ram_00b1
 	lda #$06
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e87f
 	jmp $e8b0
-	ldx $000e
-	lda $00b1
-	sta $00a4,x
-	ldx $000e
+	ldx ram_000e
+	lda ram_00b1
+	sta ram_00a4,x
+	ldx ram_000e
 	lda #$07
-	sta $009e,x
-	ldx $000e
+	sta ram_009e,x
+	ldx ram_000e
 	lda #$00
-	sta $0098,x
-	ldx $000e
-	lda $005e
+	sta ram_0098,x
+	ldx ram_000e
+	lda ram_005e
 	clc
 	adc #$05
-	sta $0092,x
-	ldx $000e
+	sta ram_0092,x
+	ldx ram_000e
 	lda #$ff
-	sta $00aa,x
-	inc $0004
+	sta ram_00aa,x
+	inc ram_0004
 	rts
 	lda #$00
-	sta $0009
-	lda $000c
+	sta ram_0009
+	lda ram_000c
 	and #$f0
-	cmp $0009
+	cmp ram_0009
 	bne $e8c0
 	rts
-	ldx $000e
-	lda $00b1
-	sta $00a4,x
-	ldx $000e
-	lda $000c
+	ldx ram_000e
+	lda ram_00b1
+	sta ram_00a4,x
+	ldx ram_000e
+	lda ram_000c
 	sec
 	sbc #$11
-	sta $009e,x
-	ldx $000e
+	sta ram_009e,x
+	ldx ram_000e
 	lda #$00
-	sta $0098,x
-	ldx $000e
-	lda $005e
+	sta ram_0098,x
+	ldx ram_000e
+	lda ram_005e
 	clc
 	adc #$0a
-	sta $0092,x
+	sta ram_0092,x
 	jsr $d5c3
 	rts
 	lda #$ff
-	sta $00b2
-	inc $00b2
-	ldx $00b2
-	lda $00a4,x
-	sta $00b1
+	sta ram_00b2
+	inc ram_00b2
+	ldx ram_00b2
+	lda ram_00a4,x
+	sta ram_00b1
 	lda #$02
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e90e
 	jsr $e960
 	lda #$03
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e91e
 	jsr $e960
 	lda #$04
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e92e
 	jsr $ec12
 	lda #$06
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e93e
 	jsr $edca
 	lda #$08
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $e94e
 	jsr $e960
-	lda $00b0
-	sta $0009
-	lda $00b2
-	cmp $0009
+	lda ram_00b0
+	sta ram_0009
+	lda ram_00b2
+	cmp ram_0009
 	bpl $e95f
 	jmp $e8f2
 	rts
-	ldx $00b2
-	lda $00aa,x
-	sta $00b3
-	ldx $00b2
-	lda $0092,x
-	sta $00b4
-	ldx $00b2
-	lda $0098,x
-	sta $00b5
-	ldx $00b2
-	lda $009e,x
-	sta $00b6
-	lda $00b4
+	ldx ram_00b2
+	lda ram_00aa,x
+	sta ram_00b3
+	ldx ram_00b2
+	lda ram_0092,x
+	sta ram_00b4
+	ldx ram_00b2
+	lda ram_0098,x
+	sta ram_00b5
+	ldx ram_00b2
+	lda ram_009e,x
+	sta ram_00b6
+	lda ram_00b4
 	clc
 	adc #$02
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bmi $e998
 	jmp $ee75
-	lda $00b4
-	sta $0009
-	lda $0020
+	lda ram_00b4
+	sta ram_0009
+	lda ram_0020
 	clc
 	adc #$12
-	cmp $0009
+	cmp ram_0009
 	bpl $e9ac
 	jmp $ee75
 	lda #$00
-	sta $00b7
+	sta ram_00b7
 	lda #$03
-	sta $0062
+	sta ram_0062
 	jsr $f2cd
 	lda #$00
-	sta $0009
-	lda $001b
+	sta ram_0009
+	lda ram_001b
 	and #$01
-	cmp $0009
+	cmp ram_0009
 	beq $e9cb
 	jmp $ea9f
 	lda #$ff
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $e9ed
 	lda #$01
-	sta $0009
-	lda $00b7
-	cmp $0009
+	sta ram_0009
+	lda ram_00b7
+	cmp ram_0009
 	bne $e9ea
 	lda #$02
-	sta $00b3
+	sta ram_00b3
 	jmp $ea41
 	lda #$01
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ea17
 	lda #$00
-	sta $0064
+	sta ram_0064
 	jsr $f083
 	lda #$00
-	sta $0009
-	lda $0064
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	cmp ram_0009
 	beq $ea14
 	lda #$02
-	sta $00b3
+	sta ram_00b3
 	jmp $ea41
 	lda #$02
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ea41
 	lda #$00
-	sta $0067
+	sta ram_0067
 	jsr $f193
 	lda #$00
-	sta $0009
-	lda $0067
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	cmp ram_0009
 	beq $ea3e
 	lda #$01
-	sta $00b3
+	sta ram_00b3
 	jmp $ea41
 	lda #$fc
-	sta $0009
-	lda $00b6
+	sta ram_0009
+	lda ram_00b6
 	and #$fc
-	cmp $0009
+	cmp ram_0009
 	bne $ea53
 	jmp $ee75
-	lda $00b4
+	lda ram_00b4
 	clc
 	adc #$05
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bmi $ea67
 	jmp $ee75
-	lda $00b4
-	sta $0009
-	lda $0020
+	lda ram_00b4
+	sta ram_0009
+	lda ram_0020
 	clc
 	adc #$15
-	cmp $0009
+	cmp ram_0009
 	bpl $ea7b
 	jmp $ee75
-	ldx $00b2
-	lda $00b3
-	sta $00aa,x
-	ldx $00b2
-	lda $00b4
-	sta $0092,x
-	ldx $00b2
-	lda $00b5
-	sta $0098,x
-	ldx $00b2
-	lda $00b6
-	sta $009e,x
+	ldx ram_00b2
+	lda ram_00b3
+	sta ram_00aa,x
+	ldx ram_00b2
+	lda ram_00b4
+	sta ram_0092,x
+	ldx ram_00b2
+	lda ram_00b5
+	sta ram_0098,x
+	ldx ram_00b2
+	lda ram_00b6
+	sta ram_009e,x
 	lda #$08
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $eaaf
 	jmp $ebb7
 	lda #$03
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $eabf
 	jmp $eb32
 	lda #$02
-	sta $006d
+	sta ram_006d
 	lda #$0a
-	sta $006e
-	lda $0020
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_006e
+	lda ram_0020
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bmi $eb31
 	beq $eb31
-	lda $0020
+	lda ram_0020
 	clc
 	adc #$10
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bpl $eb31
 	beq $eb31
-	ldx $00b2
-	lda $009e,x
+	ldx ram_00b2
+	lda ram_009e,x
 	sec
 	sbc #$10
-	sta $006c
-	lda $00b4
+	sta ram_006c
+	lda ram_00b4
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $00b5
+	lda ram_00b5
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $006b
+	adc ram_0011
+	sta ram_006b
 	lda #$00
-	sta $0009
-	lda $001b
+	sta ram_0009
+	lda ram_001b
 	and #$10
-	cmp $0009
+	cmp ram_0009
 	beq $eb2e
 	lda #$42
-	sta $006d
+	sta ram_006d
 	jmp $f44f
 	.byte $60
 	jmp $f3db
 	rts
-	lda $0020
-	sta $0009
-	lda $00b4
-	cmp $0009
+	lda ram_0020
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bmi $ebb6
 	beq $ebb6
-	lda $0020
+	lda ram_0020
 	clc
 	adc #$10
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bpl $ebb6
 	beq $ebb6
 	lda #$00
-	sta $006d
+	sta ram_006d
 	lda #$40
-	sta $006e
+	sta ram_006e
 	lda #$00
-	sta $0009
-	lda $001b
+	sta ram_0009
+	lda ram_001b
 	and #$10
-	cmp $0009
+	cmp ram_0009
 	beq $eb73
 	lda #$48
-	sta $006e
-	ldx $00b2
-	lda $009e,x
+	sta ram_006e
+	ldx ram_00b2
+	lda ram_009e,x
 	sec
 	sbc #$20
-	sta $006c
-	lda $00b4
+	sta ram_006c
+	lda ram_00b4
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $00b5
+	lda ram_00b5
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $006b
+	adc ram_0011
+	sta ram_006b
 	lda #$01
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ebb3
 	lda #$40
-	sta $006d
+	sta ram_006d
 	jmp $f4dc
 	.byte $60
 	jmp $f4c3
 	rts
 	lda #$02
-	sta $006d
+	sta ram_006d
 	lda #$02
-	sta $006e
-	lda $0020
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_006e
+	lda ram_0020
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bmi $ec11
 	beq $ec11
-	lda $0020
+	lda ram_0020
 	clc
 	adc #$10
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bpl $ec11
 	beq $ec11
-	ldx $00b2
-	lda $009e,x
+	ldx ram_00b2
+	lda ram_009e,x
 	sec
 	sbc #$10
-	sta $006c
-	lda $00b4
+	sta ram_006c
+	lda ram_00b4
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $00b5
+	lda ram_00b5
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $006b
+	adc ram_0011
+	sta ram_006b
 	jmp $f4f5
 	rts
-	ldx $00b2
-	lda $00aa,x
-	sta $00b3
-	ldx $00b2
-	lda $0092,x
-	sta $00b4
-	ldx $00b2
-	lda $0098,x
-	sta $00b5
-	ldx $00b2
-	lda $009e,x
-	sta $00b6
-	lda $00b4
+	ldx ram_00b2
+	lda ram_00aa,x
+	sta ram_00b3
+	ldx ram_00b2
+	lda ram_0092,x
+	sta ram_00b4
+	ldx ram_00b2
+	lda ram_0098,x
+	sta ram_00b5
+	ldx ram_00b2
+	lda ram_009e,x
+	sta ram_00b6
+	lda ram_00b4
 	clc
 	adc #$02
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bmi $ec4a
 	jmp $ee75
-	lda $00b4
-	sta $0009
-	lda $0020
+	lda ram_00b4
+	sta ram_0009
+	lda ram_0020
 	clc
 	adc #$12
-	cmp $0009
+	cmp ram_0009
 	bpl $ec5e
 	jmp $ee75
 	lda #$00
-	sta $00b7
+	sta ram_00b7
 	lda #$02
-	sta $0062
+	sta ram_0062
 	jsr $f2cd
 	lda #$ff
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ec8d
 	lda #$01
-	sta $0009
-	lda $00b7
-	cmp $0009
+	sta ram_0009
+	lda ram_00b7
+	cmp ram_0009
 	bne $ec8a
 	lda #$01
-	sta $00b3
+	sta ram_00b3
 	jmp $ed11
-	lda $005e
-	sta $0009
-	lda $00b4
+	lda ram_005e
+	sta ram_0009
+	lda ram_00b4
 	clc
 	adc #$02
-	cmp $0009
+	cmp ram_0009
 	bpl $eca5
 	beq $eca5
 	lda #$01
-	sta $00b3
-	lda $005e
-	sta $0009
-	lda $00b4
+	sta ram_00b3
+	lda ram_005e
+	sta ram_0009
+	lda ram_00b4
 	sec
 	sbc #$02
-	cmp $0009
+	cmp ram_0009
 	bmi $ecbd
 	beq $ecbd
 	lda #$02
-	sta $00b3
+	sta ram_00b3
 	lda #$01
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ece7
 	lda #$00
-	sta $0064
+	sta ram_0064
 	jsr $f083
 	lda #$00
-	sta $0009
-	lda $0064
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	cmp ram_0009
 	beq $ece4
 	lda #$02
-	sta $00b3
+	sta ram_00b3
 	jmp $ed11
 	lda #$02
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $ed11
 	lda #$00
-	sta $0067
+	sta ram_0067
 	jsr $f193
 	lda #$00
-	sta $0009
-	lda $0067
-	cmp $0009
+	sta ram_0009
+	lda ram_0067
+	cmp ram_0009
 	beq $ed0e
 	lda #$01
-	sta $00b3
+	sta ram_00b3
 	jmp $ed11
 	lda #$fc
-	sta $0009
-	lda $00b6
+	sta ram_0009
+	lda ram_00b6
 	and #$fc
-	cmp $0009
+	cmp ram_0009
 	bne $ed23
 	jmp $ee75
-	ldx $00b2
-	lda $00b3
-	sta $00aa,x
-	ldx $00b2
-	lda $00b4
-	sta $0092,x
-	ldx $00b2
-	lda $00b5
-	sta $0098,x
-	ldx $00b2
-	lda $00b6
-	sta $009e,x
+	ldx ram_00b2
+	lda ram_00b3
+	sta ram_00aa,x
+	ldx ram_00b2
+	lda ram_00b4
+	sta ram_0092,x
+	ldx ram_00b2
+	lda ram_00b5
+	sta ram_0098,x
+	ldx ram_00b2
+	lda ram_00b6
+	sta ram_009e,x
 	lda #$00
-	sta $006d
-	lda $001b
+	sta ram_006d
+	lda ram_001b
 	and #$0c
-	sta $006e
-	lda $006e
+	sta ram_006e
+	lda ram_006e
 	clc
 	adc #$0e
-	sta $006e
-	lda $0020
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_006e
+	lda ram_0020
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bmi $edc1
-	lda $0020
+	lda ram_0020
 	clc
 	adc #$10
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bpl $edc1
 	beq $edc1
-	ldx $00b2
-	lda $009e,x
+	ldx ram_00b2
+	lda ram_009e,x
 	sec
 	sbc #$10
-	sta $006c
-	lda $00b4
+	sta ram_006c
+	lda ram_00b4
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $00b5
+	lda ram_00b5
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $006b
+	adc ram_0011
+	sta ram_006b
 	lda #$01
-	sta $0009
-	lda $00b3
-	cmp $0009
+	sta ram_0009
+	lda ram_00b3
+	cmp ram_0009
 	bne $edbe
 	lda #$40
-	sta $006d
+	sta ram_006d
 	jmp $f44f
 	.byte $60
 	jmp $f3db
 	lda #$f5
-	sta $006c
+	sta ram_006c
 	jmp $f3db
 	.byte $60
-	ldx $00b2
-	lda $00aa,x
-	sta $00b3
-	ldx $00b2
-	lda $0092,x
-	sta $00b4
-	ldx $00b2
-	lda $0098,x
-	sta $00b5
-	ldx $00b2
-	lda $009e,x
-	sta $00b6
-	lda $00b4
+	ldx ram_00b2
+	lda ram_00aa,x
+	sta ram_00b3
+	ldx ram_00b2
+	lda ram_0092,x
+	sta ram_00b4
+	ldx ram_00b2
+	lda ram_0098,x
+	sta ram_00b5
+	ldx ram_00b2
+	lda ram_009e,x
+	sta ram_00b6
+	lda ram_00b4
 	clc
 	adc #$02
-	sta $0009
-	lda $0020
-	cmp $0009
+	sta ram_0009
+	lda ram_0020
+	cmp ram_0009
 	bmi $ee02
 	jmp $ee75
 	jsr $f29b
 	jsr $f29b
-	ldx $00b2
-	lda $00b4
-	sta $0092,x
-	ldx $00b2
-	lda $00b5
-	sta $0098,x
-	lda $0020
-	sta $0009
-	lda $00b4
-	cmp $0009
+	ldx ram_00b2
+	lda ram_00b4
+	sta ram_0092,x
+	ldx ram_00b2
+	lda ram_00b5
+	sta ram_0098,x
+	lda ram_0020
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bmi $ee74
 	beq $ee74
-	lda $0020
+	lda ram_0020
 	clc
 	adc #$10
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bpl $ee74
 	beq $ee74
 	lda #$02
-	sta $006d
+	sta ram_006d
 	lda #$04
-	sta $006e
-	ldx $00b2
-	lda $009e,x
+	sta ram_006e
+	ldx ram_00b2
+	lda ram_009e,x
 	sec
 	sbc #$10
-	sta $006c
-	lda $00b4
+	sta ram_006c
+	lda ram_00b4
 	sec
-	sbc $0020
+	sbc ram_0020
 	asl a
 	asl a
 	asl a
 	asl a
 	pha
-	lda $00b5
+	lda ram_00b5
 	sec
-	sbc $0021
-	sta $0011
+	sbc ram_0021
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $006b
+	adc ram_0011
+	sta ram_006b
 	jmp $f52f
 	rts
-	ldx $00b2
+	ldx ram_00b2
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	rts
 	lda #$00
-	sta $00b2
-	ldx $00b2
-	lda $00a4,x
-	sta $00b1
+	sta ram_00b2
+	ldx ram_00b2
+	lda ram_00a4,x
+	sta ram_00b1
 	lda #$00
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $ee9c
 	jmp $f015
-	ldx $00b2
-	lda $009e,x
-	sta $00b6
+	ldx ram_00b2
+	lda ram_009e,x
+	sta ram_00b6
 	lda #$0e
-	sta $00b8
+	sta ram_00b8
 	lda #$08
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $eebc
 	lda #$08
-	sta $00b8
+	sta ram_00b8
 	lda #$03
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $eece
 	lda #$16
-	sta $00b8
-	lda $000c
-	sta $0009
-	lda $00b6
+	sta ram_00b8
+	lda ram_000c
+	sta ram_0009
+	lda ram_00b6
 	sec
-	sbc $00b8
-	cmp $0009
+	sbc ram_00b8
+	cmp ram_0009
 	bmi $eee3
 	jmp $f015
-	lda $00b6
-	sta $0009
-	lda $000c
+	lda ram_00b6
+	sta ram_0009
+	lda ram_000c
 	sec
 	sbc #$18
-	cmp $0009
+	cmp ram_0009
 	bmi $eef7
 	jmp $f015
 	lda #$00
-	sta $0009
-	lda $0012
-	cmp $0009
+	sta ram_0009
+	lda ram_0012
+	cmp ram_0009
 	beq $ef18
-	lda $00b6
-	sta $0009
-	lda $000c
+	lda ram_00b6
+	sta ram_0009
+	lda ram_000c
 	sec
 	sbc #$10
-	cmp $0009
+	cmp ram_0009
 	bmi $ef18
 	jmp $f015
 	lda #$00
-	sta $00b9
+	sta ram_00b9
 	lda #$00
-	sta $00b7
-	ldx $00b2
-	lda $0092,x
-	sta $00b4
-	ldx $00b2
-	lda $0098,x
-	sta $00b5
-	lda $005e
-	sta $0009
-	lda $00b4
-	cmp $0009
+	sta ram_00b7
+	ldx ram_00b2
+	lda ram_0092,x
+	sta ram_00b4
+	ldx ram_00b2
+	lda ram_0098,x
+	sta ram_00b5
+	lda ram_005e
+	sta ram_0009
+	lda ram_00b4
+	cmp ram_0009
 	bne $ef47
 	lda #$01
-	sta $00b9
-	lda $00b4
-	sta $0009
-	lda $005e
+	sta ram_00b9
+	lda ram_00b4
+	sta ram_0009
+	lda ram_005e
 	clc
 	adc #$01
-	cmp $0009
+	cmp ram_0009
 	bne $ef6d
-	lda $005f
-	sta $0009
-	lda $00b5
-	cmp $0009
+	lda ram_005f
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bpl $ef6d
 	beq $ef6d
 	lda #$01
-	sta $00b9
-	lda $005e
-	sta $0009
-	lda $00b4
+	sta ram_00b9
+	lda ram_005e
+	sta ram_0009
+	lda ram_00b4
 	clc
 	adc #$01
-	cmp $0009
+	cmp ram_0009
 	bne $ef93
-	lda $00b5
-	sta $0009
-	lda $005f
-	cmp $0009
+	lda ram_00b5
+	sta ram_0009
+	lda ram_005f
+	cmp ram_0009
 	bpl $ef93
 	beq $ef93
 	lda #$01
-	sta $00b9
+	sta ram_00b9
 	lda #$00
-	sta $0009
-	lda $00b9
-	cmp $0009
+	sta ram_0009
+	lda ram_00b9
+	cmp ram_0009
 	bne $efa3
 	jmp $f015
-	lda $00b6
-	sta $0009
-	lda $000c
+	lda ram_00b6
+	sta ram_0009
+	lda ram_000c
 	pha
-	lda $00b8
+	lda ram_00b8
 	sec
 	sbc #$05
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	cmp $0009
+	adc ram_0011
+	cmp ram_0009
 	bpl $efc5
 	lda #$01
-	sta $00b7
+	sta ram_00b7
 	lda #$08
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $efd5
 	jmp $f067
 	lda #$02
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $efe5
 	jmp $f02d
 	lda #$03
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $eff5
 	jmp $f02d
 	lda #$04
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $f005
 	jmp $f02d
 	lda #$06
-	sta $0009
-	lda $00b1
-	cmp $0009
+	sta ram_0009
+	lda ram_00b1
+	cmp ram_0009
 	bne $f015
 	jmp $f063
-	inc $00b2
-	lda $00b0
+	inc ram_00b2
+	lda ram_00b0
 	clc
 	adc #$01
-	sta $0009
-	lda $00b2
-	cmp $0009
+	sta ram_0009
+	lda ram_00b2
+	cmp ram_0009
 	bpl $f02c
 	jmp $ee83
 	rts
 	lda #$00
-	sta $0009
-	lda $00b7
-	cmp $0009
+	sta ram_0009
+	lda ram_00b7
+	cmp ram_0009
 	beq $f05f
-	ldx $00b2
+	ldx ram_00b2
 	lda #$00
-	sta $00a4,x
+	sta ram_00a4,x
 	lda #$01
-	sta $000f
+	sta ram_000f
 	lda #$14
-	sta $0010
+	sta ram_0010
 	lda #$00
-	sta $0009
-	lda $0013
-	cmp $0009
+	sta ram_0009
+	lda ram_0013
+	cmp ram_0009
 	beq $f05e
 	lda #$37
-	sta $0010
+	sta ram_0010
 	rts
 	jsr $ca72
 	rts
 	jsr $ca72
 	rts
-	ldx $00b2
+	ldx ram_00b2
 	lda #$00
-	sta $00a4,x
-	inc $000a
+	sta ram_00a4,x
+	inc ram_000a
 	lda #$06
-	sta $0009
-	lda $000a
-	cmp $0009
+	sta ram_0009
+	lda ram_000a
+	cmp ram_0009
 	bne $f082
-	dec $000a
+	dec ram_000a
 	rts
 	lda #$02
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bpl $f093
 	jmp $f2b4
 	lda #$08
 	pha
-	lda $00b4
+	lda ram_00b4
 	asl a
 	asl a
 	asl a
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
-	sta $0063
-	lda $00b6
+	adc ram_0011
+	sta ram_0063
+	lda ram_00b6
 	and #$0f
-	sta $00ba
+	sta ram_00ba
 	lda #$7f
-	sta $0009
-	lda $00b6
-	cmp $0009
+	sta ram_0009
+	lda ram_00b6
+	cmp ram_0009
 	bpl $f126
-	lda $00b6
+	lda ram_00b6
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
+	adc ram_0065
 	tax
 	lda $0400,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f0e7
 	jmp $f3c9
 	lda #$0f
-	sta $0009
-	lda $00ba
-	cmp $0009
+	sta ram_0009
+	lda ram_00ba
+	cmp ram_0009
 	bne $f0f7
 	jmp $f2b4
-	lda $0063
+	lda ram_0063
 	pha
-	lda $0065
+	lda ram_0065
 	sec
 	sbc #$01
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	tax
 	lda $0400,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $00bb
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_00bb
+	and ram_0054
+	cmp ram_0009
 	beq $f123
 	jmp $f3c9
 	jmp $f2b4
-	lda $00b6
+	lda ram_00b6
 	sec
 	sbc #$70
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
+	adc ram_0065
 	tax
 	lda $0200,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f154
 	jmp $f3c9
 	lda #$0f
-	sta $0009
-	lda $00ba
-	cmp $0009
+	sta ram_0009
+	lda ram_00ba
+	cmp ram_0009
 	bne $f164
 	jmp $f2b4
-	lda $0063
+	lda ram_0063
 	pha
-	lda $0065
+	lda ram_0065
 	sec
 	sbc #$01
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	tax
 	lda $0200,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $00bb
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_00bb
+	and ram_0054
+	cmp ram_0009
 	beq $f190
 	jmp $f3c9
 	jmp $f2b4
 	lda #$00
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	beq $f1a3
 	jmp $f29b
-	lda $00b4
+	lda ram_00b4
 	asl a
 	asl a
 	asl a
 	sec
 	sbc #$08
-	sta $0063
-	lda $00b6
+	sta ram_0063
+	lda ram_00b6
 	and #$0f
-	sta $00ba
+	sta ram_00ba
 	lda #$7f
-	sta $0009
-	lda $00b6
-	cmp $0009
+	sta ram_0009
+	lda ram_00b6
+	cmp ram_0009
 	bpl $f22e
-	lda $00b6
+	lda ram_00b6
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
+	adc ram_0065
 	tax
 	lda $0400,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f1ef
 	jmp $f3cf
 	lda #$0f
-	sta $0009
-	lda $00ba
-	cmp $0009
+	sta ram_0009
+	lda ram_00ba
+	cmp ram_0009
 	bne $f1ff
 	jmp $f29b
-	lda $0063
+	lda ram_0063
 	pha
-	lda $0065
+	lda ram_0065
 	sec
 	sbc #$01
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	tax
 	lda $0400,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $00bb
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_00bb
+	and ram_0054
+	cmp ram_0009
 	beq $f22b
 	jmp $f3cf
 	jmp $f29b
-	lda $00b6
+	lda ram_00b6
 	sec
 	sbc #$70
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
+	adc ram_0065
 	tax
 	lda $0200,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f25c
 	jmp $f3cf
 	lda #$0f
-	sta $0009
-	lda $00ba
-	cmp $0009
+	sta ram_0009
+	lda ram_00ba
+	cmp ram_0009
 	bne $f26c
 	jmp $f29b
-	lda $0063
+	lda ram_0063
 	pha
-	lda $0065
+	lda ram_0065
 	sec
 	sbc #$01
-	sta $0011
+	sta ram_0011
 	pla
 	clc
-	adc $0011
+	adc ram_0011
 	tax
 	lda $0200,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $00bb
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_00bb
+	and ram_0054
+	cmp ram_0009
 	beq $f298
 	jmp $f3cf
 	jmp $f29b
-	dec $00b5
+	dec ram_00b5
 	lda #$ff
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bne $f2b3
 	lda #$0f
-	sta $00b5
-	dec $00b4
+	sta ram_00b5
+	dec ram_00b4
 	rts
-	inc $00b5
+	inc ram_00b5
 	lda #$10
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bne $f2cc
 	lda #$00
-	sta $00b5
-	inc $00b4
+	sta ram_00b5
+	inc ram_00b4
 	rts
-	lda $00b4
+	lda ram_00b4
 	asl a
 	asl a
 	asl a
-	sta $0063
+	sta ram_0063
 	lda #$7f
-	sta $0009
-	lda $00b6
-	cmp $0009
+	sta ram_0009
+	lda ram_00b6
+	cmp ram_0009
 	bpl $f350
 	beq $f350
-	lda $00b6
+	lda ram_00b6
 	clc
-	adc $0062
+	adc ram_0062
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0400,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f319
 	jmp $f3d5
 	lda #$00
-	sta $00bb
+	sta ram_00bb
 	lda #$04
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bmi $f33a
 	beq $f33a
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0400,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $0064
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0064
+	and ram_0054
+	cmp ram_0009
 	beq $f34d
 	jmp $f3d5
 	jmp $f3be
-	lda $00b6
+	lda ram_00b6
 	clc
-	adc $0062
+	adc ram_0062
 	clc
 	adc #$90
 	lsr a
 	lsr a
 	lsr a
 	lsr a
-	sta $0065
-	lda $0063
+	sta ram_0065
+	lda ram_0063
 	clc
-	adc $0065
-	sta $0066
-	ldx $0066
+	adc ram_0065
+	sta ram_0066
+	ldx ram_0066
 	lda $0200,x
-	sta $0086
+	sta ram_0086
 	lda #$00
-	sta $0009
-	lda $0086
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_0086
+	and ram_0054
+	cmp ram_0009
 	beq $f387
 	jmp $f3d5
 	lda #$00
-	sta $00bb
+	sta ram_00bb
 	lda #$04
-	sta $0009
-	lda $00b5
-	cmp $0009
+	sta ram_0009
+	lda ram_00b5
+	cmp ram_0009
 	bmi $f3a8
 	beq $f3a8
-	lda $0066
+	lda ram_0066
 	clc
 	adc #$08
 	tax
 	lda $0200,x
-	sta $00bb
+	sta ram_00bb
 	lda #$00
-	sta $0009
-	lda $00bb
-	and $0054
-	cmp $0009
+	sta ram_0009
+	lda ram_00bb
+	and ram_0054
+	cmp ram_0009
 	beq $f3bb
 	jmp $f3d5
 	jmp $f3be
-	lda $00b6
+	lda ram_00b6
 	clc
-	adc $0062
-	sta $00b6
+	adc ram_0062
+	sta ram_00b6
 	rts
 	lda #$01
-	sta $0064
+	sta ram_0064
 	rts
 	lda #$01
-	sta $0067
+	sta ram_0067
 	rts
 	lda #$01
-	sta $00b7
+	sta ram_00b7
 	rts
-	ldx $0022
-	lda $006c
+	ldx ram_0022
+	lda ram_006c
 	sta $0300,x
 	lda #$01
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	sta $0300,x
 	lda #$02
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$03
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	sta $0300,x
 	lda #$04
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006c
+	lda ram_006c
 	sta $0300,x
 	lda #$05
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	clc
 	adc #$02
 	sta $0300,x
 	lda #$06
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$07
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	clc
 	adc #$08
 	sta $0300,x
-	lda $0022
+	lda ram_0022
 	clc
 	adc #$08
-	sta $0022
+	sta ram_0022
 	rts
-	ldx $0022
-	lda $006c
+	ldx ram_0022
+	lda ram_006c
 	sta $0300,x
 	lda #$01
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	sta $0300,x
 	lda #$02
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$03
 	clc
-	adc $0022
+	adc ram_0022
 	tax
 	lda #$08
 	clc
-	adc $006b
+	adc ram_006b
 	sta $0300,x
 	lda #$04
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006c
+	lda ram_006c
 	sta $0300,x
 	lda #$05
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	clc
 	adc #$02
 	sta $0300,x
 	lda #$06
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$07
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	sta $0300,x
-	lda $0022
+	lda ram_0022
 	clc
 	adc #$08
-	sta $0022
+	sta ram_0022
 	rts
 	jsr $f3db
-	lda $006c
+	lda ram_006c
 	clc
 	adc #$10
-	sta $006c
-	lda $006e
+	sta ram_006c
+	lda ram_006e
 	clc
 	adc #$04
-	sta $006e
+	sta ram_006e
 	jsr $f3db
 	rts
 	jsr $f44f
-	lda $006c
+	lda ram_006c
 	clc
 	adc #$10
-	sta $006c
-	lda $006e
+	sta ram_006c
+	lda ram_006e
 	clc
 	adc #$04
-	sta $006e
+	sta ram_006e
 	jsr $f44f
 	rts
-	ldx $0022
-	lda $006c
+	ldx ram_0022
+	lda ram_006c
 	sta $0300,x
 	lda #$01
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	sta $0300,x
 	lda #$02
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$03
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	sta $0300,x
-	lda $0022
+	lda ram_0022
 	clc
 	adc #$04
-	sta $0022
+	sta ram_0022
 	rts
-	ldx $0022
-	lda $006c
+	ldx ram_0022
+	lda ram_006c
 	sta $0300,x
 	lda #$01
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	sta $0300,x
 	lda #$02
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$03
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	sec
 	sbc #$08
 	sta $0300,x
 	lda #$04
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006c
+	lda ram_006c
 	sta $0300,x
 	lda #$05
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	clc
 	adc #$02
 	sta $0300,x
 	lda #$06
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$07
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	sta $0300,x
 	lda #$08
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006c
+	lda ram_006c
 	sta $0300,x
 	lda #$09
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006e
+	lda ram_006e
 	clc
 	adc #$04
 	sta $0300,x
 	lda #$0a
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006d
+	lda ram_006d
 	sta $0300,x
 	lda #$0b
 	clc
-	adc $0022
+	adc ram_0022
 	tax
-	lda $006b
+	lda ram_006b
 	clc
 	adc #$08
 	sta $0300,x
-	lda $0022
+	lda ram_0022
 	clc
 	adc #$0c
-	sta $0022
+	sta ram_0022
 	rts
 	jsr $db80
 	jsr $db8e
@@ -9042,30 +9048,30 @@
 	jsr $db8e
 	jsr $f6d3
 	lda #$00
-	sta $00bc
+	sta ram_00bc
 	lda #$5a
-	sta $00bd
+	sta ram_00bd
 	lda #$56
-	sta $00be
+	sta ram_00be
 	lda #$ff
-	sta $00bf
+	sta ram_00bf
 	lda #$01
-	sta $00c0
+	sta ram_00c0
 	lda #$00
-	sta $00c1
+	sta ram_00c1
 	lda #$00
-	sta $005c
+	sta ram_005c
 	lda #$00
-	sta $00c2
+	sta ram_00c2
 	jsr $f7e2
 	jsr $f7ee
 	jsr $f7e8
 	jsr $f7e2
 	jsr $f7ee
 	lda #$00
-	sta $0009
-	lda $00c2
-	cmp $0009
+	sta ram_0009
+	lda ram_00c2
+	cmp ram_0009
 	beq $f698
 	jsr $f6e9
 	.byte $AD, $BE, $00, $18, $6D, $BF, $00, $8D
@@ -9080,26 +9086,26 @@
 	.byte $C0, $00, $A9, $6E, $8D, $09, $00, $AD
 	.byte $BD, $00, $CD, $09, $00, $D0, $05, $A9
 	.byte $FF, $8D, $C0, $00
-	lda $0004
+	lda ram_0004
 	clc
 	adc #$03
-	sta $0004
-	lda $0005
+	sta ram_0004
+	lda ram_0005
 	clc
 	adc #$07
-	sta $0005
+	sta ram_0005
 	jsr $f836
 	lda #$00
-	sta $0009
-	lda $0019
-	cmp $0009
+	sta ram_0009
+	lda ram_0019
+	cmp ram_0009
 	beq $f6bf
 	lda #$01
-	sta $00c2
+	sta ram_00c2
 	lda #$00
-	sta $0009
-	lda $001a
-	cmp $0009
+	sta ram_0009
+	lda ram_001a
+	cmp ram_0009
 	beq $f6cf
 	jmp $f6d2
 	jmp $f61d
@@ -9185,15 +9191,15 @@
 	lda #$00
 	sta PpuAddr_2006
 	lda #$00
-	sta $0066
-	ldx $0066
+	sta ram_0066
+	ldx ram_0066
 	lda $e23a,x
 	sta PpuData_2007
-	inc $0066
+	inc ram_0066
 	lda #$1f
-	sta $0009
-	lda $0066
-	cmp $0009
+	sta ram_0009
+	lda ram_0066
+	cmp ram_0009
 	bpl $f7d3
 	jmp $f7b7
 	rts
@@ -9218,7 +9224,7 @@
 	dey
 	cpy #$00
 	bne $f7f7
-	ldx $001d
+	ldx ram_001d
 	ldy #$ff
 	lda PpuStatus_2002
 	and #$10
@@ -9231,7 +9237,7 @@
 	dey
 	cpy #$00
 	bne $f810
-	inc $001d
+	inc ram_001d
 	lda #$00
 	sta PpuScroll_2005
 	lda #$00
@@ -9239,90 +9245,90 @@
 	rts
 	jsr $f8b1
 	lda #$0a
-	sta $0009
-	lda $00c1
-	cmp $0009
+	sta ram_0009
+	lda ram_00c1
+	cmp ram_0009
 	bmi $f85d
 	lda #$00
-	sta $0009
-	lda $005c
-	cmp $0009
+	sta ram_0009
+	lda ram_005c
+	cmp ram_0009
 	beq $f854
 	rts
 	.byte $A9, $01, $8D, $5C, $00, $20, $D8, $D5
 	.byte $60
 	lda #$00
-	sta $0009
-	lda $00c3
-	cmp $0009
+	sta ram_0009
+	lda ram_00c3
+	cmp ram_0009
 	beq $f880
 	lda #$00
-	sta $0009
-	lda $00c4
-	cmp $0009
+	sta ram_0009
+	lda ram_00c4
+	cmp ram_0009
 	bne $f880
 	lda #$00
-	sta $00c3
-	inc $00c1
+	sta ram_00c3
+	inc ram_00c1
 	rts
 	lda #$00
-	sta $0009
-	lda $00c4
-	cmp $0009
+	sta ram_0009
+	lda ram_00c4
+	cmp ram_0009
 	bne $f88e
 	rts
-	ldx $00c1
+	ldx ram_00c1
 	lda $f908,x
-	sta $00c5
-	lda $00c5
-	sta $0009
-	lda $00c4
-	cmp $0009
+	sta ram_00c5
+	lda ram_00c5
+	sta ram_0009
+	lda ram_00c4
+	cmp ram_0009
 	bne $f8ab
 	lda #$01
-	sta $00c3
+	sta ram_00c3
 	rts
 	lda #$00
-	sta $00c1
+	sta ram_00c1
 	rts
 	jsr $d539
-	lda $0013
-	sta $00c4
-	lda $00c4
+	lda ram_0013
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0014
-	sta $00c4
-	lda $00c4
+	adc ram_0014
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0015
-	sta $00c4
-	lda $00c4
+	adc ram_0015
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0016
-	sta $00c4
-	lda $00c4
+	adc ram_0016
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0018
-	sta $00c4
-	lda $00c4
+	adc ram_0018
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0017
-	sta $00c4
-	lda $00c4
+	adc ram_0017
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $0019
-	sta $00c4
-	lda $00c4
+	adc ram_0019
+	sta ram_00c4
+	lda ram_00c4
 	asl a
 	clc
-	adc $001a
-	sta $00c4
+	adc ram_001a
+	sta ram_00c4
 	rts
 	.byte $20
 	.byte $20, $10, $10, $08, $04, $08, $04, $40
