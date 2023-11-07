@@ -2746,7 +2746,7 @@
 	lda #$00
 	sta PpuAddr_2006
 	lda #$0e
-	ldy $0020
+	ldy ram_0020
 	sta PpuData_2007
 	dey
 	cpy #$00
@@ -3045,7 +3045,7 @@
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF
+	.byte $FF
 .segment "PRGF"
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
@@ -3431,10 +3431,10 @@
 	sta ram_0003
 	clc
 	lda ram_0002
-	cmp $008a
+	cmp ram_008a
 	bne $e7c3
 	lda ram_0003
-	cmp $008b
+	cmp ram_008b
 	bne $e7c3
 	lda ram_0088
 	sta ram_0002
@@ -5450,16 +5450,16 @@
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF
 	
-	.addr $C000, $C00, $DC6A
+	.addr $C000, $C000, $DC6A
 
-	.segment "CHR0"
+.segment "CHR0"
 	.incbin "SOF_v1d.nes", $20010, $2000
 
-	.segment "CHR1"
+.segment "CHR1"
 	.incbin "SOF_v1d.nes", $22010, $2000
 
-	.segment "CHR2"
+.segment "CHR2"
 	.incbin "SOF_v1d.nes", $24010, $2000
 
-	.segment "CHR3"
+.segment "CHR3"
 	.incbin "SOF_v1d.nes", $26010, $2000
