@@ -20,6 +20,28 @@
 	.res 1
 	unknown_1: .res 1 ; 0E related to player_health
 
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+
+	button_a: .res 1
+	button_b: .res 1
+	button_up: .res 1
+	button_down: .res 1
+	button_right: .res 1
+	button_left: .res 1
+	button_select: .res 1
+	button_start: .res 1
+
+
+	.res 166
+	
+	konami_code_correct_presses: .res 1
+	konami_code_active: .res 1
+	konami_code_held_correct_button: .res 1
+	button_mask: .res 1
+
 .segment "OAM"
 	OAM:
 
@@ -32,11 +54,12 @@
 
 	.res $17
 
-	;.repeat 
-	enemy_0_y: .res 1
-	enemy_0_frame: .res 1
+	.repeat $20, i
+	.ident(.sprintf("enemy_%d_y", i)): .res 1
+	.ident(.sprintf("enemy_%d_frame", i)): .res 1
 	.res 1
-	enemy_0_x: .res 1
+	.ident(.sprintf("enemy_%d_x", i)): .res 1
+	.endrepeat
 
 ; enemies start at 31C?
 
