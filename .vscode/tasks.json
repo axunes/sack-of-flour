@@ -8,11 +8,17 @@
 				"isDefault": true
 			},
 			"label": "Build NES rom",
-			"command": "cl65 -g -Wl --dbgfile,sack.dbg sack.s -C config.cfg; echo 9f637a7a; crc32 sack.nes"
+			"command": "cl65 -g -Wl --dbgfile,sack.dbg sack.s -C config.cfg"
+		},
+		{
+			"dependsOn": "Build NES rom",
+			"type": "shell",
+			"label": "Print checksum",
+			"command": "echo 9f637a7a; crc32 sack.nes"
 		},
 		{
 			"type": "shell",
-			"dependsOn": "Build NES rom",
+			"dependsOn": "Print checksum",
 			"group": {
 				"kind": "test",
 				"isDefault": true

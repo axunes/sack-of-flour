@@ -1,4 +1,4 @@
-	.include "nes.inc"
+.include "inc/nes.inc"
 
 .segment "HEADER"
 	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -46,16 +46,16 @@
 	jsr $f5dd
 	jsr $dbda
 	lda #$30
-	sta PpuControl_2000
+	sta PPU_CTRL1
 	lda #$04
-	sta PpuMask_2001
+	sta PPU_CTRL2
 	jsr $dc26
 	jsr $c1c2
 	jsr $db8e
 	lda #$30
-	sta PpuControl_2000
+	sta PPU_CTRL1
 	lda #$1c
-	sta PpuMask_2001
+	sta PPU_CTRL2
 	lda #$00
 	sta ram_0006
 	jsr $c26a
@@ -260,13 +260,13 @@
 	sta ram_0027
 	rts
 	lda #$00
-	sta ApuStatus_4015
+	sta APU_CHANCTRL
 	lda #$1f
-	sta ApuStatus_4015
+	sta APU_CHANCTRL
 	rts
 	ldx #$00
 	lda #$00
-	sta Sq0Duty_4000,x
+	sta APU_PULSE1CTRL,x
 	inx
 	cpx #$10
 	bne $c245
@@ -434,9 +434,9 @@
 	jsr $db8e
 	jsr $c414
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	rts
 	jsr $db8e
 	lda #$01
@@ -460,14 +460,14 @@
 	lda #$00
 	sta ram_0053
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_000e
 	ldx ram_000e
 	lda $8004,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_000e
 	lda #$20
 	sta ram_0009
@@ -482,13 +482,13 @@
 	adc ram_0053
 	sta ram_0053
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_000e
 	lda #$0e
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_000e
 	lda #$20
 	sta ram_0009
@@ -503,14 +503,14 @@
 	lda #$02
 	sta ram_0053
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_000e
 	ldx ram_000e
 	lda $8024,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_000e
 	lda #$20
 	sta ram_0009
@@ -552,28 +552,28 @@
 	ldy #$00
 	ldx #$00
 	lda ram_0056
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ram_0057
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	dey
 	dey
 	dey
@@ -585,32 +585,32 @@
 	adc #$00
 	sta ram_0056
 	lda ram_0056
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ram_0057
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	clc
 	cpy #$20
@@ -656,28 +656,28 @@
 	ldy #$20
 	ldx #$00
 	lda ram_0056
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ram_0057
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	dey
 	dey
 	dey
@@ -689,32 +689,32 @@
 	adc #$00
 	sta ram_0056
 	lda ram_0056
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ram_0057
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
 	adc #$10
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	adc #$01
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	clc
 	cpy #$3c
@@ -751,14 +751,14 @@
 	sta ram_0057
 	ldy #$3c
 	lda ram_0056
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ram_0057
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	lda ($00),y
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	iny
 	cpy #$4c
 	beq $c705
@@ -1174,7 +1174,7 @@
 	sta ram_0007
 	jsr $e5eb
 	lda #$0f
-	sta ApuStatus_4015
+	sta APU_CHANCTRL
 	lda #$00
 	sta ram_001e
 	lda #$00
@@ -2240,42 +2240,42 @@
 	jmp $d4de
 	.byte $60, $60
 	lda #$01
-	sta Ctrl1_4016
+	sta APU_PAD1
 	lda #$00
-	sta Ctrl1_4016
-	lda Ctrl1_4016
+	sta APU_PAD1
+	lda APU_PAD1
 	and #$01
 	sta ram_0013
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0014
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0019
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_001a
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0015
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0016
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0018
-	lda Ctrl1_4016
+	lda APU_PAD1
 	and #$01
 	sta ram_0017
 	rts
 	lda #$9f
-	sta Sq1Duty_4004
+	sta APU_PULSE2CTRL
 	lda #$8c
-	sta Sq1Sweep_4005
+	sta APU_PULSE2RAMP
 	lda #$4d
-	sta Sq1Timer_4006
+	sta APU_PULSE2FTUNE
 	lda #$95
-	sta Sq1Length_4007
+	sta APU_PULSE2STUNE
 	rts
 	.byte $A9, $9F, $8D, $00, $40, $A9, $84, $8D
 	.byte $01, $40, $A9, $D3, $8D, $02, $40, $A9
@@ -2284,13 +2284,13 @@
 	.byte $25, $8D, $02, $40, $A9, $4B, $8D, $03
 	.byte $40, $60
 	lda #$0b
-	sta NoiseVolume_400C
+	sta APU_NOISECTRL
 	lda #$ff
 	sta $400d
 	lda #$ff
-	sta NoisePeriod_400E
+	sta APU_NOISEFREQ1
 	lda #$08
-	sta NoiseLength_400F
+	sta APU_NOISEFREQ2
 	rts
 	.byte $A9, $0F, $8D, $0C, $40, $A9, $FF, $8D
 	.byte $0D, $40, $A9, $F9, $8D, $0E, $40, $A9
@@ -2302,14 +2302,14 @@
 	cmp ram_0009
 	beq $d609
 	lda #$31
-	sta PpuControl_2000
+	sta PPU_CTRL1
 	lda #$1c
-	sta PpuMask_2001
+	sta PPU_CTRL2
 	jmp $d613
 	lda #$30
-	sta PpuControl_2000
+	sta PPU_CTRL1
 	lda #$1c
-	sta PpuMask_2001
+	sta PPU_CTRL2
 	lda ram_001e
 	asl a
 	asl a
@@ -2319,9 +2319,9 @@
 	asl a
 	clc
 	adc ram_001f
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	rts
 	lda #$00
 	sta ram_0009
@@ -2526,22 +2526,22 @@
 	rts
 	jsr $dae9
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$08
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda $bfb8,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$20
 	bne $d834
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$68
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda $bfd8,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$20
 	bne $d84b
@@ -2549,13 +2549,13 @@
 	lda ram_0008
 	sta ram_000e
 	lda #$22
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$04
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$ee
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	lda #$ef
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	dec ram_000e
 	lda #$00
 	sta ram_0009
@@ -2566,13 +2566,13 @@
 	lda ram_0008
 	sta ram_000e
 	lda #$22
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$24
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$fe
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	lda #$ff
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	dec ram_000e
 	lda #$00
 	sta ram_0009
@@ -2644,14 +2644,14 @@
 	.byte $F0, $03, $4C, $7E, $DA, $60
 	jsr $dae9
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$08
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_000e
 	ldx ram_000e
 	lda $e3f8,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_000e
 	lda #$09
 	sta ram_0009
@@ -2682,19 +2682,19 @@
 	jsr $dc26
 	jsr $db8e
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	rts
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_000e
 	ldx ram_000e
 	lda $e25a,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_000e
 	lda #$10
 	sta ram_0009
@@ -2712,7 +2712,7 @@
 	jsr $d629
 	jsr $d5ed
 	lda #$03
-	sta SpriteDma_4014
+	sta APU_SPR_DMA
 	lda #$10
 	sta ram_0022
 	rts
@@ -2720,64 +2720,64 @@
 	.byte $A9, $1C, $8D, $01, $20, $60
 	jsr $db8e
 	lda #$20
-	sta PpuControl_2000
+	sta PPU_CTRL1
 	lda #$1c
-	sta PpuMask_2001
+	sta PPU_CTRL2
 	rts
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	bpl $db8e
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	bmi $db93
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	inc ram_001b
 	rts
 	.byte $AD, $02, $20, $10, $FB, $AD, $02, $20
 	.byte $30, $FB, $AD, $02, $20, $10, $FB, $EE
 	.byte $1B, $00, $60
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$0e
 	ldy ram_0020
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	dey
 	cpy #$00
 	bne $dbd2
 	jsr $db8e
 	lda #$20
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	jsr $dc1b
 	jsr $db8e
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	jsr $dc1b
 	jsr $db8e
 	lda #$22
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	jsr $dc1b
 	jsr $db8e
 	lda #$23
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	jsr $dc1b
 	rts
 	ldx #$00
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$00
 	bne $dc1d
@@ -2785,9 +2785,9 @@
 	lda #$00
 	sta ram_0066
 	lda #$00
-	sta OamAddr_2003
+	sta PPU_SPR_ADDR
 	lda #$f5
-	sta OamData_2004
+	sta PPU_SPR_IO
 	inc ram_0066
 	lda #$00
 	sta ram_0009
@@ -3246,7 +3246,7 @@
 	lda #$00
 	sta ram_008f
 	lda #$1f
-	sta ApuStatus_4015
+	sta APU_CHANCTRL
 	lda #$00
 	sta ram_0090
 	lda ram_0007
@@ -3331,16 +3331,16 @@
 	bne $e6c4
 	jmp $e6c4
 	lda ($02),y
-	sta Sq0Duty_4000
+	sta APU_PULSE1CTRL
 	iny
 	lda ($02),y
-	sta Sq0Sweep_4001
+	sta APU_PULSE1RAMP
 	iny
 	lda ($02),y
-	sta Sq0Timer_4002
+	sta APU_PULSE1FTUNE
 	iny
 	lda ($02),y
-	sta Sq0Length_4003
+	sta APU_PULSE1CTUNE
 	iny
 	lda #$00
 	sta ram_0009
@@ -3357,16 +3357,16 @@
 	bne $e700
 	jmp $e700
 	lda ($02),y
-	sta Sq1Duty_4004
+	sta APU_PULSE2CTRL
 	iny
 	lda ($02),y
-	sta Sq1Sweep_4005
+	sta APU_PULSE2RAMP
 	iny
 	lda ($02),y
-	sta Sq1Timer_4006
+	sta APU_PULSE2FTUNE
 	iny
 	lda ($02),y
-	sta Sq1Length_4007
+	sta APU_PULSE2STUNE
 	iny
 	lda #$00
 	sta ram_0009
@@ -3383,16 +3383,16 @@
 	bne $e73c
 	jmp $e73c
 	lda ($02),y
-	sta TrgLinear_4008
+	sta APU_TRICTRL1
 	iny
 	lda ($02),y
 	sta $4009
 	iny
 	lda ($02),y
-	sta TrgTimer_400A
+	sta APU_TRIFREQ1
 	iny
 	lda ($02),y
-	sta TrgLength_400B
+	sta APU_TRIFREQ2
 	iny
 	lda #$00
 	sta ram_0009
@@ -3409,16 +3409,16 @@
 	bne $e778
 	jmp $e778
 	lda ($02),y
-	sta NoiseVolume_400C
+	sta APU_NOISECTRL
 	iny
 	lda ($02),y
 	sta $400d
 	iny
 	lda ($02),y
-	sta NoisePeriod_400E
+	sta APU_NOISEFREQ1
 	iny
 	lda ($02),y
-	sta NoiseLength_400F
+	sta APU_NOISEFREQ2
 	iny
 	tya
 	sta ram_0011
@@ -5022,74 +5022,74 @@
 	.byte $D0, $DB, $60
 	jsr $db8e
 	lda #$20
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$c4
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda $e2b2,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$80
 	bne $f72b
 	jsr $db8e
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$44
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$80
 	lda $e2b2,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$b9
 	bne $f745
 	jsr $db8e
 	lda #$21
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$ab
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda $e36b,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$80
 	bne $f75f
 	jsr $db8e
 	lda #$22
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$c9
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda $e3eb,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$0d
 	bne $f779
 	jsr $db8e
 	lda #$23
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$c0
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda #$00
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$18
 	bne $f795
 	lda #$55
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inx
 	cpx #$40
 	bne $f79f
 	rts
 	lda #$3f
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta PpuAddr_2006
+	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_0066
 	ldx ram_0066
 	lda $e23a,x
-	sta PpuData_2007
+	sta PPU_VRAM_IO
 	inc ram_0066
 	lda #$1f
 	sta ram_0009
@@ -5100,43 +5100,43 @@
 	rts
 	.byte $AC, $11, $00, $A9, $00, $8D, $07, $20
 	.byte $88, $C0, $00, $D0, $F8, $60
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	bpl $f7e2
 	rts
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	bmi $f7e8
 	rts
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	and #$10
 	bne $f7ee
 	ldy #$c8
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	and #$10
 	bne $f7f7
 	lda #$00
-	sta PpuScroll_2005
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
+	sta PPU_VRAM_ADDR1
 	dey
 	cpy #$00
 	bne $f7f7
 	ldx ram_001d
 	ldy #$ff
-	lda PpuStatus_2002
+	lda PPU_STATUS
 	and #$10
 	bne $f810
 	lda $e4eb,x
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	inx
 	dey
 	cpy #$00
 	bne $f810
 	inc ram_001d
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	lda #$00
-	sta PpuScroll_2005
+	sta PPU_VRAM_ADDR1
 	rts
 	jsr $f8b1
 	lda #$0a
