@@ -1,3 +1,4 @@
+.segment "PRG0"
 .byte $00, $00, $00, $00, $AA, $E2, $00, $00
 .byte $00, $00, $00, $00, $00, $00, $00, $00
 .byte $00, $00, $00, $00, $00, $00, $00, $00
@@ -4203,7 +4204,7 @@
   cmp $0009
   bne $c0ca
   jsr $cab7
-.db $4C $CD $C0
+.byte $4C, $CD, $C0
   jmp $c04a
   lda #$00
   sta $0009
@@ -4475,7 +4476,7 @@
   sta $8001
   rts
   jmp $c31d
-.db $60
+.byte $60
   jsr $dc6b
   jsr $db8e
   jsr $dbc3
@@ -4567,7 +4568,7 @@
   bne $c447
   rts
   jmp $c42d
-.db $60
+.byte $60
   lda #$01
   clc
   adc $0053
@@ -4588,7 +4589,7 @@
   bne $c479
   rts
   jmp $c463
-.db $60
+.byte $60
   lda #$aa
   sta $0054
   lda #$02
@@ -4610,7 +4611,7 @@
   bne $c4b0
   rts
   jmp $c496
-.db $60
+.byte $60
   lda $0052
   and #$07
   sta $0055
@@ -4996,9 +4997,9 @@
   cmp $0009
   bne $c83d
   jsr $d204
-.db $A9 $01 $8D $09 $00 $AD $1C $00
-.db $CD $09 $00 $D0 $03 $20 $55 $D2
-.db $4C $84 $C9
+.byte $A9, $01, $8D, $09, $00, $AD, $1C, $00
+.byte $CD, $09, $00, $D0, $03, $20, $55, $D2
+.byte $4C, $84, $C9
   lda #$00
   sta $0009
   lda $0016
@@ -5070,7 +5071,7 @@
   lda #$01
   sta $005a
   jsr $d5d8
-.db $4C $84 $C9
+.byte $4C, $84, $C9
   lda #$00
   sta $0009
   lda $0013
@@ -9058,18 +9059,18 @@
   cmp $0009
   beq $f698
   jsr $f6e9
-.db $AD $BE $00 $18 $6D $BF $00 $8D
-.db $BE $00 $AD $BD $00 $18 $6D $C0
-.db $00 $8D $BD $00 $A9 $32 $8D $09
-.db $00 $AD $BE $00 $CD $09 $00 $D0
-.db $05 $A9 $01 $8D $BF $00 $A9 $82
-.db $8D $09 $00 $AD $BE $00 $CD $09
-.db $00 $D0 $05 $A9 $FF $8D $BF $00
-.db $A9 $46 $8D $09 $00 $AD $BD $00
-.db $CD $09 $00 $D0 $05 $A9 $01 $8D
-.db $C0 $00 $A9 $6E $8D $09 $00 $AD
-.db $BD $00 $CD $09 $00 $D0 $05 $A9
-.db $FF $8D $C0 $00
+.byte $AD, $BE, $00, $18, $6D, $BF, $00, $8D
+.byte $BE, $00, $AD, $BD, $00, $18, $6D, $C0
+.byte $00, $8D, $BD, $00, $A9, $32, $8D, $09
+.byte $00, $AD, $BE, $00, $CD, $09, $00, $D0
+.byte $05, $A9, $01, $8D, $BF, $00, $A9, $82
+.byte $8D, $09, $00, $AD, $BE, $00, $CD, $09
+.byte $00, $D0, $05, $A9, $FF, $8D, $BF, $00
+.byte $A9, $46, $8D, $09, $00, $AD, $BD, $00
+.byte $CD, $09, $00, $D0, $05, $A9, $01, $8D
+.byte $C0, $00, $A9, $6E, $8D, $09, $00, $AD
+.byte $BD, $00, $CD, $09, $00, $D0, $05, $A9
+.byte $FF, $8D, $C0, $00,
   lda $0004
   clc
   adc #$03
@@ -9239,8 +9240,8 @@
   cmp $0009
   beq $f854
   rts
-.db $A9 $01 $8D $5C $00 $20 $D8 $D5
-.db $60
+.byte $A9, $01, $8D, $5C, $00, $20, $D8, $D5
+.byte $60
   lda #$00
   sta $0009
   lda $00c3
