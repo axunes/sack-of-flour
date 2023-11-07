@@ -1,9 +1,13 @@
+.include "nes.inc"
+
      ; unidentified
      
      ; unmapped
      
      ; unidentified
-     
+
+.segment "PRG0E"
+.org $C000
 jsr $c35a
 jsr $c236
 jsr $db8e
