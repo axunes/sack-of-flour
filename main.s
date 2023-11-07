@@ -7478,5 +7478,18 @@
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 	.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-	.byte $FF, $FF, $FF
-	.addr $C000, $C000, $DC6A
+	.byte $FF
+	
+	.addr $C000, $C00, $DC6A
+
+	.segment "CHR0"
+	.incbin "SOF_v1d.nes", $20010, $2000
+
+	.segment "CHR1"
+	.incbin "SOF_v1d.nes", $22010, $2000
+
+	.segment "CHR2"
+	.incbin "SOF_v1d.nes", $24010, $2000
+
+	.segment "CHR3"
+	.incbin "SOF_v1d.nes", $26010, $2000
