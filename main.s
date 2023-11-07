@@ -1,6 +1,10 @@
+.segment "HEADER"
+
+.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
+
 .include "nes.inc"
 
-.segment "PRG0"
+.segment "PRG00"
 .byte $00, $00, $00, $00, $AA, $E2, $00, $00
 .byte $00, $00, $00, $00, $00, $00, $00, $00
 .byte $00, $00, $00, $00, $00, $00, $00, $00
@@ -4134,7 +4138,7 @@
 .byte $00, $00, $00, $00, $00, $00, $00, $00
 .byte $00, $00, $FF, $FF, $FF, $FF, $FF, $FF
 
-.segment "PRGE"
+.segment "PRG0E"
 .org $C000
   jsr $c35a
   jsr $c236
