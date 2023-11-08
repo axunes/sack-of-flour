@@ -4,7 +4,11 @@
 
 
 .segment "HEADER"
-	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	INES_MAPPER = 4
+	INES_PRG_ROM_SIZE = $8
+	INES_CHR_ROM_SIZE = $4
+	INES_MIRROR = 1
+	.include "inc/header.inc"
 
 .segment "ZEROPAGE"
 	.res 1
