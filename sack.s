@@ -1,13 +1,15 @@
 .include "inc/nes.inc"
 
+; $9978 is start of level 1 music I think
+
+
 .segment "HEADER"
 	.byte $4E, $45, $53, $1A, $08, $04, $41, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
 .segment "ZEROPAGE"
 	.res 1
 	.res 1
-	.res 1
-	.res 1
+	music_pointer: .res 2
 	.res 1
 	.res 1
 	.res 1
@@ -43,7 +45,7 @@
 	button_mask: .res 1
 
 .segment "OAM"
-	OAM:
+	OAM: .res $100
 
 .segment "BSS"
 	player_pos_y: .res 1
