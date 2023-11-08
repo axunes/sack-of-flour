@@ -403,7 +403,7 @@
 	pha
 	lda #$0d
 	pha
-	lda a: $10
+	lda a: player_velocity
 	clc
 	adc a: $86
 	sta a: $11
@@ -455,7 +455,7 @@
 	lda #$00
 	sta a: $0e
 	lda #$00
-	sta a: $1d
+	sta a: title_screen_wave_timer
 	lda #$00
 	sta a: $1e
 	lda #$00
@@ -1178,7 +1178,7 @@
 	cmp a: $09
 	beq $c8d5
 	lda #$0a
-	sta a: $10
+	sta a: player_velocity
 	lda #$00
 	sta a: $5b
 	jmp $c984
@@ -1193,7 +1193,7 @@
 	cmp a: $09
 	bne $c90c
 	lda #$23
-	sta a: $10
+	sta a: player_velocity
 	lda #$01
 	sta a: player_fall_state
 	lda #$01
@@ -1226,21 +1226,21 @@
 	lda #$01
 	sta a: player_fall_state
 	lda #$28
-	sta a: $10
+	sta a: player_velocity
 	lda #$03
 	sta a: $09
 	lda a: $06
 	cmp a: $09
 	bne $c965
 	lda #$2d
-	sta a: $10
+	sta a: player_velocity
 	lda #$00
 	sta a: $09
 	lda a: $12
 	cmp a: $09
 	beq $c977
 	lda #$26
-	sta a: $10
+	sta a: player_velocity
 	lda #$00
 	sta a: $5d
 	lda #$0f
@@ -1328,7 +1328,7 @@
 	lda #$01
 	sta a: player_fall_state
 	lda #$0a
-	sta a: $10
+	sta a: player_velocity
 	dec a: player_health
 	lda #$ff
 	sta a: $09
@@ -1343,7 +1343,7 @@
 	cmp a: $09
 	bne $cab6
 	lda #$37
-	sta a: $10
+	sta a: player_velocity
 	rts
 	; take a life
 	dec a: player_lives
@@ -1372,7 +1372,7 @@
 	lda $8059
 	sta a: $5e
 	lda #$00
-	sta a: $10
+	sta a: player_velocity
 	lda #$00
 	sta a: player_fall_state
 	lda #$ff
@@ -1429,7 +1429,7 @@
 	sta a: $25
 	jsr $d2bb
 	rts
-	ldx a: $10
+	ldx a: player_velocity
 	lda $e040,x
 	sta a: $62
 	lda #$01
@@ -1729,10 +1729,10 @@
 	and #$f8
 	cmp a: $09
 	bne $ce6f
-	dec a: $10
+	dec a: player_velocity
 	lda #$00
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bne $ce6e
 	lda #$00
@@ -1831,10 +1831,10 @@
 	sec
 	sbc a: $62
 	sta a: $0c
-	dec a: $10
+	dec a: player_velocity
 	lda #$00
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bne $cf70
 	lda #$00
@@ -1904,10 +1904,10 @@
 	sec
 	sbc a: $62
 	sta a: $0c
-	dec a: $10
+	dec a: player_velocity
 	lda #$00
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bne $d019
 	lda #$00
@@ -1935,10 +1935,10 @@
 	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bpl $d05c
-	inc a: $10
+	inc a: player_velocity
 	rts
 	lda a: $5e
 	asl a
@@ -2029,10 +2029,10 @@
 	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bpl $d13e
-	inc a: $10
+	inc a: player_velocity
 	lda #$00
 	sta a: $5d
 	rts
@@ -2094,10 +2094,10 @@
 	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bpl $d1db
-	inc a: $10
+	inc a: player_velocity
 	lda #$00
 	sta a: $5d
 	rts
@@ -2105,14 +2105,14 @@
 	sta a: player_fall_state
 	lda #$11
 	sta a: $09
-	lda a: $10
+	lda a: player_velocity
 	cmp a: $09
 	bmi $d1f9
 	lda #$0c
-	sta a: $10
+	sta a: player_velocity
 	rts
 	lda #$00
-	sta a: $10
+	sta a: player_velocity
 	lda #$01
 	sta a: $5d
 	rts
@@ -4479,14 +4479,14 @@
 	lda #$01
 	sta a: player_fall_state
 	lda #$14
-	sta a: $10
+	sta a: player_velocity
 	lda #$00
 	sta a: $09
 	lda a: button_a_down
 	cmp a: $09
 	beq $f05e
 	lda #$37
-	sta a: $10
+	sta a: player_velocity
 	rts
 	jsr $ca72
 	rts
@@ -5292,7 +5292,7 @@
 	dey
 	cpy #$00
 	bne $f7f7
-	ldx a: $1d
+	ldx a: title_screen_wave_timer
 	ldy #$ff
 	lda PPU_STATUS
 	and #$10
@@ -5305,7 +5305,7 @@
 	dey
 	cpy #$00
 	bne $f810
-	inc a: $1d
+	inc a: title_screen_wave_timer
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	lda #$00
