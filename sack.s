@@ -39,8 +39,160 @@
 	button_select_down: .res 1
 	button_start_down: .res 1
 
+	.enum EnemyType
+		goomba = 2
+		cabbage = 4
+		carrot = 6
+	.endenum
 
-	.res 166
+	; man I hate all this res
+
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	enemy_pos_x: .res 6
+	enemy_pos_x2: .res 6
+	enemy_pos_y: .res 6
+	enemy_type: .res 6
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
+	.res 1
 	
 	konami_code_correct_presses: .res 1
 	konami_code_active: .res 1
@@ -61,7 +213,7 @@
 
 	.res $17
 
-	.repeat $20, i
+	.repeat 6, i
 	.ident(.sprintf("enemy_%d_y", i)): .res 1
 	.ident(.sprintf("enemy_%d_frame", i)): .res 1
 	.res 1
