@@ -13,7 +13,7 @@
 	.res 1
 	.res 1
 	player_lives: .res 1 ; 08
-	.res 1
+	.res 1 ; this is used a fuckton
 	player_health: .res 1 ; 0A
 	.res 1
 	.res 1
@@ -1182,11 +1182,13 @@
 	lda #$37
 	sta a: $10
 	rts
+	; take a life
 	dec a: player_lives
 	rts
 	jsr $c241
 	jsr $dbc3
 	jsr $dbda
+	; set health to 3
 	lda #$03
 	sta a: player_health
 	lda #$64
@@ -4329,6 +4331,7 @@
 	ldx a: $b2
 	lda #$00
 	sta a: $a4,x
+	; collect heart
 	inc a: player_health
 	lda #$06
 	sta a: $09
