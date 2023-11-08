@@ -48,8 +48,8 @@
 	; man I hate all this res
 
 	.res 1
-	.res 1
-	.res 1
+	player_direction: .res 1 ; 0 = left, 1 = right
+	title_screen_wave_timer: .res 1
 	.res 1
 	.res 1
 	.res 1
@@ -360,7 +360,7 @@
 	jmp $c0f7
 	jsr $d5c3
 	lda #$01
-	sta a: $0f
+	sta a: player_fall_state
 	jsr $db8e
 	jsr $d2bb
 	jsr $db61
@@ -451,7 +451,7 @@
 	lda #$00
 	sta a: $1b
 	lda #$01
-	sta a: $1c
+	sta a: player_direction
 	lda #$00
 	sta a: $0e
 	lda #$00
@@ -1121,7 +1121,7 @@
 	bne $c850
 	lda #$00
 	sta a: $09
-	lda a: $1c
+	lda a: player_direction
 	cmp a: $09
 	bne $c83d
 	jsr $d204
@@ -1141,7 +1141,7 @@
 	cmp a: $09
 	beq $c88c
 	lda #$01
-	sta a: $1c
+	sta a: player_direction
 	jsr $cbaa
 	lda #$00
 	sta a: $09
@@ -1157,7 +1157,7 @@
 	cmp a: $09
 	beq $c8b6
 	lda #$00
-	sta a: $1c
+	sta a: player_direction
 	jsr $ccfa
 	lda #$00
 	sta a: $09
@@ -1195,7 +1195,7 @@
 	lda #$23
 	sta a: $10
 	lda #$01
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$01
 	sta a: $5a
 	jsr $d5d8
@@ -1224,7 +1224,7 @@
 	beq $c984
 	jsr $d584
 	lda #$01
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$28
 	sta a: $10
 	lda #$03
@@ -1326,7 +1326,7 @@
 	lda #$96
 	sta a: $0d
 	lda #$01
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$0a
 	sta a: $10
 	dec a: player_health
@@ -1357,7 +1357,7 @@
 	lda #$64
 	sta a: $0d
 	lda #$01
-	sta a: $1c
+	sta a: player_direction
 	lda #$0a
 	sta a: $0c
 	lda #$00
@@ -1374,7 +1374,7 @@
 	lda #$00
 	sta a: $10
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$ff
 	sta a: $60
 	jsr $d825
@@ -1434,7 +1434,7 @@
 	sta a: $62
 	lda #$01
 	sta a: $09
-	lda a: $0f
+	lda a: player_fall_state
 	cmp a: $09
 	bne $cba6
 	jmp $ce4a
@@ -1736,7 +1736,7 @@
 	cmp a: $09
 	bne $ce6e
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	rts
 	lda #$00
 	sta a: $09
@@ -1838,7 +1838,7 @@
 	cmp a: $09
 	bne $cf70
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	rts
 	lda a: $0c
 	clc
@@ -1911,10 +1911,10 @@
 	cmp a: $09
 	bne $d019
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	rts
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	jsr $dc92
 	rts
 	lda #$00
@@ -1932,7 +1932,7 @@
 	cmp a: $09
 	beq $d04c
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
 	lda a: $10
@@ -2026,7 +2026,7 @@
 	cmp a: $09
 	beq $d12e
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
 	lda a: $10
@@ -2091,7 +2091,7 @@
 	cmp a: $09
 	beq $d1cb
 	lda #$00
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$3c
 	sta a: $09
 	lda a: $10
@@ -2102,7 +2102,7 @@
 	sta a: $5d
 	rts
 	lda #$02
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$11
 	sta a: $09
 	lda a: $10
@@ -2209,7 +2209,7 @@
 	sta a: $25
 	lda #$02
 	sta a: $09
-	lda a: $0f
+	lda a: player_fall_state
 	cmp a: $09
 	beq $d2fb
 	lda #$30
@@ -2281,7 +2281,7 @@
 	jsr $f4f5
 	lda #$01
 	sta a: $09
-	lda a: $1c
+	lda a: player_direction
 	cmp a: $09
 	bne $d3a1
 	jmp $d3a4
@@ -3427,7 +3427,7 @@
 	ldx a: $91
 	lda $8000,x
 	sta a: $88
-	sta a: $02
+	sta a: music_pointer
 	inx
 	lda $8000,x
 	sta a: $89
@@ -3440,12 +3440,12 @@
 	sta a: $8b
 	rts
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta a: $8e
 	clc
-	lda a: $02
+	lda a: music_pointer
 	adc #$02
-	sta a: $02
+	sta a: music_pointer
 	sta a: $8c
 	lda a: $03
 	adc #$00
@@ -3457,14 +3457,14 @@
 	cmp #$00
 	beq $e665
 	lda a: $8c
-	sta a: $02
+	sta a: music_pointer
 	lda a: $8d
 	sta a: $03
 	jmp $e679
 	clc
-	lda a: $02
+	lda a: music_pointer
 	adc #$01
-	sta a: $02
+	sta a: music_pointer
 	lda a: $03
 	adc #$00
 	sta a: $03
@@ -3477,14 +3477,14 @@
 	dec a: $8f
 	rts
 	ldy #$00
-	lda ($02),y
+	lda (music_pointer), y
 	cmp #$ff
 	beq $e62c
 	cmp #$fe
 	beq $e64c
 	sta a: $8f
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta a: $90
 	iny
 	lda #$00
@@ -3501,16 +3501,17 @@
 	cmp a: $09
 	bne $e6c4
 	jmp $e6c4
-	lda ($02),y
+	; this is some music shit right here I can tell you that much
+	lda (music_pointer), y
 	sta APU_PULSE1CTRL
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE1RAMP
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE1FTUNE
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE1CTUNE
 	iny
 	lda #$00
@@ -3527,16 +3528,16 @@
 	cmp a: $09
 	bne $e700
 	jmp $e700
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE2CTRL
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE2RAMP
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE2FTUNE
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_PULSE2STUNE
 	iny
 	lda #$00
@@ -3553,16 +3554,16 @@
 	cmp a: $09
 	bne $e73c
 	jmp $e73c
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_TRICTRL1
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta $4009
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_TRIFREQ1
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_TRIFREQ2
 	iny
 	lda #$00
@@ -3579,36 +3580,36 @@
 	cmp a: $09
 	bne $e778
 	jmp $e778
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_NOISECTRL
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta $400d
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_NOISEFREQ1
 	iny
-	lda ($02),y
+	lda (music_pointer), y
 	sta APU_NOISEFREQ2
 	iny
 	tya
 	sta a: $11
 	clc
-	lda a: $02
+	lda a: music_pointer
 	adc a: $11
-	sta a: $02
+	sta a: music_pointer
 	lda a: $03
 	adc #$00
 	sta a: $03
 	clc
-	lda a: $02
+	lda a: music_pointer
 	cmp a: $8a
 	bne $e7c3
 	lda a: $03
 	cmp a: $8b
 	bne $e7c3
 	lda a: $88
-	sta a: $02
+	sta a: music_pointer
 	lda a: $89
 	sta a: $03
 	rts
@@ -4476,7 +4477,7 @@
 	lda #$00
 	sta a: $a4,x
 	lda #$01
-	sta a: $0f
+	sta a: player_fall_state
 	lda #$14
 	sta a: $10
 	lda #$00
@@ -5125,11 +5126,11 @@
 	lda #$01
 	sta a: $c0
 	lda #$00
-	sta a: $c1
+	sta a: konami_code_correct_presses
 	lda #$00
 	sta a: $5c
 	lda #$00
-	sta a: $c2
+	sta a: konami_code_active
 	jsr $f7e2
 	jsr $f7ee
 	jsr $f7e8
@@ -5137,7 +5138,7 @@
 	jsr $f7ee
 	lda #$00
 	sta a: $09
-	lda a: $c2
+	lda a: konami_code_active
 	cmp a: $09
 	beq $f698
 	jsr $f6e9
@@ -5168,7 +5169,7 @@
 	cmp a: $09
 	beq $f6bf
 	lda #$01
-	sta a: $c2
+	sta a: konami_code_active
 	lda #$00
 	sta a: $09
 	lda a: button_start_down
@@ -5313,7 +5314,7 @@
 	jsr $f8b1
 	lda #$0a
 	sta a: $09
-	lda a: $c1
+	lda a: konami_code_correct_presses
 	cmp a: $09
 	bmi $f85d
 	lda #$00
@@ -5326,7 +5327,7 @@
 	rts
 	lda #$00
 	sta a: $09
-	lda a: $c3
+	lda a: konami_code_correct_button_down
 	cmp a: $09
 	beq $f880
 	lda #$00
@@ -5335,8 +5336,8 @@
 	cmp a: $09
 	bne $f880
 	lda #$00
-	sta a: $c3
-	inc a: $c1
+	sta a: konami_code_correct_button_down
+	inc a: konami_code_correct_presses
 	rts
 	lda #$00
 	sta a: $09
@@ -5344,7 +5345,7 @@
 	cmp a: $09
 	bne $f88e
 	rts
-	ldx a: $c1
+	ldx a: konami_code_correct_presses
 	lda $f908,x
 	sta a: $c5
 	lda a: $c5
@@ -5353,10 +5354,10 @@
 	cmp a: $09
 	bne $f8ab
 	lda #$01
-	sta a: $c3
+	sta a: konami_code_correct_button_down
 	rts
 	lda #$00
-	sta a: $c1
+	sta a: konami_code_correct_presses
 	rts
 	jsr $d539
 	lda a: button_a_down
