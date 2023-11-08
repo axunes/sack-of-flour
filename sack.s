@@ -11,8 +11,7 @@
 	.include "inc/header.inc"
 
 .segment "ZEROPAGE"
-	.res 1
-	.res 1
+	.res 2 ; probably a pointer to level data or something
 	music_pointer: .res 2
 	.res 1
 	.res 1
@@ -24,12 +23,12 @@
 	.res 1
 	.res 1
 	.res 1
-	unknown_1: .res 1 ; 0E related to player_health
+	.res 1 ; 0E related to player_health
 
+	player_fall_state: .res 1 ; (?) 2 = on ground, 1 = ascending, 0 = descending
+	player_velocity: .res 1
 	.res 1
-	.res 1
-	.res 1
-	.res 1
+	.res 1 ; related to jumping?
 
 	button_a_down: .res 1
 	button_b_down: .res 1
@@ -58,6 +57,8 @@
 	player_pos_x: .res 1
 	player_pos_y_again : .res 1 ; ???
 
+	
+
 	.res $17
 
 	.repeat $20, i
@@ -66,6 +67,10 @@
 	.res 1
 	.ident(.sprintf("enemy_%d_x", i)): .res 1
 	.endrepeat
+
+	; $1F7 may have something to do with enemies
+
+	; $200 is of course the oam buffer but it reallt looks more like collision stuff!
 
 ; enemies start at 31C?
 
