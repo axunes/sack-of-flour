@@ -78,9 +78,9 @@
 	jsr $e8ed
 	jsr $c24e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	beq $c069
 	jsr $e679
 	jsr $c17f
@@ -88,42 +88,42 @@
 	jsr $db8e
 	jsr $db61
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0b
-	cmp a: $09
+	cmp a: temp
 	beq $c085
 	jmp $c0e9
 	lda #$fc
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$fc
-	cmp a: $09
+	cmp a: temp
 	bne $c0aa
 	jsr $c9e2
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bne $c0a7
 	jmp $c04a
 	jmp $c0cd
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $c0ca
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0d
-	cmp a: $09
+	cmp a: temp
 	bne $c0ca
 	jsr $cab7
 	.byte $4C, $CD, $C0
 	jmp $c04a
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_lives
-	cmp a: $09
+	cmp a: temp
 	bne $c0e3
 	jsr $da95
 	jsr $c3eb
@@ -139,9 +139,9 @@
 	jsr $d5ed
 	dec a: $0e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $c110
 	jmp $c0f7
 	jsr $d5c3
@@ -155,10 +155,10 @@
 	sbc #$03
 	sta a: $0c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$f8
-	cmp a: $09
+	cmp a: temp
 	beq $c13c
 	jmp $c118
 	lda #$1e
@@ -167,17 +167,17 @@
 	jsr $d5ed
 	dec a: $0e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $c15a
 	jmp $c141
 	jmp $c15d
 	inc a: $06
 	lda #$05
-	sta a: $09
+	sta a: temp
 	lda a: $06
-	cmp a: $09
+	cmp a: temp
 	bne $c170
 	jmp $d8b7
 	jsr $c26a
@@ -278,9 +278,9 @@
 	bne $c245
 	rts
 	lda #$0f
-	sta a: $09
+	sta a: temp
 	lda a: $22
-	cmp a: $09
+	cmp a: temp
 	bpl $c25c
 	rts
 	ldx a: $22
@@ -421,9 +421,9 @@
 	jsr $c6a0
 	dec a: $52
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $52
-	cmp a: $09
+	cmp a: temp
 	beq $c3bc
 	jmp $c397
 	lda #$00
@@ -432,9 +432,9 @@
 	jsr $c706
 	inc a: $52
 	lda #$05
-	sta a: $09
+	sta a: temp
 	lda a: $52
-	cmp a: $09
+	cmp a: temp
 	beq $c3da
 	jmp $c3c1
 	jsr $db8e
@@ -446,16 +446,16 @@
 	rts
 	jsr $db8e
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $53
-	cmp a: $09
+	cmp a: temp
 	bne $c3ff
 	jsr $c47d
 	rts
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $53
-	cmp a: $09
+	cmp a: temp
 	bne $c410
 	jsr $c414
 	rts
@@ -476,9 +476,9 @@
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$20
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bne $c447
 	rts
 	jmp $c42d
@@ -497,9 +497,9 @@
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$20
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bne $c479
 	rts
 	jmp $c463
@@ -519,9 +519,9 @@
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$20
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bne $c4b0
 	rts
 	jmp $c496
@@ -533,9 +533,9 @@
 	lda a: $2a,x
 	sta a: $11
 	lda a: $52
-	sta a: $09
+	sta a: temp
 	lda a: $11
-	cmp a: $09
+	cmp a: temp
 	bne $c4d4
 	rts
 	ldx a: $55
@@ -637,9 +637,9 @@
 	lda a: $32,x
 	sta a: $11
 	lda a: $52
-	sta a: $09
+	sta a: temp
 	lda a: $11
-	cmp a: $09
+	cmp a: temp
 	bne $c5ca
 	rts
 	ldx a: $55
@@ -741,9 +741,9 @@
 	lda a: $3a,x
 	sta a: $11
 	lda a: $52
-	sta a: $09
+	sta a: temp
 	lda a: $11
-	cmp a: $09
+	cmp a: temp
 	bne $c6c0
 	rts
 	ldx a: $55
@@ -781,9 +781,9 @@
 	lda a: $42,x
 	sta a: $11
 	lda a: $52
-	sta a: $09
+	sta a: temp
 	lda a: $11
-	cmp a: $09
+	cmp a: temp
 	bne $c726
 	rts
 	ldx a: $55
@@ -889,79 +889,79 @@
 	lda #$00
 	sta a: $5a
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_start_down
-	cmp a: $09
+	cmp a: temp
 	beq $c810
 	jsr $c99e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_up_down
-	cmp a: $09
+	cmp a: temp
 	beq $c820
 	jsr $dd2d
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $c850
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_direction
-	cmp a: $09
+	cmp a: temp
 	bne $c83d
 	jsr $d204
 	.byte $A9, $01, $8D, $09, $00, $AD, $1C, $00
 	.byte $CD, $09, $00, $D0, $03, $20, $55, $D2
 	.byte $4C, $84, $C9
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_down_down
-	cmp a: $09
+	cmp a: temp
 	beq $c862
 	lda #$01
 	sta a: $12
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_right_down
-	cmp a: $09
+	cmp a: temp
 	beq $c88c
 	lda #$01
 	sta a: player_direction
 	jsr $cbaa
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_b_down
-	cmp a: $09
+	cmp a: temp
 	beq $c887
 	jsr $cbaa
 	lda #$01
 	sta a: $59
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_left_down
-	cmp a: $09
+	cmp a: temp
 	beq $c8b6
 	lda #$00
 	sta a: player_direction
 	jsr $ccfa
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_b_down
-	cmp a: $09
+	cmp a: temp
 	beq $c8b1
 	jsr $ccfa
 	lda #$01
 	sta a: $59
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_a_down
-	cmp a: $09
+	cmp a: temp
 	bne $c8dd
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5b
-	cmp a: $09
+	cmp a: temp
 	beq $c8d5
 	lda #$0a
 	sta a: player_velocity
@@ -969,14 +969,14 @@
 	sta a: $5b
 	jmp $c984
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_a_down
-	cmp a: $09
+	cmp a: temp
 	beq $c90c
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $5c
-	cmp a: $09
+	cmp a: temp
 	bne $c90c
 	lda #$23
 	sta a: player_velocity
@@ -987,26 +987,26 @@
 	jsr $d5d8
 	.byte $4C, $84, $C9
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_a_down
-	cmp a: $09
+	cmp a: temp
 	beq $c92c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5b
-	cmp a: $09
+	cmp a: temp
 	beq $c92c
 	dec a: $5b
 	jmp $c984
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_a_down
-	cmp a: $09
+	cmp a: temp
 	beq $c984
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5d
-	cmp a: $09
+	cmp a: temp
 	beq $c984
 	jsr $d584
 	lda #$01
@@ -1014,16 +1014,16 @@
 	lda #$28
 	sta a: player_velocity
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $06
-	cmp a: $09
+	cmp a: temp
 	bne $c965
 	lda #$2d
 	sta a: player_velocity
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $c977
 	lda #$26
 	sta a: player_velocity
@@ -1034,9 +1034,9 @@
 	jmp $c984
 	jsr $cb8c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0d
-	cmp a: $09
+	cmp a: temp
 	beq $c997
 	dec a: $0d
 	jsr $ee7e
@@ -1052,21 +1052,21 @@
 	.byte $00, $F0, $03, $4C, $C9, $C9, $A9, $0F
 	.byte $8D, $15, $40, $60
 	lda $805c
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $c9f3
 	jmp $ca36
 	lda $805d
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $ca04
 	jmp $ca36
 	lda $805e
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $ca15
 	jmp $ca36
 	lda #$00
@@ -1075,17 +1075,17 @@
 	jsr $d5ed
 	inc a: $0e
 	lda #$1e
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $ca33
 	jmp $ca1a
 	jmp $cab7
 	jsr $dc26
 	lda $805f
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	beq $ca6c
 	jsr $e679
 	jsr $d204
@@ -1093,9 +1093,9 @@
 	jsr $d204
 	jsr $db8e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	beq $ca66
 	jsr $d629
 	jsr $d5ed
@@ -1104,9 +1104,9 @@
 	sta a: $0c
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0d
-	cmp a: $09
+	cmp a: temp
 	beq $ca80
 	rts
 	lda #$96
@@ -1117,16 +1117,16 @@
 	sta a: player_velocity
 	dec a: player_health
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $caa4
 	lda #$00
 	sta a: player_health
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $cab6
 	lda #$37
 	sta a: player_velocity
@@ -1151,9 +1151,9 @@
 	lda #$02
 	sta a: $5e
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $27
-	cmp a: $09
+	cmp a: temp
 	bne $caf5
 	lda $8059
 	sta a: $5e
@@ -1169,9 +1169,9 @@
 	jsr $db8e
 	inc a: $61
 	lda #$78
-	sta a: $09
+	sta a: temp
 	lda a: $61
-	cmp a: $09
+	cmp a: temp
 	bpl $cb22
 	jmp $cb0c
 	lda #$00
@@ -1192,17 +1192,17 @@
 	lda #$00
 	sta a: $21
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	sec
 	sbc #$06
-	cmp a: $09
+	cmp a: temp
 	bmi $cb75
 	jsr $d6e5
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	beq $cb72
 	jsr $d629
 	jmp $cb4e
@@ -1219,18 +1219,18 @@
 	lda $e040,x
 	sta a: $62
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: player_fall_state
-	cmp a: $09
+	cmp a: temp
 	bne $cba6
 	jmp $ce4a
 	rts
 	jmp $d023
 	rts
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $cbba
 	jmp $d204
 	lda a: $5e
@@ -1241,29 +1241,29 @@
 	adc #$08
 	sta a: $63
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bmi $cc2b
 	lda #$81
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bpl $cc2b
 	ldx a: $63
 	lda $0200,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cbfa
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cc0a
 	jmp $d204
 	lda a: $63
@@ -1273,17 +1273,17 @@
 	lda $0400,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cc28
 	rts
 	jmp $d204
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bpl $cc97
 	lda a: $0c
 	lsr a
@@ -1299,16 +1299,16 @@
 	lda $0400,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cc66
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cc76
 	jmp $d204
 	lda a: $66
@@ -1318,10 +1318,10 @@
 	lda $0400,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cc94
 	rts
 	jmp $d204
@@ -1341,16 +1341,16 @@
 	lda $0200,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $ccc8
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $ccd8
 	jmp $d204
 	lda a: $66
@@ -1360,18 +1360,18 @@
 	lda $0200,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $ccf6
 	rts
 	jsr $d204
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	beq $cd0a
 	jmp $d255
 	lda a: $5e
@@ -1382,29 +1382,29 @@
 	asl a
 	sta a: $63
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bmi $cd7b
 	lda #$81
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bpl $cd7b
 	ldx a: $63
 	lda $0200,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cd4a
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cd5a
 	jmp $d255
 	lda a: $63
@@ -1414,17 +1414,17 @@
 	lda $0400,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cd78
 	rts
 	jmp $d255
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bpl $cde7
 	lda a: $0c
 	lsr a
@@ -1440,16 +1440,16 @@
 	lda $0400,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cdb6
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cdc6
 	jmp $d255
 	lda a: $66
@@ -1459,10 +1459,10 @@
 	lda $0400,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cde4
 	rts
 	jmp $d255
@@ -1482,16 +1482,16 @@
 	lda $0200,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $ce18
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $ce28
 	jmp $d255
 	lda a: $66
@@ -1501,33 +1501,33 @@
 	lda $0200,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $ce46
 	rts
 	jmp $d255
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$f8
-	cmp a: $09
+	cmp a: temp
 	bne $ce6f
 	dec a: player_velocity
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bne $ce6e
 	lda #$00
 	sta a: player_fall_state
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $ce9f
 	jsr $c241
 	.byte $AD, $0C, $00, $38, $ED, $62, $00, $8D
@@ -1540,9 +1540,9 @@
 	asl a
 	sta a: $63
 	lda #$97
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bmi $ceb8
 	jmp $cf71
 	lda a: $0c
@@ -1560,9 +1560,9 @@
 	lsr a
 	sta a: $65
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cef7
 	lda a: $0c
 	pha
@@ -1586,18 +1586,18 @@
 	lda $0400,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cf1d
 	jmp $d01a
 	lda #$00
 	sta a: $64
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $cf3e
 	beq $cf3e
 	lda a: $66
@@ -1607,10 +1607,10 @@
 	lda $0400,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cf51
 	jmp $d01a
 	lda a: $0c
@@ -1619,9 +1619,9 @@
 	sta a: $0c
 	dec a: player_velocity
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bne $cf70
 	lda #$00
 	sta a: player_fall_state
@@ -1637,9 +1637,9 @@
 	lsr a
 	sta a: $65
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $cfa0
 	lda a: $0c
 	clc
@@ -1659,18 +1659,18 @@
 	lda $0200,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cfc6
 	jmp $d01a
 	lda #$00
 	sta a: $64
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $cfe7
 	beq $cfe7
 	lda a: $66
@@ -1680,10 +1680,10 @@
 	lda $0200,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $cffa
 	jmp $d01a
 	lda a: $0c
@@ -1692,9 +1692,9 @@
 	sta a: $0c
 	dec a: player_velocity
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bne $d019
 	lda #$00
 	sta a: player_fall_state
@@ -1704,25 +1704,25 @@
 	jsr $dc92
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $d05d
 	lda a: $0c
 	clc
 	adc a: $62
 	sta a: $0c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $62
-	cmp a: $09
+	cmp a: temp
 	beq $d04c
 	lda #$00
 	sta a: player_fall_state
 	lda #$3c
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bpl $d05c
 	inc a: player_velocity
 	rts
@@ -1732,10 +1732,10 @@
 	asl a
 	sta a: $63
 	lda #$e8
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$f8
-	cmp a: $09
+	cmp a: temp
 	bne $d080
 	lda a: $0c
 	clc
@@ -1743,10 +1743,10 @@
 	sta a: $0c
 	rts
 	lda #$f0
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$f0
-	cmp a: $09
+	cmp a: temp
 	bne $d09a
 	lda a: $0c
 	clc
@@ -1754,9 +1754,9 @@
 	sta a: $0c
 	rts
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $0c
-	cmp a: $09
+	cmp a: temp
 	bmi $d0aa
 	jmp $d144
 	lda a: $0c
@@ -1775,18 +1775,18 @@
 	lda $0400,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $d0de
 	jmp $d1e1
 	lda #$00
 	sta a: $64
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $d0ff
 	beq $d0ff
 	lda a: $66
@@ -1796,10 +1796,10 @@
 	lda $0400,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $d112
 	jmp $d1e1
 	lda a: $0c
@@ -1807,16 +1807,16 @@
 	adc a: $62
 	sta a: $0c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $62
-	cmp a: $09
+	cmp a: temp
 	beq $d12e
 	lda #$00
 	sta a: player_fall_state
 	lda #$3c
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bpl $d13e
 	inc a: player_velocity
 	lda #$00
@@ -1840,18 +1840,18 @@
 	lda $0200,x
 	sta a: $67
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $d17b
 	jmp $d1e1
 	lda #$00
 	sta a: $64
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $d19c
 	beq $d19c
 	lda a: $66
@@ -1861,10 +1861,10 @@
 	lda $0200,x
 	sta a: $64
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $d1af
 	jmp $d1e1
 	lda a: $0c
@@ -1872,16 +1872,16 @@
 	adc a: $62
 	sta a: $0c
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $62
-	cmp a: $09
+	cmp a: temp
 	beq $d1cb
 	lda #$00
 	sta a: player_fall_state
 	lda #$3c
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bpl $d1db
 	inc a: player_velocity
 	lda #$00
@@ -1890,9 +1890,9 @@
 	lda #$02
 	sta a: player_fall_state
 	lda #$11
-	sta a: $09
+	sta a: temp
 	lda a: player_velocity
-	cmp a: $09
+	cmp a: temp
 	bmi $d1f9
 	lda #$0c
 	sta a: player_velocity
@@ -1903,74 +1903,74 @@
 	sta a: $5d
 	rts
 	lda $8058
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $d213
 	rts
 	lda $8059
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $d226
 	lda #$01
 	sta a: $27
 	inc a: $5f
 	lda #$10
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bne $d23e
 	lda #$00
 	sta a: $5f
 	inc a: $5e
 	lda #$0a
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	sec
 	sbc a: $20
-	cmp a: $09
+	cmp a: temp
 	bmi $d254
 	beq $d254
 	jsr $d6e5
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $d270
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $d270
 	rts
 	lda $805a
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $d28c
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $d28c
 	rts
 	dec a: $5f
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bne $d2a4
 	lda #$0f
 	sta a: $5f
 	dec a: $5e
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	sec
 	sbc a: $20
-	cmp a: $09
+	cmp a: temp
 	bpl $d2ba
 	beq $d2ba
 	jsr $d773
@@ -1979,31 +1979,31 @@
 	sta a: $24
 	inc a: $25
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $25
 	and #$08
-	cmp a: $09
+	cmp a: temp
 	beq $d2d7
 	lda #$28
 	sta a: $24
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $59
-	cmp a: $09
+	cmp a: temp
 	bne $d2e9
 	lda #$00
 	sta a: $25
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: player_fall_state
-	cmp a: $09
+	cmp a: temp
 	beq $d2fb
 	lda #$30
 	sta a: $24
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $d30d
 	lda #$38
 	sta a: $24
@@ -2032,17 +2032,17 @@
 	lda #$01
 	sta a: $6a
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0d
-	cmp a: $09
+	cmp a: temp
 	beq $d351
 	lda a: $0d
 	and #$03
 	sta a: $6a
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5a
-	cmp a: $09
+	cmp a: temp
 	beq $d391
 	lda a: $69
 	clc
@@ -2055,10 +2055,10 @@
 	lda #$03
 	sta a: $6d
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1b
 	and #$02
-	cmp a: $09
+	cmp a: temp
 	beq $d389
 	lda #$43
 	sta a: $6d
@@ -2066,9 +2066,9 @@
 	sta a: $6e
 	jsr $f4f5
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: player_direction
-	cmp a: $09
+	cmp a: temp
 	bne $d3a1
 	jmp $d3a4
 	jmp $d43a
@@ -2205,9 +2205,9 @@
 	lda #$00
 	sta a: $0e
 	lda a: player_health
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bmi $d4ed
 	rts
 	ldx a: $22
@@ -2305,10 +2305,10 @@
 	.byte $0D, $40, $A9, $F9, $8D, $0E, $40, $A9
 	.byte $08, $8D, $0F, $40, $60
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1e
 	and #$04
-	cmp a: $09
+	cmp a: temp
 	beq $d609
 	lda #$31
 	sta PPU_CTRL1
@@ -2333,15 +2333,15 @@
 	sta PPU_VRAM_ADDR1
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d637
 	rts
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bmi $d647
 	jmp $d696
 	lda a: $1e
@@ -2349,27 +2349,27 @@
 	adc #$05
 	sta a: $52
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d660
 	jsr $c4b4
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d670
 	jsr $c5aa
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d680
 	jsr $c6a0
 	lda #$05
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d690
 	jsr $c706
 	lda #$00
@@ -2380,53 +2380,53 @@
 	sbc #$01
 	sta a: $52
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d6af
 	jsr $c4b4
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d6bf
 	jsr $c5aa
 	lda #$09
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d6cf
 	jsr $c6a0
 	lda #$0a
-	sta a: $09
+	sta a: temp
 	lda a: $58
-	cmp a: $09
+	cmp a: temp
 	bne $d6df
 	jsr $c706
 	lda #$00
 	sta a: $58
 	rts
 	lda $805b
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bne $d6f9
 	lda #$01
 	sta a: $0b
 	rts
 	inc a: $21
 	lda #$10
-	sta a: $09
+	sta a: temp
 	lda a: $21
-	cmp a: $09
+	cmp a: temp
 	bne $d711
 	lda #$00
 	sta a: $21
 	inc a: $20
 	lda #$3f
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d727
 	lda #$00
 	sta a: $1f
@@ -2434,64 +2434,64 @@
 	rts
 	inc a: $1f
 	lda #$0a
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d73c
 	lda #$01
 	sta a: $58
 	lda #$1e
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d74e
 	lda #$03
 	sta a: $58
 	lda #$28
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d760
 	lda #$04
 	sta a: $58
 	lda #$32
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d772
 	lda #$05
 	sta a: $58
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1e
-	cmp a: $09
+	cmp a: temp
 	bne $d78e
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bpl $d78e
 	rts
 	lda $805b
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bne $d79d
 	rts
 	dec a: $21
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $21
-	cmp a: $09
+	cmp a: temp
 	bne $d7b5
 	lda #$0f
 	sta a: $21
 	dec a: $20
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d7cb
 	lda #$3f
 	sta a: $1f
@@ -2499,36 +2499,36 @@
 	rts
 	dec a: $1f
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1e
-	cmp a: $09
+	cmp a: temp
 	bne $d7dc
 	rts
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d7ee
 	lda #$06
 	sta a: $58
 	lda #$1c
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d800
 	lda #$08
 	sta a: $58
 	lda #$26
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d812
 	lda #$09
 	sta a: $58
 	lda #$30
-	sta a: $09
+	sta a: temp
 	lda a: $1f
-	cmp a: $09
+	cmp a: temp
 	bne $d824
 	lda #$0a
 	sta a: $58
@@ -2567,9 +2567,9 @@
 	sta PPU_VRAM_IO
 	dec a: $0e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $d886
 	jmp $d869
 	lda a: player_lives
@@ -2584,9 +2584,9 @@
 	sta PPU_VRAM_IO
 	dec a: $0e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $d8b3
 	jmp $d896
 	jsr $db09
@@ -2663,9 +2663,9 @@
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$09
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $dac3
 	jmp $daa7
 	jsr $db09
@@ -2677,9 +2677,9 @@
 	jsr $db8e
 	dec a: $71
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $71
-	cmp a: $09
+	cmp a: temp
 	beq $dae8
 	jmp $dad2
 	rts
@@ -2706,9 +2706,9 @@
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$10
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bne $db32
 	rts
 	jmp $db18
@@ -2799,9 +2799,9 @@
 	sta PPU_SPR_IO
 	inc a: $66
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $66
-	cmp a: $09
+	cmp a: temp
 	beq $dc48
 	jmp $dc30
 	rts
@@ -2822,9 +2822,9 @@
 	sta a: $72,x
 	inc a: $0e
 	lda #$0c
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $dc91
 	jmp $dc76
 	rts
@@ -2834,9 +2834,9 @@
 	lda a: $72,x
 	sta a: $80
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $80
-	cmp a: $09
+	cmp a: temp
 	beq $dcb0
 	jmp $dd19
 	ldx a: $7f
@@ -2846,7 +2846,7 @@
 	lda $807c,x
 	sta a: $82
 	lda a: $82
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$20
@@ -2854,38 +2854,38 @@
 	lsr a
 	lsr a
 	lsr a
-	cmp a: $09
+	cmp a: temp
 	beq $dcda
 	jmp $dd19
 	lda a: $81
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $dcf8
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $dcf8
 	jmp $ddd8
 	lda a: $81
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	clc
 	adc #$01
-	cmp a: $09
+	cmp a: temp
 	bne $dd19
 	lda #$0a
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $dd19
 	jmp $ddd8
 	inc a: $7f
 	lda #$0c
-	sta a: $09
+	sta a: temp
 	lda a: $7f
-	cmp a: $09
+	cmp a: temp
 	beq $dd2c
 	jmp $dc97
 	rts
@@ -2898,7 +2898,7 @@
 	lda $8049,x
 	sta a: $85
 	lda a: $85
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$02
@@ -2906,38 +2906,38 @@
 	lsr a
 	lsr a
 	lsr a
-	cmp a: $09
+	cmp a: temp
 	beq $dd5c
 	jmp $dd9b
 	lda a: $84
-	sta a: $09
+	sta a: temp
 	lda a: $5e
-	cmp a: $09
+	cmp a: temp
 	bne $dd7a
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $dd7a
 	jmp $ddb0
 	lda a: $84
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	clc
 	adc #$01
-	cmp a: $09
+	cmp a: temp
 	bne $dd9b
 	lda #$0c
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bmi $dd9b
 	jmp $ddb0
 	inc a: $83
 	lda a: $7e
-	sta a: $09
+	sta a: temp
 	lda a: $83
-	cmp a: $09
+	cmp a: temp
 	bpl $ddaf
 	jmp $dd32
 	rts
@@ -2949,9 +2949,9 @@
 	jsr $de0d
 	inc a: $86
 	lda #$15
-	sta a: $09
+	sta a: temp
 	lda a: $86
-	cmp a: $09
+	cmp a: temp
 	beq $ddd4
 	jmp $ddb8
 	jsr $c3eb
@@ -2987,16 +2987,16 @@
 	sta a: $87
 	inc a: $87
 	lda #$40
-	sta a: $09
+	sta a: temp
 	lda a: $87
-	cmp a: $09
+	cmp a: temp
 	beq $de2a
 	jmp $de17
 	inc a: $0e
 	lda #$11
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	beq $de3d
 	jmp $de12
 	rts
@@ -3256,9 +3256,9 @@
 	sta a: $03
 	jmp $e679
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $8f
-	cmp a: $09
+	cmp a: temp
 	beq $e68a
 	dec a: $8f
 	rts
@@ -3274,17 +3274,17 @@
 	sta a: $90
 	iny
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$03
-	cmp a: $09
+	cmp a: temp
 	bne $e6b2
 	jmp $e6dc
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$03
-	cmp a: $09
+	cmp a: temp
 	bne $e6c4
 	jmp $e6c4
 	; this is some music shit right here I can tell you that much
@@ -3301,17 +3301,17 @@
 	sta APU_PULSE1CTUNE
 	iny
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$0c
-	cmp a: $09
+	cmp a: temp
 	bne $e6ee
 	jmp $e718
 	lda #$0c
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$0c
-	cmp a: $09
+	cmp a: temp
 	bne $e700
 	jmp $e700
 	lda (music_pointer), y
@@ -3327,17 +3327,17 @@
 	sta APU_PULSE2STUNE
 	iny
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$30
-	cmp a: $09
+	cmp a: temp
 	bne $e72a
 	jmp $e754
 	lda #$30
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$30
-	cmp a: $09
+	cmp a: temp
 	bne $e73c
 	jmp $e73c
 	lda (music_pointer), y
@@ -3353,17 +3353,17 @@
 	sta APU_TRIFREQ2
 	iny
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$c0
-	cmp a: $09
+	cmp a: temp
 	bne $e766
 	jmp $e790
 	lda #$c0
-	sta a: $09
+	sta a: temp
 	lda a: $90
 	and #$c0
-	cmp a: $09
+	cmp a: temp
 	bne $e778
 	jmp $e778
 	lda (music_pointer), y
@@ -3427,16 +3427,16 @@
 	sta a: $a4,x
 	inc a: $0e
 	lda a: $b0
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bpl $e815
 	jmp $e7f9
 	rts
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $04
-	cmp a: $09
+	cmp a: temp
 	beq $e824
 	rts
 	lda #$00
@@ -3445,16 +3445,16 @@
 	lda a: $a4,x
 	sta a: $b1
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e842
 	jmp $e85e
 	inc a: $0e
 	lda a: $b0
-	sta a: $09
+	sta a: temp
 	lda a: $0e
-	cmp a: $09
+	cmp a: temp
 	bpl $e858
 	beq $e858
 	jmp $e829
@@ -3466,9 +3466,9 @@
 	lda $8060,x
 	sta a: $b1
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e87f
 	jmp $e8b0
 	ldx a: $0e
@@ -3491,10 +3491,10 @@
 	inc a: $04
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	and #$f0
-	cmp a: $09
+	cmp a: temp
 	bne $e8c0
 	rts
 	ldx a: $0e
@@ -3522,39 +3522,39 @@
 	lda a: $a4,x
 	sta a: $b1
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e90e
 	jsr $e960
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e91e
 	jsr $e960
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e92e
 	jsr $ec12
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e93e
 	jsr $edca
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $e94e
 	jsr $e960
 	lda a: $b0
-	sta a: $09
+	sta a: temp
 	lda a: $b2
-	cmp a: $09
+	cmp a: temp
 	bpl $e95f
 	jmp $e8f2
 	rts
@@ -3573,17 +3573,17 @@
 	lda a: $b4
 	clc
 	adc #$02
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bmi $e998
 	jmp $ee75
 	lda a: $b4
-	sta a: $09
+	sta a: temp
 	lda a: $20
 	clc
 	adc #$12
-	cmp a: $09
+	cmp a: temp
 	bpl $e9ac
 	jmp $ee75
 	lda #$00
@@ -3592,78 +3592,78 @@
 	sta a: $62
 	jsr $f2cd
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1b
 	and #$01
-	cmp a: $09
+	cmp a: temp
 	beq $e9cb
 	jmp $ea9f
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $e9ed
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b7
-	cmp a: $09
+	cmp a: temp
 	bne $e9ea
 	lda #$02
 	sta a: $b3
 	jmp $ea41
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ea17
 	lda #$00
 	sta a: $64
 	jsr $f083
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
-	cmp a: $09
+	cmp a: temp
 	beq $ea14
 	lda #$02
 	sta a: $b3
 	jmp $ea41
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ea41
 	lda #$00
 	sta a: $67
 	jsr $f193
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
-	cmp a: $09
+	cmp a: temp
 	beq $ea3e
 	lda #$01
 	sta a: $b3
 	jmp $ea41
 	lda #$fc
-	sta a: $09
+	sta a: temp
 	lda a: $b6
 	and #$fc
-	cmp a: $09
+	cmp a: temp
 	bne $ea53
 	jmp $ee75
 	lda a: $b4
 	clc
 	adc #$05
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bmi $ea67
 	jmp $ee75
 	lda a: $b4
-	sta a: $09
+	sta a: temp
 	lda a: $20
 	clc
 	adc #$15
-	cmp a: $09
+	cmp a: temp
 	bpl $ea7b
 	jmp $ee75
 	ldx a: $b2
@@ -3679,15 +3679,15 @@
 	lda a: $b6
 	sta a: $9e,x
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $eaaf
 	jmp $ebb7
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $eabf
 	jmp $eb32
 	lda #$02
@@ -3695,17 +3695,17 @@
 	lda #$0a
 	sta a: $6e
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bmi $eb31
 	beq $eb31
 	lda a: $20
 	clc
 	adc #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bpl $eb31
 	beq $eb31
 	ldx a: $b2
@@ -3730,10 +3730,10 @@
 	adc a: $11
 	sta a: $6b
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1b
 	and #$10
-	cmp a: $09
+	cmp a: temp
 	beq $eb2e
 	lda #$42
 	sta a: $6d
@@ -3742,17 +3742,17 @@
 	jmp $f3db
 	rts
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bmi $ebb6
 	beq $ebb6
 	lda a: $20
 	clc
 	adc #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bpl $ebb6
 	beq $ebb6
 	lda #$00
@@ -3760,10 +3760,10 @@
 	lda #$40
 	sta a: $6e
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $1b
 	and #$10
-	cmp a: $09
+	cmp a: temp
 	beq $eb73
 	lda #$48
 	sta a: $6e
@@ -3789,9 +3789,9 @@
 	adc a: $11
 	sta a: $6b
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ebb3
 	lda #$40
 	sta a: $6d
@@ -3804,17 +3804,17 @@
 	lda #$02
 	sta a: $6e
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bmi $ec11
 	beq $ec11
 	lda a: $20
 	clc
 	adc #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bpl $ec11
 	beq $ec11
 	ldx a: $b2
@@ -3855,17 +3855,17 @@
 	lda a: $b4
 	clc
 	adc #$02
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bmi $ec4a
 	jmp $ee75
 	lda a: $b4
-	sta a: $09
+	sta a: temp
 	lda a: $20
 	clc
 	adc #$12
-	cmp a: $09
+	cmp a: temp
 	bpl $ec5e
 	jmp $ee75
 	lda #$00
@@ -3874,75 +3874,75 @@
 	sta a: $62
 	jsr $f2cd
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ec8d
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b7
-	cmp a: $09
+	cmp a: temp
 	bne $ec8a
 	lda #$01
 	sta a: $b3
 	jmp $ed11
 	lda a: $5e
-	sta a: $09
+	sta a: temp
 	lda a: $b4
 	clc
 	adc #$02
-	cmp a: $09
+	cmp a: temp
 	bpl $eca5
 	beq $eca5
 	lda #$01
 	sta a: $b3
 	lda a: $5e
-	sta a: $09
+	sta a: temp
 	lda a: $b4
 	sec
 	sbc #$02
-	cmp a: $09
+	cmp a: temp
 	bmi $ecbd
 	beq $ecbd
 	lda #$02
 	sta a: $b3
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ece7
 	lda #$00
 	sta a: $64
 	jsr $f083
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
-	cmp a: $09
+	cmp a: temp
 	beq $ece4
 	lda #$02
 	sta a: $b3
 	jmp $ed11
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $ed11
 	lda #$00
 	sta a: $67
 	jsr $f193
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $67
-	cmp a: $09
+	cmp a: temp
 	beq $ed0e
 	lda #$01
 	sta a: $b3
 	jmp $ed11
 	lda #$fc
-	sta a: $09
+	sta a: temp
 	lda a: $b6
 	and #$fc
-	cmp a: $09
+	cmp a: temp
 	bne $ed23
 	jmp $ee75
 	ldx a: $b2
@@ -3967,16 +3967,16 @@
 	adc #$0e
 	sta a: $6e
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bmi $edc1
 	lda a: $20
 	clc
 	adc #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bpl $edc1
 	beq $edc1
 	ldx a: $b2
@@ -4001,9 +4001,9 @@
 	adc a: $11
 	sta a: $6b
 	lda #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b3
-	cmp a: $09
+	cmp a: temp
 	bne $edbe
 	lda #$40
 	sta a: $6d
@@ -4029,9 +4029,9 @@
 	lda a: $b4
 	clc
 	adc #$02
-	sta a: $09
+	sta a: temp
 	lda a: $20
-	cmp a: $09
+	cmp a: temp
 	bmi $ee02
 	jmp $ee75
 	jsr $f29b
@@ -4043,17 +4043,17 @@
 	lda a: $b5
 	sta a: $98,x
 	lda a: $20
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bmi $ee74
 	beq $ee74
 	lda a: $20
 	clc
 	adc #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bpl $ee74
 	beq $ee74
 	lda #$02
@@ -4093,9 +4093,9 @@
 	lda a: $a4,x
 	sta a: $b1
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $ee9c
 	jmp $f015
 	ldx a: $b2
@@ -4104,46 +4104,46 @@
 	lda #$0e
 	sta a: $b8
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $eebc
 	lda #$08
 	sta a: $b8
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $eece
 	lda #$16
 	sta a: $b8
 	lda a: $0c
-	sta a: $09
+	sta a: temp
 	lda a: $b6
 	sec
 	sbc a: $b8
-	cmp a: $09
+	cmp a: temp
 	bmi $eee3
 	jmp $f015
 	lda a: $b6
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$18
-	cmp a: $09
+	cmp a: temp
 	bmi $eef7
 	jmp $f015
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $12
-	cmp a: $09
+	cmp a: temp
 	beq $ef18
 	lda a: $b6
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$10
-	cmp a: $09
+	cmp a: temp
 	bmi $ef18
 	jmp $f015
 	lda #$00
@@ -4157,50 +4157,50 @@
 	lda a: $98,x
 	sta a: $b5
 	lda a: $5e
-	sta a: $09
+	sta a: temp
 	lda a: $b4
-	cmp a: $09
+	cmp a: temp
 	bne $ef47
 	lda #$01
 	sta a: $b9
 	lda a: $b4
-	sta a: $09
+	sta a: temp
 	lda a: $5e
 	clc
 	adc #$01
-	cmp a: $09
+	cmp a: temp
 	bne $ef6d
 	lda a: $5f
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bpl $ef6d
 	beq $ef6d
 	lda #$01
 	sta a: $b9
 	lda a: $5e
-	sta a: $09
+	sta a: temp
 	lda a: $b4
 	clc
 	adc #$01
-	cmp a: $09
+	cmp a: temp
 	bne $ef93
 	lda a: $b5
-	sta a: $09
+	sta a: temp
 	lda a: $5f
-	cmp a: $09
+	cmp a: temp
 	bpl $ef93
 	beq $ef93
 	lda #$01
 	sta a: $b9
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $b9
-	cmp a: $09
+	cmp a: temp
 	bne $efa3
 	jmp $f015
 	lda a: $b6
-	sta a: $09
+	sta a: temp
 	lda a: $0c
 	pha
 	lda a: $b8
@@ -4210,54 +4210,54 @@
 	pla
 	clc
 	adc a: $11
-	cmp a: $09
+	cmp a: temp
 	bpl $efc5
 	lda #$01
 	sta a: $b7
 	lda #$08
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $efd5
 	jmp $f067
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $efe5
 	jmp $f02d
 	lda #$03
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $eff5
 	jmp $f02d
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $f005
 	jmp $f02d
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: $b1
-	cmp a: $09
+	cmp a: temp
 	bne $f015
 	jmp $f063
 	inc a: $b2
 	lda a: $b0
 	clc
 	adc #$01
-	sta a: $09
+	sta a: temp
 	lda a: $b2
-	cmp a: $09
+	cmp a: temp
 	bpl $f02c
 	jmp $ee83
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $b7
-	cmp a: $09
+	cmp a: temp
 	beq $f05f
 	ldx a: $b2
 	lda #$00
@@ -4267,9 +4267,9 @@
 	lda #$14
 	sta a: player_velocity
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_a_down
-	cmp a: $09
+	cmp a: temp
 	beq $f05e
 	lda #$37
 	sta a: player_velocity
@@ -4284,16 +4284,16 @@
 	; collect heart
 	inc a: player_health
 	lda #$06
-	sta a: $09
+	sta a: temp
 	lda a: player_health
-	cmp a: $09
+	cmp a: temp
 	bne $f082
 	dec a: player_health
 	rts
 	lda #$02
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bpl $f093
 	jmp $f2b4
 	lda #$08
@@ -4311,9 +4311,9 @@
 	and #$0f
 	sta a: $ba
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $b6
-	cmp a: $09
+	cmp a: temp
 	bpl $f126
 	lda a: $b6
 	lsr a
@@ -4328,16 +4328,16 @@
 	lda $0400,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f0e7
 	jmp $f3c9
 	lda #$0f
-	sta a: $09
+	sta a: temp
 	lda a: $ba
-	cmp a: $09
+	cmp a: temp
 	bne $f0f7
 	jmp $f2b4
 	lda a: $63
@@ -4353,10 +4353,10 @@
 	lda $0400,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $bb
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f123
 	jmp $f3c9
 	jmp $f2b4
@@ -4375,16 +4375,16 @@
 	lda $0200,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f154
 	jmp $f3c9
 	lda #$0f
-	sta a: $09
+	sta a: temp
 	lda a: $ba
-	cmp a: $09
+	cmp a: temp
 	bne $f164
 	jmp $f2b4
 	lda a: $63
@@ -4400,17 +4400,17 @@
 	lda $0200,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $bb
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f190
 	jmp $f3c9
 	jmp $f2b4
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	beq $f1a3
 	jmp $f29b
 	lda a: $b4
@@ -4424,9 +4424,9 @@
 	and #$0f
 	sta a: $ba
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $b6
-	cmp a: $09
+	cmp a: temp
 	bpl $f22e
 	lda a: $b6
 	lsr a
@@ -4441,16 +4441,16 @@
 	lda $0400,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f1ef
 	jmp $f3cf
 	lda #$0f
-	sta a: $09
+	sta a: temp
 	lda a: $ba
-	cmp a: $09
+	cmp a: temp
 	bne $f1ff
 	jmp $f29b
 	lda a: $63
@@ -4466,10 +4466,10 @@
 	lda $0400,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $bb
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f22b
 	jmp $f3cf
 	jmp $f29b
@@ -4488,16 +4488,16 @@
 	lda $0200,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f25c
 	jmp $f3cf
 	lda #$0f
-	sta a: $09
+	sta a: temp
 	lda a: $ba
-	cmp a: $09
+	cmp a: temp
 	bne $f26c
 	jmp $f29b
 	lda a: $63
@@ -4513,18 +4513,18 @@
 	lda $0200,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $bb
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f298
 	jmp $f3cf
 	jmp $f29b
 	dec a: $b5
 	lda #$ff
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bne $f2b3
 	lda #$0f
 	sta a: $b5
@@ -4532,9 +4532,9 @@
 	rts
 	inc a: $b5
 	lda #$10
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bne $f2cc
 	lda #$00
 	sta a: $b5
@@ -4546,9 +4546,9 @@
 	asl a
 	sta a: $63
 	lda #$7f
-	sta a: $09
+	sta a: temp
 	lda a: $b6
-	cmp a: $09
+	cmp a: temp
 	bpl $f350
 	beq $f350
 	lda a: $b6
@@ -4567,18 +4567,18 @@
 	lda $0400,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f319
 	jmp $f3d5
 	lda #$00
 	sta a: $bb
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bmi $f33a
 	beq $f33a
 	lda a: $66
@@ -4588,10 +4588,10 @@
 	lda $0400,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $64
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f34d
 	jmp $f3d5
 	jmp $f3be
@@ -4613,18 +4613,18 @@
 	lda $0200,x
 	sta a: $86
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $86
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f387
 	jmp $f3d5
 	lda #$00
 	sta a: $bb
 	lda #$04
-	sta a: $09
+	sta a: temp
 	lda a: $b5
-	cmp a: $09
+	cmp a: temp
 	bmi $f3a8
 	beq $f3a8
 	lda a: $66
@@ -4634,10 +4634,10 @@
 	lda $0200,x
 	sta a: $bb
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $bb
 	and a: $54
-	cmp a: $09
+	cmp a: temp
 	beq $f3bb
 	jmp $f3d5
 	jmp $f3be
@@ -4923,9 +4923,9 @@
 	jsr $f7e2
 	jsr $f7ee
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: konami_code_active
-	cmp a: $09
+	cmp a: temp
 	beq $f698
 	jsr $f6e9
 	.byte $AD, $BE, $00, $18, $6D, $BF, $00, $8D
@@ -4950,16 +4950,16 @@
 	sta a: $05
 	jsr $f836
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_select_down
-	cmp a: $09
+	cmp a: temp
 	beq $f6bf
 	lda #$01
 	sta a: konami_code_active
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: button_start_down
-	cmp a: $09
+	cmp a: temp
 	beq $f6cf
 	jmp $f6d2
 	jmp $f61d
@@ -5051,9 +5051,9 @@
 	sta PPU_VRAM_IO
 	inc a: $66
 	lda #$1f
-	sta a: $09
+	sta a: temp
 	lda a: $66
-	cmp a: $09
+	cmp a: temp
 	bpl $f7d3
 	jmp $f7b7
 	rts
@@ -5099,45 +5099,45 @@
 	rts
 	jsr $f8b1
 	lda #$0a
-	sta a: $09
+	sta a: temp
 	lda a: konami_code_correct_presses
-	cmp a: $09
+	cmp a: temp
 	bmi $f85d
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $5c
-	cmp a: $09
+	cmp a: temp
 	beq $f854
 	rts
 	.byte $A9, $01, $8D, $5C, $00, $20, $D8, $D5
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: konami_code_correct_button_down
-	cmp a: $09
+	cmp a: temp
 	beq $f880
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $c4
-	cmp a: $09
+	cmp a: temp
 	bne $f880
 	lda #$00
 	sta a: konami_code_correct_button_down
 	inc a: konami_code_correct_presses
 	rts
 	lda #$00
-	sta a: $09
+	sta a: temp
 	lda a: $c4
-	cmp a: $09
+	cmp a: temp
 	bne $f88e
 	rts
 	ldx a: konami_code_correct_presses
 	lda $f908,x
 	sta a: $c5
 	lda a: $c5
-	sta a: $09
+	sta a: temp
 	lda a: $c4
-	cmp a: $09
+	cmp a: temp
 	bne $f8ab
 	lda #$01
 	sta a: konami_code_correct_button_down

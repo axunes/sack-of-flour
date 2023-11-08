@@ -6,7 +6,7 @@
 	.res 1
 	.res 1
 	player_lives: .res 1 ; 08
-	.res 1 ; this is used a fuckton
+	temp: .res 1 ; this is used a fuckton, also set it to res 2 and it skips levels lol
 	player_health: .res 1 ; 0A
 	.res 1
 	.res 1
@@ -187,14 +187,18 @@
 	konami_code_correct_button_down: .res 1
 	button_mask: .res 1
 
-.segment "OAM"
-	OAM: .res $100
 
-; $1F7 may have something to do with enemies
-
-; $200 is of course the oam buffer but it reallt looks more like collision stuff!
 
 .segment "BSS"
+	; $1F7 may have something to do with enemies
+
+	; $200 is of course the oam buffer but it reallt looks more like collision stuff!
+
+
+	.res $100 ; smallram
+
+	OAM: .res $100
+
 	; I think this is all sprite stuff actually
 	player_pos_y: .res 1
 	player_sprite: .res 1
