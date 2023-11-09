@@ -29,8 +29,10 @@
 
 	.enum EnemyType
 		goomba = 2
-		cabbage = 4
+		crocodile
+		cabbage
 		carrot = 6
+		heart = 8
 	.endenum
 
 	; man I hate all this res
@@ -192,47 +194,6 @@
 .segment "BSS"
 	; $1F7 may have something to do with enemies
 
-	; $200 is of course the oam buffer but it reallt looks more like collision stuff!
-
-
-	.res $100 ; smallram
+	collision_something: .res $100
 
 	OAM: .res $100
-
-	; I think this is all sprite stuff actually
-	player_pos_y: .res 1
-	player_sprite: .res 1
-	.res 1 ; player dir = bit 6? (left $41 right $01)
-	player_pos_x: .res 1
-	player_pos_y_again : .res 1 ; ???
-
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-
-	.repeat 6, i
-	.ident(.sprintf("enemy_%d_y", i)): .res 1
-	.ident(.sprintf("enemy_%d_frame", i)): .res 1
-	.res 1
-	.ident(.sprintf("enemy_%d_x", i)): .res 1
-	.endrepeat
