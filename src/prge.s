@@ -416,17 +416,17 @@ label_c245:
 	sta a: temp
 	lda a: $53
 	cmp a: temp
-	bne $c3ff
+	bne :+
 	jsr $c47d
 	rts
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $53
 	cmp a: temp
-	bne $c410
+	bne :+
 	jsr $c414
 	rts
-	jsr $c44b
+:	jsr $c44b
 	rts
 	lda #$55
 	sta a: $54
@@ -446,9 +446,9 @@ label_c245:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bne $c447
+	bne :+
 	rts
-	jmp $c42d
+:	jmp $c42d
 	rts
 	lda #$01
 	clc
@@ -467,9 +467,9 @@ label_c245:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bne $c479
+	bne :+
 	rts
-	jmp $c463
+:	jmp $c463
 	rts
 	lda #$aa
 	sta a: $54
@@ -489,9 +489,9 @@ label_c245:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bne $c4b0
+	bne :+
 	rts
-	jmp $c496
+:	jmp $c496
 	rts
 	lda a: $52
 	and #$07
@@ -503,9 +503,9 @@ label_c245:
 	sta a: temp
 	lda a: $11
 	cmp a: temp
-	bne $c4d4
+	bne :+
 	rts
-	ldx a: $55
+:	ldx a: $55
 	lda a: $52
 	sta a: $2a,x
 	lda a: $52
@@ -607,9 +607,9 @@ label_c245:
 	sta a: temp
 	lda a: $11
 	cmp a: temp
-	bne $c5ca
+	bne :+
 	rts
-	ldx a: $55
+:	ldx a: $55
 	lda a: $52
 	sta a: $32,x
 	lda a: $52
@@ -711,9 +711,9 @@ label_c245:
 	sta a: temp
 	lda a: $11
 	cmp a: temp
-	bne $c6c0
+	bne :+
 	rts
-	ldx a: $55
+:	ldx a: $55
 	lda a: $52
 	sta a: $3a,x
 	ldx a: $55
@@ -751,9 +751,9 @@ label_c245:
 	sta a: temp
 	lda a: $11
 	cmp a: temp
-	bne $c726
+	bne :+
 	rts
-	ldx a: $55
+:	ldx a: $55
 	lda a: $52
 	sta a: $42,x
 	lda a: $52
@@ -774,6 +774,7 @@ label_c245:
 	asl a
 	sta a: $26
 	tax
+label_c750:
 	lda ($00),y
 	iny
 	sta a: $11
@@ -801,7 +802,7 @@ label_c245:
 	lsr a: $11
 	inx
 	cpy #$54
-	bne $c750
+	bne label_c750
 	ldy #$54
 	clc
 	lda a: $52
@@ -812,6 +813,7 @@ label_c245:
 	asl a
 	sta a: $26
 	tax
+label_c7a2:
 	lda ($00),y
 	iny
 	sta a: $11
@@ -839,7 +841,7 @@ label_c245:
 	lsr a: $11
 	inx
 	cpy #$5c
-	bne $c7a2
+	bne label_c7a2
 	nop
 	nop
 	nop
@@ -871,20 +873,21 @@ label_c245:
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $c850
+	bne label_c850
 	lda #$00
 	sta a: temp
 	lda a: player_direction
 	cmp a: temp
-	bne $c83d
+	bne :+
 	jsr $d204
-	lda #$01
+:	lda #$01
 	sta a: temp
 	lda a: player_direction
 	cmp a: temp
-	bne $c84d
+	bne :+
 	jsr $d255
-	jmp label_c984
+:	jmp label_c984
+label_c850:
 	lda #$00
 	sta a: temp
 	lda a: button_down_down
@@ -928,7 +931,7 @@ label_c245:
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
-	bne $c8dd
+	bne label_c8dd
 	lda #$00
 	sta a: temp
 	lda a: $5b
@@ -939,6 +942,7 @@ label_c245:
 :	lda #$00
 	sta a: $5b
 	jmp label_c984
+label_c8dd:
 	lda #$00
 	sta a: temp
 	lda a: button_a_down
@@ -988,10 +992,10 @@ label_c245:
 	sta a: temp
 	lda a: $06
 	cmp a: temp
-	bne $c965
+	bne :+
 	lda #$2d
 	sta a: player_velocity
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
@@ -1031,16 +1035,16 @@ label_c9b6:
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	bne $c9c9
+	bne :+
 	jmp label_c9b6
-	jsr $d539
+:	jsr $d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	beq $c9dc
-	jmp $c9c9
-	lda #$0f
+	beq :+
+	jmp :-
+:	lda #$0f
 	sta $4015
 	rts
 	lda $805c

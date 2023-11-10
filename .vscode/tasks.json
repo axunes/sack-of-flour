@@ -3,16 +3,16 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
 			"label": "Build NES rom",
 			"command": "cl65 -g -Wl --dbgfile,sack.dbg sack.s -C config.cfg"
 		},
 		{
 			"dependsOn": "Build NES rom",
 			"type": "shell",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"label": "Print checksum",
 			"command": "echo 9f637a7a; crc32 sack.nes"
 		},
