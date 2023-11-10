@@ -2638,66 +2638,184 @@
 	jmp $d896
 	jsr $db09
 	rts
-	.byte $20, $E9, $DA, $20, $8E, $DB, $A9, $20
-	.byte $8D, $06, $20, $A9, $48, $8D, $06, $20
-	.byte $A9, $00, $8D, $0E, $00, $AE, $0E, $00
-	.byte $BD, $01, $E4, $8D, $07, $20, $EE, $0E
-	.byte $00, $A9, $0F, $8D, $09, $00, $AD, $0E
-	.byte $00, $CD, $09, $00, $F0, $03, $4C, $CC
-	.byte $D8, $20, $8E, $DB, $A9, $20, $8D, $06
-	.byte $20, $A9, $AB, $8D, $06, $20, $A9, $00
-	.byte $8D, $0E, $00, $AE, $0E, $00, $BD, $10
-	.byte $E4, $8D, $07, $20, $EE, $0E, $00, $A9
-	.byte $08, $8D, $09, $00, $AD, $0E, $00, $CD
-	.byte $09, $00, $F0, $03, $4C, $FA, $D8, $20
-	.byte $8E, $DB, $A9, $21, $8D, $06, $20, $A9
-	.byte $01, $8D, $06, $20, $A9, $00, $8D, $0E
-	.byte $00, $AE, $0E, $00, $BD, $19, $E4, $8D
-	.byte $07, $20, $EE, $0E, $00, $A9, $1E, $8D
-	.byte $09, $00, $AD, $0E, $00, $CD, $09, $00
-	.byte $F0, $03, $4C, $28, $D9, $20, $8E, $DB
-	.byte $A9, $21, $8D, $06, $20, $A9, $61, $8D
-	.byte $06, $20, $A9, $00, $8D, $0E, $00, $AE
-	.byte $0E, $00, $BD, $37, $E4, $8D, $07, $20
-	.byte $EE, $0E, $00, $A9, $1E, $8D, $09, $00
-	.byte $AD, $0E, $00, $CD, $09, $00, $F0, $03
-	.byte $4C, $56, $D9, $20, $8E, $DB, $A9, $21
-	.byte $8D, $06, $20, $A9, $A1, $8D, $06, $20
-	.byte $A9, $00, $8D, $0E, $00, $AE, $0E, $00
-	.byte $BD, $55, $E4, $8D, $07, $20, $EE, $0E
-	.byte $00, $A9, $1E, $8D, $09, $00, $AD, $0E
-	.byte $00, $CD, $09, $00, $F0, $03, $4C, $84
-	.byte $D9, $20, $8E, $DB, $A9, $21, $8D, $06
-	.byte $20, $A9, $E1, $8D, $06, $20, $A9, $00
-	.byte $8D, $0E, $00, $AE, $0E, $00, $BD, $73
-	.byte $E4, $8D, $07, $20, $EE, $0E, $00, $A9
-	.byte $1E, $8D, $09, $00, $AD, $0E, $00, $CD
-	.byte $09, $00, $F0, $03, $4C, $B2, $D9, $20
-	.byte $8E, $DB, $A9, $22, $8D, $06, $20, $A9
-	.byte $21, $8D, $06, $20, $A9, $00, $8D, $0E
-	.byte $00, $AE, $0E, $00, $BD, $91, $E4, $8D
-	.byte $07, $20, $EE, $0E, $00, $A9, $1E, $8D
-	.byte $09, $00, $AD, $0E, $00, $CD, $09, $00
-	.byte $F0, $03, $4C, $E0, $D9, $20, $8E, $DB
-	.byte $A9, $22, $8D, $06, $20, $A9, $61, $8D
-	.byte $06, $20, $A9, $00, $8D, $0E, $00, $AE
-	.byte $0E, $00, $BD, $AF, $E4, $8D, $07, $20
-	.byte $EE, $0E, $00, $A9, $1E, $8D, $09, $00
-	.byte $AD, $0E, $00, $CD, $09, $00, $F0, $03
-	.byte $4C, $0E, $DA, $20, $8E, $DB, $A9, $22
-	.byte $8D, $06, $20, $A9, $A1, $8D, $06, $20
-	.byte $A9, $00, $8D, $0E, $00, $AE, $0E, $00
-	.byte $BD, $CD, $E4, $8D, $07, $20, $EE, $0E
-	.byte $00, $A9, $1E, $8D, $09, $00, $AD, $0E
-	.byte $00, $CD, $09, $00, $F0, $03, $4C, $3C
-	.byte $DA, $20, $09, $DB, $20, $41, $C2, $A9
-	.byte $00, $8D, $05, $20, $A9, $00, $8D, $05
-	.byte $20, $20, $8E, $DB, $20, $39, $D5, $A9
-	.byte $00, $8D, $09, $00, $AD, $1A, $00, $CD
-	.byte $09, $00, $D0, $03, $4C, $68, $DA, $20
-	.byte $8E, $DB, $20, $39, $D5, $A9, $00, $8D
-	.byte $09, $00, $AD, $1A, $00, $CD, $09, $00
-	.byte $F0, $03, $4C, $7E, $DA, $60
+	; FIXME
+	jsr $dae9
+	jsr $db8e
+	lda #$20
+	sta $2006
+	lda #$48
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e401,x
+	sta $2007
+	inc a: $0e
+	lda #$0f
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d8e8
+	jmp $d8cc
+	jsr $db8e
+	lda #$20
+	sta $2006
+	lda #$ab
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e410,x
+	sta $2007
+	inc a: $0e
+	lda #$08
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d916
+	jmp $d8fa
+	jsr $db8e
+	lda #$21
+	sta $2006
+	lda #$01
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e419,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d944
+	jmp $d928
+	jsr $db8e
+	lda #$21
+	sta $2006
+	lda #$61
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e437,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d972
+	jmp $d956
+	jsr $db8e
+	lda #$21
+	sta $2006
+	lda #$a1
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e455,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d9a0
+	jmp $d984
+	jsr $db8e
+	lda #$21
+	sta $2006
+	lda #$e1
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e473,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d9ce
+	jmp $d9b2
+	jsr $db8e
+	lda #$22
+	sta $2006
+	lda #$21
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e491,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $d9fc
+	jmp $d9e0
+	jsr $db8e
+	lda #$22
+	sta $2006
+	lda #$61
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e4af,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $da2a
+	jmp $da0e
+	jsr $db8e
+	lda #$22
+	sta $2006
+	lda #$a1
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e4cd,x
+	sta $2007
+	inc a: $0e
+	lda #$1e
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	beq $da58
+	jmp $da3c
+	jsr $db09
+	jsr $c241
+	lda #$00
+	sta $2005
+	lda #$00
+	sta $2005
+	jsr $db8e
+	jsr $d539
+	lda #$00
+	sta a: temp
+	lda a: button_start_down
+	cmp a: temp
+	bne $da7e
+	jmp $da68
+	jsr $db8e
+	jsr $d539
+	lda #$00
+	sta a: temp
+	lda a: button_start_down
+	cmp a: temp
+	beq $da94
+	jmp $da7e
+	rts
 	jsr $dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -3051,6 +3169,7 @@
 	
 .segment "PRGF"
 	.org $e000
+	weird_fucking_data:
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
 	.byte $37, $01, $27, $0E, $16, $03, $00, $0E
