@@ -1051,21 +1051,21 @@ label_c9b6:
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	bne $c9f3
+	bne :+
 	jmp $ca36
-	lda $805d
+:	lda $805d
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	bne $ca04
+	bne :+
 	jmp $ca36
-	lda $805e
+:	lda $805e
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	bne $ca15
+	bne :+
 	jmp $ca36
-	lda #$00
+:	lda #$00
 	sta a: $0e
 	jsr label_db8e
 	jsr $d5ed
@@ -1074,15 +1074,15 @@ label_c9b6:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $ca33
+	beq :+
 	jmp $ca1a
-	jmp $cab7
+:	jmp $cab7
 	jsr label_dc26
 	lda $805f
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	beq $ca6c
+	beq label_ca6c
 	jsr $e679
 	jsr $d204
 	jsr $d204
@@ -1092,10 +1092,11 @@ label_c9b6:
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	beq $ca66
+	beq :+
 	jsr $d629
-	jsr $d5ed
+:	jsr $d5ed
 	jmp $ca39
+label_ca6c:
 	lda #$02
 	sta a: $0c
 	rts
@@ -1103,9 +1104,9 @@ label_c9b6:
 	sta a: temp
 	lda a: i_frames
 	cmp a: temp
-	beq $ca80
+	beq :+
 	rts
-	lda #$96
+:	lda #$96
 	sta a: i_frames
 	lda #$01
 	sta a: player_fall_state
@@ -1116,17 +1117,17 @@ label_c9b6:
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $caa4
+	bne :+
 	lda #$00
 	sta a: player_health
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $cab6
+	bne :+
 	lda #$37
 	sta a: player_velocity
-	rts
+:	rts
 	; take a life
 	dec a: player_lives
 	rts
@@ -1150,10 +1151,10 @@ label_c9b6:
 	sta a: temp
 	lda a: $27
 	cmp a: temp
-	bne $caf5
+	bne :+
 	lda $8059
 	sta a: player_pos_x1
-	lda #$00
+:	lda #$00
 	sta a: player_velocity
 	lda #$00
 	sta a: player_fall_state
@@ -1168,9 +1169,9 @@ label_c9b6:
 	sta a: temp
 	lda a: $61
 	cmp a: temp
-	bpl $cb22
+	bpl :+
 	jmp $cb0c
-	lda #$00
+:	lda #$00
 	sta a: $61
 	jsr $dbc3
 	jsr $c35e
@@ -1193,15 +1194,16 @@ label_c9b6:
 	sec
 	sbc #$06
 	cmp a: temp
-	bmi $cb75
+	bmi label_cb75
 	jsr $d6e5
 	lda #$00
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	beq $cb72
+	beq :+
 	jsr $d629
-	jmp $cb4e
+:	jmp $cb4e
+label_cb75:
 	jsr $c28b
 	jsr label_db8e
 	jsr init_enemies
@@ -1218,18 +1220,18 @@ label_c9b6:
 	sta a: temp
 	lda a: player_fall_state
 	cmp a: temp
-	bne $cba6
+	bne :+
 	jmp $ce4a
 	rts
-	jmp $d023
+:	jmp $d023
 	rts
 	lda #$03
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bpl $cbba
+	bpl :+
 	jmp $d204
-	lda a: player_pos_x1
+:	lda a: player_pos_x1
 	asl a
 	asl a
 	asl a
@@ -1240,12 +1242,12 @@ label_c9b6:
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bmi $cc2b
+	bmi label_cc2b
 	lda #$81
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bpl $cc2b
+	bpl label_cc2b
 	ldx a: $63
 	lda $0200,x
 	sta a: $64
@@ -1254,15 +1256,15 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $cbfa
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $cc0a
+	beq :+
 	jmp $d204
-	lda a: $63
+:	lda a: $63
 	clc
 	adc #$06
 	tax
@@ -1273,14 +1275,15 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $cc28
+	beq :+
 	rts
-	jmp $d204
+:	jmp $d204
+label_cc2b:
 	lda #$7f
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bpl $cc97
+	bpl label_cc97
 	lda a: $0c
 	lsr a
 	lsr a
@@ -1299,15 +1302,15 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $cc66
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $cc76
+	beq :+
 	jmp $d204
-	lda a: $66
+:	lda a: $66
 	sec
 	sbc #$01
 	tax
@@ -1318,9 +1321,10 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $cc94
+	beq :+
 	rts
-	jmp $d204
+:	jmp $d204
+label_cc97:
 	lda a: $0c
 	sec
 	sbc #$70
@@ -1341,15 +1345,15 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $ccc8
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $ccd8
+	beq :+
 	jmp $d204
-	lda a: $66
+:	lda a: $66
 	sec
 	sbc #$01
 	tax
@@ -1360,17 +1364,17 @@ label_c9b6:
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $ccf6
+	beq :+
 	rts
-	jsr $d204
+:	jsr $d204
 	rts
 	lda #$00
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	beq $cd0a
+	beq :+
 	jmp $d255
-	lda a: player_pos_x1
+:	lda a: player_pos_x1
 	sec
 	sbc #$01
 	asl a
@@ -1381,12 +1385,12 @@ label_c9b6:
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bmi $cd7b
+	bmi label_cd7b
 	lda #$81
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bpl $cd7b
+	bpl label_cd7b
 	ldx a: $63
 	lda $0200,x
 	sta a: $67
@@ -1395,15 +1399,15 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $cd4a
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $cd5a
+	beq :+
 	jmp $d255
-	lda a: $63
+:	lda a: $63
 	clc
 	adc #$06
 	tax
@@ -1414,14 +1418,15 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $cd78
+	beq :+
 	rts
-	jmp $d255
+:	jmp $d255
+label_cd7b:
 	lda #$7f
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bpl $cde7
+	bpl label_cde7
 	lda a: $0c
 	lsr a
 	lsr a
@@ -1440,15 +1445,15 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $cdb6
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $cdc6
+	beq :+
 	jmp $d255
-	lda a: $66
+:	lda a: $66
 	sec
 	sbc #$01
 	tax
@@ -1459,9 +1464,10 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $cde4
+	beq :+
 	rts
-	jmp $d255
+:	jmp $d255
+label_cde7:
 	lda a: $0c
 	clc
 	adc #$90
@@ -1482,15 +1488,15 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $ce18
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $ce28
+	beq :+
 	jmp $d255
-	lda a: $66
+:	lda a: $66
 	sec
 	sbc #$01
 	tax
@@ -1501,30 +1507,31 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $ce46
+	beq :+
 	rts
-	jmp $d255
+:	jmp $d255
 	rts
 	lda #$00
 	sta a: temp
 	lda a: $0c
 	and #$f8
 	cmp a: temp
-	bne $ce6f
+	bne label_ce6f
 	dec a: player_velocity
 	lda #$00
 	sta a: temp
 	lda a: player_velocity
 	cmp a: temp
-	bne $ce6e
+	bne :+
 	lda #$00
 	sta a: player_fall_state
-	rts
+:	rts
+label_ce6f:
 	lda #$00
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $ce9f
+	bne label_ce9f
 	jsr $c241
 	lda a: player_position_y_again
 	sec
@@ -1535,11 +1542,11 @@ label_c9b6:
 	sta a: temp
 	lda a: player_velocity
 	cmp a: temp
-	bne $ce9e
+	bne :+
 	lda #$00
 	sta a: player_fall_state
-	rts
-
+:	rts
+label_ce9f:
 	lda a: player_pos_x1
 	asl a
 	asl a
@@ -1549,9 +1556,9 @@ label_c9b6:
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bmi $ceb8
+	bmi :+
 	jmp $cf71
-	lda a: $0c
+:	lda a: $0c
 	pha
 	lda #$e8
 	sec
@@ -1569,7 +1576,7 @@ label_c9b6:
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $cef7
+	beq label_cef7
 	lda a: $0c
 	pha
 	lda #$ef
@@ -1584,6 +1591,7 @@ label_c9b6:
 	lsr a
 	lsr a
 	sta a: $65
+label_cef7:
 	lda a: $63
 	clc
 	adc a: $65
@@ -1596,30 +1604,30 @@ label_c9b6:
 	lda a: $67
 	and a: $54
 	cmp a: temp
-	beq $cf1d
+	beq :+
 	jmp $d01a
-	lda #$00
+:	lda #$00
 	sta a: $64
 	lda #$04
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bmi $cf3e
-	beq $cf3e
+	bmi :+
+	beq :+
 	lda a: $66
 	clc
 	adc #$08
 	tax
 	lda $0400,x
 	sta a: $64
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $cf51
+	beq :+
 	jmp $d01a
-	lda a: $0c
+:	lda a: $0c
 	sec
 	sbc a: $62
 	sta a: $0c
