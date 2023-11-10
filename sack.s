@@ -55,8 +55,8 @@
 	sta PPU_CTRL1
 	lda #$04
 	sta PPU_CTRL2
-	jsr $dc26
-	jsr $c1c2
+	jsr label_dc26
+	jsr label_c1c2
 	jsr label_db8e
 	lda #$30
 	sta PPU_CTRL1
@@ -64,10 +64,10 @@
 	sta PPU_CTRL2
 	lda #$00
 	sta a: $06
-	jsr $c26a
+	jsr label_c26a
 	lda #$00
 	sta a: $07
-	jsr $e5eb
+	jsr label_e5eb
 	lda #$03
 	sta a: player_lives
 	jsr $dc71
@@ -83,9 +83,9 @@
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	beq $c069
+	beq :+
 	jsr $e679
-	jsr $c17f
+:	jsr $c17f
 	jsr $e816
 	jsr label_db8e
 	jsr $db61
@@ -93,43 +93,47 @@
 	sta a: temp
 	lda a: $0b
 	cmp a: temp
-	beq $c085
+	beq :+
 	jmp $c0e9
-	lda #$fc
+:	lda #$fc
 	sta a: temp
 	lda a: $0c
 	and #$fc
 	cmp a: temp
-	bne $c0aa
+	bne label_c0aa
 	jsr $c9e2
 	lda #$02
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
-	bne $c0a7
+	bne label_c0a7
 	jmp $c04a
+label_c0a7:
 	jmp $c0cd
+label_c0aa:
 	lda #$00
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $c0ca
+	bne label_c0ca
 	lda #$00
 	sta a: temp
 	lda a: i_frames
 	cmp a: temp
-	bne $c0ca
+	bne label_c0ca
 	jsr $cab7
 	jmp $c0cd
+label_c0ca:
 	jmp $c04a
 	lda #$00
 	sta a: temp
 	lda a: player_lives
 	cmp a: temp
-	bne $c0e3
+	bne label_c0e3
 	jsr $da95
 	jsr $c3eb
 	jmp $c000
+label_c0e3:
 	jsr $cabb
 	jmp $c04a
 	jsr $e7f4
@@ -144,9 +148,9 @@
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $c110
+	beq :+
 	jmp $c0f7
-	jsr $d5c3
+:	jsr $d5c3
 	lda #$01
 	sta a: player_fall_state
 	jsr label_db8e
@@ -161,9 +165,9 @@
 	lda a: $0c
 	and #$f8
 	cmp a: temp
-	beq $c13c
+	beq :+
 	jmp $c118
-	lda #$1e
+:	lda #$1e
 	sta a: $0e
 	jsr label_db8e
 	jsr $d5ed
@@ -172,9 +176,9 @@
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $c15a
+	beq :+
 	jmp $c141
-	jmp $c15d
+:	jmp $c15d
 	inc a: $06
 	lda #$05
 	sta a: temp
@@ -182,8 +186,8 @@
 	cmp a: temp
 	bne $c170
 	jmp $d8b7
-	jsr $c26a
-	jsr $c1c2
+	jsr label_c26a
+	jsr label_c1c2
 	jsr $dc71
 	jsr $cabb
 	jmp $c04a
@@ -220,53 +224,54 @@
 	adc a: $11
 	sta a: $05
 	rts
-	lda #$00
-	sta a: button_a_down
-	lda #$00
-	sta a: button_b_down
-	lda #$00
-	sta a: button_up_down
-	lda #$00
-	sta a: button_down_down
-	lda #$00
-	sta a: button_right_down
-	lda #$00
-	sta a: button_left_down
-	lda #$00
-	sta a: button_select_down
-	lda #$00
-	sta a: button_start_down
-	lda #$00
-	sta a: $1b
-	lda #$01
-	sta a: player_direction
-	lda #$00
-	sta a: $0e
-	lda #$00
-	sta a: title_screen_wave_timer
-	lda #$00
-	sta a: $1e
-	lda #$00
-	sta a: $1f
-	lda #$00
-	sta a: $20
-	lda #$00
-	sta a: $21
-	lda #$10
-	sta a: $22
-	lda #$00
-	sta a: $0b
-	lda #$00
-	sta a: $23
-	lda #$20
-	sta a: $24
-	lda #$00
-	sta a: $25
-	lda #$00
-	sta a: $26
-	lda #$00
-	sta a: $27
-	rts
+	label_c1c2:
+		lda #$00
+		sta a: button_a_down
+		lda #$00
+		sta a: button_b_down
+		lda #$00
+		sta a: button_up_down
+		lda #$00
+		sta a: button_down_down
+		lda #$00
+		sta a: button_right_down
+		lda #$00
+		sta a: button_left_down
+		lda #$00
+		sta a: button_select_down
+		lda #$00
+		sta a: button_start_down
+		lda #$00
+		sta a: $1b
+		lda #$01
+		sta a: player_direction
+		lda #$00
+		sta a: $0e
+		lda #$00
+		sta a: title_screen_wave_timer
+		lda #$00
+		sta a: $1e
+		lda #$00
+		sta a: $1f
+		lda #$00
+		sta a: $20
+		lda #$00
+		sta a: $21
+		lda #$10
+		sta a: $22
+		lda #$00
+		sta a: $0b
+		lda #$00
+		sta a: $23
+		lda #$20
+		sta a: $24
+		lda #$00
+		sta a: $25
+		lda #$00
+		sta a: $26
+		lda #$00
+		sta a: $27
+		rts
 	label_c236:
 		lda #$00
 		sta APU_CHANCTRL
@@ -291,20 +296,21 @@
 	sta $0300,x
 	inc a: $22
 	jmp $c24e
-	lda a: $06
-	asl a
-	sta a: $28
-	lda #$06
-	sta $8000
-	lda a: $28
-	sta $8001
-	lda #$07
-	sta $8000
-	lda a: $28
-	clc
-	adc #$01
-	sta $8001
-	rts
+	label_c26a:
+		lda a: $06
+		asl a
+		sta a: $28
+		lda #$06
+		sta $8000
+		lda a: $28
+		sta $8001
+		lda #$07
+		sta $8000
+		lda a: $28
+		clc
+		adc #$01
+		sta $8001
+		rts
 	lda #$00
 	sta $8000
 	lda #$08
@@ -398,7 +404,7 @@
 	jsr $dc6b
 	jsr label_db8e
 	jsr $dbc3
-	jsr $dc26
+	jsr label_dc26
 	jsr label_db8e
 	ldx #$00
 	lda #$f5
@@ -428,9 +434,9 @@
 	sta a: temp
 	lda a: $52
 	cmp a: temp
-	beq $c3bc
+	beq :+
 	jmp $c397
-	lda #$00
+:	lda #$00
 	sta a: $52
 	jsr label_db8e
 	jsr $c706
@@ -439,9 +445,9 @@
 	sta a: temp
 	lda a: $52
 	cmp a: temp
-	beq $c3da
+	beq :+
 	jmp $c3c1
-	jsr label_db8e
+:	jsr label_db8e
 	jsr $c414
 	lda #$00
 	sta PPU_VRAM_ADDR1
@@ -624,7 +630,7 @@
 	iny
 	clc
 	cpy #$20
-	beq $c5a9
+	beq :+
 	clc
 	lda a: $57
 	adc #$20
@@ -633,7 +639,7 @@
 	adc #$00
 	sta a: $56
 	jmp $c505
-	rts
+:	rts
 	lda a: $52
 	and #$07
 	sta a: $55
@@ -728,7 +734,7 @@
 	iny
 	clc
 	cpy #$3c
-	beq $c69f
+	beq :+
 	clc
 	lda a: $57
 	adc #$20
@@ -737,7 +743,7 @@
 	adc #$00
 	sta a: $56
 	jmp $c5fb
-	rts
+:	rts
 	lda a: $52
 	and #$07
 	sta a: $55
@@ -771,13 +777,13 @@
 	sta PPU_VRAM_IO
 	iny
 	cpy #$4c
-	beq $c705
+	beq :+
 	clc
 	lda a: $57
 	adc #$08
 	sta a: $57
 	jmp $c6dd
-	rts
+:	rts
 	lda a: $52
 	and #$07
 	sta a: $55
@@ -896,15 +902,15 @@
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	beq $c810
+	beq :+
 	jsr $c99e
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: button_up_down
 	cmp a: temp
-	beq $c820
+	beq :+
 	jsr $dd2d
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
@@ -921,19 +927,19 @@
 	cmp a: temp
 	bne $c84d
 	jsr $d255
-	jmp $c984
+	jmp label_c984
 	lda #$00
 	sta a: temp
 	lda a: button_down_down
 	cmp a: temp
-	beq $c862
+	beq :+
 	lda #$01
 	sta a: $12
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: button_right_down
 	cmp a: temp
-	beq $c88c
+	beq :++
 	lda #$01
 	sta a: player_direction
 	jsr $cbaa
@@ -941,15 +947,15 @@
 	sta a: temp
 	lda a: button_b_down
 	cmp a: temp
-	beq $c887
+	beq :+
 	jsr $cbaa
-	lda #$01
+:	lda #$01
 	sta a: player_is_moving_h
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: button_left_down
 	cmp a: temp
-	beq $c8b6
+	beq :++
 	lda #$00
 	sta a: player_direction
 	jsr $ccfa
@@ -957,11 +963,11 @@
 	sta a: temp
 	lda a: button_b_down
 	cmp a: temp
-	beq $c8b1
+	beq :+
 	jsr $ccfa
-	lda #$01
+:	lda #$01
 	sta a: player_is_moving_h
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
@@ -970,22 +976,22 @@
 	sta a: temp
 	lda a: $5b
 	cmp a: temp
-	beq $c8d5
+	beq :+
 	lda #$0a
 	sta a: player_velocity
-	lda #$00
+:	lda #$00
 	sta a: $5b
-	jmp $c984
+	jmp label_c984
 	lda #$00
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
-	beq $c90c
+	beq :+
 	lda #$01
 	sta a: temp
 	lda a: $5c
 	cmp a: temp
-	bne $c90c
+	bne :+
 	lda #$23
 	sta a: player_velocity
 	lda #$01
@@ -993,29 +999,29 @@
 	lda #$01
 	sta a: $5a
 	jsr $d5d8
-	jmp $c984
-	lda #$00
+	jmp label_c984
+:	lda #$00
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
-	beq $c92c
+	beq :+
 	lda #$00
 	sta a: temp
 	lda a: $5b
 	cmp a: temp
-	beq $c92c
+	beq :+
 	dec a: $5b
-	jmp $c984
-	lda #$00
+	jmp label_c984
+:	lda #$00
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
-	beq $c984
+	beq label_c984
 	lda #$00
 	sta a: temp
 	lda a: $5d
 	cmp a: temp
-	beq $c984
+	beq label_c984
 	jsr $d584
 	lda #$01
 	sta a: player_fall_state
@@ -1032,22 +1038,23 @@
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $c977
+	beq :+
 	lda #$26
 	sta a: player_velocity
-	lda #$00
+:	lda #$00
 	sta a: $5d
 	lda #$0f
 	sta a: $5b
-	jmp $c984
+	jmp label_c984
+label_c984:
 	jsr $cb8c
 	lda #$00
 	sta a: temp
 	lda a: i_frames
 	cmp a: temp
-	beq $c997
+	beq :+
 	dec a: i_frames
-	jsr $ee7e
+:	jsr $ee7e
 	jsr $d4d9
 	rts
 	;FIXME
@@ -1059,15 +1066,16 @@
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	beq $c9b6
+	beq label_c9b6
 	jmp $c99e
+label_c9b6:
 	jsr $d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
 	bne $c9c9
-	jmp $c9b6
+	jmp label_c9b6
 	jsr $d539
 	lda #$00
 	sta a: temp
@@ -1108,7 +1116,7 @@
 	beq $ca33
 	jmp $ca1a
 	jmp $cab7
-	jsr $dc26
+	jsr label_dc26
 	lda $805f
 	sta a: temp
 	lda a: player_pos_x1
@@ -1207,7 +1215,7 @@
 	jsr $c35e
 	lda #$00
 	sta a: $07
-	jsr $e5eb
+	jsr label_e5eb
 	lda #$0f
 	sta APU_CHANCTRL
 	lda #$00
@@ -2864,7 +2872,7 @@
 	jsr label_db8e
 	jsr label_dbda
 	jsr label_db8e
-	jsr $dc26
+	jsr label_dc26
 	jsr label_db8e
 	lda #$00
 	sta PPU_VRAM_ADDR1
@@ -2991,20 +2999,21 @@
 	cpx #$00
 	bne $dc1d
 	rts
-	lda #$00
-	sta a: $66
-	lda #$00
-	sta PPU_SPR_ADDR
-	lda #$f5
-	sta PPU_SPR_IO
-	inc a: $66
-	lda #$00
-	sta a: temp
-	lda a: $66
-	cmp a: temp
-	beq $dc48
-	jmp $dc30
-	rts
+	label_dc26:
+		lda #$00
+		sta a: $66
+		lda #$00
+		sta PPU_SPR_ADDR
+		lda #$f5
+		sta PPU_SPR_IO
+		inc a: $66
+		lda #$00
+		sta a: temp
+		lda a: $66
+		cmp a: temp
+		beq $dc48
+		jmp $dc30
+		rts
 	; FIXME
 	lda #$00
 	sta a: $66
@@ -3408,33 +3417,34 @@
 	.byte $02, $02, $02, $02, $02, $02, $02, $02
 	.byte $02, $02, $02, $02, $02, $02, $03, $03
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
-	lda #$00
-	sta a: $8e
-	lda #$00
-	sta a: $8f
-	lda #$1f
-	sta APU_CHANCTRL
-	lda #$00
-	sta a: $90
-	lda a: $07
-	asl a
-	asl a
-	sta a: $91
-	ldx a: $91
-	lda $8000,x
-	sta a: $88
-	sta a: music_pointer
-	inx
-	lda $8000,x
-	sta a: $89
-	sta a: $03
-	inx
-	lda $8000,x
-	sta a: $8a
-	inx
-	lda $8000,x
-	sta a: $8b
-	rts
+	label_e5eb:
+		lda #$00
+		sta a: $8e
+		lda #$00
+		sta a: $8f
+		lda #$1f
+		sta APU_CHANCTRL
+		lda #$00
+		sta a: $90
+		lda a: $07
+		asl a
+		asl a
+		sta a: $91
+		ldx a: $91
+		lda $8000,x
+		sta a: $88
+		sta a: music_pointer
+		inx
+		lda $8000,x
+		sta a: $89
+		sta a: $03
+		inx
+		lda $8000,x
+		sta a: $8a
+		inx
+		lda $8000,x
+		sta a: $8b
+		rts
 	iny
 	lda (music_pointer), y
 	sta a: $8e
@@ -5210,7 +5220,7 @@
 	jmp $f6d2
 	jmp $f61d
 	rts
-	jsr $dc26
+	jsr label_dc26
 	jsr label_db8e
 	jsr $f71c
 	jsr label_db8e
