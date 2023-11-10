@@ -114,7 +114,7 @@
 	bne $c0ca
 	lda #$00
 	sta a: temp
-	lda a: $0d
+	lda a: i_frames
 	cmp a: temp
 	bne $c0ca
 	jsr $cab7
@@ -883,7 +883,7 @@
 	lda #$00
 	sta a: $58
 	lda #$00
-	sta a: $59
+	sta a: player_is_moving_h
 	lda #$00
 	sta a: $12
 	lda #$00
@@ -936,7 +936,7 @@
 	beq $c887
 	jsr $cbaa
 	lda #$01
-	sta a: $59
+	sta a: player_is_moving_h
 	lda #$00
 	sta a: temp
 	lda a: button_left_down
@@ -952,7 +952,7 @@
 	beq $c8b1
 	jsr $ccfa
 	lda #$01
-	sta a: $59
+	sta a: player_is_moving_h
 	lda #$00
 	sta a: temp
 	lda a: button_a_down
@@ -1035,10 +1035,10 @@
 	jsr $cb8c
 	lda #$00
 	sta a: temp
-	lda a: $0d
+	lda a: i_frames
 	cmp a: temp
 	beq $c997
-	dec a: $0d
+	dec a: i_frames
 	jsr $ee7e
 	jsr $d4d9
 	rts
@@ -1053,19 +1053,19 @@
 	.byte $8D, $15, $40, $60
 	lda $805c
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $c9f3
 	jmp $ca36
 	lda $805d
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $ca04
 	jmp $ca36
 	lda $805e
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $ca15
 	jmp $ca36
@@ -1084,7 +1084,7 @@
 	jsr $dc26
 	lda $805f
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	beq $ca6c
 	jsr $e679
@@ -1105,12 +1105,12 @@
 	rts
 	lda #$00
 	sta a: temp
-	lda a: $0d
+	lda a: i_frames
 	cmp a: temp
 	beq $ca80
 	rts
 	lda #$96
-	sta a: $0d
+	sta a: i_frames
 	lda #$01
 	sta a: player_fall_state
 	lda #$0a
@@ -1141,22 +1141,22 @@
 	lda #$03
 	sta a: player_health
 	lda #$64
-	sta a: $0d
+	sta a: i_frames
 	lda #$01
 	sta a: player_direction
 	lda #$0a
 	sta a: $0c
 	lda #$00
-	sta a: $5f
+	sta a: player_pos_x2
 	lda #$02
-	sta a: $5e
+	sta a: player_pos_x1
 	lda #$01
 	sta a: temp
 	lda a: $27
 	cmp a: temp
 	bne $caf5
 	lda $8059
-	sta a: $5e
+	sta a: player_pos_x1
 	lda #$00
 	sta a: player_velocity
 	lda #$00
@@ -1193,7 +1193,7 @@
 	sta a: $21
 	lda a: $20
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	sec
 	sbc #$06
 	cmp a: temp
@@ -1229,11 +1229,11 @@
 	rts
 	lda #$03
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $cbba
 	jmp $d204
-	lda a: $5e
+	lda a: player_pos_x1
 	asl a
 	asl a
 	asl a
@@ -1370,11 +1370,11 @@
 	rts
 	lda #$00
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	beq $cd0a
 	jmp $d255
-	lda a: $5e
+	lda a: player_pos_x1
 	sec
 	sbc #$01
 	asl a
@@ -1534,7 +1534,7 @@
 	.byte $0C, $00, $CE, $10, $00, $A9, $00, $8D
 	.byte $09, $00, $AD, $10, $00, $CD, $09, $00
 	.byte $D0, $05, $A9, $00, $8D, $0F, $00, $60
-	lda a: $5e
+	lda a: player_pos_x1
 	asl a
 	asl a
 	asl a
@@ -1596,7 +1596,7 @@
 	sta a: $64
 	lda #$04
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $cf3e
 	beq $cf3e
@@ -1669,7 +1669,7 @@
 	sta a: $64
 	lda #$04
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $cfe7
 	beq $cfe7
@@ -1726,7 +1726,7 @@
 	bpl $d05c
 	inc a: player_velocity
 	rts
-	lda a: $5e
+	lda a: player_pos_x1
 	asl a
 	asl a
 	asl a
@@ -1785,7 +1785,7 @@
 	sta a: $64
 	lda #$04
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $d0ff
 	beq $d0ff
@@ -1850,7 +1850,7 @@
 	sta a: $64
 	lda #$04
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $d19c
 	beq $d19c
@@ -1904,29 +1904,29 @@
 	rts
 	lda $8058
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $d213
 	rts
 	lda $8059
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $d226
 	lda #$01
 	sta a: $27
-	inc a: $5f
+	inc a: player_pos_x2
 	lda #$10
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bne $d23e
 	lda #$00
-	sta a: $5f
-	inc a: $5e
+	sta a: player_pos_x2
+	inc a: player_pos_x1
 	lda #$0a
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	sec
 	sbc a: $20
 	cmp a: temp
@@ -1936,38 +1936,38 @@
 	rts
 	lda #$00
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $d270
 	lda #$08
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $d270
 	rts
 	lda $805a
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $d28c
 	lda #$01
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $d28c
 	rts
-	dec a: $5f
+	dec a: player_pos_x2
 	lda #$ff
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bne $d2a4
 	lda #$0f
-	sta a: $5f
-	dec a: $5e
+	sta a: player_pos_x2
+	dec a: player_pos_x1
 	lda #$06
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	sec
 	sbc a: $20
 	cmp a: temp
@@ -1988,7 +1988,7 @@
 	sta a: $24
 	lda #$00
 	sta a: temp
-	lda a: $59
+	lda a: player_is_moving_h
 	cmp a: temp
 	bne $d2e9
 	lda #$00
@@ -2010,8 +2010,8 @@
 	lda a: $0c
 	sec
 	sbc #$20
-	sta a: $68
-	lda a: $5e
+	sta a: player_offset_y
+	lda a: player_pos_x1
 	sec
 	sbc a: $20
 	asl a
@@ -2019,7 +2019,7 @@
 	asl a
 	asl a
 	pha
-	lda a: $5f
+	lda a: player_pos_x2
 	sec
 	sbc a: $21
 	sta a: $11
@@ -2028,15 +2028,15 @@
 	adc a: $11
 	sec
 	sbc #$01
-	sta a: $69
+	sta a: player_offset_x
 	lda #$01
 	sta a: $6a
 	lda #$00
 	sta a: temp
-	lda a: $0d
+	lda a: i_frames
 	cmp a: temp
 	beq $d351
-	lda a: $0d
+	lda a: i_frames
 	and #$03
 	sta a: $6a
 	lda #$00
@@ -2044,7 +2044,7 @@
 	lda a: $5a
 	cmp a: temp
 	beq $d391
-	lda a: $69
+	lda a: player_offset_x
 	clc
 	adc #$04
 	sta a: $6b
@@ -2073,7 +2073,7 @@
 	jmp $d3a4
 	jmp $d43a
 	ldx #$00
-	lda a: $68
+	lda a: player_offset_y
 	sta $0300,x
 	ldx #$01
 	lda a: $24
@@ -2082,12 +2082,12 @@
 	lda a: $6a
 	sta $0300,x
 	ldx #$03
-	lda a: $69
+	lda a: player_offset_x
 	sta $0300,x
 	ldx #$04
 	lda #$10
 	clc
-	adc a: $68
+	adc a: player_offset_y
 	sta $0300,x
 	ldx #$05
 	lda #$02
@@ -2098,10 +2098,10 @@
 	lda a: $6a
 	sta $0300,x
 	ldx #$07
-	lda a: $69
+	lda a: player_offset_x
 	sta $0300,x
 	ldx #$08
-	lda a: $68
+	lda a: player_offset_y
 	sta $0300,x
 	ldx #$09
 	lda #$04
@@ -2114,12 +2114,12 @@
 	ldx #$0b
 	lda #$08
 	clc
-	adc a: $69
+	adc a: player_offset_x
 	sta $0300,x
 	ldx #$0c
 	lda #$10
 	clc
-	adc a: $68
+	adc a: player_offset_y
 	sta $0300,x
 	ldx #$0d
 	lda #$06
@@ -2132,7 +2132,7 @@
 	ldx #$0f
 	lda #$08
 	clc
-	adc a: $69
+	adc a: player_offset_x
 	sta $0300,x
 	rts
 	lda a: $6a
@@ -2140,7 +2140,7 @@
 	adc #$40
 	sta a: $6a
 	ldx #$00
-	lda a: $68
+	lda a: player_offset_y
 	sta $0300,x
 	ldx #$01
 	lda #$04
@@ -2151,12 +2151,12 @@
 	lda a: $6a
 	sta $0300,x
 	ldx #$03
-	lda a: $69
+	lda a: player_offset_x
 	sta $0300,x
 	ldx #$04
 	lda #$10
 	clc
-	adc a: $68
+	adc a: player_offset_y
 	sta $0300,x
 	ldx #$05
 	lda #$06
@@ -2167,10 +2167,10 @@
 	lda a: $6a
 	sta $0300,x
 	ldx #$07
-	lda a: $69
+	lda a: player_offset_x
 	sta $0300,x
 	ldx #$08
-	lda a: $68
+	lda a: player_offset_y
 	sta $0300,x
 	ldx #$09
 	lda a: $24
@@ -2181,12 +2181,12 @@
 	ldx #$0b
 	lda #$08
 	clc
-	adc a: $69
+	adc a: player_offset_x
 	sta $0300,x
 	ldx #$0c
 	lda #$10
 	clc
-	adc a: $68
+	adc a: player_offset_y
 	sta $0300,x
 	ldx #$0d
 	lda #$02
@@ -2199,7 +2199,7 @@
 	ldx #$0f
 	lda #$08
 	clc
-	adc a: $69
+	adc a: player_offset_x
 	sta $0300,x
 	rts
 	lda #$00
@@ -2859,25 +2859,25 @@
 	jmp $dd19
 	lda a: $81
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $dcf8
 	lda #$06
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $dcf8
 	jmp $ddd8
 	lda a: $81
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
 	bne $dd19
 	lda #$0a
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $dd19
 	jmp $ddd8
@@ -2911,25 +2911,25 @@
 	jmp $dd9b
 	lda a: $84
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	cmp a: temp
 	bne $dd7a
 	lda #$04
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $dd7a
 	jmp $ddb0
 	lda a: $84
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
 	bne $dd9b
 	lda #$0c
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bmi $dd9b
 	jmp $ddb0
@@ -2961,7 +2961,7 @@
 	sta a: $72,x
 	ldx #$05
 	lda #$08
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$05
 	lda a: $82
 	asl a
@@ -2970,13 +2970,13 @@
 	asl a
 	sec
 	sbc #$08
-	sta a: $9e,x
+	sta a: enemy_pos_y,x
 	ldx #$05
 	lda a: $81
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	ldx #$05
 	lda #$00
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	ldx #$05
 	lda #$01
 	sta a: $aa,x
@@ -3401,22 +3401,22 @@
 	rts
 	ldx #$00
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$01
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$02
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$03
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$04
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx #$05
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	lda #$05
 	sta a: $b0
 	rts
@@ -3424,7 +3424,7 @@
 	sta a: $0e
 	ldx a: $0e
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	inc a: $0e
 	lda a: $b0
 	sta a: temp
@@ -3442,7 +3442,7 @@
 	lda #$00
 	sta a: $0e
 	ldx a: $0e
-	lda a: $a4,x
+	lda a: enemy_type,x
 	sta a: $b1
 	lda #$00
 	sta a: temp
@@ -3473,18 +3473,18 @@
 	jmp $e8b0
 	ldx a: $0e
 	lda a: $b1
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx a: $0e
 	lda #$07
-	sta a: $9e,x
+	sta a: enemy_pos_y,x
 	ldx a: $0e
 	lda #$00
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	ldx a: $0e
-	lda a: $5e
+	lda a: player_pos_x1
 	clc
 	adc #$05
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	ldx a: $0e
 	lda #$ff
 	sta a: $aa,x
@@ -3499,27 +3499,27 @@
 	rts
 	ldx a: $0e
 	lda a: $b1
-	sta a: $a4,x
+	sta a: enemy_type,x
 	ldx a: $0e
 	lda a: $0c
 	sec
 	sbc #$11
-	sta a: $9e,x
+	sta a: enemy_pos_y,x
 	ldx a: $0e
 	lda #$00
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	ldx a: $0e
-	lda a: $5e
+	lda a: player_pos_x1
 	clc
 	adc #$0a
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	jsr $d5c3
 	rts
 	lda #$ff
 	sta a: $b2
 	inc a: $b2
 	ldx a: $b2
-	lda a: $a4,x
+	lda a: enemy_type,x
 	sta a: $b1
 	lda #$02
 	sta a: temp
@@ -3562,13 +3562,13 @@
 	lda a: $aa,x
 	sta a: $b3
 	ldx a: $b2
-	lda a: $92,x
+	lda a: enemy_pos_x,x
 	sta a: $b4
 	ldx a: $b2
-	lda a: $98,x
+	lda a: enemy_pos_x2,x
 	sta a: $b5
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
 	clc
@@ -3671,13 +3671,13 @@
 	sta a: $aa,x
 	ldx a: $b2
 	lda a: $b4
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	ldx a: $b2
 	lda a: $b5
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	ldx a: $b2
 	lda a: $b6
-	sta a: $9e,x
+	sta a: enemy_pos_y,x
 	lda #$08
 	sta a: temp
 	lda a: $b1
@@ -3709,7 +3709,7 @@
 	bpl $eb31
 	beq $eb31
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
 	sta a: $6c
@@ -3768,7 +3768,7 @@
 	lda #$48
 	sta a: $6e
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sec
 	sbc #$20
 	sta a: $6c
@@ -3818,7 +3818,7 @@
 	bpl $ec11
 	beq $ec11
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
 	sta a: $6c
@@ -3844,13 +3844,13 @@
 	lda a: $aa,x
 	sta a: $b3
 	ldx a: $b2
-	lda a: $92,x
+	lda a: enemy_pos_x,x
 	sta a: $b4
 	ldx a: $b2
-	lda a: $98,x
+	lda a: enemy_pos_x2,x
 	sta a: $b5
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
 	clc
@@ -3886,7 +3886,7 @@
 	lda #$01
 	sta a: $b3
 	jmp $ed11
-	lda a: $5e
+	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	clc
@@ -3896,7 +3896,7 @@
 	beq $eca5
 	lda #$01
 	sta a: $b3
-	lda a: $5e
+	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	sec
@@ -3950,13 +3950,13 @@
 	sta a: $aa,x
 	ldx a: $b2
 	lda a: $b4
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	ldx a: $b2
 	lda a: $b5
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	ldx a: $b2
 	lda a: $b6
-	sta a: $9e,x
+	sta a: enemy_pos_y,x
 	lda #$00
 	sta a: $6d
 	lda a: $1b
@@ -3980,7 +3980,7 @@
 	bpl $edc1
 	beq $edc1
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
 	sta a: $6c
@@ -4018,13 +4018,13 @@
 	lda a: $aa,x
 	sta a: $b3
 	ldx a: $b2
-	lda a: $92,x
+	lda a: enemy_pos_x,x
 	sta a: $b4
 	ldx a: $b2
-	lda a: $98,x
+	lda a: enemy_pos_x2,x
 	sta a: $b5
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
 	clc
@@ -4038,10 +4038,10 @@
 	jsr $f29b
 	ldx a: $b2
 	lda a: $b4
-	sta a: $92,x
+	sta a: enemy_pos_x,x
 	ldx a: $b2
 	lda a: $b5
-	sta a: $98,x
+	sta a: enemy_pos_x2,x
 	lda a: $20
 	sta a: temp
 	lda a: $b4
@@ -4061,7 +4061,7 @@
 	lda #$04
 	sta a: $6e
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
 	sta a: $6c
@@ -4085,12 +4085,12 @@
 	rts
 	ldx a: $b2
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	rts
 	lda #$00
 	sta a: $b2
 	ldx a: $b2
-	lda a: $a4,x
+	lda a: enemy_type,x
 	sta a: $b1
 	lda #$00
 	sta a: temp
@@ -4099,7 +4099,7 @@
 	bne $ee9c
 	jmp $f015
 	ldx a: $b2
-	lda a: $9e,x
+	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda #$0e
 	sta a: $b8
@@ -4151,12 +4151,12 @@
 	lda #$00
 	sta a: $b7
 	ldx a: $b2
-	lda a: $92,x
+	lda a: enemy_pos_x,x
 	sta a: $b4
 	ldx a: $b2
-	lda a: $98,x
+	lda a: enemy_pos_x2,x
 	sta a: $b5
-	lda a: $5e
+	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
@@ -4165,12 +4165,12 @@
 	sta a: $b9
 	lda a: $b4
 	sta a: temp
-	lda a: $5e
+	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
 	bne $ef6d
-	lda a: $5f
+	lda a: player_pos_x2
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
@@ -4178,7 +4178,7 @@
 	beq $ef6d
 	lda #$01
 	sta a: $b9
-	lda a: $5e
+	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	clc
@@ -4187,7 +4187,7 @@
 	bne $ef93
 	lda a: $b5
 	sta a: temp
-	lda a: $5f
+	lda a: player_pos_x2
 	cmp a: temp
 	bpl $ef93
 	beq $ef93
@@ -4261,7 +4261,7 @@
 	beq $f05f
 	ldx a: $b2
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	lda #$01
 	sta a: player_fall_state
 	lda #$14
@@ -4280,7 +4280,7 @@
 	rts
 	ldx a: $b2
 	lda #$00
-	sta a: $a4,x
+	sta a: enemy_type,x
 	; collect heart
 	inc a: player_health
 	lda #$06
