@@ -77,6 +77,8 @@
 	jsr $d2bb
 	jsr $e8ed
 	jsr $c24e
+
+	; if player_health is 0, KILL?
 	lda #$00
 	sta a: temp
 	lda a: player_health
@@ -2348,9 +2350,16 @@
 	lda #$08
 	sta APU_NOISEFREQ2
 	rts
-	.byte $A9, $0F, $8D, $0C, $40, $A9, $FF, $8D
-	.byte $0D, $40, $A9, $F9, $8D, $0E, $40, $A9
-	.byte $08, $8D, $0F, $40, $60
+	; FIXME
+	lda #$0f
+	sta $400C
+	lda #$ff
+	sta $400d
+	lda #$f9
+	sta $400E
+	lda #$08
+	sta $400F
+	rts
 	lda #$00
 	sta a: temp
 	lda a: $1e
@@ -2877,21 +2886,37 @@
 	bne $db32
 	rts
 	jmp $db18
-	.byte $A9, $3F, $8D, $06, $20, $A9, $00, $8D
-	.byte $06, $20, $A9, $00, $8D, $0E, $00, $AE
-	.byte $0E, $00, $BD, $00, $E0, $8D, $07, $20
-	.byte $EE, $0E, $00, $A9, $20, $8D, $09, $00
-	.byte $AD, $0E, $00, $CD, $09, $00, $D0, $01
-	.byte $60, $4C, $44, $DB
+	; FIXME
+	lda #$3f
+	sta $2006
+	lda #$00
+	sta $2006
+	lda #$00
+	sta a: $0e
+	ldx a: $0e
+	lda $e000,x
+	sta $2007
+	inc a: $0e
+	lda #$20
+	sta a: temp
+	lda a: $0e
+	cmp a: temp
+	bne $db5e
+	rts
+	jmp $db44
 	jsr $d629
 	jsr $d5ed
 	lda #$03
 	sta APU_SPR_DMA
 	lda #$10
 	sta a: $22
+	rts ; FIXME
+	jsr $db8e
+	lda #$30
+	sta $2000
+	lda #$1c
+	sta $2001
 	rts
-	.byte $20, $8E, $DB, $A9, $30, $8D, $00, $20
-	.byte $A9, $1C, $8D, $01, $20, $60
 	jsr $db8e
 	lda #$20
 	sta PPU_CTRL1
@@ -2912,9 +2937,15 @@
 	sta PPU_VRAM_ADDR2
 	inc a: $1b
 	rts
-	.byte $AD, $02, $20, $10, $FB, $AD, $02, $20
-	.byte $30, $FB, $AD, $02, $20, $10, $FB, $EE
-	.byte $1B, $00, $60
+	; FIXME
+	lda $2002
+	bpl $dbb0
+	lda $2002
+	bmi $dbb5
+	lda $2002
+	bpl $dbba
+	inc a: $1b
+	rts
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00
@@ -2970,11 +3001,20 @@
 	beq $dc48
 	jmp $dc30
 	rts
-	.byte $A9, $00, $8D, $66, $00, $AE, $66, $00
-	.byte $A9, $F5, $9D, $00, $03, $EE, $66, $00
-	.byte $A9, $00, $8D, $09, $00, $AD, $66, $00
-	.byte $CD, $09, $00, $F0, $03, $4C, $4E, $DC
-	.byte $60
+	; FIXME
+	lda #$00
+	sta a: $66
+	ldx a: $66
+	lda #$f5
+	sta OAM+0,x
+	inc a: $66
+	lda #$00
+	sta a: temp
+	lda a: $66
+	cmp a: temp
+	beq $dc69
+	jmp $dc4e
+	rts
 	irq:
 	rti
 	lda #$05
@@ -3169,7 +3209,7 @@
 	
 .segment "PRGF"
 	.org $e000
-	weird_fucking_data:
+	weird_fucking_data: ; this is probably at least some pitch table stuff
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
 	.byte $37, $01, $27, $0E, $16, $03, $00, $0E
@@ -3626,7 +3666,10 @@
 	bpl $e858
 	beq $e858
 	jmp $e829
-	.byte $60, $A9, $00, $8D, $0E, $00
+	; FIXME
+	rts
+	lda #$00
+	sta a: $0e
 	lda a: $05
 	and #$0f
 	sta a: $b1
@@ -4454,13 +4497,16 @@
 	sta a: enemy_type,x
 	; collect heart
 	inc a: player_health
-	lda #$06
+
+	; if player health becomes 6, decrement to max health of 5
+	lda #MAX_HEALTH + 1
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
 	bne $f082
 	dec a: player_health
 	rts
+
 	lda #$02
 	sta a: temp
 	lda a: $b5
@@ -5099,18 +5145,42 @@
 	cmp a: temp
 	beq $f698
 	jsr $f6e9
-	.byte $AD, $BE, $00, $18, $6D, $BF, $00, $8D
-	.byte $BE, $00, $AD, $BD, $00, $18, $6D, $C0
-	.byte $00, $8D, $BD, $00, $A9, $32, $8D, $09
-	.byte $00, $AD, $BE, $00, $CD, $09, $00, $D0
-	.byte $05, $A9, $01, $8D, $BF, $00, $A9, $82
-	.byte $8D, $09, $00, $AD, $BE, $00, $CD, $09
-	.byte $00, $D0, $05, $A9, $FF, $8D, $BF, $00
-	.byte $A9, $46, $8D, $09, $00, $AD, $BD, $00
-	.byte $CD, $09, $00, $D0, $05, $A9, $01, $8D
-	.byte $C0, $00, $A9, $6E, $8D, $09, $00, $AD
-	.byte $BD, $00, $CD, $09, $00, $D0, $05, $A9
-	.byte $FF, $8D, $C0, $00
+	lda a: $be
+	clc
+	adc a: $bf
+	sta a: $be
+	lda a: $bd
+	clc
+	adc a: $c0
+	sta a: $bd
+	lda #$32
+	sta a: temp
+	lda a: $be
+	cmp a: temp
+	bne $f662
+	lda #$01
+	sta a: $bf
+	lda #$82
+	sta a: temp
+	lda a: $be
+	cmp a: temp
+	bne $f674
+	lda #$ff
+	sta a: $bf
+	lda #$46
+	sta a: temp
+	lda a: $bd
+	cmp a: temp
+	bne $f686
+	lda #$01
+	sta a: $c0
+	lda #$6e
+	sta a: temp
+	lda a: $bd
+	cmp a: temp
+	bne $f698
+	lda #$ff
+	sta a: $c0
 	lda a: $04
 	clc
 	adc #$03
@@ -5143,13 +5213,32 @@
 	jsr $db8e
 	jsr $db8e
 	rts
-	.byte $A9, $00, $8D, $03, $20, $A0, $F0, $AD
-	.byte $BD, $00, $8D, $69, $00, $AD, $BE, $00
-	.byte $8D, $04, $20, $E8, $98, $8D, $04, $20
-	.byte $E8, $A9, $20, $8D, $04, $20, $E8, $AD
-	.byte $69, $00, $8D, $04, $20, $18, $69, $08
-	.byte $8D, $69, $00, $E8, $C8, $C8, $C0, $00
-	.byte $D0, $DB, $60
+	; FIXME
+	lda #$00
+	sta $2003
+	ldy #$f0
+	lda a: $bd
+	sta a: player_offset_x
+	lda a: $be
+	sta $2004
+	inx
+	tya
+	sta $2004
+	inx
+	lda #$20
+	sta $2004
+	inx
+	lda a: player_offset_x
+	sta $2004
+	clc
+	adc #$08
+	sta a: player_offset_x
+	inx
+	iny
+	iny
+	cpy #$00
+	bne $f6f6
+	rts
 	jsr $db8e
 	lda #$20
 	sta PPU_VRAM_ADDR2
@@ -5228,8 +5317,14 @@
 	bpl $f7d3
 	jmp $f7b7
 	rts
-	.byte $AC, $11, $00, $A9, $00, $8D, $07, $20
-	.byte $88, $C0, $00, $D0, $F8, $60
+	; FIXME
+	ldy a: $11
+	lda #$00
+	sta $2007
+	dey
+	cpy #$00
+	bne $f7d9
+	rts
 	lda PPU_STATUS
 	bpl $f7e2
 	rts
@@ -5280,7 +5375,9 @@
 	cmp a: temp
 	beq $f854
 	rts
-	.byte $A9, $01, $8D, $5C, $00, $20, $D8, $D5
+	lda #$01
+	sta a: $5c
+	jsr $d5d8
 	rts
 	lda #$00
 	sta a: temp
@@ -5355,9 +5452,7 @@
 	adc a: button_start_down
 	sta a: $c4
 	rts
-	.byte $20
-	.byte $20, $10, $10, $08, $04, $08, $04, $40
-	.byte $80
+	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
 	.reloc
 
 .segment "VECTORS"

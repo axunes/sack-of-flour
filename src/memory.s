@@ -27,6 +27,8 @@
 	button_select_down: .res 1
 	button_start_down: .res 1
 
+	MAX_HEALTH = 5
+
 	.enum EnemyType
 		none
 		goomba = 2
