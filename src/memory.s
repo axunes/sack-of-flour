@@ -28,6 +28,7 @@
 	button_start_down: .res 1
 
 	.enum EnemyType
+		none
 		goomba = 2
 		crocodile
 		cabbage
@@ -46,8 +47,8 @@
 	player_chunk_pos_fine_again: .res 1
 	.res 1
 	.res 1
-	.res 1
-	.res 1
+	player_sprite: .res 1
+	player_anim_timer: .res 1
 	.res 1
 	.res 1
 	.res 1

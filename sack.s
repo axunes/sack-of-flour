@@ -118,7 +118,7 @@
 	cmp a: temp
 	bne $c0ca
 	jsr $cab7
-	.byte $4C, $CD, $C0
+	jmp $c0cd
 	jmp $c04a
 	lda #$00
 	sta a: temp
@@ -911,9 +911,13 @@
 	cmp a: temp
 	bne $c83d
 	jsr $d204
-	.byte $A9, $01, $8D, $09, $00, $AD, $1C, $00
-	.byte $CD, $09, $00, $D0, $03, $20, $55, $D2
-	.byte $4C, $84, $C9
+	lda #$01
+	sta a: temp
+	lda a: player_direction
+	cmp a: temp
+	bne $c84d
+	jsr $d255
+	jmp $c984
 	lda #$00
 	sta a: temp
 	lda a: button_down_down
@@ -985,7 +989,7 @@
 	lda #$01
 	sta a: $5a
 	jsr $d5d8
-	.byte $4C, $84, $C9
+	jmp $c984
 	lda #$00
 	sta a: temp
 	lda a: button_a_down
@@ -1042,15 +1046,34 @@
 	jsr $ee7e
 	jsr $d4d9
 	rts
-	.byte $A9, $00, $8D, $15, $40, $20, $39, $D5
-	.byte $A9, $00, $8D, $09, $00, $AD, $1A, $00
-	.byte $CD, $09, $00, $F0, $03, $4C, $9E, $C9
-	.byte $20, $39, $D5, $A9, $00, $8D, $09, $00
-	.byte $AD, $1A, $00, $CD, $09, $00, $D0, $03
-	.byte $4C, $B6, $C9, $20, $39, $D5, $A9, $00
-	.byte $8D, $09, $00, $AD, $1A, $00, $CD, $09
-	.byte $00, $F0, $03, $4C, $C9, $C9, $A9, $0F
-	.byte $8D, $15, $40, $60
+	;FIXME
+	; pausing shit?
+	lda #$00
+	sta $4015
+	jsr $d539
+	lda #$00
+	sta a: temp
+	lda a: button_start_down
+	cmp a: temp
+	beq $c9b6
+	jmp $c99e
+	jsr $d539
+	lda #$00
+	sta a: temp
+	lda a: button_start_down
+	cmp a: temp
+	bne $c9c9
+	jmp $c9b6
+	jsr $d539
+	lda #$00
+	sta a: temp
+	lda a: button_start_down
+	cmp a: temp
+	beq $c9dc
+	jmp $c9c9
+	lda #$0f
+	sta $4015
+	rts
 	lda $805c
 	sta a: temp
 	lda a: player_pos_x1
@@ -1208,7 +1231,7 @@
 	jmp $cb4e
 	jsr $c28b
 	jsr $db8e
-	jsr $e7c4
+	jsr init_enemies
 	lda #$00
 	sta a: $5d
 	lda #$00
@@ -1530,10 +1553,20 @@
 	cmp a: temp
 	bne $ce9f
 	jsr $c241
-	.byte $AD, $0C, $00, $38, $ED, $62, $00, $8D
-	.byte $0C, $00, $CE, $10, $00, $A9, $00, $8D
-	.byte $09, $00, $AD, $10, $00, $CD, $09, $00
-	.byte $D0, $05, $A9, $00, $8D, $0F, $00, $60
+	lda a: player_position_y_again
+	sec
+	sbc a: $62
+	sta a: player_position_y_again
+	dec a: player_velocity
+	lda #$00
+	sta a: temp
+	lda a: player_velocity
+	cmp a: temp
+	bne $ce9e
+	lda #$00
+	sta a: player_fall_state
+	rts
+
 	lda a: player_pos_x1
 	asl a
 	asl a
@@ -2286,12 +2319,26 @@
 	lda #$95
 	sta APU_PULSE2STUNE
 	rts
-	.byte $A9, $9F, $8D, $00, $40, $A9, $84, $8D
-	.byte $01, $40, $A9, $D3, $8D, $02, $40, $A9
-	.byte $FC, $8D, $03, $40, $60, $A9, $88, $8D
-	.byte $00, $40, $A9, $48, $8D, $01, $40, $A9
-	.byte $25, $8D, $02, $40, $A9, $4B, $8D, $03
-	.byte $40, $60
+	; FIXME
+	lda #$9f
+	sta $4000
+	lda #$84
+	sta $4001
+	lda #$d3
+	sta $4002
+	lda #$fc
+	sta $4003
+	rts
+	lda #$88
+	sta $4000
+	lda #$48
+	sta $4001
+	lda #$25
+	sta $4002
+	lda #$4b
+	sta $4003
+	rts
+
 	lda #$0b
 	sta APU_NOISECTRL
 	lda #$ff
@@ -3399,27 +3446,29 @@
 	lda a: $89
 	sta a: $03
 	rts
-	ldx #$00
-	lda #$00
-	sta a: enemy_type,x
-	ldx #$01
-	lda #$00
-	sta a: enemy_type,x
-	ldx #$02
-	lda #$00
-	sta a: enemy_type,x
-	ldx #$03
-	lda #$00
-	sta a: enemy_type,x
-	ldx #$04
-	lda #$00
-	sta a: enemy_type,x
-	ldx #$05
-	lda #$00
-	sta a: enemy_type,x
-	lda #$05
-	sta a: $b0
-	rts
+	init_enemies:
+		; set all enemy type slots to zero
+		ldx #$00
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		ldx #$01
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		ldx #$02
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		ldx #$03
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		ldx #$04
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		ldx #$05
+		lda #EnemyType::none
+		sta a: enemy_type,x
+		lda #$05
+		sta a: $b0
+		rts
 	lda #$00
 	sta a: $0e
 	ldx a: $0e
@@ -3469,34 +3518,36 @@
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e87f
-	jmp $e8b0
-	ldx a: $0e
-	lda a: $b1
-	sta a: enemy_type,x
-	ldx a: $0e
-	lda #$07
-	sta a: enemy_pos_y,x
-	ldx a: $0e
-	lda #$00
-	sta a: enemy_pos_x2,x
-	ldx a: $0e
-	lda a: player_pos_x1
-	clc
-	adc #$05
-	sta a: enemy_pos_x,x
-	ldx a: $0e
-	lda #$ff
-	sta a: $aa,x
-	inc a: $04
-	rts
-	lda #$00
-	sta a: temp
-	lda a: $0c
-	and #$f0
-	cmp a: temp
-	bne $e8c0
-	rts
+	bne spawn_enemy
+	jmp :+
+	spawn_enemy:
+		ldx a: $0e
+		lda a: $b1
+		sta a: enemy_type,x
+		ldx a: $0e
+		lda #$07
+		sta a: enemy_pos_y,x
+		ldx a: $0e
+		lda #$00
+		sta a: enemy_pos_x2,x
+		ldx a: $0e
+		lda a: player_pos_x1
+		clc
+		adc #$05
+		sta a: enemy_pos_x,x
+		ldx a: $0e
+		lda #$ff
+		sta a: $aa,x
+		inc a: $04
+		rts
+	:
+		lda #$00
+		sta a: temp
+		lda a: $0c
+		and #$f0
+		cmp a: temp
+		bne $e8c0
+		rts
 	ldx a: $0e
 	lda a: $b1
 	sta a: enemy_type,x
@@ -3577,7 +3628,7 @@
 	lda a: $20
 	cmp a: temp
 	bmi $e998
-	jmp $ee75
+	jmp purge_enemy
 	lda a: $b4
 	sta a: temp
 	lda a: $20
@@ -3585,7 +3636,7 @@
 	adc #$12
 	cmp a: temp
 	bpl $e9ac
-	jmp $ee75
+	jmp purge_enemy
 	lda #$00
 	sta a: $b7
 	lda #$03
@@ -3649,7 +3700,7 @@
 	and #$fc
 	cmp a: temp
 	bne $ea53
-	jmp $ee75
+	jmp purge_enemy
 	lda a: $b4
 	clc
 	adc #$05
@@ -3657,7 +3708,7 @@
 	lda a: $20
 	cmp a: temp
 	bmi $ea67
-	jmp $ee75
+	jmp purge_enemy
 	lda a: $b4
 	sta a: temp
 	lda a: $20
@@ -3665,7 +3716,7 @@
 	adc #$15
 	cmp a: temp
 	bpl $ea7b
-	jmp $ee75
+	jmp purge_enemy
 	ldx a: $b2
 	lda a: $b3
 	sta a: $aa,x
@@ -3859,7 +3910,7 @@
 	lda a: $20
 	cmp a: temp
 	bmi $ec4a
-	jmp $ee75
+	jmp purge_enemy
 	lda a: $b4
 	sta a: temp
 	lda a: $20
@@ -3867,7 +3918,7 @@
 	adc #$12
 	cmp a: temp
 	bpl $ec5e
-	jmp $ee75
+	jmp purge_enemy
 	lda #$00
 	sta a: $b7
 	lda #$02
@@ -3944,7 +3995,7 @@
 	and #$fc
 	cmp a: temp
 	bne $ed23
-	jmp $ee75
+	jmp purge_enemy
 	ldx a: $b2
 	lda a: $b3
 	sta a: $aa,x
@@ -4033,7 +4084,7 @@
 	lda a: $20
 	cmp a: temp
 	bmi $ee02
-	jmp $ee75
+	jmp purge_enemy
 	jsr $f29b
 	jsr $f29b
 	ldx a: $b2
@@ -4083,10 +4134,11 @@
 	sta a: $6b
 	jmp $f52f
 	rts
-	ldx a: $b2
-	lda #$00
-	sta a: enemy_type,x
-	rts
+	purge_enemy:
+		ldx a: $b2
+		lda #$00
+		sta a: enemy_type,x
+		rts
 	lda #$00
 	sta a: $b2
 	ldx a: $b2
