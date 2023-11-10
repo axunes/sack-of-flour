@@ -9,8 +9,8 @@
 	temp: .res 1 ; this is used a fuckton, also set it to res 2 and it skips levels lol
 	player_health: .res 1 ; 0A
 	.res 1
-	.res 1
-	.res 1
+	player_position_y_again: .res 1
+	i_frames: .res 1
 	.res 1 ; 0E related to player_health
 
 	player_fall_state: .res 1 ; (?) 2 = on ground, 1 = ascending, 0 = descending
@@ -40,6 +40,10 @@
 	.res 1
 	player_direction: .res 1 ; 0 = left, 1 = right
 	title_screen_wave_timer: .res 1
+	player_chunk_pos: .res 1
+	player_chunk_pos_fine: .res 1
+	player_chunk_pos_again: .res 1
+	player_chunk_pos_fine_again: .res 1
 	.res 1
 	.res 1
 	.res 1
@@ -95,10 +99,13 @@
 	.res 1
 	.res 1
 	.res 1
+	player_is_moving_h: .res 1
 	.res 1
 	.res 1
 	.res 1
 	.res 1
+	player_pos_x1: .res 1
+	player_pos_x2: .res 1
 	.res 1
 	.res 1
 	.res 1
@@ -107,15 +114,8 @@
 	.res 1
 	.res 1
 	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
+	player_offset_y: .res 1
+	player_offset_x: .res 1
 	.res 1
 	.res 1
 	.res 1
