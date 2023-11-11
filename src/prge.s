@@ -2059,7 +2059,7 @@ label_d05d:
 	sta a: temp
 	lda a: $5a
 	cmp a: temp
-	beq $d391
+	beq label_d391
 	lda a: player_offset_x
 	clc
 	adc #$04
@@ -2075,19 +2075,20 @@ label_d05d:
 	lda a: $1b
 	and #$02
 	cmp a: temp
-	beq $d389
+	beq :+
 	lda #$43
 	sta a: $6d
-	lda #$1e
+:	lda #$1e
 	sta a: $6e
 	jsr $f4f5
+label_d391:
 	lda #$01
 	sta a: temp
 	lda a: player_direction
 	cmp a: temp
-	bne $d3a1
+	bne :+
 	jmp $d3a4
-	jmp $d43a
+:	jmp $d43a
 	ldx #$00
 	lda a: player_offset_y
 	sta $0300,x
@@ -2224,9 +2225,9 @@ label_d05d:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bmi $d4ed
+	bmi :+
 	rts
-	ldx a: $22
+:	ldx a: $22
 	lda #$08
 	sta $0300,x
 	lda #$01
@@ -2346,13 +2347,13 @@ label_d05d:
 	lda a: $1e
 	and #$04
 	cmp a: temp
-	beq $d609
+	beq :+
 	lda #$31
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
 	jmp $d613
-	lda #$30
+:	lda #$30
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
@@ -2373,15 +2374,15 @@ label_d05d:
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d637
+	bne :+
 	rts
-	lda #$06
+:	lda #$06
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bmi $d647
+	bmi :+
 	jmp $d696
-	lda a: $1e
+:	lda a: $1e
 	clc
 	adc #$05
 	sta a: $52
@@ -2389,27 +2390,27 @@ label_d05d:
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d660
+	bne :+
 	jsr $c4b4
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d670
+	bne :+
 	jsr $c5aa
-	lda #$04
+:	lda #$04
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d680
+	bne :+
 	jsr $c6a0
-	lda #$05
+:	lda #$05
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d690
+	bne :+
 	jsr $c706
-	lda #$00
+:	lda #$00
 	sta a: $58
 	rts
 	lda a: $1e
@@ -2420,135 +2421,135 @@ label_d05d:
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d6af
+	bne :+
 	jsr $c4b4
-	lda #$08
+:	lda #$08
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d6bf
+	bne :+
 	jsr $c5aa
-	lda #$09
+:	lda #$09
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d6cf
+	bne :+
 	jsr $c6a0
-	lda #$0a
+:	lda #$0a
 	sta a: temp
 	lda a: $58
 	cmp a: temp
-	bne $d6df
+	bne :+
 	jsr $c706
-	lda #$00
+:	lda #$00
 	sta a: $58
 	rts
 	lda $805b
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bne $d6f9
+	bne :+
 	lda #$01
 	sta a: $0b
 	rts
-	inc a: $21
+:	inc a: $21
 	lda #$10
 	sta a: temp
 	lda a: $21
 	cmp a: temp
-	bne $d711
+	bne :+
 	lda #$00
 	sta a: $21
 	inc a: $20
-	lda #$3f
+:	lda #$3f
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d727
+	bne :+
 	lda #$00
 	sta a: $1f
 	inc a: $1e
 	rts
-	inc a: $1f
+:	inc a: $1f
 	lda #$0a
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d73c
+	bne :+
 	lda #$01
 	sta a: $58
-	lda #$1e
+:	lda #$1e
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d74e
+	bne :+
 	lda #$03
 	sta a: $58
-	lda #$28
+:	lda #$28
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d760
+	bne :+
 	lda #$04
 	sta a: $58
-	lda #$32
+:	lda #$32
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d772
+	bne :+
 	lda #$05
 	sta a: $58
-	rts
+:	rts
 	lda #$00
 	sta a: temp
 	lda a: $1e
 	cmp a: temp
-	bne $d78e
+	bne :+
 	lda #$01
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bpl $d78e
+	bpl :+
 	rts
-	lda $805b
+:	lda $805b
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bne $d79d
+	bne :+
 	rts
-	dec a: $21
+:	dec a: $21
 	lda #$ff
 	sta a: temp
 	lda a: $21
 	cmp a: temp
-	bne $d7b5
+	bne :+
 	lda #$0f
 	sta a: $21
 	dec a: $20
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d7cb
+	bne :+
 	lda #$3f
 	sta a: $1f
 	dec a: $1e
 	rts
-	dec a: $1f
+:	dec a: $1f
 	lda #$00
 	sta a: temp
 	lda a: $1e
 	cmp a: temp
-	bne $d7dc
+	bne :+
 	rts
-	lda #$08
+:	lda #$08
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d7ee
+	bne :+
 	lda #$06
 	sta a: $58
-	lda #$1c
+:	lda #$1c
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
