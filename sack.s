@@ -19,9 +19,9 @@
 .segment "PRG1"
 	.include "prg1.s"
 .segment "PRG2"
-	.incbin "SOF_v1d.nes", $04010, $2000
+	.include "prg2.s"
 .segment "PRG3"
-	.incbin "SOF_v1d.nes", $06010, $2000
+	.include "prg3.s"
 .segment "PRG4"
 	.incbin "SOF_v1d.nes", $08010, $2000
 .segment "PRG5"
