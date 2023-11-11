@@ -2553,45 +2553,45 @@ label_d391:
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d800
+	bne :+
 	lda #$08
 	sta a: $58
-	lda #$26
+:	lda #$26
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d812
+	bne :+
 	lda #$09
 	sta a: $58
-	lda #$30
+:	lda #$30
 	sta a: temp
 	lda a: $1f
 	cmp a: temp
-	bne $d824
+	bne :+
 	lda #$0a
 	sta a: $58
-	rts
+:	rts
 	jsr $dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$08
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-	lda $bfb8,x
+:	lda $bfb8,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20
-	bne $d834
+	bne :-
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$68
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-	lda $bfd8,x
+:	lda $bfd8,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20
-	bne $d84b
+	bne :-
 	jsr label_db8e
 	lda a: player_lives
 	sta a: $0e
@@ -2608,9 +2608,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d886
+	beq :+
 	jmp $d869
-	lda a: player_lives
+:	lda a: player_lives
 	sta a: $0e
 	lda #$22
 	sta PPU_VRAM_ADDR2
@@ -2625,9 +2625,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d8b3
+	beq :+
 	jmp $d896
-	jsr $db09
+:	jsr $db09
 	rts
 	; FIXME
 	jsr $dae9
@@ -2646,9 +2646,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d8e8
+	beq :+
 	jmp $d8cc
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$20
 	sta $2006
 	lda #$ab
@@ -2663,9 +2663,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d916
+	beq :+
 	jmp $d8fa
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$21
 	sta $2006
 	lda #$01
@@ -2680,9 +2680,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d944
+	beq :+
 	jmp $d928
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$21
 	sta $2006
 	lda #$61
@@ -2697,9 +2697,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d972
+	beq :+
 	jmp $d956
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$21
 	sta $2006
 	lda #$a1
@@ -2714,9 +2714,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d9a0
+	beq :+
 	jmp $d984
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$21
 	sta $2006
 	lda #$e1
@@ -2731,9 +2731,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d9ce
+	beq :+
 	jmp $d9b2
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$22
 	sta $2006
 	lda #$21
@@ -2748,9 +2748,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $d9fc
+	beq :+
 	jmp $d9e0
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$22
 	sta $2006
 	lda #$61
@@ -2765,9 +2765,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $da2a
+	beq :+
 	jmp $da0e
-	jsr label_db8e
+:	jsr label_db8e
 	lda #$22
 	sta $2006
 	lda #$a1
@@ -2782,9 +2782,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $da58
+	beq :+
 	jmp $da3c
-	jsr $db09
+:	jsr $db09
 	jsr $c241
 	lda #$00
 	sta $2005
@@ -2796,17 +2796,17 @@ label_d391:
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	bne $da7e
+	bne :+
 	jmp $da68
-	jsr label_db8e
+:	jsr label_db8e
 	jsr $d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	beq $da94
+	beq :+
 	jmp $da7e
-	rts
+:	rts
 	jsr $dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -2822,9 +2822,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $dac3
+	beq :+
 	jmp $daa7
-	jsr $db09
+:	jsr $db09
 	jsr $c241
 	lda #$c8
 	sta a: $71
@@ -2836,9 +2836,9 @@ label_d391:
 	sta a: temp
 	lda a: $71
 	cmp a: temp
-	beq $dae8
+	beq :+
 	jmp $dad2
-	rts
+:	rts
 	jsr $db80
 	jsr $c2e0
 	jsr label_db8e
@@ -2865,9 +2865,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bne $db32
+	bne :+
 	rts
-	jmp $db18
+:	jmp $db18
 	; FIXME
 	lda #$3f
 	sta $2006
@@ -2883,9 +2883,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bne $db5e
+	bne :+
 	rts
-	jmp $db44
+:	jmp $db44
 	jsr $d629
 	jsr $d5ed
 	lda #$03
@@ -2906,10 +2906,10 @@ label_d391:
 	sta PPU_CTRL2
 	rts
 	label_db8e:
-		lda PPU_STATUS
-		bpl label_db8e
-		lda PPU_STATUS
-		bmi $db93
+	:	lda PPU_STATUS
+		bpl :-
+	:	lda PPU_STATUS
+		bmi :-
 		lda #$00
 		sta PPU_VRAM_ADDR1
 		lda #$00
@@ -2921,12 +2921,12 @@ label_d391:
 		inc a: $1b
 		rts
 	; FIXME
-	lda $2002
-	bpl $dbb0
-	lda $2002
-	bmi $dbb5
-	lda $2002
-	bpl $dbba
+:	lda $2002
+	bpl :-
+:	lda $2002
+	bmi :-
+:	lda $2002
+	bpl :-
 	inc a: $1b
 	rts
 	lda #$3f
@@ -2935,10 +2935,10 @@ label_d391:
 	sta PPU_VRAM_ADDR2
 	lda #$0e
 	ldy a: $20
-	sta PPU_VRAM_IO
+:	sta PPU_VRAM_IO
 	dey
 	cpy #$00
-	bne $dbd2
+	bne :-
 	label_dbda:
 	jsr label_db8e
 	lda #$20
@@ -2966,10 +2966,10 @@ label_d391:
 	jsr $dc1b
 	rts
 	ldx #$00
-	sta PPU_VRAM_IO
+:	sta PPU_VRAM_IO
 	inx
 	cpx #$00
-	bne $dc1d
+	bne :-
 	rts
 	label_dc26:
 		lda #$00
@@ -2983,9 +2983,9 @@ label_d391:
 		sta a: temp
 		lda a: $66
 		cmp a: temp
-		beq $dc48
+		beq :+
 		jmp $dc30
-		rts
+	:	rts
 	; FIXME
 	lda #$00
 	sta a: $66
@@ -2997,9 +2997,9 @@ label_d391:
 	sta a: temp
 	lda a: $66
 	cmp a: temp
-	beq $dc69
+	beq :+
 	jmp $dc4e
-	rts
+:	rts
 	irq:
 	rti
 	lda #$05
@@ -3015,9 +3015,9 @@ label_d391:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $dc91
+	beq :+
 	jmp $dc76
-	rts
+:	rts
 	lda #$00
 	sta a: $7f
 	ldx a: $7f
@@ -3027,9 +3027,9 @@ label_d391:
 	sta a: temp
 	lda a: $80
 	cmp a: temp
-	beq $dcb0
+	beq :+
 	jmp $dd19
-	ldx a: $7f
+:	ldx a: $7f
 	lda $8070,x
 	sta a: $81
 	ldx a: $7f
@@ -3045,40 +3045,41 @@ label_d391:
 	lsr a
 	lsr a
 	cmp a: temp
-	beq $dcda
+	beq :+
 	jmp $dd19
-	lda a: $81
+:	lda a: $81
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	bne $dcf8
+	bne :+
 	lda #$06
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bpl $dcf8
+	bpl :+
 	jmp $ddd8
-	lda a: $81
+:	lda a: $81
 	sta a: temp
 	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
-	bne $dd19
+	bne label_dd19
 	lda #$0a
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bmi $dd19
+	bmi label_dd19
 	jmp $ddd8
+label_dd19:
 	inc a: $7f
 	lda #$0c
 	sta a: temp
 	lda a: $7f
 	cmp a: temp
-	beq $dd2c
+	beq :+
 	jmp $dc97
-	rts
+:	rts
 	lda #$00
 	sta a: $83
 	ldx a: $83
@@ -3097,40 +3098,41 @@ label_d391:
 	lsr a
 	lsr a
 	cmp a: temp
-	beq $dd5c
+	beq :+
 	jmp $dd9b
-	lda a: $84
+:	lda a: $84
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
-	bne $dd7a
+	bne :+
 	lda #$04
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bpl $dd7a
+	bpl :+
 	jmp $ddb0
-	lda a: $84
+:	lda a: $84
 	sta a: temp
 	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
-	bne $dd9b
+	bne label_dd9b
 	lda #$0c
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bmi $dd9b
+	bmi label_dd9b
 	jmp $ddb0
+label_dd9b:
 	inc a: $83
 	lda a: $7e
 	sta a: temp
 	lda a: $83
 	cmp a: temp
-	bpl $ddaf
+	bpl :+
 	jmp $dd32
-	rts
+:	rts
 	jsr $c3eb
 	lda #$00
 	sta a: $86
@@ -3142,9 +3144,9 @@ label_d391:
 	sta a: temp
 	lda a: $86
 	cmp a: temp
-	beq $ddd4
+	beq :+
 	jmp $ddb8
-	jsr $c3eb
+:	jsr $c3eb
 	rts
 	ldx a: $7f
 	lda #$01
@@ -3180,13 +3182,13 @@ label_d391:
 	sta a: temp
 	lda a: $87
 	cmp a: temp
-	beq $de2a
+	beq :+
 	jmp $de17
-	inc a: $0e
+:	inc a: $0e
 	lda #$11
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	beq $de3d
+	beq :+
 	jmp $de12
-	rts
+:	rts

@@ -42,9 +42,7 @@
 	.incbin "SOF_v1d.nes", $1A010, $2000
 
 .segment "PRGE"
-	.org $c000
 	.include "src/prge.s"
-	.reloc
 	
 .segment "PRGF"
 	.org $e000
