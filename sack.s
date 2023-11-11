@@ -45,7 +45,6 @@
 	.include "src/prge.s"
 	
 .segment "PRGF"
-	.org $e000
 	weird_fucking_data: ; this is probably at least some pitch table stuff
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
@@ -242,7 +241,6 @@
 	.byte $02, $02, $02, $02, $02, $02, $03, $03
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
 	.include "src/prgf.s"
-	.reloc
 	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
 
 .segment "VECTORS"

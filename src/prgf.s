@@ -108,9 +108,9 @@ label_e64c:
 	lda a: $90
 	and #$0c
 	cmp a: temp
-	bne $e6ee
+	bne :+
 	jmp $e718
-	lda #$0c
+:	lda #$0c
 	sta a: temp
 	lda a: $90
 	and #$0c
@@ -789,15 +789,15 @@ label_ed11:
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bmi $edc1
+	bmi label_edc1
 	lda a: $20
 	clc
 	adc #$10
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bpl $edc1
-	beq $edc1
+	bpl label_edc1
+	beq label_edc1
 	ldx a: $b2
 	lda a: enemy_pos_y,x
 	sec
@@ -823,12 +823,13 @@ label_ed11:
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $edbe
+	bne :+
 	lda #$40
 	sta a: $6d
 	jmp $f44f
 	rts
-	jmp $f3db
+:	jmp $f3db
+label_edc1:
 	lda #$f5
 	sta a: $6c
 	jmp $f3db
@@ -851,9 +852,9 @@ label_ed11:
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bmi $ee02
+	bmi :+
 	jmp purge_enemy
-	jsr $f29b
+:	jsr $f29b
 	jsr $f29b
 	ldx a: $b2
 	lda a: $b4
@@ -865,16 +866,16 @@ label_ed11:
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bmi $ee74
-	beq $ee74
+	bmi label_ee74
+	beq label_ee74
 	lda a: $20
 	clc
 	adc #$10
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bpl $ee74
-	beq $ee74
+	bpl label_ee74
+	beq label_ee74
 	lda #$02
 	sta a: $6d
 	lda #$04
@@ -901,6 +902,7 @@ label_ed11:
 	adc a: $11
 	sta a: $6b
 	jmp $f52f
+label_ee74:
 	rts
 	purge_enemy:
 		ldx a: $b2
@@ -916,9 +918,9 @@ label_ed11:
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $ee9c
+	bne :+
 	jmp $f015
-	ldx a: $b2
+:	ldx a: $b2
 	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda #$0e
@@ -927,46 +929,46 @@ label_ed11:
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $eebc
+	bne :+
 	lda #$08
 	sta a: $b8
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $eece
+	bne :+
 	lda #$16
 	sta a: $b8
-	lda a: $0c
+:	lda a: $0c
 	sta a: temp
 	lda a: $b6
 	sec
 	sbc a: $b8
 	cmp a: temp
-	bmi $eee3
+	bmi :+
 	jmp $f015
-	lda a: $b6
+:	lda a: $b6
 	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$18
 	cmp a: temp
-	bmi $eef7
+	bmi :+
 	jmp $f015
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $12
 	cmp a: temp
-	beq $ef18
+	beq :+
 	lda a: $b6
 	sta a: temp
 	lda a: $0c
 	sec
 	sbc #$10
 	cmp a: temp
-	bmi $ef18
+	bmi :+
 	jmp $f015
-	lda #$00
+:	lda #$00
 	sta a: $b9
 	lda #$00
 	sta a: $b7
@@ -980,46 +982,46 @@ label_ed11:
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bne $ef47
+	bne :+
 	lda #$01
 	sta a: $b9
-	lda a: $b4
+:	lda a: $b4
 	sta a: temp
 	lda a: player_pos_x1
 	clc
 	adc #$01
 	cmp a: temp
-	bne $ef6d
+	bne :+
 	lda a: player_pos_x2
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bpl $ef6d
-	beq $ef6d
+	bpl :+
+	beq :+
 	lda #$01
 	sta a: $b9
-	lda a: player_pos_x1
+:	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	clc
 	adc #$01
 	cmp a: temp
-	bne $ef93
+	bne :+
 	lda a: $b5
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
-	bpl $ef93
-	beq $ef93
+	bpl :+
+	beq :+
 	lda #$01
 	sta a: $b9
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $b9
 	cmp a: temp
-	bne $efa3
+	bne :+
 	jmp $f015
-	lda a: $b6
+:	lda a: $b6
 	sta a: temp
 	lda a: $0c
 	pha
@@ -1031,39 +1033,40 @@ label_ed11:
 	clc
 	adc a: $11
 	cmp a: temp
-	bpl $efc5
+	bpl :+
 	lda #$01
 	sta a: $b7
-	lda #$08
+:	lda #$08
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $efd5
+	bne :+
 	jmp $f067
-	lda #$02
+:	lda #$02
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $efe5
+	bne :+
 	jmp $f02d
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $eff5
+	bne :+
 	jmp $f02d
-	lda #$04
+:	lda #$04
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $f005
+	bne :+
 	jmp $f02d
-	lda #$06
+:	lda #$06
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $f015
+	bne label_f015
 	jmp $f063
+label_f015:
 	inc a: $b2
 	lda a: $b0
 	clc
@@ -1071,14 +1074,14 @@ label_ed11:
 	sta a: temp
 	lda a: $b2
 	cmp a: temp
-	bpl $f02c
+	bpl :+
 	jmp $ee83
-	rts
+:	rts
 	lda #$00
 	sta a: temp
 	lda a: $b7
 	cmp a: temp
-	beq $f05f
+	beq label_f05f
 	ldx a: $b2
 	lda #$00
 	sta a: enemy_type,x
@@ -1090,10 +1093,11 @@ label_ed11:
 	sta a: temp
 	lda a: button_a_down
 	cmp a: temp
-	beq $f05e
+	beq :+
 	lda #$37
 	sta a: player_velocity
-	rts
+:	rts
+label_f05f:
 	jsr $ca72
 	rts
 	jsr $ca72
@@ -1109,17 +1113,17 @@ label_ed11:
 	sta a: temp
 	lda a: player_health
 	cmp a: temp
-	bne $f082
+	bne :+
 	dec a: player_health
-	rts
+:	rts
 
 	lda #$02
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bpl $f093
+	bpl :+
 	jmp $f2b4
-	lda #$08
+:	lda #$08
 	pha
 	lda a: $b4
 	asl a
@@ -1137,7 +1141,7 @@ label_ed11:
 	sta a: temp
 	lda a: $b6
 	cmp a: temp
-	bpl $f126
+	bpl label_f126
 	lda a: $b6
 	lsr a
 	lsr a
@@ -1155,15 +1159,15 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f0e7
+	beq :+
 	jmp $f3c9
-	lda #$0f
+:	lda #$0f
 	sta a: temp
 	lda a: $ba
 	cmp a: temp
-	bne $f0f7
+	bne :+
 	jmp $f2b4
-	lda a: $63
+:	lda a: $63
 	pha
 	lda a: $65
 	sec
@@ -1180,9 +1184,10 @@ label_ed11:
 	lda a: $bb
 	and a: $54
 	cmp a: temp
-	beq $f123
+	beq :+
 	jmp $f3c9
-	jmp $f2b4
+:	jmp $f2b4
+label_f126:
 	lda a: $b6
 	sec
 	sbc #$70
@@ -1202,15 +1207,15 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f154
+	beq :+
 	jmp $f3c9
-	lda #$0f
+:	lda #$0f
 	sta a: temp
 	lda a: $ba
 	cmp a: temp
-	bne $f164
+	bne :+
 	jmp $f2b4
-	lda a: $63
+:	lda a: $63
 	pha
 	lda a: $65
 	sec
@@ -1227,16 +1232,16 @@ label_ed11:
 	lda a: $bb
 	and a: $54
 	cmp a: temp
-	beq $f190
+	beq :+
 	jmp $f3c9
-	jmp $f2b4
+:	jmp $f2b4
 	lda #$00
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	beq $f1a3
+	beq :+
 	jmp $f29b
-	lda a: $b4
+:	lda a: $b4
 	asl a
 	asl a
 	asl a
@@ -1250,7 +1255,7 @@ label_ed11:
 	sta a: temp
 	lda a: $b6
 	cmp a: temp
-	bpl $f22e
+	bpl label_f22e
 	lda a: $b6
 	lsr a
 	lsr a
@@ -1268,15 +1273,15 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f1ef
+	beq :+
 	jmp $f3cf
-	lda #$0f
+:	lda #$0f
 	sta a: temp
 	lda a: $ba
 	cmp a: temp
-	bne $f1ff
+	bne :+
 	jmp $f29b
-	lda a: $63
+:	lda a: $63
 	pha
 	lda a: $65
 	sec
@@ -1293,9 +1298,10 @@ label_ed11:
 	lda a: $bb
 	and a: $54
 	cmp a: temp
-	beq $f22b
+	beq :+
 	jmp $f3cf
-	jmp $f29b
+:	jmp $f29b
+label_f22e:
 	lda a: $b6
 	sec
 	sbc #$70
@@ -1315,15 +1321,15 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f25c
+	beq :+
 	jmp $f3cf
-	lda #$0f
+:	lda #$0f
 	sta a: temp
 	lda a: $ba
 	cmp a: temp
-	bne $f26c
+	bne :+
 	jmp $f29b
-	lda a: $63
+:	lda a: $63
 	pha
 	lda a: $65
 	sec
@@ -1340,29 +1346,29 @@ label_ed11:
 	lda a: $bb
 	and a: $54
 	cmp a: temp
-	beq $f298
+	beq :+
 	jmp $f3cf
-	jmp $f29b
+:	jmp $f29b
 	dec a: $b5
 	lda #$ff
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bne $f2b3
+	bne :+
 	lda #$0f
 	sta a: $b5
 	dec a: $b4
-	rts
+:	rts
 	inc a: $b5
 	lda #$10
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bne $f2cc
+	bne :+
 	lda #$00
 	sta a: $b5
 	inc a: $b4
-	rts
+:	rts
 	lda a: $b4
 	asl a
 	asl a
@@ -1372,8 +1378,8 @@ label_ed11:
 	sta a: temp
 	lda a: $b6
 	cmp a: temp
-	bpl $f350
-	beq $f350
+	bpl label_f350
+	beq label_f350
 	lda a: $b6
 	clc
 	adc a: $62
@@ -1394,30 +1400,31 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f319
+	beq :+
 	jmp $f3d5
-	lda #$00
+:	lda #$00
 	sta a: $bb
 	lda #$04
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bmi $f33a
-	beq $f33a
+	bmi :+
+	beq :+
 	lda a: $66
 	clc
 	adc #$08
 	tax
 	lda $0400,x
 	sta a: $bb
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $64
 	and a: $54
 	cmp a: temp
-	beq $f34d
+	beq :+
 	jmp $f3d5
-	jmp $f3be
+:	jmp $f3be
+label_f350:
 	lda a: $b6
 	clc
 	adc a: $62
@@ -1440,30 +1447,30 @@ label_ed11:
 	lda a: $86
 	and a: $54
 	cmp a: temp
-	beq $f387
+	beq :+
 	jmp $f3d5
-	lda #$00
+:	lda #$00
 	sta a: $bb
 	lda #$04
 	sta a: temp
 	lda a: $b5
 	cmp a: temp
-	bmi $f3a8
-	beq $f3a8
+	bmi :+
+	beq :+
 	lda a: $66
 	clc
 	adc #$08
 	tax
 	lda $0200,x
 	sta a: $bb
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $bb
 	and a: $54
 	cmp a: temp
-	beq $f3bb
+	beq :+
 	jmp $f3d5
-	jmp $f3be
+:	jmp $f3be
 	lda a: $b6
 	clc
 	adc a: $62
@@ -1750,7 +1757,7 @@ label_ed11:
 	sta a: temp
 	lda a: konami_code_active
 	cmp a: temp
-	beq $f698
+	beq label_f698
 	jsr $f6e9
 	lda a: $be
 	clc
@@ -1764,30 +1771,31 @@ label_ed11:
 	sta a: temp
 	lda a: $be
 	cmp a: temp
-	bne $f662
+	bne :+
 	lda #$01
 	sta a: $bf
-	lda #$82
+:	lda #$82
 	sta a: temp
 	lda a: $be
 	cmp a: temp
-	bne $f674
+	bne :+
 	lda #$ff
 	sta a: $bf
-	lda #$46
+:	lda #$46
 	sta a: temp
 	lda a: $bd
 	cmp a: temp
-	bne $f686
+	bne :+
 	lda #$01
 	sta a: $c0
-	lda #$6e
+:	lda #$6e
 	sta a: temp
 	lda a: $bd
 	cmp a: temp
-	bne $f698
+	bne label_f698
 	lda #$ff
 	sta a: $c0
+label_f698:
 	lda a: $04
 	clc
 	adc #$03
@@ -1801,16 +1809,16 @@ label_ed11:
 	sta a: temp
 	lda a: button_select_down
 	cmp a: temp
-	beq $f6bf
+	beq :+
 	lda #$01
 	sta a: konami_code_active
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
-	beq $f6cf
+	beq :+
 	jmp $f6d2
-	jmp $f61d
+:	jmp $f61d
 	rts
 	jsr label_dc26
 	jsr label_db8e
@@ -1826,7 +1834,7 @@ label_ed11:
 	ldy #$f0
 	lda a: $bd
 	sta a: player_offset_x
-	lda a: $be
+:	lda a: $be
 	sta $2004
 	inx
 	tya
@@ -1844,7 +1852,7 @@ label_ed11:
 	iny
 	iny
 	cpy #$00
-	bne $f6f6
+	bne :-
 	rts
 	jsr label_db8e
 	lda #$20
@@ -1852,44 +1860,44 @@ label_ed11:
 	lda #$c4
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-	lda $e2b2,x
+:	lda $e2b2,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$80
-	bne $f72b
+	bne :-
 	jsr label_db8e
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$44
 	sta PPU_VRAM_ADDR2
 	ldx #$80
-	lda $e2b2,x
+:	lda $e2b2,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$b9
-	bne $f745
+	bne :-
 	jsr label_db8e
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$ab
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-	lda $e36b,x
+:	lda $e36b,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$80
-	bne $f75f
+	bne :-
 	jsr label_db8e
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$c9
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-	lda $e3eb,x
+:	lda $e3eb,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$0d
-	bne $f779
+	bne :-
 	jsr label_db8e
 	lda #$23
 	sta PPU_VRAM_ADDR2
@@ -1897,15 +1905,15 @@ label_ed11:
 	sta PPU_VRAM_ADDR2
 	ldx #$00
 	lda #$00
-	sta PPU_VRAM_IO
+:	sta PPU_VRAM_IO
 	inx
 	cpx #$18
-	bne $f795
+	bne :-
 	lda #$55
-	sta PPU_VRAM_IO
+:	sta PPU_VRAM_IO
 	inx
 	cpx #$40
-	bne $f79f
+	bne :-
 	rts
 	lda #$3f
 	sta PPU_VRAM_ADDR2
@@ -1921,41 +1929,45 @@ label_ed11:
 	sta a: temp
 	lda a: $66
 	cmp a: temp
-	bpl $f7d3
+	bpl :+
 	jmp $f7b7
-	rts
+:	rts
 	; FIXME
 	ldy a: $11
 	lda #$00
-	sta $2007
+:	sta $2007
 	dey
 	cpy #$00
-	bne $f7d9
+	bne :-
 	rts
-	lda PPU_STATUS
-	bpl $f7e2
+label_f7e2:
+:	lda PPU_STATUS
+	bpl :-
 	rts
-	lda PPU_STATUS
-	bmi $f7e8
+label_f7e8:
+:	lda PPU_STATUS
+	bmi :-
 	rts
-	lda PPU_STATUS
+label_f7ee:
+:	lda PPU_STATUS
 	and #$10
-	bne $f7ee
+	bne :-
 	ldy #$c8
-	lda PPU_STATUS
+label_f7f7:
+:	lda PPU_STATUS
 	and #$10
-	bne $f7f7
+	bne :-
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	sta PPU_VRAM_ADDR1
 	dey
 	cpy #$00
-	bne $f7f7
+	bne :-
 	ldx a: title_screen_wave_timer
 	ldy #$ff
-	lda PPU_STATUS
+:	lda PPU_STATUS
 	and #$10
-	bne $f810
+	bne :-
 	lda $e4eb,x
 	sta PPU_VRAM_ADDR1
 	lda #$00
@@ -1963,7 +1975,7 @@ label_ed11:
 	inx
 	dey
 	cpy #$00
-	bne $f810
+	bne :-
 	inc a: title_screen_wave_timer
 	lda #$00
 	sta PPU_VRAM_ADDR1
@@ -1975,49 +1987,50 @@ label_ed11:
 	sta a: temp
 	lda a: konami_code_correct_presses
 	cmp a: temp
-	bmi $f85d
+	bmi label_f85d
 	lda #$00
 	sta a: temp
 	lda a: $5c
 	cmp a: temp
-	beq $f854
+	beq :+
 	rts
-	lda #$01
+:	lda #$01
 	sta a: $5c
 	jsr $d5d8
 	rts
+label_f85d:
 	lda #$00
 	sta a: temp
 	lda a: konami_code_correct_button_down
 	cmp a: temp
-	beq $f880
+	beq :+
 	lda #$00
 	sta a: temp
 	lda a: $c4
 	cmp a: temp
-	bne $f880
+	bne :+
 	lda #$00
 	sta a: konami_code_correct_button_down
 	inc a: konami_code_correct_presses
 	rts
-	lda #$00
+:	lda #$00
 	sta a: temp
 	lda a: $c4
 	cmp a: temp
-	bne $f88e
+	bne :+
 	rts
-	ldx a: konami_code_correct_presses
+:	ldx a: konami_code_correct_presses
 	lda $f908,x
 	sta a: $c5
 	lda a: $c5
 	sta a: temp
 	lda a: $c4
 	cmp a: temp
-	bne $f8ab
+	bne :+
 	lda #$01
 	sta a: konami_code_correct_button_down
 	rts
-	lda #$00
+:	lda #$00
 	sta a: konami_code_correct_presses
 	rts
 	jsr $d539
