@@ -1,7 +1,9 @@
 .include "inc/nes.inc"
 
 ; $9978 is start of level 1 music I think
-
+.repeat $100, I
+	.charmap I, I
+.endrepeat
 
 .segment "HEADER"
 	INES_MAPPER = 4
@@ -15,7 +17,7 @@
 .segment "PRG0"
 	.include "prg0.s"
 .segment "PRG1"
-	.incbin "SOF_v1d.nes", $02010, $2000
+	.include "prg1.s"
 .segment "PRG2"
 	.incbin "SOF_v1d.nes", $04010, $2000
 .segment "PRG3"
@@ -176,8 +178,10 @@
 	.byte $00, $00, $00, $00, $00, $00, $00, $00
 	.byte $00, $00, $00, $00, $00, $00, $00, $00
 	.byte $00, $CC, $CD, $CE, $CF, $D0, $D1, $D2
-	.byte $D3, $D4, $D5, $D6, $D7, $D8, $47, $41
-	.byte $4D, $45, $20, $4F, $56, $45, $52
+	.byte $D3, $D4, $D5, $D6, $D7, $D8
+	game_over_text:
+	.byte $47, $41, $4D, $45, $20, $4F, $56, $45, $52
+	end_screen_text:
 	.byte $43, $4F, $4E, $47, $52, $41, $54, $55
 	.byte $4C, $41, $54, $49, $4F, $4E, $53, $46
 	.byte $52, $4F, $4D, $20, $54, $48, $45, $20

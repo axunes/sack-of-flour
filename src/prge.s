@@ -2577,7 +2577,7 @@ label_d391:
 	lda #$08
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-:	lda $bfb8,x
+:	lda level_1_title,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20
@@ -2587,7 +2587,7 @@ label_d391:
 	lda #$68
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-:	lda $bfd8,x
+:	lda level_1_name,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20
@@ -2815,7 +2815,7 @@ label_d391:
 	lda #$00
 	sta a: $0e
 	ldx a: $0e
-	lda $e3f8,x
+	lda game_over_text,x
 	sta PPU_VRAM_IO
 	inc a: $0e
 	lda #$09
