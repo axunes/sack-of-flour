@@ -13,7 +13,7 @@
 .include "src/memory.s"
 
 .segment "PRG0"
-	.incbin "SOF_v1d.nes", $00010, $2000
+	.include "prg0.s"
 .segment "PRG1"
 	.incbin "SOF_v1d.nes", $02010, $2000
 .segment "PRG2"

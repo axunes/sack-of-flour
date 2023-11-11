@@ -2020,7 +2020,7 @@ label_f85d:
 	bne :+
 	rts
 :	ldx a: konami_code_correct_presses
-	lda $f908,x
+	lda konami_code_values,x
 	sta a: $c5
 	lda a: $c5
 	sta a: temp
