@@ -26,6 +26,7 @@ label_e5eb:
 		lda $8000,x
 		sta a: $8b
 		rts
+label_e62c:
 	iny
 	lda (music_pointer), y
 	sta a: $8e
@@ -39,16 +40,17 @@ label_e5eb:
 	sta a: $03
 	sta a: $8d
 	jmp $e679
+label_e64c:
 	dec a: $8e
 	lda a: $8e
 	cmp #$00
-	beq $e665
+	beq :+
 	lda a: $8c
 	sta a: music_pointer
 	lda a: $8d
 	sta a: $03
 	jmp $e679
-	clc
+:	clc
 	lda a: music_pointer
 	adc #$01
 	sta a: music_pointer
@@ -60,15 +62,15 @@ label_e5eb:
 	sta a: temp
 	lda a: $8f
 	cmp a: temp
-	beq $e68a
+	beq :+
 	dec a: $8f
 	rts
-	ldy #$00
+:	ldy #$00
 	lda (music_pointer), y
 	cmp #$ff
-	beq $e62c
+	beq label_e62c
 	cmp #$fe
-	beq $e64c
+	beq label_e64c
 	sta a: $8f
 	iny
 	lda (music_pointer), y
@@ -79,17 +81,17 @@ label_e5eb:
 	lda a: $90
 	and #$03
 	cmp a: temp
-	bne $e6b2
+	bne :+
 	jmp $e6dc
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $90
 	and #$03
 	cmp a: temp
-	bne $e6c4
-	jmp $e6c4
+	bne :+
+	jmp :+
 	; this is some music shit right here I can tell you that much
-	lda (music_pointer), y
+:	lda (music_pointer), y
 	sta APU_PULSE1CTRL
 	iny
 	lda (music_pointer), y
@@ -113,9 +115,9 @@ label_e5eb:
 	lda a: $90
 	and #$0c
 	cmp a: temp
-	bne $e700
-	jmp $e700
-	lda (music_pointer), y
+	bne :+
+	jmp :+
+:	lda (music_pointer), y
 	sta APU_PULSE2CTRL
 	iny
 	lda (music_pointer), y
@@ -132,16 +134,16 @@ label_e5eb:
 	lda a: $90
 	and #$30
 	cmp a: temp
-	bne $e72a
+	bne :+
 	jmp $e754
-	lda #$30
+:	lda #$30
 	sta a: temp
 	lda a: $90
 	and #$30
 	cmp a: temp
-	bne $e73c
-	jmp $e73c
-	lda (music_pointer), y
+	bne :+
+	jmp :+
+:	lda (music_pointer), y
 	sta APU_TRICTRL1
 	iny
 	lda (music_pointer), y
@@ -158,16 +160,16 @@ label_e5eb:
 	lda a: $90
 	and #$c0
 	cmp a: temp
-	bne $e766
+	bne :+
 	jmp $e790
-	lda #$c0
+:	lda #$c0
 	sta a: temp
 	lda a: $90
 	and #$c0
 	cmp a: temp
-	bne $e778
-	jmp $e778
-	lda (music_pointer), y
+	bne :+
+	jmp :+
+:	lda (music_pointer), y
 	sta APU_NOISECTRL
 	iny
 	lda (music_pointer), y
@@ -191,15 +193,15 @@ label_e5eb:
 	clc
 	lda a: music_pointer
 	cmp a: $8a
-	bne $e7c3
+	bne :+
 	lda a: $03
 	cmp a: $8b
-	bne $e7c3
+	bne :+
 	lda a: $88
 	sta a: music_pointer
 	lda a: $89
 	sta a: $03
-	rts
+:	rts
 	init_enemies:
 		; set all enemy type slots to zero
 		ldx #$00
@@ -233,16 +235,16 @@ label_e5eb:
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bpl $e815
+	bpl :+
 	jmp $e7f9
-	rts
+:	rts
 	lda #$01
 	sta a: temp
 	lda a: $04
 	cmp a: temp
-	beq $e824
+	beq :+
 	rts
-	lda #$00
+:	lda #$00
 	sta a: $0e
 	ldx a: $0e
 	lda a: enemy_type,x
@@ -251,18 +253,18 @@ label_e5eb:
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e842
+	bne :+
 	jmp $e85e
-	inc a: $0e
+:	inc a: $0e
 	lda a: $b0
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
-	bpl $e858
-	beq $e858
+	bpl :+
+	beq :+
 	jmp $e829
 	; FIXME
-	rts
+:	rts
 	lda #$00
 	sta a: $0e
 	lda a: $05
@@ -303,9 +305,9 @@ label_e5eb:
 		lda a: $0c
 		and #$f0
 		cmp a: temp
-		bne $e8c0
+		bne :+
 		rts
-	ldx a: $0e
+:	ldx a: $0e
 	lda a: $b1
 	sta a: enemy_type,x
 	ldx a: $0e
@@ -333,39 +335,39 @@ label_e5eb:
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e90e
+	bne :+
 	jsr $e960
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e91e
+	bne :+
 	jsr $e960
-	lda #$04
+:	lda #$04
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e92e
+	bne :+
 	jsr $ec12
-	lda #$06
+:	lda #$06
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e93e
+	bne :+
 	jsr $edca
-	lda #$08
+:	lda #$08
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $e94e
+	bne :+
 	jsr $e960
-	lda a: $b0
+:	lda a: $b0
 	sta a: temp
 	lda a: $b2
 	cmp a: temp
-	bpl $e95f
+	bpl :+
 	jmp $e8f2
-	rts
+:	rts
 	ldx a: $b2
 	lda a: $aa,x
 	sta a: $b3
@@ -384,17 +386,17 @@ label_e5eb:
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bmi $e998
+	bmi :+
 	jmp purge_enemy
-	lda a: $b4
+:	lda a: $b4
 	sta a: temp
 	lda a: $20
 	clc
 	adc #$12
 	cmp a: temp
-	bpl $e9ac
+	bpl :+
 	jmp purge_enemy
-	lda #$00
+:	lda #$00
 	sta a: $b7
 	lda #$03
 	sta a: $62
@@ -404,26 +406,27 @@ label_e5eb:
 	lda a: $1b
 	and #$01
 	cmp a: temp
-	beq $e9cb
+	beq :+
 	jmp $ea9f
-	lda #$ff
+:	lda #$ff
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $e9ed
+	bne label_e9ed
 	lda #$01
 	sta a: temp
 	lda a: $b7
 	cmp a: temp
-	bne $e9ea
+	bne :+
 	lda #$02
 	sta a: $b3
-	jmp $ea41
+:	jmp $ea41
+label_e9ed:
 	lda #$01
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ea17
+	bne label_ea17
 	lda #$00
 	sta a: $64
 	jsr $f083
@@ -431,15 +434,16 @@ label_e5eb:
 	sta a: temp
 	lda a: $64
 	cmp a: temp
-	beq $ea14
+	beq :+
 	lda #$02
 	sta a: $b3
-	jmp $ea41
+:	jmp label_ea41
+label_ea17:
 	lda #$02
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ea41
+	bne label_ea41
 	lda #$00
 	sta a: $67
 	jsr $f193
@@ -447,34 +451,35 @@ label_e5eb:
 	sta a: temp
 	lda a: $67
 	cmp a: temp
-	beq $ea3e
+	beq :+
 	lda #$01
 	sta a: $b3
-	jmp $ea41
+:	jmp $ea41
+label_ea41:
 	lda #$fc
 	sta a: temp
 	lda a: $b6
 	and #$fc
 	cmp a: temp
-	bne $ea53
+	bne :+
 	jmp purge_enemy
-	lda a: $b4
+:	lda a: $b4
 	clc
 	adc #$05
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bmi $ea67
+	bmi :+
 	jmp purge_enemy
-	lda a: $b4
+:	lda a: $b4
 	sta a: temp
 	lda a: $20
 	clc
 	adc #$15
 	cmp a: temp
-	bpl $ea7b
+	bpl :+
 	jmp purge_enemy
-	ldx a: $b2
+:	ldx a: $b2
 	lda a: $b3
 	sta a: $aa,x
 	ldx a: $b2
@@ -490,15 +495,15 @@ label_e5eb:
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $eaaf
+	bne :+
 	jmp $ebb7
-	lda #$03
+:	lda #$03
 	sta a: temp
 	lda a: $b1
 	cmp a: temp
-	bne $eabf
+	bne :+
 	jmp $eb32
-	lda #$02
+:	lda #$02
 	sta a: $6d
 	lda #$0a
 	sta a: $6e
@@ -506,16 +511,16 @@ label_e5eb:
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bmi $eb31
-	beq $eb31
+	bmi label_eb31
+	beq label_eb31
 	lda a: $20
 	clc
 	adc #$10
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bpl $eb31
-	beq $eb31
+	bpl label_eb31
+	beq label_eb31
 	ldx a: $b2
 	lda a: enemy_pos_y,x
 	sec
@@ -542,27 +547,28 @@ label_e5eb:
 	lda a: $1b
 	and #$10
 	cmp a: temp
-	beq $eb2e
+	beq :+
 	lda #$42
 	sta a: $6d
 	jmp $f44f
 	rts
-	jmp $f3db
+:	jmp $f3db
+label_eb31:
 	rts
 	lda a: $20
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bmi $ebb6
-	beq $ebb6
+	bmi label_ebb6
+	beq label_ebb6
 	lda a: $20
 	clc
 	adc #$10
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bpl $ebb6
-	beq $ebb6
+	bpl label_ebb6
+	beq label_ebb6
 	lda #$00
 	sta a: $6d
 	lda #$40
@@ -572,10 +578,10 @@ label_e5eb:
 	lda a: $1b
 	and #$10
 	cmp a: temp
-	beq $eb73
+	beq :+
 	lda #$48
 	sta a: $6e
-	ldx a: $b2
+:	ldx a: $b2
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$20
@@ -600,12 +606,13 @@ label_e5eb:
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ebb3
+	bne :+
 	lda #$40
 	sta a: $6d
 	jmp $f4dc
 	rts
-	jmp $f4c3
+:	jmp $f4c3
+label_ebb6:
 	rts
 	lda #$02
 	sta a: $6d
@@ -615,16 +622,16 @@ label_e5eb:
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bmi $ec11
-	beq $ec11
+	bmi label_ec11
+	beq label_ec11
 	lda a: $20
 	clc
 	adc #$10
 	sta a: temp
 	lda a: $b4
 	cmp a: temp
-	bpl $ec11
-	beq $ec11
+	bpl label_ec11
+	beq label_ec11
 	ldx a: $b2
 	lda a: enemy_pos_y,x
 	sec
@@ -647,6 +654,7 @@ label_e5eb:
 	adc a: $11
 	sta a: $6b
 	jmp $f4f5
+label_ec11:
 	rts
 	ldx a: $b2
 	lda a: $aa,x
@@ -666,17 +674,17 @@ label_e5eb:
 	sta a: temp
 	lda a: $20
 	cmp a: temp
-	bmi $ec4a
+	bmi :+
 	jmp purge_enemy
-	lda a: $b4
+:	lda a: $b4
 	sta a: temp
 	lda a: $20
 	clc
 	adc #$12
 	cmp a: temp
-	bpl $ec5e
+	bpl :+
 	jmp purge_enemy
-	lda #$00
+:	lda #$00
 	sta a: $b7
 	lda #$02
 	sta a: $62
@@ -685,40 +693,41 @@ label_e5eb:
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ec8d
+	bne label_ec8d
 	lda #$01
 	sta a: temp
 	lda a: $b7
 	cmp a: temp
-	bne $ec8a
+	bne :+
 	lda #$01
 	sta a: $b3
-	jmp $ed11
+:	jmp $ed11
+label_ec8d:
 	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	clc
 	adc #$02
 	cmp a: temp
-	bpl $eca5
-	beq $eca5
+	bpl :+
+	beq :+
 	lda #$01
 	sta a: $b3
-	lda a: player_pos_x1
+:	lda a: player_pos_x1
 	sta a: temp
 	lda a: $b4
 	sec
 	sbc #$02
 	cmp a: temp
-	bmi $ecbd
-	beq $ecbd
+	bmi :+
+	beq :+
 	lda #$02
 	sta a: $b3
-	lda #$01
+:	lda #$01
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ece7
+	bne label_ece7
 	lda #$00
 	sta a: $64
 	jsr $f083
@@ -726,15 +735,16 @@ label_e5eb:
 	sta a: temp
 	lda a: $64
 	cmp a: temp
-	beq $ece4
+	beq :+
 	lda #$02
 	sta a: $b3
-	jmp $ed11
+:	jmp $ed11
+label_ece7:
 	lda #$02
 	sta a: temp
 	lda a: $b3
 	cmp a: temp
-	bne $ed11
+	bne label_ed11
 	lda #$00
 	sta a: $67
 	jsr $f193
@@ -742,18 +752,19 @@ label_e5eb:
 	sta a: temp
 	lda a: $67
 	cmp a: temp
-	beq $ed0e
+	beq :+
 	lda #$01
 	sta a: $b3
-	jmp $ed11
+:	jmp label_ed11
+label_ed11:
 	lda #$fc
 	sta a: temp
 	lda a: $b6
 	and #$fc
 	cmp a: temp
-	bne $ed23
+	bne :+
 	jmp purge_enemy
-	ldx a: $b2
+:	ldx a: $b2
 	lda a: $b3
 	sta a: $aa,x
 	ldx a: $b2
