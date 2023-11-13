@@ -28,9 +28,9 @@
 .segment "PRGB"
 	.include "prgb.s"
 .segment "PRGC"
-	.incbin "SOF_v1d.nes", $18010, $2000
+	.include "prga.s"
 .segment "PRGD"
-	.incbin "SOF_v1d.nes", $1A010, $2000
+	.include "prgb.s"
 
 ; code
 
@@ -242,13 +242,10 @@
 	.addr nmi, reset, irq
 
 .segment "CHR0"
-	.incbin "SOF_v1d.nes", $20010, $2000
-
+	.incbin "0.chr"
 .segment "CHR1"
-	.incbin "SOF_v1d.nes", $22010, $2000
-
+	.incbin "1.chr"
 .segment "CHR2"
-	.incbin "SOF_v1d.nes", $24010, $2000
-
+	.incbin "2.chr"
 .segment "CHR3"
-	.incbin "SOF_v1d.nes", $26010, $2000
+	.incbin "3.chr"
