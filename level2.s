@@ -1065,8 +1065,6 @@
 	.res 7824
 	.byte "LEVEL 2"
 	.res 25
-	.byte $54, $48, $45, $20, $48, $45, $49, $4E
-	.byte $4F, $55, $53, $20, $48, $49, $4C, $4C
-	.byte $53
+	.byte "THE HEINOUS HILLS"
 	.res 17
 	.res 6, $FF
