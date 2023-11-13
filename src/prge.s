@@ -511,13 +511,13 @@ label_c245:
 	lda a: $52
 	asl a
 	tax
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $00
 	inx
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $01
 	ldx a: $55
-	lda $e10a,x
+	lda tile_shit_1,x
 	sta a: $56
 	ldx a: $55
 	lda $e112,x
@@ -615,13 +615,13 @@ label_c245:
 	lda a: $52
 	asl a
 	tax
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $00
 	inx
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $01
 	ldx a: $55
-	lda $e11a,x
+	lda tile_shit_2,x
 	sta a: $56
 	ldx a: $55
 	lda $e122,x
@@ -717,7 +717,7 @@ label_c245:
 	lda a: $52
 	sta a: $3a,x
 	ldx a: $55
-	lda $e12a,x
+	lda tile_shit_3,x
 	sta a: $56
 	ldx a: $55
 	lda $e132,x
@@ -751,7 +751,7 @@ label_c245:
 	sta a: temp
 	lda a: $11
 	cmp a: temp
-	bne :+
+	bne :+ ; we do some tile shit
 	rts
 :	ldx a: $55
 	lda a: $52
@@ -759,10 +759,10 @@ label_c245:
 	lda a: $52
 	asl a
 	tax
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $00
 	inx
-	lda $e13a,x
+	lda tile_shit_4,x
 	sta a: $01
 	ldy #$4c
 	clc

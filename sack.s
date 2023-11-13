@@ -38,7 +38,7 @@
 	.include "src/prge.s"
 	
 .segment "PRGF"
-	weird_fucking_data: ; this is probably at least some pitch table stuff
+	weird_fucking_data: ; definitely not a pitch table and doesn't get used like ever
 	.byte $28, $38, $37, $08, $28, $21
 	.byte $37, $38, $28, $38, $01, $08, $28, $21
 	.byte $37, $01, $27, $0E, $16, $03, $00, $0E
@@ -56,9 +56,7 @@
 	.byte $02, $02, $03, $02, $02, $03, $02, $03
 	.byte $02, $03, $03, $03, $03, $03, $03, $03
 	.byte $03, $03, $03, $04, $03, $04, $03, $04
-	.byte $04, $03, $04, $04, $04
-	
-	.byte $04, $04, $04 ; may or may not get used?
+	.byte $04, $03, $04, $04, $04, $04, $04, $04 ; last 3 may or may not get used?
 	
 	.byte $00, $00, $00, $00, $00
 	.byte $00, $01, $00, $00, $01, $00, $00, $01
@@ -78,12 +76,16 @@
 	.byte $04, $03, $04, $04, $04, $04, $04, $04
 	.byte $04, $04, $04, $04, $04, $04, $04, $04
 	.byte $04, $04, $04, $04, $04
+	tile_shit_1:
 	.byte $20, $20, $20, $20, $24, $24, $24, $24
 	.byte $00, $08, $10, $18, $00, $08, $10, $18
+	tile_shit_2:
 	.byte $22, $22, $22, $22, $26, $26, $26, $26
 	.byte $00, $08, $10, $18, $00, $08, $10, $18
+	tile_shit_3:
 	.byte $23, $23, $23, $23, $27, $27, $27, $27
 	.byte $C0, $C2, $C4, $C6, $C0, $C2, $C4, $C6
+	tile_shit_4:
 	.byte $00, $81, $6C, $81, $D8, $81, $44, $82
 	.byte $B0, $82, $1C, $83, $88, $83, $F4, $83
 	.byte $60, $84, $CC, $84, $38, $85, $A4, $85
