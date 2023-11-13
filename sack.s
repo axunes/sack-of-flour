@@ -24,9 +24,9 @@
 
 ; unused
 .segment "PRGA"
-	.incbin "SOF_v1d.nes", $14010, $2000
+	.include "prga.s"
 .segment "PRGB"
-	.incbin "SOF_v1d.nes", $16010, $2000
+	.include "prgb.s"
 .segment "PRGC"
 	.incbin "SOF_v1d.nes", $18010, $2000
 .segment "PRGD"
