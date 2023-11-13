@@ -17,20 +17,10 @@
 ; levels
 
 .include "level1.s"
-
-.segment "PRG2"
-	.include "prg2.s"
-.segment "PRG3"
-	.include "prg3.s"
-.segment "PRG4"
-	.include "prg4.s"
-.segment "PRG5"
-	.include "prg5.s"
+.include "level2.s"
+.include "level3.s"
 .include "level4.s"
-.segment "PRG8"
-	.include "prg8.s"
-.segment "PRG9"
-	.include "prg9.s"
+.include "level5.s"
 
 ; unused
 .segment "PRGA"
