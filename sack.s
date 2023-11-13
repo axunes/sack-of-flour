@@ -14,6 +14,8 @@
 
 .include "src/memory.s"
 
+; levels
+
 .segment "PRG0"
 	.include "prg0.s"
 .segment "PRG1"
@@ -23,17 +25,19 @@
 .segment "PRG3"
 	.include "prg3.s"
 .segment "PRG4"
-	.incbin "SOF_v1d.nes", $08010, $2000
+	.include "prg4.s"
 .segment "PRG5"
-	.incbin "SOF_v1d.nes", $0A010, $2000
+	.include "prg5.s"
 .segment "PRG6"
-	.incbin "SOF_v1d.nes", $0C010, $2000
+	.include "prg6.s"
 .segment "PRG7"
-	.incbin "SOF_v1d.nes", $0E010, $2000
+	.include "prg7.s"
 .segment "PRG8"
-	.incbin "SOF_v1d.nes", $10010, $2000
+	.include "prg8.s"
 .segment "PRG9"
-	.incbin "SOF_v1d.nes", $12010, $2000
+	.include "prg9.s"
+
+; unused
 .segment "PRGA"
 	.incbin "SOF_v1d.nes", $14010, $2000
 .segment "PRGB"
@@ -42,6 +46,8 @@
 	.incbin "SOF_v1d.nes", $18010, $2000
 .segment "PRGD"
 	.incbin "SOF_v1d.nes", $1A010, $2000
+
+; code
 
 .segment "PRGE"
 	.include "src/prge.s"
