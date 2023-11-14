@@ -2577,7 +2577,7 @@ label_d391:
 	lda #$08
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-:	lda level_1_title,x
+:	lda level_title,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20
@@ -2587,7 +2587,7 @@ label_d391:
 	lda #$68
 	sta PPU_VRAM_ADDR2
 	ldx #$00
-:	lda level_1_name,x
+:	lda level_name,x
 	sta PPU_VRAM_IO
 	inx
 	cpx #$20

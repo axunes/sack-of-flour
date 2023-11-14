@@ -996,10 +996,10 @@
 	.byte $96, $30, $83, $00, $3F, $30, $0E, $0F
 	.byte $00, $00, $00, $00, $83, $00, $C9, $30
 .segment "PRG1"
-	level_1_title:
+	level_title:
 	.byte "LEVEL 1"
 	.res 25
-	level_1_name:
+	level_name:
 	.byte "THE PERNICIOUS PLAINS"
 	.res 13
 	.res 6, $FF
