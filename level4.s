@@ -1027,7 +1027,6 @@
 	.byte $00, $00
 
 .segment "PRG7"
-	.res 8120
 	.byte "LEVEL X"
 	.res 25
 	.byte "S P A C E"

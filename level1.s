@@ -996,7 +996,6 @@
 	.byte $96, $30, $83, $00, $3F, $30, $0E, $0F
 	.byte $00, $00, $00, $00, $83, $00, $C9, $30
 .segment "PRG1"
-	.res 8120
 	level_1_title:
 	.byte "LEVEL 1"
 	.res 25
