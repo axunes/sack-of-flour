@@ -1,6 +1,13 @@
 .include "inc/nes.inc"
 
 ; $9978 is start of level 1 music I think
+; $9978 is start of level 2 music I think
+; $9D26 is start of level 2 section B I think
+; $9B28 is start of level 3 music I think
+; $9834 is start of level 4 music I think
+
+; 0E = play, FE = loop?
+
 .repeat $100, I
 	.charmap I, I
 .endrepeat
@@ -88,6 +95,7 @@
 	tile_shit_4:
 	.byte $00, $81, $6C, $81, $D8, $81, $44, $82
 	.byte $B0, $82, $1C, $83, $88, $83, $F4, $83
+	
 	.byte $60, $84, $CC, $84, $38, $85, $A4, $85
 	.byte $10, $86, $7C, $86, $E8, $86, $54, $87
 	.byte $C0, $87, $2C, $88, $98, $88, $04, $89
