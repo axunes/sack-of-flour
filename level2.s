@@ -1063,8 +1063,6 @@
 	.byte $00, $00, $00, $00, $00, $00, $00, $00
 	.byte $06, $C0, $82, $00, $E1, $30, $00, $00
 .segment "PRG3"
-	.byte "LEVEL 2"
-	.res 25
-	.byte "THE HEINOUS HILLS"
-	.res 17
+	PaddedString "LEVEL 2", $20
+	PaddedString "THE HEINOUS HILLS", $22
 	.res 6, $FF

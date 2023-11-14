@@ -1396,8 +1396,6 @@
 	.byte $DF, $31, $83, $00, $AA, $31, $06, $C0
 	.byte $83, $00, $AA, $31, $0B, $FF, $00, $00
 .segment "PRG9"
-	.byte "LEVEL 5"
-	.res 25
-	.byte "EVIL EGYPT"
-	.res 24
+	PaddedString "LEVEL 5", $20
+	PaddedString "EVIL EGYPT", $22
 	.res 6, $ff

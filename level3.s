@@ -1315,9 +1315,6 @@
 	.byte $7E, $30, $11, $C0, $00, $00, $00, $00
 
 .segment "PRG5"
-	
-	.byte "LEVEL 3"
-	.res 25
-	.byte "THE FEROCIOUS FOREST"
-	.res 14
+	PaddedString "LEVEL 3", $20
+	PaddedString "THE FEROCIOUS FOREST", $22
 	.res 6, $FF

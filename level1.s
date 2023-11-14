@@ -998,9 +998,7 @@
 	.byte $00, $00, $00, $00, $83, $00, $C9, $30
 .segment "PRG1"
 	level_title:
-	.byte "LEVEL 1"
-	.res 25
+	PaddedString "LEVEL 1", $20
 	level_name:
-	.byte "THE PERNICIOUS PLAINS"
-	.res 13
+	PaddedString "THE PERNICIOUS PLAINS", $22
 	.res 6, $FF

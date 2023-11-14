@@ -1,4 +1,5 @@
 .include "inc/nes.inc"
+.include "inc/macros.inc"
 
 ; 0E = play, FE = loop?
 
