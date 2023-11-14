@@ -171,7 +171,7 @@
 	.res 1
 	.res 1
 	.res 1
-	.res 1
+	which_enemy: .res 1
 	.res 1
 	.res 1
 	.res 1

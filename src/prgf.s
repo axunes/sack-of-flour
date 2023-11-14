@@ -326,9 +326,9 @@ label_e64c:
 	jsr $d5c3
 	rts
 	lda #$ff
-	sta a: $b2
-	inc a: $b2
-	ldx a: $b2
+	sta a: which_enemy
+	inc a: which_enemy
+	ldx a: which_enemy
 	lda a: enemy_type,x
 	sta a: $b1
 	lda #$02
@@ -363,21 +363,21 @@ label_e64c:
 	jsr $e960
 :	lda a: $b0
 	sta a: temp
-	lda a: $b2
+	lda a: which_enemy
 	cmp a: temp
 	bpl :+
 	jmp $e8f2
 :	rts
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $aa,x
 	sta a: $b3
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x,x
 	sta a: $b4
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x2,x
 	sta a: $b5
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
@@ -479,16 +479,16 @@ label_ea41:
 	cmp a: temp
 	bpl :+
 	jmp purge_enemy
-:	ldx a: $b2
+:	ldx a: which_enemy
 	lda a: $b3
 	sta a: $aa,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b4
 	sta a: enemy_pos_x,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b5
 	sta a: enemy_pos_x2,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b6
 	sta a: enemy_pos_y,x
 	lda #$08
@@ -521,7 +521,7 @@ label_ea41:
 	cmp a: temp
 	bpl label_eb31
 	beq label_eb31
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
@@ -581,7 +581,7 @@ label_eb31:
 	beq :+
 	lda #$48
 	sta a: $6e
-:	ldx a: $b2
+:	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$20
@@ -632,7 +632,7 @@ label_ebb6:
 	cmp a: temp
 	bpl label_ec11
 	beq label_ec11
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
@@ -656,16 +656,16 @@ label_ebb6:
 	jmp $f4f5
 label_ec11:
 	rts
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $aa,x
 	sta a: $b3
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x,x
 	sta a: $b4
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x2,x
 	sta a: $b5
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
@@ -764,16 +764,16 @@ label_ed11:
 	cmp a: temp
 	bne :+
 	jmp purge_enemy
-:	ldx a: $b2
+:	ldx a: which_enemy
 	lda a: $b3
 	sta a: $aa,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b4
 	sta a: enemy_pos_x,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b5
 	sta a: enemy_pos_x2,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b6
 	sta a: enemy_pos_y,x
 	lda #$00
@@ -798,7 +798,7 @@ label_ed11:
 	cmp a: temp
 	bpl label_edc1
 	beq label_edc1
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
@@ -834,16 +834,16 @@ label_edc1:
 	sta a: $6c
 	jmp $f3db
 	rts
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $aa,x
 	sta a: $b3
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x,x
 	sta a: $b4
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x2,x
 	sta a: $b5
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda a: $b4
@@ -856,10 +856,10 @@ label_edc1:
 	jmp purge_enemy
 :	jsr $f29b
 	jsr $f29b
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b4
 	sta a: enemy_pos_x,x
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: $b5
 	sta a: enemy_pos_x2,x
 	lda a: $20
@@ -880,7 +880,7 @@ label_edc1:
 	sta a: $6d
 	lda #$04
 	sta a: $6e
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sec
 	sbc #$10
@@ -905,13 +905,13 @@ label_edc1:
 label_ee74:
 	rts
 	purge_enemy:
-		ldx a: $b2
+		ldx a: which_enemy
 		lda #$00
 		sta a: enemy_type,x
 		rts
 	lda #$00
-	sta a: $b2
-	ldx a: $b2
+	sta a: which_enemy
+	ldx a: which_enemy
 	lda a: enemy_type,x
 	sta a: $b1
 	lda #$00
@@ -920,7 +920,7 @@ label_ee74:
 	cmp a: temp
 	bne :+
 	jmp $f015
-:	ldx a: $b2
+:	ldx a: which_enemy
 	lda a: enemy_pos_y,x
 	sta a: $b6
 	lda #$0e
@@ -972,10 +972,10 @@ label_ee74:
 	sta a: $b9
 	lda #$00
 	sta a: $b7
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x,x
 	sta a: $b4
-	ldx a: $b2
+	ldx a: which_enemy
 	lda a: enemy_pos_x2,x
 	sta a: $b5
 	lda a: player_pos_x1
@@ -1067,12 +1067,12 @@ label_ee74:
 	bne label_f015
 	jmp $f063
 label_f015:
-	inc a: $b2
+	inc a: which_enemy
 	lda a: $b0
 	clc
 	adc #$01
 	sta a: temp
-	lda a: $b2
+	lda a: which_enemy
 	cmp a: temp
 	bpl :+
 	jmp $ee83
@@ -1082,7 +1082,7 @@ label_f015:
 	lda a: $b7
 	cmp a: temp
 	beq label_f05f
-	ldx a: $b2
+	ldx a: which_enemy
 	lda #$00
 	sta a: enemy_type,x
 	lda #$01
@@ -1102,7 +1102,7 @@ label_f05f:
 	rts
 	jsr $ca72
 	rts
-	ldx a: $b2
+	ldx a: which_enemy
 	lda #$00
 	sta a: enemy_type,x
 	; collect heart
