@@ -12,18 +12,18 @@ label_e5eb:
 		asl a
 		sta a: $91
 		ldx a: $91
-		lda $8000,x
+		lda music_start,x
 		sta a: $88
 		sta a: music_pointer
 		inx
-		lda $8000,x
+		lda music_start,x
 		sta a: $89
 		sta a: $03
 		inx
-		lda $8000,x
+		lda music_start,x
 		sta a: $8a
 		inx
-		lda $8000,x
+		lda music_start,x
 		sta a: $8b
 		rts
 label_e62c:

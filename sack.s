@@ -1,11 +1,5 @@
 .include "inc/nes.inc"
 
-; $9978 is start of level 1 music I think
-; $9978 is start of level 2 music I think
-; $9D26 is start of level 2 section B I think
-; $9B28 is start of level 3 music I think
-; $9834 is start of level 4 music I think
-
 ; 0E = play, FE = loop?
 
 .repeat $100, I

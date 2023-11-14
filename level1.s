@@ -1,5 +1,6 @@
 .segment "PRG0"
-	.byte $78, $99, $18, $9F, $0A, $1A, $29, $31
+	music_start: .addr level_1_music
+	.byte $18, $9F, $0A, $1A, $29, $31
 	.byte $0A, $31, $30, $0F, $0A, $38, $0F, $31
 	.byte $0A, $37, $31, $29, $0A, $0E, $1A, $20
 	.byte $00, $0E, $20, $10, $00, $0E, $39, $18
