@@ -6,9 +6,8 @@
 	; not verified
 	door_tiles_x: .byte $18, $27, $45, $47, $7B
 	door_tiles_y: .byte $0C, $0B, $03, $0D, $07
-	.byte $00, $00
-	.byte $00, $00, $00, $00, $00, $00, $00, $00
-	.byte $E3, $73, $D4, $D2, $00, $00, $00, $00
+	; I don't know
+	player_x_values_fuck: .byte $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $E3, $73, $D4, $D2, $00, $00, $00, $00
 	enemies_to_spawn: .byte $02, $02, $02, $02, $02, $02, $02, $04, $04, $04, $04, $04, $04, $06, $06, $06
 	; not verified
 	item_box_tiles_x: .byte $05, $13, $20, $33, $7F, $9B, $A9, $C2, $D1, $00, $00, $00
