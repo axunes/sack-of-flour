@@ -93,7 +93,7 @@ label_c0e3:
 	jmp $c04a
 	jsr $e7f4
 	jmp $c0ef
-	jsr $c241
+	jsr nesmus_shut_up
 	lda #$1e
 	sta a: $0e
 	jsr label_db8e
@@ -233,14 +233,16 @@ label_c0e3:
 		lda #$1f
 		sta APU_CHANCTRL
 		rts
+nesmus_shut_up:
+; zero out all apu registers
 	ldx #$00
 	lda #$00
-label_c245:
-	sta APU_PULSE1CTRL,x
+:	sta APU_PULSE1CTRL,x
 	inx
 	cpx #$10
-	bne label_c245
+	bne :-
 	rts
+
 	lda #$0f
 	sta a: temp
 	lda a: $22
@@ -1131,7 +1133,7 @@ label_ca6c:
 	; take a life
 	dec a: player_lives
 	rts
-	jsr $c241
+	jsr nesmus_shut_up
 	jsr $dbc3
 	jsr label_dbda
 	; set health to 3
@@ -1532,7 +1534,7 @@ label_ce6f:
 	lda a: player_health
 	cmp a: temp
 	bne label_ce9f
-	jsr $c241
+	jsr nesmus_shut_up
 	lda a: player_position_y_again
 	sec
 	sbc a: $62
@@ -2785,7 +2787,7 @@ label_d391:
 	beq :+
 	jmp $da3c
 :	jsr $db09
-	jsr $c241
+	jsr nesmus_shut_up
 	lda #$00
 	sta $2005
 	lda #$00
@@ -2825,7 +2827,7 @@ label_d391:
 	beq :+
 	jmp $daa7
 :	jsr $db09
-	jsr $c241
+	jsr nesmus_shut_up
 	lda #$c8
 	sta a: $71
 	jsr $dad2
