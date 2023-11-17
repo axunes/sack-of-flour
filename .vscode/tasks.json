@@ -3,11 +3,11 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "Build NES rom",
+			"label": "Build NES ROM",
 			"command": "cl65 -g -Wl --dbgfile,sack.dbg sack.s -C config.cfg"
 		},
 		{
-			"dependsOn": "Build NES rom",
+			"dependsOn": "Build NES ROM",
 			"type": "shell",
 			"group": {
 				"kind": "build",
