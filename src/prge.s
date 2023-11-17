@@ -25,13 +25,13 @@
 	jsr label_e5eb
 	lda #$03
 	sta a: player_lives
-	jsr $dc71
-	jsr $cabb
-	jsr $d539
-	jsr $c7ec
-	jsr $d2bb
-	jsr $e8ed
-	jsr $c24e
+	jsr label_dc71
+	jsr label_cabb
+	jsr label_d539
+	jsr label_c7ec
+	jsr label_d2bb
+	jsr label_e8ed
+	jsr label_c24e
 
 	; if player_health is 0, KILL?
 	lda #$00
@@ -39,32 +39,32 @@
 	lda a: player_health
 	cmp a: temp
 	beq :+
-	jsr $e679
-:	jsr $c17f
-	jsr $e816
+	jsr label_e679
+:	jsr label_c17f
+	jsr label_e816
 	jsr label_db8e
-	jsr $db61
+	jsr label_db61
 	lda #$00
 	sta a: temp
 	lda a: $0b
 	cmp a: temp
 	beq :+
-	jmp $c0e9
+	jmp label_c0e9
 :	lda #$fc
 	sta a: temp
 	lda a: $0c
 	and #$fc
 	cmp a: temp
 	bne label_c0aa
-	jsr $c9e2
+	jsr label_c9e2
 	lda #$02
 	sta a: temp
 	lda a: $0c
 	cmp a: temp
 	bne label_c0a7
-	jmp $c04a
+	jmp label_c04a
 label_c0a7:
-	jmp $c0cd
+	jmp label_c0cd
 label_c0aa:
 	lda #$00
 	sta a: temp
@@ -76,41 +76,42 @@ label_c0aa:
 	lda a: i_frames
 	cmp a: temp
 	bne label_c0ca
-	jsr $cab7
-	jmp $c0cd
+	jsr label_cab7
+	jmp label_c0cd
 label_c0ca:
-	jmp $c04a
+	jmp label_c04a
 	lda #$00
 	sta a: temp
 	lda a: player_lives
 	cmp a: temp
 	bne label_c0e3
-	jsr $da95
-	jsr $c3eb
-	jmp $c000
+	jsr label_da95
+	jsr label_c3eb
+	jmp label_c000
 label_c0e3:
-	jsr $cabb
-	jmp $c04a
-	jsr $e7f4
-	jmp $c0ef
+	jsr label_cabb
+	jmp label_c04a
+label_c0e9:
+	jsr label_e7f4
+	jmp label_c0ef
 	jsr nesmus_shut_up
 	lda #$1e
 	sta a: $0e
 	jsr label_db8e
-	jsr $d5ed
+	jsr label_d5ed
 	dec a: $0e
 	lda #$00
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $c0f7
-:	jsr $d5c3
+	jmp label_c0f7
+:	jsr label_d5c3
 	lda #$01
 	sta a: player_fall_state
 	jsr label_db8e
-	jsr $d2bb
-	jsr $db61
+	jsr label_d2bb
+	jsr label_db61
 	lda a: $0c
 	sec
 	sbc #$03
@@ -121,31 +122,31 @@ label_c0e3:
 	and #$f8
 	cmp a: temp
 	beq :+
-	jmp $c118
+	jmp label_c118
 :	lda #$1e
 	sta a: $0e
 	jsr label_db8e
-	jsr $d5ed
+	jsr label_d5ed
 	dec a: $0e
 	lda #$00
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $c141
-:	jmp $c15d
+	jmp label_c141
+:	jmp label_c15d
 	inc a: $06
 	lda #$05
 	sta a: temp
 	lda a: $06
 	cmp a: temp
 	bne :+
-	jmp $d8b7
+	jmp label_d8b7
 :	jsr label_c26a
 	jsr label_c1c2
-	jsr $dc71
-	jsr $cabb
-	jmp $c04a
+	jsr label_dc71
+	jsr label_cabb
+	jmp label_c04a
 	lda a: $04
 	pha
 	lda #$0d
@@ -253,7 +254,7 @@ nesmus_shut_up:
 	lda #$f5
 	sta $0300,x
 	inc a: $22
-	jmp $c24e
+	jmp label_c24e
 	label_c26a:
 		lda a: $06
 		asl a
@@ -357,11 +358,11 @@ nesmus_shut_up:
 	sta $8001
 	rts
 	label_c35a:
-		jmp $c31d
+		jmp label_c31d
 		rts
-	jsr $dc6b
+	jsr label_dc6b
 	jsr label_db8e
-	jsr $dbc3
+	jsr label_dbc3
 	jsr label_dc26
 	jsr label_db8e
 	ldx #$00
@@ -383,31 +384,31 @@ nesmus_shut_up:
 	lda #$07
 	sta a: $52
 	jsr label_db8e
-	jsr $c4b4
+	jsr label_c4b4
 	jsr label_db8e
-	jsr $c5aa
+	jsr label_c5aa
 	jsr label_db8e
-	jsr $c6a0
+	jsr label_c6a0
 	dec a: $52
 	lda #$ff
 	sta a: temp
 	lda a: $52
 	cmp a: temp
 	beq :+
-	jmp $c397
+	jmp label_c397
 :	lda #$00
 	sta a: $52
 	jsr label_db8e
-	jsr $c706
+	jsr label_c706
 	inc a: $52
 	lda #$05
 	sta a: temp
 	lda a: $52
 	cmp a: temp
 	beq :+
-	jmp $c3c1
+	jmp label_c3c1
 :	jsr label_db8e
-	jsr $c414
+	jsr label_c414
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	lda #$00
@@ -419,16 +420,16 @@ nesmus_shut_up:
 	lda a: $53
 	cmp a: temp
 	bne :+
-	jsr $c47d
+	jsr label_c47d
 	rts
 :	lda #$03
 	sta a: temp
 	lda a: $53
 	cmp a: temp
 	bne :+
-	jsr $c414
+	jsr label_c414
 	rts
-:	jsr $c44b
+:	jsr label_c44b
 	rts
 	lda #$55
 	sta a: $54
@@ -450,7 +451,7 @@ nesmus_shut_up:
 	cmp a: temp
 	bne :+
 	rts
-:	jmp $c42d
+:	jmp label_c42d
 	rts
 	lda #$01
 	clc
@@ -471,7 +472,7 @@ nesmus_shut_up:
 	cmp a: temp
 	bne :+
 	rts
-:	jmp $c463
+:	jmp label_c463
 	rts
 	lda #$aa
 	sta a: $54
@@ -493,7 +494,7 @@ nesmus_shut_up:
 	cmp a: temp
 	bne :+
 	rts
-:	jmp $c496
+:	jmp label_c496
 	rts
 	lda a: $52
 	and #$07
@@ -597,7 +598,7 @@ nesmus_shut_up:
 	lda a: $56
 	adc #$00
 	sta a: $56
-	jmp $c505
+	jmp label_c505
 :	rts
 	lda a: $52
 	and #$07
@@ -701,7 +702,7 @@ nesmus_shut_up:
 	lda a: $56
 	adc #$00
 	sta a: $56
-	jmp $c5fb
+	jmp label_c5fb
 :	rts
 	lda a: $52
 	and #$07
@@ -741,7 +742,7 @@ nesmus_shut_up:
 	lda a: $57
 	adc #$08
 	sta a: $57
-	jmp $c6dd
+	jmp label_c6dd
 :	rts
 	lda a: $52
 	and #$07
@@ -864,13 +865,13 @@ label_c7a2:
 	lda a: button_start_down
 	cmp a: temp
 	beq :+
-	jsr $c99e
+	jsr label_c99e
 :	lda #$00
 	sta a: temp
 	lda a: button_up_down
 	cmp a: temp
 	beq :+
-	jsr $dd2d
+	jsr label_dd2d
 :	lda #$00
 	sta a: temp
 	lda a: player_health
@@ -881,13 +882,13 @@ label_c7a2:
 	lda a: player_direction
 	cmp a: temp
 	bne :+
-	jsr $d204
+	jsr label_d204
 :	lda #$01
 	sta a: temp
 	lda a: player_direction
 	cmp a: temp
 	bne :+
-	jsr $d255
+	jsr label_d255
 :	jmp label_c984
 label_c850:
 	lda #$00
@@ -904,13 +905,13 @@ label_c850:
 	beq :++
 	lda #$01
 	sta a: player_direction
-	jsr $cbaa
+	jsr label_cbaa
 	lda #$00
 	sta a: temp
 	lda a: button_b_down
 	cmp a: temp
 	beq :+
-	jsr $cbaa
+	jsr label_cbaa
 :	lda #$01
 	sta a: player_is_moving_h
 :	lda #$00
@@ -920,13 +921,13 @@ label_c850:
 	beq :++
 	lda #$00
 	sta a: player_direction
-	jsr $ccfa
+	jsr label_ccfa
 	lda #$00
 	sta a: temp
 	lda a: button_b_down
 	cmp a: temp
 	beq :+
-	jsr $ccfa
+	jsr label_ccfa
 :	lda #$01
 	sta a: player_is_moving_h
 :	lda #$00
@@ -961,7 +962,7 @@ label_c8dd:
 	sta a: player_fall_state
 	lda #$01
 	sta a: $5a
-	jsr $d5d8
+	jsr label_d5d8
 	jmp label_c984
 :	lda #$00
 	sta a: temp
@@ -985,7 +986,7 @@ label_c8dd:
 	lda a: $5d
 	cmp a: temp
 	beq label_c984
-	jsr $d584
+	jsr label_d584
 	lda #$01
 	sta a: player_fall_state
 	lda #$28
@@ -1010,36 +1011,36 @@ label_c8dd:
 	sta a: $5b
 	jmp label_c984
 label_c984:
-	jsr $cb8c
+	jsr label_cb8c
 	lda #$00
 	sta a: temp
 	lda a: i_frames
 	cmp a: temp
 	beq :+
 	dec a: i_frames
-:	jsr $ee7e
-	jsr $d4d9
+:	jsr label_ee7e
+	jsr label_d4d9
 	rts
 	;FIXME
 	; pausing shit?
 	lda #$00
 	sta $4015
-	jsr $d539
+	jsr label_d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
 	beq label_c9b6
-	jmp $c99e
+	jmp label_c99e
 label_c9b6:
-	jsr $d539
+	jsr label_d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
 	bne :+
 	jmp label_c9b6
-:	jsr $d539
+:	jsr label_d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
@@ -1054,50 +1055,50 @@ label_c9b6:
 	lda a: player_pos_x1
 	cmp a: temp
 	bne :+
-	jmp $ca36
+	jmp label_ca36
 :	lda $805d
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
 	bne :+
-	jmp $ca36
+	jmp label_ca36
 :	lda $805e
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
 	bne :+
-	jmp $ca36
+	jmp label_ca36
 :	lda #$00
 	sta a: $0e
 	jsr label_db8e
-	jsr $d5ed
+	jsr label_d5ed
 	inc a: $0e
 	lda #$1e
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $ca1a
-:	jmp $cab7
+	jmp label_ca1a
+:	jmp label_cab7
 	jsr label_dc26
 	lda $805f
 	sta a: temp
 	lda a: player_pos_x1
 	cmp a: temp
 	beq label_ca6c
-	jsr $e679
-	jsr $d204
-	jsr $d204
-	jsr $d204
+	jsr label_e679
+	jsr label_d204
+	jsr label_d204
+	jsr label_d204
 	jsr label_db8e
 	lda #$00
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	beq :+
-	jsr $d629
-:	jsr $d5ed
-	jmp $ca39
+	jsr label_d629
+:	jsr label_d5ed
+	jmp label_ca39
 label_ca6c:
 	lda #$02
 	sta a: $0c
@@ -1133,8 +1134,9 @@ label_ca6c:
 	; take a life
 	dec a: player_lives
 	rts
+label_cabb:
 	jsr nesmus_shut_up
-	jsr $dbc3
+	jsr label_dbc3
 	jsr label_dbda
 	; set health to 3
 	lda #$03
@@ -1162,7 +1164,7 @@ label_ca6c:
 	sta a: player_fall_state
 	lda #$ff
 	sta a: $60
-	jsr $d825
+	jsr label_d825
 	lda #$00
 	sta a: $61
 	jsr label_db8e
@@ -1172,11 +1174,11 @@ label_ca6c:
 	lda a: $61
 	cmp a: temp
 	bpl :+
-	jmp $cb0c
+	jmp label_cb0c
 :	lda #$00
 	sta a: $61
-	jsr $dbc3
-	jsr $c35e
+	jsr label_dbc3
+	jsr label_c35e
 	lda #$00
 	sta a: $07
 	jsr label_e5eb
@@ -1197,23 +1199,23 @@ label_ca6c:
 	sbc #$06
 	cmp a: temp
 	bmi label_cb75
-	jsr $d6e5
+	jsr label_d6e5
 	lda #$00
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	beq :+
-	jsr $d629
-:	jmp $cb4e
+	jsr label_d629
+:	jmp label_cb4e
 label_cb75:
-	jsr $c28b
+	jsr label_c28b
 	jsr label_db8e
 	jsr init_enemies
 	lda #$00
 	sta a: $5d
 	lda #$00
 	sta a: $25
-	jsr $d2bb
+	jsr label_d2bb
 	rts
 	ldx a: player_velocity
 	lda $e040,x
@@ -1223,16 +1225,16 @@ label_cb75:
 	lda a: player_fall_state
 	cmp a: temp
 	bne :+
-	jmp $ce4a
+	jmp label_ce4a
 	rts
-:	jmp $d023
+:	jmp label_d023
 	rts
 	lda #$03
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
 	bpl :+
-	jmp $d204
+	jmp label_d204
 :	lda a: player_pos_x1
 	asl a
 	asl a
@@ -1265,7 +1267,7 @@ label_cb75:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d204
+	jmp label_d204
 :	lda a: $63
 	clc
 	adc #$06
@@ -1279,7 +1281,7 @@ label_cb75:
 	cmp a: temp
 	beq :+
 	rts
-:	jmp $d204
+:	jmp label_d204
 label_cc2b:
 	lda #$7f
 	sta a: temp
@@ -1311,7 +1313,7 @@ label_cc2b:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d204
+	jmp label_d204
 :	lda a: $66
 	sec
 	sbc #$01
@@ -1325,7 +1327,7 @@ label_cc2b:
 	cmp a: temp
 	beq :+
 	rts
-:	jmp $d204
+:	jmp label_d204
 label_cc97:
 	lda a: $0c
 	sec
@@ -1354,7 +1356,7 @@ label_cc97:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d204
+	jmp label_d204
 :	lda a: $66
 	sec
 	sbc #$01
@@ -1368,14 +1370,14 @@ label_cc97:
 	cmp a: temp
 	beq :+
 	rts
-:	jsr $d204
+:	jsr label_d204
 	rts
 	lda #$00
 	sta a: temp
 	lda a: player_pos_x2
 	cmp a: temp
 	beq :+
-	jmp $d255
+	jmp label_d255
 :	lda a: player_pos_x1
 	sec
 	sbc #$01
@@ -1408,7 +1410,7 @@ label_cc97:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d255
+	jmp label_d255
 :	lda a: $63
 	clc
 	adc #$06
@@ -1422,7 +1424,7 @@ label_cc97:
 	cmp a: temp
 	beq :+
 	rts
-:	jmp $d255
+:	jmp label_d255
 label_cd7b:
 	lda #$7f
 	sta a: temp
@@ -1454,7 +1456,7 @@ label_cd7b:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d255
+	jmp label_d255
 :	lda a: $66
 	sec
 	sbc #$01
@@ -1468,7 +1470,7 @@ label_cd7b:
 	cmp a: temp
 	beq :+
 	rts
-:	jmp $d255
+:	jmp label_d255
 label_cde7:
 	lda a: $0c
 	clc
@@ -1497,7 +1499,7 @@ label_cde7:
 	lda a: $12
 	cmp a: temp
 	beq :+
-	jmp $d255
+	jmp label_d255
 :	lda a: $66
 	sec
 	sbc #$01
@@ -1511,7 +1513,7 @@ label_cde7:
 	cmp a: temp
 	beq :+
 	rts
-:	jmp $d255
+:	jmp label_d255
 	rts
 	lda #$00
 	sta a: temp
@@ -1559,7 +1561,7 @@ label_ce9f:
 	lda a: $0c
 	cmp a: temp
 	bmi :+
-	jmp $cf71
+	jmp label_cf71
 :	lda a: $0c
 	pha
 	lda #$e8
@@ -1607,7 +1609,7 @@ label_cef7:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d01a
+	jmp label_d01a
 :	lda #$00
 	sta a: $64
 	lda #$04
@@ -1628,7 +1630,7 @@ label_cef7:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d01a
+	jmp label_d01a
 :	lda a: $0c
 	sec
 	sbc a: $62
@@ -1681,7 +1683,7 @@ label_cfa0:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d01a
+	jmp label_d01a
 :	lda #$00
 	sta a: $64
 	lda #$04
@@ -1702,7 +1704,7 @@ label_cfa0:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d01a
+	jmp label_d01a
 :	lda a: $0c
 	sec
 	sbc a: $62
@@ -1718,7 +1720,7 @@ label_cfa0:
 :	rts
 	lda #$00
 	sta a: player_fall_state
-	jsr $dc92
+	jsr label_dc92
 	rts
 	lda #$00
 	sta a: temp
@@ -1776,7 +1778,7 @@ label_d05d:
 	lda a: $0c
 	cmp a: temp
 	bmi :+
-	jmp $d144
+	jmp label_d144
 :	lda a: $0c
 	clc
 	adc a: $62
@@ -1798,7 +1800,7 @@ label_d05d:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d1e1
+	jmp label_d1e1
 :	lda #$00
 	sta a: $64
 	lda #$04
@@ -1819,7 +1821,7 @@ label_d05d:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d1e1
+	jmp label_d1e1
 :	lda a: $0c
 	clc
 	adc a: $62
@@ -1863,7 +1865,7 @@ label_d05d:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d1e1
+	jmp label_d1e1
 :	lda #$00
 	sta a: $64
 	lda #$04
@@ -1884,7 +1886,7 @@ label_d05d:
 	and a: $54
 	cmp a: temp
 	beq :+
-	jmp $d1e1
+	jmp label_d1e1
 :	lda a: $0c
 	clc
 	adc a: $62
@@ -1950,7 +1952,7 @@ label_d05d:
 	cmp a: temp
 	bmi :+
 	beq :+
-	jsr $d6e5
+	jsr label_d6e5
 :	rts
 	lda #$00
 	sta a: temp
@@ -1991,7 +1993,7 @@ label_d05d:
 	cmp a: temp
 	bpl :+
 	beq :+
-	jsr $d773
+	jsr label_d773
 :	rts
 	lda #$20
 	sta a: $24
@@ -2082,15 +2084,15 @@ label_d05d:
 	sta a: $6d
 :	lda #$1e
 	sta a: $6e
-	jsr $f4f5
+	jsr label_f4f5
 label_d391:
 	lda #$01
 	sta a: temp
 	lda a: player_direction
 	cmp a: temp
 	bne :+
-	jmp $d3a4
-:	jmp $d43a
+	jmp label_d3a4
+:	jmp label_d43a
 	ldx #$00
 	lda a: player_offset_y
 	sta $0300,x
@@ -2264,7 +2266,7 @@ label_d391:
 	adc #$04
 	sta a: $22
 	inc a: $0e
-	jmp $d4de
+	jmp label_d4de
 	rts
 	rts
 	lda #$01
@@ -2354,7 +2356,7 @@ label_d391:
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
-	jmp $d613
+	jmp label_d613
 :	lda #$30
 	sta PPU_CTRL1
 	lda #$1c
@@ -2379,11 +2381,12 @@ label_d391:
 	bne :+
 	rts
 :	lda #$06
+label_d639:
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bmi :+
-	jmp $d696
+	jmp label_d696
 :	lda a: $1e
 	clc
 	adc #$05
@@ -2393,25 +2396,25 @@ label_d391:
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c4b4
+	jsr label_c4b4
 :	lda #$03
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c5aa
+	jsr label_c5aa
 :	lda #$04
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c6a0
+	jsr label_c6a0
 :	lda #$05
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c706
+	jsr label_c706
 :	lda #$00
 	sta a: $58
 	rts
@@ -2424,25 +2427,25 @@ label_d391:
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c4b4
+	jsr label_c4b4
 :	lda #$08
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c5aa
+	jsr label_c5aa
 :	lda #$09
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c6a0
+	jsr label_c6a0
 :	lda #$0a
 	sta a: temp
 	lda a: $58
 	cmp a: temp
 	bne :+
-	jsr $c706
+	jsr label_c706
 :	lda #$00
 	sta a: $58
 	rts
@@ -2573,7 +2576,7 @@ label_d391:
 	lda #$0a
 	sta a: $58
 :	rts
-	jsr $dae9
+	jsr label_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$08
@@ -2611,7 +2614,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d869
+	jmp label_d869
 :	lda a: player_lives
 	sta a: $0e
 	lda #$22
@@ -2628,11 +2631,11 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d896
-:	jsr $db09
+	jmp label_d896
+:	jsr label_db09
 	rts
 	; FIXME
-	jsr $dae9
+	jsr label_dae9
 	jsr label_db8e
 	lda #$20
 	sta $2006
@@ -2649,7 +2652,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d8cc
+	jmp label_d8cc
 :	jsr label_db8e
 	lda #$20
 	sta $2006
@@ -2666,7 +2669,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d8fa
+	jmp label_d8fa
 :	jsr label_db8e
 	lda #$21
 	sta $2006
@@ -2683,7 +2686,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d928
+	jmp label_d928
 :	jsr label_db8e
 	lda #$21
 	sta $2006
@@ -2700,7 +2703,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d956
+	jmp label_d956
 :	jsr label_db8e
 	lda #$21
 	sta $2006
@@ -2717,7 +2720,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d984
+	jmp label_d984
 :	jsr label_db8e
 	lda #$21
 	sta $2006
@@ -2734,7 +2737,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d9b2
+	jmp label_d9b2
 :	jsr label_db8e
 	lda #$22
 	sta $2006
@@ -2751,7 +2754,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $d9e0
+	jmp label_d9e0
 :	jsr label_db8e
 	lda #$22
 	sta $2006
@@ -2768,7 +2771,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $da0e
+	jmp label_da0e
 :	jsr label_db8e
 	lda #$22
 	sta $2006
@@ -2785,31 +2788,31 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $da3c
-:	jsr $db09
+	jmp label_da3c
+:	jsr label_db09
 	jsr nesmus_shut_up
 	lda #$00
 	sta $2005
 	lda #$00
 	sta $2005
 	jsr label_db8e
-	jsr $d539
+	jsr label_d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
 	bne :+
-	jmp $da68
+	jmp label_da68
 :	jsr label_db8e
-	jsr $d539
+	jsr label_d539
 	lda #$00
 	sta a: temp
 	lda a: button_start_down
 	cmp a: temp
 	beq :+
-	jmp $da7e
+	jmp label_da7e
 :	rts
-	jsr $dae9
+	jsr label_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$08
@@ -2825,12 +2828,12 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $daa7
-:	jsr $db09
+	jmp label_daa7
+:	jsr label_db09
 	jsr nesmus_shut_up
 	lda #$c8
 	sta a: $71
-	jsr $dad2
+	jsr label_dad2
 	rts
 	jsr label_db8e
 	dec a: $71
@@ -2839,10 +2842,10 @@ label_d391:
 	lda a: $71
 	cmp a: temp
 	beq :+
-	jmp $dad2
+	jmp label_dad2
 :	rts
-	jsr $db80
-	jsr $c2e0
+	jsr label_db80
+	jsr label_c2e0
 	jsr label_db8e
 	jsr label_dbda
 	jsr label_db8e
@@ -2869,7 +2872,7 @@ label_d391:
 	cmp a: temp
 	bne :+
 	rts
-:	jmp $db18
+:	jmp label_db18
 	; FIXME
 	lda #$3f
 	sta $2006
@@ -2887,9 +2890,9 @@ label_d391:
 	cmp a: temp
 	bne :+
 	rts
-:	jmp $db44
-	jsr $d629
-	jsr $d5ed
+:	jmp label_db44
+	jsr label_d629
+	jsr label_d5ed
 	lda #$03
 	sta APU_SPR_DMA
 	lda #$10
@@ -2947,25 +2950,25 @@ label_d391:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
-	jsr $dc1b
+	jsr label_dc1b
 	jsr label_db8e
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
-	jsr $dc1b
+	jsr label_dc1b
 	jsr label_db8e
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
-	jsr $dc1b
+	jsr label_dc1b
 	jsr label_db8e
 	lda #$23
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
-	jsr $dc1b
+	jsr label_dc1b
 	rts
 	ldx #$00
 :	sta PPU_VRAM_IO
@@ -2986,7 +2989,7 @@ label_d391:
 		lda a: $66
 		cmp a: temp
 		beq :+
-		jmp $dc30
+		jmp label_dc30
 	:	rts
 	; FIXME
 	lda #$00
@@ -3000,13 +3003,14 @@ label_d391:
 	lda a: $66
 	cmp a: temp
 	beq :+
-	jmp $dc4e
+	jmp label_dc4e
 :	rts
 	irq:
 	rti
 	lda #$05
 	sta a: $7e
 	rts
+label_dc71:
 	lda #$00
 	sta a: $0e
 	ldx a: $0e
@@ -3018,7 +3022,7 @@ label_d391:
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $dc76
+	jmp label_dc76
 :	rts
 	lda #$00
 	sta a: $7f
@@ -3030,7 +3034,7 @@ label_d391:
 	lda a: $80
 	cmp a: temp
 	beq :+
-	jmp $dd19
+	jmp label_dd19
 :	ldx a: $7f
 	lda $8070,x
 	sta a: $81
@@ -3048,7 +3052,7 @@ label_d391:
 	lsr a
 	cmp a: temp
 	beq :+
-	jmp $dd19
+	jmp label_dd19
 :	lda a: $81
 	sta a: temp
 	lda a: player_pos_x1
@@ -3059,7 +3063,7 @@ label_d391:
 	lda a: player_pos_x2
 	cmp a: temp
 	bpl :+
-	jmp $ddd8
+	jmp label_ddd8
 :	lda a: $81
 	sta a: temp
 	lda a: player_pos_x1
@@ -3072,7 +3076,7 @@ label_d391:
 	lda a: player_pos_x2
 	cmp a: temp
 	bmi label_dd19
-	jmp $ddd8
+	jmp label_ddd8
 label_dd19:
 	inc a: $7f
 	lda #$0c
@@ -3080,7 +3084,7 @@ label_dd19:
 	lda a: $7f
 	cmp a: temp
 	beq :+
-	jmp $dc97
+	jmp label_dc97
 :	rts
 	lda #$00
 	sta a: $83
@@ -3101,7 +3105,7 @@ label_dd19:
 	lsr a
 	cmp a: temp
 	beq :+
-	jmp $dd9b
+	jmp label_dd9b
 :	lda a: $84
 	sta a: temp
 	lda a: player_pos_x1
@@ -3112,7 +3116,7 @@ label_dd19:
 	lda a: player_pos_x2
 	cmp a: temp
 	bpl :+
-	jmp $ddb0
+	jmp label_ddb0
 :	lda a: $84
 	sta a: temp
 	lda a: player_pos_x1
@@ -3125,7 +3129,7 @@ label_dd19:
 	lda a: player_pos_x2
 	cmp a: temp
 	bmi label_dd9b
-	jmp $ddb0
+	jmp label_ddb0
 label_dd9b:
 	inc a: $83
 	lda a: $7e
@@ -3133,22 +3137,23 @@ label_dd9b:
 	lda a: $83
 	cmp a: temp
 	bpl :+
-	jmp $dd32
+	jmp label_dd32
 :	rts
-	jsr $c3eb
+	jsr label_c3eb
 	lda #$00
 	sta a: $86
+label_ddb8:
 	jsr label_db8e
-	jsr $e679
-	jsr $de0d
+	jsr label_e679
+	jsr label_de0d
 	inc a: $86
 	lda #$15
 	sta a: temp
 	lda a: $86
 	cmp a: temp
 	beq :+
-	jmp $ddb8
-:	jsr $c3eb
+	jmp label_ddb8
+:	jsr label_c3eb
 	rts
 	ldx a: $7f
 	lda #$01
@@ -3177,20 +3182,22 @@ label_dd9b:
 	rts
 	lda #$00
 	sta a: $0e
+label_de12:
 	lda #$00
 	sta a: $87
+label_de17:
 	inc a: $87
 	lda #$40
 	sta a: temp
 	lda a: $87
 	cmp a: temp
 	beq :+
-	jmp $de17
+	jmp label_de17
 :	inc a: $0e
 	lda #$11
 	sta a: temp
 	lda a: $0e
 	cmp a: temp
 	beq :+
-	jmp $de12
+	jmp label_de12
 :	rts

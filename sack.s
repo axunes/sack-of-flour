@@ -7,6 +7,8 @@
 	.charmap I, I
 .endrepeat
 
+
+
 .segment "HEADER"
 	INES_MAPPER = 4
 	INES_PRG_ROM_SIZE = $8
@@ -230,3 +232,9 @@
 	.incbin "2.chr"
 .segment "CHR3"
 	.incbin "3.chr"
+
+.repeat $10000, I
+	.ifndef .ident(.sprintf("label_%04x", I))
+		.ident(.sprintf("label_%04x", I)) := I
+	.endif
+.endrepeat
