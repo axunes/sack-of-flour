@@ -2269,6 +2269,7 @@ label_d391:
 	jmp label_d4de
 	rts
 	rts
+label_d539:
 	lda #$01
 	sta APU_PAD1
 	lda #$00
