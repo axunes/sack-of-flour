@@ -244,12 +244,10 @@ setLongBranch -, -
 fuck = 1
 
 .ifdef fuck
-	.repeat $4000, I
-		.ifref .ident(.sprintf("label_%04x", I + $c000))
-			.ifndef .ident(.sprintf("label_%04x", I + $c000))
-				.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
-				.out .sprintf("label_%04x", I + $c000)
-			.endif
+	.repeat $2000, I
+		.if .referenced(.ident(.sprintf("label_%04x", I + $c000))) && (.not .defined(.ident(.sprintf("label_%04x", I + $c000))))
+			.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
+			.out .sprintf("label_%04x", I + $c000)
 		.endif
 	.endrepeat
 .endif
