@@ -2039,7 +2039,7 @@ label_f85d:
 :	lda #$00
 	sta konami_code_correct_presses
 	rts
-	jsr $d539
+	jsr get_controller_buttons
 	lda button_a_down
 	sta button_mask
 	lda button_mask

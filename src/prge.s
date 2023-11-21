@@ -28,7 +28,7 @@ nmi:
 	jsr label_dc71
 	jsr label_cabb
 label_c04a:
-	jsr label_d539
+	jsr get_controller_buttons
 	jsr label_c7ec
 	jsr label_d2bb
 	jsr label_e8ed
@@ -855,7 +855,7 @@ label_c7a2:
 	nop
 	nop
 	rts
-label_c7ec:
+label_c7ec: ; giant player process routine I think
 	lda #$00
 	sta ram_58
 	lda #$00
@@ -864,36 +864,42 @@ label_c7ec:
 	sta ram_12
 	lda #$00
 	sta ram_5a
-	lda #$00
-	sta temp
-	lda button_start_down
-	cmp temp
-	beq :+
-	jsr label_c99e
-:	lda #$00
-	sta temp
-	lda button_up_down
-	cmp temp
-	beq :+
-	jsr label_dd2d
-:	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	bne label_c850
-	lda #$00
-	sta temp
-	lda player_direction
-	cmp temp
-	bne :+
-	jsr label_d204
-:	lda #$01
-	sta temp
-	lda player_direction
-	cmp temp
-	bne :+
-	jsr label_d255
-:	jmp label_c984
+;	lda #$00
+;	sta temp
+;	lda button_start_down
+;	cmp temp
+;	beq :+
+;	jsr label_c99e
+	if (button_start_down <> #0) jsr label_c99e
+;	lda #$00
+;	sta temp
+;	lda button_up_down
+;	cmp temp
+;	beq :+
+;	jsr label_dd2d
+	if (button_up_down <> #0) jsr label_dd2d
+;	lda #$00
+;	sta temp
+;	lda player_health
+;	cmp temp
+;	bne label_c850
+	if (player_health = #00)
+	;	lda #$00
+	;	sta temp
+	;	lda player_direction
+	;	cmp temp
+	;	bne :+
+	;	jsr label_d204
+		if (player_direction = #0) jsr label_d204
+	;	lda #$01
+	;	sta temp
+	;	lda player_direction
+	;	cmp temp
+	;	bne :+
+	;	jsr label_d255
+		if (player_direction = #1) jsr label_d255
+		jmp label_c984
+	endif
 label_c850:
 	lda #$00
 	sta temp
@@ -1025,11 +1031,24 @@ label_c984:
 :	jsr label_ee7e
 	jsr label_d4d9
 	rts
+
+
+
+
+
+
+
+
+
+
+
+
+
 	;FIXME
 	; pausing shit?
 	lda #$00
 	sta $4015
-	jsr label_d539
+	jsr get_controller_buttons
 	lda #$00
 	sta temp
 	lda button_start_down
@@ -1037,14 +1056,14 @@ label_c984:
 	beq label_c9b6
 	jmp label_c99e
 label_c9b6:
-	jsr label_d539
+	jsr get_controller_buttons
 	lda #$00
 	sta temp
 	lda button_start_down
 	cmp temp
 	bne :+
 	jmp label_c9b6
-:	jsr label_d539
+:	jsr get_controller_buttons
 	lda #$00
 	sta temp
 	lda button_start_down
@@ -2290,7 +2309,7 @@ label_d391:
 	jmp label_d4de
 	rts
 	rts
-label_d539:
+get_controller_buttons:
 	lda #$01
 	sta APU_PAD1
 	lda #$00
@@ -2819,7 +2838,7 @@ label_d639:
 	lda #$00
 	sta $2005
 	jsr label_db8e
-	jsr label_d539
+	jsr get_controller_buttons
 	lda #$00
 	sta temp
 	lda button_start_down
@@ -2827,7 +2846,7 @@ label_d639:
 	bne :+
 	jmp label_da68
 :	jsr label_db8e
-	jsr label_d539
+	jsr get_controller_buttons
 	lda #$00
 	sta temp
 	lda button_start_down
