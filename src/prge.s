@@ -42,24 +42,25 @@ label_c04a:
 	jsr label_db8e
 	jsr label_db61
 	if (ram_0b <> #0) goto label_c0e9, long
-	lda #$fc
-	sta temp
-	lda player_position_y_again
-	and #$fc
-	cmp temp
-	bne label_c0aa
-	jsr label_c9e2
-;	if (player_position_y_again & #$fc = #$fc) jsr label_c9e2
-
-;	lda #$02
+;	lda #$fc
 ;	sta temp
 ;	lda player_position_y_again
+;	and #$fc
 ;	cmp temp
-;	bne label_c0a7
-;	jmp label_c04a
-	if (player_position_y_again = #02) jmp label_c04a
-label_c0a7:
-	jmp label_c0cd
+;	bne label_c0aa
+;	jsr label_c9e2
+	if (player_position_y_again & #$fc = #$fc)
+		jsr label_c9e2
+	;	lda #$02
+	;	sta temp
+	;	lda player_position_y_again
+	;	cmp temp
+	;	bne label_c0a7
+	;	jmp label_c04a
+		if (player_position_y_again = #02) jmp label_c04a
+		jmp label_c0cd
+	endif
+	
 	
 label_c0aa:
 	lda #$00
