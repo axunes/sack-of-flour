@@ -532,7 +532,7 @@ label_c4b4:
 	sta ram_00
 	inx
 	lda tile_shit_4,x
-	sta ram_01
+	sta ram_00+1
 	ldx ram_55
 	lda tile_shit_1,x
 	sta ram_56
@@ -636,7 +636,7 @@ label_c4b4:
 	sta ram_00
 	inx
 	lda tile_shit_4,x
-	sta ram_01
+	sta ram_00+1
 	ldx ram_55
 	lda tile_shit_2,x
 	sta ram_56
@@ -780,7 +780,7 @@ label_c4b4:
 	sta ram_00
 	inx
 	lda tile_shit_4,x
-	sta ram_01
+	sta ram_00+1
 	ldy #$4c
 	clc
 	lda ram_52

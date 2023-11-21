@@ -1,6 +1,5 @@
 .segment "ZP"
-	ram_00: .res 1 ; probably a pointer to level data or something
-	ram_01: .res 1
+	ram_00: .res 2 ; probably a pointer to level data or something
 	music_pointer: .res 2
 	ram_04: .res 1
 	ram_05: .res 1
@@ -56,46 +55,12 @@
 	ram_27: .res 1
 	ram_28: .res 1
 	ram_29: .res 1
-	ram_2a: .res 1
-	ram_2b: .res 1
-	ram_2c: .res 1
-	ram_2d: .res 1
-	ram_2e: .res 1
-	ram_2f: .res 1
-	ram_30: .res 1
-	ram_31: .res 1
-	ram_32: .res 1
-	ram_33: .res 1
-	ram_34: .res 1
-	ram_35: .res 1
-	ram_36: .res 1
-	ram_37: .res 1
-	ram_38: .res 1
-	ram_39: .res 1
-	ram_3a: .res 1
-	ram_3b: .res 1
-	ram_3c: .res 1
-	ram_3d: .res 1
-	ram_3e: .res 1
-	ram_3f: .res 1
-	ram_40: .res 1
-	ram_41: .res 1
-	ram_42: .res 1
-	ram_43: .res 1
-	ram_44: .res 1
-	ram_45: .res 1
-	ram_46: .res 1
-	ram_47: .res 1
-	ram_48: .res 1
-	ram_49: .res 1
-	ram_4a: .res 1
-	ram_4b: .res 1
-	ram_4c: .res 1
-	ram_4d: .res 1
-	ram_4e: .res 1
-	ram_4f: .res 1
-	ram_50: .res 1
-	ram_51: .res 1
+	; could be decompression related
+	ram_2a: .res 8
+	ram_32: .res 8
+	ram_3a: .res 8
+	ram_42: .res 8
+	ram_4a: .res 8
 	ram_52: .res 1
 	ram_53: .res 1
 	ram_54: .res 1
@@ -128,18 +93,7 @@
 	ram_6f: .res 1
 	ram_70: .res 1
 	ram_71: .res 1
-	ram_72: .res 1
-	ram_73: .res 1
-	ram_74: .res 1
-	ram_75: .res 1
-	ram_76: .res 1
-	ram_77: .res 1
-	ram_78: .res 1
-	ram_79: .res 1
-	ram_7a: .res 1
-	ram_7b: .res 1
-	ram_7c: .res 1
-	ram_7d: .res 1
+	ram_72: .res 12
 	ram_7e: .res 1
 	ram_7f: .res 1
 	ram_80: .res 1
@@ -164,12 +118,7 @@
 	enemy_pos_x2: .res 6
 	enemy_pos_y: .res 6
 	enemy_type: .res 6
-	ram_aa: .res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
-	.res 1
+	ram_aa: .res 6
 	ram_b0: .res 1
 	ram_b1: .res 1
 	which_enemy: .res 1
