@@ -1701,9 +1701,11 @@ label_cfa0:
 	lda ram_67
 	and ram_54
 	cmp temp
-	beq :+
-	jmp label_d01a
-:	lda #$00
+;	beq :+
+;	jmp label_d01a
+;	:
+	if (!Z) goto label_d01a, long
+	lda #$00
 	sta ram_64
 	lda #$04
 	sta temp
