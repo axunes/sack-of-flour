@@ -1635,8 +1635,7 @@ label_cef7:
 ;	tax
 ;	lda $0400,x
 ;	sta a: $64
-	cmp a: temp
-	if (!(N || Z))
+	if (a > temp)
 		lda a: $66
 		clc
 		adc #$08

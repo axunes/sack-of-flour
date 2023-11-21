@@ -275,9 +275,10 @@
 ;
 ;   Simulate a branch for 'G' flag clear: 'less or equal'
 
+; sacked
 .macro branchOnLessOrEqual label
+    bmi label
     beq label
-    bcc label
 .endmacro
 
 ; --------------------------------------------------------------------------------------------
@@ -627,7 +628,8 @@
     .endif
     
     .if left = REGA
-        cmp _RIGHT
+        ; sacked
+        cmp a: _RIGHT
     .elseif left = REGX
         cpx _RIGHT
     .elseif left = REGY

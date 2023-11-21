@@ -1,5 +1,6 @@
 .include "inc/nes.inc"
 .include "inc/macros.inc"
+.include "src/memory.s"
 .linecont +
 .include "inc/ca65hl/ca65hl.inc"
 
@@ -24,7 +25,7 @@
 	INES_MIRROR = 1
 	.include "inc/header.inc"
 
-.include "src/memory.s"
+
 
 ; levels
 
