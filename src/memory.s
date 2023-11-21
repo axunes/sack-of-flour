@@ -1,6 +1,7 @@
-.segment "ZEROPAGE"
+.segment "ZP": absolute
 	.res 2 ; probably a pointer to level data or something
-	music_pointer: .res 2
+	music_pointer = 2 ; music_pointer:
+	.res 2
 	.res 1
 	.res 1
 	.res 1

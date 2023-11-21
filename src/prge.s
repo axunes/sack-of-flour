@@ -1625,7 +1625,6 @@ label_cef7:
 	sta a: $64
 	lda #$04
 	sta a: temp
-	lda a: player_pos_x2
 ;	cmp a: temp
 ;	bmi :+
 ;	beq :+
@@ -1635,7 +1634,7 @@ label_cef7:
 ;	tax
 ;	lda $0400,x
 ;	sta a: $64
-	if (a > temp)
+	if (player_pos_x2 > temp)
 		lda a: $66
 		clc
 		adc #$08

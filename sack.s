@@ -1,6 +1,8 @@
 .include "inc/nes.inc"
 .include "inc/macros.inc"
 .include "src/memory.s"
+
+CA65HL_USE_CUSTOM_SYNTAX = 0
 .linecont +
 .include "inc/ca65hl/ca65hl.inc"
 
@@ -249,7 +251,7 @@ fuck = 1
 ;shit = 1
 
 .ifdef fuck
-	.repeat $2000, I
+	.repeat $4000, I
 		.ifndef .ident(.sprintf("label_%04x", I + $c000))
 			.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
 		.endif

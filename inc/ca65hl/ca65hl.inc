@@ -628,8 +628,7 @@
     .endif
     
     .if left = REGA
-        ; sacked
-        cmp a: _RIGHT
+        cmp _RIGHT
     .elseif left = REGX
         cpx _RIGHT
     .elseif left = REGY
