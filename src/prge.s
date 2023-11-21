@@ -181,6 +181,17 @@ label_c17f:
 	adc ram_11
 	sta ram_05
 	rts
+
+
+
+
+
+
+
+
+
+
+	
 	label_c1c2:
 		lda #$00
 		sta button_a_down
@@ -2034,7 +2045,7 @@ label_d255:
 	beq :+
 	jsr label_d773
 :	rts
-label_d2bb:
+label_d2bb: ; process player sprites, store in oam
 	lda #$20
 	sta player_sprite
 	inc player_anim_timer
@@ -2196,6 +2207,19 @@ label_d391:
 	adc player_offset_x
 	sta $0300,x
 	rts
+
+
+
+
+
+
+
+
+
+
+
+
+
 	lda ram_6a
 	clc
 	adc #$40

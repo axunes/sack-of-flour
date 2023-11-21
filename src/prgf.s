@@ -328,7 +328,7 @@ label_e816:
 	sta enemy_pos_x,x
 	jsr $d5c3
 	rts
-label_e8ed:
+label_e8ed: ; process enemies
 	lda #$ff
 	sta which_enemy
 	inc which_enemy
