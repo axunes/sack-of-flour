@@ -50,7 +50,6 @@ label_e64c:
 	lda a: $8d
 	sta a: $03
 	jmp $e679
-label_e679:
 :	clc
 	lda a: music_pointer
 	adc #$01
@@ -59,6 +58,7 @@ label_e679:
 	adc #$00
 	sta a: $03
 	jmp $e679
+label_e679:
 	lda #$00
 	sta a: temp
 	lda a: $8f

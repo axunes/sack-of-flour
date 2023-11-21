@@ -39,9 +39,12 @@
 ; code
 
 .segment "PRGE"
+.org $c000
 	.include "src/prge.s"
+	.reloc
 	
 .segment "PRGF"
+.org $e000
 	weird_fucking_data: ; this only used to load as a palette somewhere
 	.byte $28, $38, $37, $08, $28, $21, $37, $38
 	.byte $28, $38, $01, $08, $28, $21, $37, $01
@@ -220,7 +223,7 @@
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
 	.include "src/prgf.s"
 	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
-
+.reloc
 .segment "VECTORS"
 	.addr nmi, reset, irq
 
@@ -234,10 +237,22 @@
 	.incbin "3.chr"
 
 ;fuck = 1
+;shit = 1
+
 .ifdef fuck
 	.repeat $10000, I
 		.ifndef .ident(.sprintf("label_%04x", I))
 			.ident(.sprintf("label_%04x", I)) := I
+		.endif
+	.endrepeat
+.endif
+
+.ifdef shit
+	.repeat $10000, I
+		.ifdef .ident(.sprintf("label_%04x", I))
+			.if .ident(.sprintf("label_%04x", I)) <> I
+			.out .string(I)
+			.endif
 		.endif
 	.endrepeat
 .endif

@@ -97,9 +97,11 @@ label_c0e3:
 label_c0e9:
 	jsr label_e7f4
 	jmp label_c0ef
+label_c0ef:
 	jsr nesmus_shut_up
 	lda #$1e
 	sta a: $0e
+label_c0f7:
 	jsr label_db8e
 	jsr label_d5ed
 	dec a: $0e
