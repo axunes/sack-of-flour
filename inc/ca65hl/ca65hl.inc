@@ -590,6 +590,10 @@
             left .set REGY
         .endif
     .endif
+
+    lda _RIGHT
+    sta temp
+
     ; no registers found, so first we will load a register, or eval an expression
     .if !left
         .define _LEFT1 .left (1, {_LEFT})
@@ -628,7 +632,7 @@
     .endif
     
     .if left = REGA
-        cmp _RIGHT
+        cmp temp
     .elseif left = REGX
         cpx _RIGHT
     .elseif left = REGY

@@ -1623,8 +1623,8 @@ label_cef7:
 	jmp label_d01a
 :	lda #$00
 	sta ram_64
-	lda #$04
-	sta temp
+;	lda #$04
+;	sta temp
 ;	lda player_pos_x2
 ;	cmp temp
 ;	bmi :+
@@ -1635,7 +1635,7 @@ label_cef7:
 ;	tax
 ;	lda $0400,x
 ;	sta ram_64
-	if (player_pos_x2 > temp)
+	if (player_pos_x2 > #04)
 		lda ram_66
 		clc
 		adc #$08
