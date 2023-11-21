@@ -103,7 +103,7 @@
 ; --------------------------------------------------------------------------------------------
 .include "stacks.inc"             ; macros that allow for named stacks 
 .include "tokeneval.inc"          ; macros to make token evaluation easier
-.include "debug.inc"              ; macros to help with debugging
+;.include "debug.inc"              ; macros to help with debugging
 .if ::CA65HL_USE_CUSTOM_SYNTAX
     .include "customSyntax.inc"   ; macros to enable allow custom syntax for instructions
 .endif

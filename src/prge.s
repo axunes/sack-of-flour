@@ -1,6 +1,5 @@
-	reset:
-	nmi:
-	label_c000:
+reset:
+nmi:
 	jsr label_c35a
 	jsr label_c236
 	jsr label_db8e
@@ -90,7 +89,7 @@ label_c0cd:
 	bne label_c0e3
 	jsr label_da95
 	jsr label_c3eb
-	jmp label_c000
+	jmp reset
 label_c0e3:
 	jsr label_cabb
 	jmp label_c04a

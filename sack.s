@@ -3,16 +3,10 @@
 .include "src/memory.s"
 
 ; CA65HL_USE_CUSTOM_SYNTAX = 0
-.linecont +
 .include "inc/ca65hl/ca65hl.inc"
+setLongBranch -, -
 
 ; 0E = play, FE = loop?
-
-; bpl
-; beq
-
-; bmi
-; beq
 
 .repeat $100, I
 	.charmap I, I
