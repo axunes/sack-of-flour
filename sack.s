@@ -242,21 +242,13 @@ setLongBranch -, -
 	.incbin "3.chr"
 
 fuck = 1
-;shit = 1
 
 .ifdef fuck
 	.repeat $4000, I
-		.ifndef .ident(.sprintf("label_%04x", I + $c000))
-			.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
-		.endif
-	.endrepeat
-.endif
-
-.ifdef shit
-	.repeat $10000, I
-		.ifdef .ident(.sprintf("label_%04x", I))
-			.if .ident(.sprintf("label_%04x", I)) <> I
-			.out .string(I)
+		.ifref .ident(.sprintf("label_%04x", I + $c000))
+			.ifndef .ident(.sprintf("label_%04x", I + $c000))
+				.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
+				.out .sprintf("label_%04x", I + $c000)
 			.endif
 		.endif
 	.endrepeat
