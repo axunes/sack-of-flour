@@ -1626,16 +1626,25 @@ label_cef7:
 	lda #$04
 	sta a: temp
 	lda a: player_pos_x2
+;	cmp a: temp
+;	bmi :+
+;	beq :+
+;	lda a: $66
+;	clc
+;	adc #$08
+;	tax
+;	lda $0400,x
+;	sta a: $64
 	cmp a: temp
-	bmi :+
-	beq :+
-	lda a: $66
-	clc
-	adc #$08
-	tax
-	lda $0400,x
-	sta a: $64
-:	lda #$00
+	if (!(N || Z))
+		lda a: $66
+		clc
+		adc #$08
+		tax
+		lda $0400,x
+		sta a: $64
+	endif
+	lda #$00
 	sta a: temp
 	lda a: $64
 	and a: $54
@@ -2002,6 +2011,12 @@ label_d255:
 :	lda #$06
 	sta a: temp
 	lda a: player_pos_x1
+
+	; subtract $20 from playerposx1
+	; compare playerposx1 and 6
+	; this is equal to subtracting playerposx1 by 6 but not storing
+	; if 
+
 	sec
 	sbc a: $20
 	cmp a: temp

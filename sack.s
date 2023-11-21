@@ -1,7 +1,15 @@
 .include "inc/nes.inc"
 .include "inc/macros.inc"
+.linecont +
+.include "inc/ca65hl/ca65hl.inc"
 
 ; 0E = play, FE = loop?
+
+; bpl
+; beq
+
+; bmi
+; beq
 
 .repeat $100, I
 	.charmap I, I
