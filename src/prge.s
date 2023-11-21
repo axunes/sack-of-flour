@@ -35,37 +35,32 @@ label_c04a:
 	jsr label_c24e
 
 	; if player_health is 0, KILL?
-	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	beq :+
-	jsr label_e679
-:	jsr label_c17f
+	; ^ I guess that's wrong
+	if (player_health <> #0) jsr label_e679
+	jsr label_c17f
 	jsr label_e816
 	jsr label_db8e
 	jsr label_db61
-	lda #$00
-	sta temp
-	lda ram_0b
-	cmp temp
-	beq :+
-	jmp label_c0e9
-:	lda #$fc
+	if (ram_0b <> #0) goto label_c0e9, long
+	lda #$fc
 	sta temp
 	lda player_position_y_again
 	and #$fc
 	cmp temp
 	bne label_c0aa
 	jsr label_c9e2
-	lda #$02
-	sta temp
-	lda player_position_y_again
-	cmp temp
-	bne label_c0a7
-	jmp label_c04a
+;	if (player_position_y_again & #$fc = #$fc) jsr label_c9e2
+
+;	lda #$02
+;	sta temp
+;	lda player_position_y_again
+;	cmp temp
+;	bne label_c0a7
+;	jmp label_c04a
+	if (player_position_y_again = #02) jmp label_c04a
 label_c0a7:
 	jmp label_c0cd
+	
 label_c0aa:
 	lda #$00
 	sta temp
