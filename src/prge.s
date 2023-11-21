@@ -1705,39 +1705,33 @@ label_cfa0:
 ;	jmp label_d01a
 ;	:
 	; I THINK it can be optimized to (ram_67 & ram_54)
-	if (ram_67 & ram_54 <> #0) jmp label_d01a
-	lda #$00
-	sta ram_64
-;	lda #$04
-;	sta temp
-;	lda player_pos_x2
-;	cmp temp
-;	bmi :+
-;	beq :+
-	if (player_pos_x2 > #4)
-		lda ram_66
-		clc
-		adc #$08
-		tax
-		lda $0200,x
-		sta ram_64
-	endif
-	if (ram_64 & ram_54 <> #0) jmp label_d01a
-	lda player_position_y_again
-	sec
-	sbc ram_62
-	sta player_position_y_again
-	dec player_velocity
-;	lda #$00
-;	sta temp
-;	lda player_velocity
-;	cmp temp
-;	bne :+
-	if (player_velocity = #0)
+	if (ram_67 & ram_54 = #0), long
 		lda #$00
-		sta player_fall_state
+		sta ram_64
+	
+		if (player_pos_x2 > #4)
+			lda ram_66
+			clc
+			adc #$08
+			tax
+			lda $0200,x
+			sta ram_64
+		endif
+
+		if (ram_64 & ram_54 <> #0) jmp label_d01a
+		lda player_position_y_again
+		sec
+		sbc ram_62
+		sta player_position_y_again
+		dec player_velocity
+
+		if (player_velocity = #0)
+			lda #$00
+			sta player_fall_state
+		endif
+		rts
 	endif
-	rts
+
 label_d01a:
 	lda #$00
 	sta player_fall_state
