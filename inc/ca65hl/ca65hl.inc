@@ -882,7 +882,8 @@
             nextToken
             pos .set currentTokenNumber
             ___mb_findNextOp
-            and {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            ; removing the brackets works for some reason
+            and .mid( pos, currentTokenNumber - pos, {EXP} )
         .endif
         ; --------------------------------------------------------------------------------------------
         .if xmatchToken { | }
@@ -1329,15 +1330,16 @@
             .endif
         .else 
             ; not a register, first save if it is an instruction or macro
-            .if ::CA65HL_USE_CUSTOM_SYNTAX
-                .feature ubiquitous_idents -
-                isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc) ; adc bug, fixed in recent builds of ca65
-                isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
-                .feature ubiquitous_idents +
-            .else
+            ; what the fuck lol
+            ; .if ::CA65HL_USE_CUSTOM_SYNTAX
+            ;     .feature ubiquitous_idents -
+            ;     isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc) ; adc bug, fixed in recent builds of ca65
+            ;     isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
+            ;     .feature ubiquitous_idents +
+            ; .else
                 isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc)
                 isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
-            .endif
+            ; .endif
             ; is it a macro?
             .if isMacro
                 printTokenListDebugCA65HL {Macro: S}
