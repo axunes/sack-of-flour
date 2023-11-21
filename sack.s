@@ -236,13 +236,13 @@
 .segment "CHR3"
 	.incbin "3.chr"
 
-;fuck = 1
+fuck = 1
 ;shit = 1
 
 .ifdef fuck
-	.repeat $10000, I
-		.ifndef .ident(.sprintf("label_%04x", I))
-			.ident(.sprintf("label_%04x", I)) := I
+	.repeat $2000, I
+		.ifndef .ident(.sprintf("label_%04x", I + $c000))
+			.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
 		.endif
 	.endrepeat
 .endif

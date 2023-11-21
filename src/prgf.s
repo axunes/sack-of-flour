@@ -913,6 +913,7 @@ label_ee74:
 		lda #$00
 		sta a: enemy_type,x
 		rts
+label_ee7e:
 	lda #$00
 	sta a: which_enemy
 	ldx a: which_enemy
@@ -1619,6 +1620,7 @@ label_f350:
 	sta a: $6e
 	jsr $f44f
 	rts
+label_f4f5:
 	ldx a: $22
 	lda a: $6c
 	sta $0300,x
