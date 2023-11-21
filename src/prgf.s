@@ -18,7 +18,7 @@ label_e5eb:
 		inx
 		lda music_start,x
 		sta ram_89
-		sta ram_03
+		sta music_pointer+1
 		inx
 		lda music_start,x
 		sta ram_8a
@@ -35,9 +35,9 @@ label_e62c:
 	adc #$02
 	sta music_pointer
 	sta ram_8c
-	lda ram_03
+	lda music_pointer+1
 	adc #$00
-	sta ram_03
+	sta music_pointer+1
 	sta ram_8d
 	jmp $e679
 label_e64c:
@@ -48,15 +48,15 @@ label_e64c:
 	lda ram_8c
 	sta music_pointer
 	lda ram_8d
-	sta ram_03
+	sta music_pointer+1
 	jmp $e679
 :	clc
 	lda music_pointer
 	adc #$01
 	sta music_pointer
-	lda ram_03
+	lda music_pointer+1
 	adc #$00
-	sta ram_03
+	sta music_pointer+1
 	jmp $e679
 label_e679:
 	lda #$00
@@ -188,20 +188,20 @@ label_e679:
 	lda music_pointer
 	adc ram_11
 	sta music_pointer
-	lda ram_03
+	lda music_pointer+1
 	adc #$00
-	sta ram_03
+	sta music_pointer+1
 	clc
 	lda music_pointer
 	cmp ram_8a
 	bne :+
-	lda ram_03
+	lda music_pointer+1
 	cmp ram_8b
 	bne :+
 	lda ram_88
 	sta music_pointer
 	lda ram_89
-	sta ram_03
+	sta music_pointer+1
 :	rts
 	init_enemies:
 		; set all enemy type slots to zero

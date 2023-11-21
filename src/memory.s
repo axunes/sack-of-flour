@@ -1,10 +1,7 @@
-.segment "ZP": absolute
-
+.segment "ZP"
 	ram_00: .res 1 ; probably a pointer to level data or something
 	ram_01: .res 1
-	ram_02: .res 1
-	ram_03: .res 1
-	music_pointer = ram_02 ; music_pointer:
+	music_pointer: .res 2
 	ram_04: .res 1
 	ram_05: .res 1
 	ram_06: .res 1
