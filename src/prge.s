@@ -1,5 +1,6 @@
 	reset:
 	nmi:
+	label_c000:
 	jsr label_c35a
 	jsr label_c236
 	jsr label_db8e
@@ -27,6 +28,7 @@
 	sta a: player_lives
 	jsr label_dc71
 	jsr label_cabb
+label_c04a:
 	jsr label_d539
 	jsr label_c7ec
 	jsr label_d2bb
@@ -80,6 +82,7 @@ label_c0aa:
 	jmp label_c0cd
 label_c0ca:
 	jmp label_c04a
+label_c0cd:
 	lda #$00
 	sta a: temp
 	lda a: player_lives
@@ -147,6 +150,7 @@ label_c0e9:
 	jsr label_dc71
 	jsr label_cabb
 	jmp label_c04a
+label_c17f:
 	lda a: $04
 	pha
 	lda #$0d
@@ -243,7 +247,7 @@ nesmus_shut_up:
 	cpx #$10
 	bne :-
 	rts
-
+label_c24e:
 	lda #$0f
 	sta a: temp
 	lda a: $22
@@ -414,6 +418,7 @@ nesmus_shut_up:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
+label_c3eb:
 	jsr label_db8e
 	lda #$01
 	sta a: temp
@@ -496,6 +501,7 @@ nesmus_shut_up:
 	rts
 :	jmp label_c496
 	rts
+label_c4b4:
 	lda a: $52
 	and #$07
 	sta a: $55
@@ -852,6 +858,7 @@ label_c7a2:
 	nop
 	nop
 	rts
+label_c7ec:
 	lda #$00
 	sta a: $58
 	lda #$00
@@ -1050,6 +1057,7 @@ label_c9b6:
 :	lda #$0f
 	sta $4015
 	rts
+label_c9e2:
 	lda $805c
 	sta a: temp
 	lda a: player_pos_x1
@@ -1131,6 +1139,7 @@ label_ca6c:
 	lda #$37
 	sta a: player_velocity
 :	rts
+label_cab7:
 	; take a life
 	dec a: player_lives
 	rts
@@ -1907,6 +1916,7 @@ label_d05d:
 :	lda #$00
 	sta a: $5d
 	rts
+label_d1e1:
 	lda #$02
 	sta a: player_fall_state
 	lda #$11
@@ -1922,6 +1932,7 @@ label_d05d:
 	lda #$01
 	sta a: $5d
 	rts
+label_d204:
 	lda $8058
 	sta a: temp
 	lda a: player_pos_x1
@@ -1954,6 +1965,7 @@ label_d05d:
 	beq :+
 	jsr label_d6e5
 :	rts
+label_d255:
 	lda #$00
 	sta a: temp
 	lda a: player_pos_x1
@@ -1995,6 +2007,7 @@ label_d05d:
 	beq :+
 	jsr label_d773
 :	rts
+label_d2bb:
 	lda #$20
 	sta a: $24
 	inc a: $25
@@ -2347,6 +2360,7 @@ label_d539:
 	lda #$08
 	sta $400F
 	rts
+label_d5ed:
 	lda #$00
 	sta a: temp
 	lda a: $1e
@@ -2813,6 +2827,7 @@ label_d639:
 	beq :+
 	jmp label_da7e
 :	rts
+label_da95:
 	jsr label_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -2892,6 +2907,7 @@ label_d639:
 	bne :+
 	rts
 :	jmp label_db44
+label_db61:
 	jsr label_d629
 	jsr label_d5ed
 	lda #$03
@@ -2935,6 +2951,7 @@ label_d639:
 	bpl :-
 	inc a: $1b
 	rts
+label_dbc3:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00

@@ -50,6 +50,7 @@ label_e64c:
 	lda a: $8d
 	sta a: $03
 	jmp $e679
+label_e679:
 :	clc
 	lda a: music_pointer
 	adc #$01
@@ -225,6 +226,7 @@ label_e64c:
 		lda #$05
 		sta a: $b0
 		rts
+label_e7f4:
 	lda #$00
 	sta a: $0e
 	ldx a: $0e
@@ -238,6 +240,7 @@ label_e64c:
 	bpl :+
 	jmp $e7f9
 :	rts
+label_e816:
 	lda #$01
 	sta a: temp
 	lda a: $04
@@ -325,6 +328,7 @@ label_e64c:
 	sta a: enemy_pos_x,x
 	jsr $d5c3
 	rts
+label_e8ed:
 	lda #$ff
 	sta a: which_enemy
 	inc a: which_enemy
