@@ -3076,12 +3076,14 @@ label_dbc3:
 :	rts
 	irq:
 	rti
+label_dc6b:
 	lda #$05
 	sta ram_7e
 	rts
 label_dc71:
 	lda #$00
 	sta ram_0e
+label_dc76:
 	ldx ram_0e
 	lda #$00
 	sta ram_72,x
@@ -3093,8 +3095,10 @@ label_dc71:
 	beq :+
 	jmp label_dc76
 :	rts
+label_dc92:
 	lda #$00
 	sta ram_7f
+label_dc97:
 	ldx ram_7f
 	lda ram_72,x
 	sta ram_80
@@ -3155,8 +3159,10 @@ label_dd19:
 	beq :+
 	jmp label_dc97
 :	rts
+label_dd2d:
 	lda #$00
 	sta ram_83
+label_dd32:
 	ldx ram_83
 	lda $8044,x
 	sta ram_84
@@ -3208,6 +3214,7 @@ label_dd9b:
 	bpl :+
 	jmp label_dd32
 :	rts
+label_ddb0:
 	jsr label_c3eb
 	lda #$00
 	sta ram_86
@@ -3224,6 +3231,7 @@ label_ddb8:
 	jmp label_ddb8
 :	jsr label_c3eb
 	rts
+label_ddd8:
 	ldx ram_7f
 	lda #$01
 	sta ram_72,x
@@ -3249,6 +3257,7 @@ label_ddb8:
 	lda #$01
 	sta ram_aa,x
 	rts
+label_de0d:
 	lda #$00
 	sta ram_0e
 label_de12:
