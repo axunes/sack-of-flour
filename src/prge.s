@@ -1696,15 +1696,15 @@ label_cfa0:
 	ldx ram_66
 	lda $0200,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
+;	lda #$00
+;	sta temp
+;	lda ram_67
+;	and ram_54
+;	cmp temp
 ;	beq :+
 ;	jmp label_d01a
 ;	:
-	if (!Z) goto label_d01a, long
+	if (ram_67 & ram_54 <> #0) jmp label_d01a
 	lda #$00
 	sta ram_64
 	lda #$04
