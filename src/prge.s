@@ -96,28 +96,15 @@ do
 	mb player_position_y_again := player_position_y_again - #03
 	while (player_position_y_again & #$f8 <> #0)
 	
-	lda #$1e
-	sta idx
-label_c141:
-	jsr label_db8e
-	jsr label_d5ed
-	dec idx
-	lda #$00
-	sta temp
-	lda idx
-	cmp temp
-	beq :+
-	jmp label_c141
-:	jmp label_c15d
-label_c15d:
-	inc ram_06
-	lda #$05
-	sta temp
-	lda ram_06
-	cmp temp
-	bne :+
-	jmp label_d8b7
-:	jsr label_c26a
+	for (lda #$1e : sta idx, idx <> #0, dec idx)
+		jsr label_db8e
+		jsr label_d5ed
+	next
+
+	jmp :+
+	:
+	if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
+	jsr label_c26a
 	jsr label_c1c2
 	jsr label_dc71
 	jsr label_cabb
