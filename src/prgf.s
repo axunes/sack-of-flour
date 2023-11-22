@@ -228,14 +228,14 @@ label_e679:
 		rts
 label_e7f4:
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda #$00
 	sta enemy_type,x
-	inc ram_0e
+	inc idx
 	lda ram_b0
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bpl :+
 	jmp $e7f9
@@ -248,8 +248,8 @@ label_e816:
 	beq :+
 	rts
 :	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda enemy_type,x
 	sta ram_b1
 	lda #$00
@@ -258,10 +258,10 @@ label_e816:
 	cmp temp
 	bne :+
 	jmp $e85e
-:	inc ram_0e
+:	inc idx
 	lda ram_b0
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bpl :+
 	beq :+
@@ -269,7 +269,7 @@ label_e816:
 	; FIXME
 :	rts
 	lda #$00
-	sta ram_0e
+	sta idx
 	lda ram_05
 	and #$0f
 	sta ram_b1
@@ -283,21 +283,21 @@ label_e816:
 	bne spawn_enemy
 	jmp :+
 	spawn_enemy:
-		ldx ram_0e
+		ldx idx
 		lda ram_b1
 		sta enemy_type,x
-		ldx ram_0e
+		ldx idx
 		lda #$07
 		sta enemy_pos_y,x
-		ldx ram_0e
+		ldx idx
 		lda #$00
 		sta enemy_pos_x2,x
-		ldx ram_0e
+		ldx idx
 		lda player_pos_x1
 		clc
 		adc #$05
 		sta enemy_pos_x,x
-		ldx ram_0e
+		ldx idx
 		lda #$ff
 		sta ram_aa,x
 		inc ram_04
@@ -310,18 +310,18 @@ label_e816:
 		cmp temp
 		bne :+
 		rts
-:	ldx ram_0e
+:	ldx idx
 	lda ram_b1
 	sta enemy_type,x
-	ldx ram_0e
+	ldx idx
 	lda player_position_y_again
 	sec
 	sbc #$11
 	sta enemy_pos_y,x
-	ldx ram_0e
+	ldx idx
 	lda #$00
 	sta enemy_pos_x2,x
-	ldx ram_0e
+	ldx idx
 	lda player_pos_x1
 	clc
 	adc #$0a

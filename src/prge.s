@@ -95,14 +95,14 @@ label_c0e9:
 label_c0ef:
 	jsr nesmus_shut_up
 	lda #$1e
-	sta ram_0e
+	sta idx
 label_c0f7:
 	jsr label_db8e
 	jsr label_d5ed
-	dec ram_0e
+	dec idx
 	lda #$00
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_c0f7
@@ -124,13 +124,13 @@ label_c0f7:
 	beq :+
 	jmp label_c118
 :	lda #$1e
-	sta ram_0e
+	sta idx
 	jsr label_db8e
 	jsr label_d5ed
-	dec ram_0e
+	dec idx
 	lda #$00
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_c141
@@ -214,7 +214,7 @@ label_c17f:
 		lda #$01
 		sta player_direction
 		lda #$00
-		sta ram_0e
+		sta idx
 		lda #$00
 		sta title_screen_wave_timer
 		lda #$00
@@ -453,14 +453,14 @@ label_c3eb:
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $8004,x
 	sta PPU_VRAM_IO
-	inc ram_0e
+	inc idx
 	lda #$20
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bne :+
 	rts
@@ -475,13 +475,13 @@ label_c3eb:
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta ram_0e
+	sta idx
 	lda #$0e
 	sta PPU_VRAM_IO
-	inc ram_0e
+	inc idx
 	lda #$20
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bne :+
 	rts
@@ -496,14 +496,14 @@ label_c3eb:
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $8024,x
 	sta PPU_VRAM_IO
-	inc ram_0e
+	inc idx
 	lda #$20
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bne :+
 	rts
@@ -1104,13 +1104,13 @@ label_c9e2:
 	bne :+
 	jmp label_ca36
 :	lda #$00
-	sta ram_0e
+	sta idx
 	jsr label_db8e
 	jsr label_d5ed
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_ca1a
@@ -2288,10 +2288,10 @@ label_d391:
 	sta $0300,x
 	rts
 	lda #$00
-	sta ram_0e
+	sta idx
 	lda player_health
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bmi :+
 	rts
@@ -2316,7 +2316,7 @@ label_d391:
 	tax
 	lda #$10
 	pha
-	lda ram_0e
+	lda idx
 	asl a
 	asl a
 	asl a
@@ -2329,7 +2329,7 @@ label_d391:
 	clc
 	adc #$04
 	sta ram_22
-	inc ram_0e
+	inc idx
 	jmp label_d4de
 	rts
 	rts
@@ -2665,7 +2665,7 @@ label_d639:
 	bne :-
 	jsr label_db8e
 	lda player_lives
-	sta ram_0e
+	sta idx
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$04
@@ -2674,15 +2674,15 @@ label_d639:
 	sta PPU_VRAM_IO
 	lda #$ef
 	sta PPU_VRAM_IO
-	dec ram_0e
+	dec idx
 	lda #$00
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d869
 :	lda player_lives
-	sta ram_0e
+	sta idx
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$24
@@ -2691,10 +2691,10 @@ label_d639:
 	sta PPU_VRAM_IO
 	lda #$ff
 	sta PPU_VRAM_IO
-	dec ram_0e
+	dec idx
 	lda #$00
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d896
@@ -2708,14 +2708,14 @@ label_d639:
 	lda #$48
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e401,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$0f
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d8cc
@@ -2725,14 +2725,14 @@ label_d639:
 	lda #$ab
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e410,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$08
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d8fa
@@ -2742,14 +2742,14 @@ label_d639:
 	lda #$01
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e419,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d928
@@ -2759,14 +2759,14 @@ label_d639:
 	lda #$61
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e437,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d956
@@ -2776,14 +2776,14 @@ label_d639:
 	lda #$a1
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e455,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d984
@@ -2793,14 +2793,14 @@ label_d639:
 	lda #$e1
 	sta $2006
 	lda #$00
-	sta ram_0e
-	ldx ram_0e
+	sta idx
+	ldx idx
 	lda $e473,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d9b2
@@ -2810,15 +2810,15 @@ label_d639:
 	lda #$21
 	sta $2006
 	lda #$00
-	sta ram_0e
+	sta idx
 label_d9e0:
-	ldx ram_0e
+	ldx idx
 	lda $e491,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_d9e0
@@ -2828,15 +2828,15 @@ label_d9e0:
 	lda #$61
 	sta $2006
 	lda #$00
-	sta ram_0e
+	sta idx
 label_da0e:
-	ldx ram_0e
+	ldx idx
 	lda $e4af,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_da0e
@@ -2846,15 +2846,15 @@ label_da0e:
 	lda #$a1
 	sta $2006
 	lda #$00
-	sta ram_0e
+	sta idx
 label_da3c:
-	ldx ram_0e
+	ldx idx
 	lda $e4cd,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$1e
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_da3c
@@ -2890,15 +2890,15 @@ label_da95:
 	lda #$08
 	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta ram_0e
+	sta idx
 label_daa7:
-	ldx ram_0e
+	ldx idx
 	lda game_over_text,x
 	sta PPU_VRAM_IO
-	inc ram_0e
+	inc idx
 	lda #$09
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_daa7
@@ -2937,15 +2937,15 @@ label_db09:
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
-	sta ram_0e
+	sta idx
 label_db18:
-	ldx ram_0e
+	ldx idx
 	lda $e25a,x
 	sta PPU_VRAM_IO
-	inc ram_0e
+	inc idx
 	lda #$10
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bne :+
 	rts
@@ -2956,15 +2956,15 @@ label_db18:
 	lda #$00
 	sta $2006
 	lda #$00
-	sta ram_0e
+	sta idx
 label_db44:
-	ldx ram_0e
+	ldx idx
 	lda $e000,x
 	sta $2007
-	inc ram_0e
+	inc idx
 	lda #$20
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	bne :+
 	rts
@@ -3097,15 +3097,15 @@ label_dc6b:
 	rts
 label_dc71:
 	lda #$00
-	sta ram_0e
+	sta idx
 label_dc76:
-	ldx ram_0e
+	ldx idx
 	lda #$00
 	sta ram_72,x
-	inc ram_0e
+	inc idx
 	lda #$0c
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_dc76
@@ -3274,7 +3274,7 @@ label_ddd8:
 	rts
 label_de0d:
 	lda #$00
-	sta ram_0e
+	sta idx
 label_de12:
 	lda #$00
 	sta ram_87
@@ -3286,10 +3286,10 @@ label_de17:
 	cmp temp
 	beq :+
 	jmp label_de17
-:	inc ram_0e
+:	inc idx
 	lda #$11
 	sta temp
-	lda ram_0e
+	lda idx
 	cmp temp
 	beq :+
 	jmp label_de12

@@ -11,7 +11,7 @@
 	ram_0b: .res 1
 	player_position_y_again: .res 1
 	i_frames: .res 1
-	ram_0e: .res 1 ; 0E related to player_health
+	idx: .res 1
 
 	player_fall_state: .res 1 ; (?) 2 = on ground, 1 = ascending, 0 = descending
 	player_velocity: .res 1
