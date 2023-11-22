@@ -1162,6 +1162,7 @@ label_ca6c:
 	lda #$02
 	sta player_position_y_again
 	rts
+label_ca72:
 	lda #$00
 	sta temp
 	lda i_frames

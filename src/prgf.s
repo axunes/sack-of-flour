@@ -39,7 +39,7 @@ label_e62c:
 	adc #$00
 	sta music_pointer+1
 	sta ram_8d
-	jmp $e679
+	jmp label_e679
 label_e64c:
 	dec ram_8e
 	lda ram_8e
@@ -49,7 +49,7 @@ label_e64c:
 	sta music_pointer
 	lda ram_8d
 	sta music_pointer+1
-	jmp $e679
+	jmp label_e679
 :	clc
 	lda music_pointer
 	adc #$01
@@ -57,7 +57,7 @@ label_e64c:
 	lda music_pointer+1
 	adc #$00
 	sta music_pointer+1
-	jmp $e679
+	jmp label_e679
 label_e679:
 	lda #$00
 	sta temp
@@ -83,7 +83,7 @@ label_e679:
 	and #$03
 	cmp temp
 	bne :+
-	jmp $e6dc
+	jmp label_e6dc
 :	lda #$03
 	sta temp
 	lda ram_90
@@ -110,7 +110,7 @@ label_e679:
 	and #$0c
 	cmp temp
 	bne :+
-	jmp $e718
+	jmp label_e718
 :	lda #$0c
 	sta temp
 	lda ram_90
@@ -136,7 +136,7 @@ label_e679:
 	and #$30
 	cmp temp
 	bne :+
-	jmp $e754
+	jmp label_e754
 :	lda #$30
 	sta temp
 	lda ram_90
@@ -162,7 +162,7 @@ label_e679:
 	and #$c0
 	cmp temp
 	bne :+
-	jmp $e790
+	jmp label_e790
 :	lda #$c0
 	sta temp
 	lda ram_90
@@ -238,7 +238,7 @@ label_e7f4:
 	lda idx
 	cmp temp
 	bpl :+
-	jmp $e7f9
+	jmp label_e7f9
 :	rts
 label_e816:
 	lda #$01
@@ -257,7 +257,7 @@ label_e816:
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $e85e
+	jmp label_e85e
 :	inc idx
 	lda ram_b0
 	sta temp
@@ -265,7 +265,7 @@ label_e816:
 	cmp temp
 	bpl :+
 	beq :+
-	jmp $e829
+	jmp label_e829
 	; FIXME
 :	rts
 	lda #$00
@@ -326,7 +326,7 @@ label_e816:
 	clc
 	adc #$0a
 	sta enemy_pos_x,x
-	jsr $d5c3
+	jsr label_d5c3
 	rts
 label_e8ed: ; process enemies
 	lda #$ff
@@ -340,37 +340,37 @@ label_e8ed: ; process enemies
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr $e960
+	jsr label_e960
 :	lda #$03
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr $e960
+	jsr label_e960
 :	lda #$04
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr $ec12
+	jsr label_ec12
 :	lda #$06
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr $edca
+	jsr label_edca
 :	lda #$08
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr $e960
+	jsr label_e960
 :	lda ram_b0
 	sta temp
 	lda which_enemy
 	cmp temp
 	bpl :+
-	jmp $e8f2
+	jmp label_e8f2
 :	rts
 	ldx which_enemy
 	lda ram_aa,x
@@ -404,14 +404,14 @@ label_e8ed: ; process enemies
 	sta ram_b7
 	lda #$03
 	sta ram_62
-	jsr $f2cd
+	jsr label_f2cd
 	lda #$00
 	sta temp
 	lda ram_1b
 	and #$01
 	cmp temp
 	beq :+
-	jmp $ea9f
+	jmp label_ea9f
 :	lda #$ff
 	sta temp
 	lda ram_b3
@@ -424,7 +424,7 @@ label_e8ed: ; process enemies
 	bne :+
 	lda #$02
 	sta ram_b3
-:	jmp $ea41
+:	jmp label_ea41
 label_e9ed:
 	lda #$01
 	sta temp
@@ -433,7 +433,7 @@ label_e9ed:
 	bne label_ea17
 	lda #$00
 	sta ram_64
-	jsr $f083
+	jsr label_f083
 	lda #$00
 	sta temp
 	lda ram_64
@@ -450,7 +450,7 @@ label_ea17:
 	bne label_ea41
 	lda #$00
 	sta ram_67
-	jsr $f193
+	jsr label_f193
 	lda #$00
 	sta temp
 	lda ram_67
@@ -458,7 +458,7 @@ label_ea17:
 	beq :+
 	lda #$01
 	sta ram_b3
-:	jmp $ea41
+:	jmp label_ea41
 label_ea41:
 	lda #$fc
 	sta temp
@@ -500,13 +500,13 @@ label_ea41:
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $ebb7
+	jmp label_ebb7
 :	lda #$03
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $eb32
+	jmp label_eb32
 :	lda #$02
 	sta ram_6d
 	lda #$0a
@@ -554,9 +554,9 @@ label_ea41:
 	beq :+
 	lda #$42
 	sta ram_6d
-	jmp $f44f
+	jmp label_f44f
 	rts
-:	jmp $f3db
+:	jmp label_f3db
 label_eb31:
 	rts
 	lda player_chunk_pos_again
@@ -613,9 +613,9 @@ label_eb31:
 	bne :+
 	lda #$40
 	sta ram_6d
-	jmp $f4dc
+	jmp label_f4dc
 	rts
-:	jmp $f4c3
+:	jmp label_f4c3
 label_ebb6:
 	rts
 	lda #$02
@@ -657,7 +657,7 @@ label_ebb6:
 	clc
 	adc ram_11
 	sta ram_6b
-	jmp $f4f5
+	jmp label_f4f5
 label_ec11:
 	rts
 	ldx which_enemy
@@ -692,7 +692,7 @@ label_ec11:
 	sta ram_b7
 	lda #$02
 	sta ram_62
-	jsr $f2cd
+	jsr label_f2cd
 	lda #$ff
 	sta temp
 	lda ram_b3
@@ -705,7 +705,7 @@ label_ec11:
 	bne :+
 	lda #$01
 	sta ram_b3
-:	jmp $ed11
+:	jmp label_ed11
 label_ec8d:
 	lda player_pos_x1
 	sta temp
@@ -734,7 +734,7 @@ label_ec8d:
 	bne label_ece7
 	lda #$00
 	sta ram_64
-	jsr $f083
+	jsr label_f083
 	lda #$00
 	sta temp
 	lda ram_64
@@ -742,7 +742,7 @@ label_ec8d:
 	beq :+
 	lda #$02
 	sta ram_b3
-:	jmp $ed11
+:	jmp label_ed11
 label_ece7:
 	lda #$02
 	sta temp
@@ -751,7 +751,7 @@ label_ece7:
 	bne label_ed11
 	lda #$00
 	sta ram_67
-	jsr $f193
+	jsr label_f193
 	lda #$00
 	sta temp
 	lda ram_67
@@ -830,13 +830,13 @@ label_ed11:
 	bne :+
 	lda #$40
 	sta ram_6d
-	jmp $f44f
+	jmp label_f44f
 	rts
-:	jmp $f3db
+:	jmp label_f3db
 label_edc1:
 	lda #$f5
 	sta ram_6c
-	jmp $f3db
+	jmp label_f3db
 	rts
 	ldx which_enemy
 	lda ram_aa,x
@@ -858,8 +858,8 @@ label_edc1:
 	cmp temp
 	bmi :+
 	jmp purge_enemy
-:	jsr $f29b
-	jsr $f29b
+:	jsr label_f29b
+	jsr label_f29b
 	ldx which_enemy
 	lda ram_b4
 	sta enemy_pos_x,x
@@ -905,7 +905,7 @@ label_edc1:
 	clc
 	adc ram_11
 	sta ram_6b
-	jmp $f52f
+	jmp label_f52f
 label_ee74:
 	rts
 	purge_enemy:
@@ -924,7 +924,7 @@ label_ee7e:
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $f015
+	jmp label_f015
 :	ldx which_enemy
 	lda enemy_pos_y,x
 	sta ram_b6
@@ -951,7 +951,7 @@ label_ee7e:
 	sbc ram_b8
 	cmp temp
 	bmi :+
-	jmp $f015
+	jmp label_f015
 :	lda ram_b6
 	sta temp
 	lda player_position_y_again
@@ -959,7 +959,7 @@ label_ee7e:
 	sbc #$18
 	cmp temp
 	bmi :+
-	jmp $f015
+	jmp label_f015
 :	lda #$00
 	sta temp
 	lda ram_12
@@ -972,7 +972,7 @@ label_ee7e:
 	sbc #$10
 	cmp temp
 	bmi :+
-	jmp $f015
+	jmp label_f015
 :	lda #$00
 	sta ram_b9
 	lda #$00
@@ -1025,7 +1025,7 @@ label_ee7e:
 	lda ram_b9
 	cmp temp
 	bne :+
-	jmp $f015
+	jmp label_f015
 :	lda ram_b6
 	sta temp
 	lda player_position_y_again
@@ -1046,31 +1046,31 @@ label_ee7e:
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $f067
+	jmp label_f067
 :	lda #$02
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $f02d
+	jmp label_f02d
 :	lda #$03
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $f02d
+	jmp label_f02d
 :	lda #$04
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jmp $f02d
+	jmp label_f02d
 :	lda #$06
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne label_f015
-	jmp $f063
+	jmp label_f063
 label_f015:
 	inc which_enemy
 	lda ram_b0
@@ -1080,8 +1080,9 @@ label_f015:
 	lda which_enemy
 	cmp temp
 	bpl :+
-	jmp $ee83
+	jmp label_ee83
 :	rts
+label_f02d:
 	lda #$00
 	sta temp
 	lda ram_b7
@@ -1103,10 +1104,12 @@ label_f015:
 	sta player_velocity
 :	rts
 label_f05f:
-	jsr $ca72
+	jsr label_ca72
 	rts
-	jsr $ca72
+label_f063:
+	jsr label_ca72
 	rts
+label_f067:
 	ldx which_enemy
 	lda #$00
 	sta enemy_type,x
@@ -1121,13 +1124,13 @@ label_f05f:
 	bne :+
 	dec player_health
 :	rts
-
+label_f083:
 	lda #$02
 	sta temp
 	lda ram_b5
 	cmp temp
 	bpl :+
-	jmp $f2b4
+	jmp label_f2b4
 :	lda #$08
 	pha
 	lda ram_b4
@@ -1165,13 +1168,13 @@ label_f05f:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3c9
+	jmp label_f3c9
 :	lda #$0f
 	sta temp
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp $f2b4
+	jmp label_f2b4
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1190,8 +1193,8 @@ label_f05f:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3c9
-:	jmp $f2b4
+	jmp label_f3c9
+:	jmp label_f2b4
 label_f126:
 	lda ram_b6
 	sec
@@ -1213,13 +1216,13 @@ label_f126:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3c9
+	jmp label_f3c9
 :	lda #$0f
 	sta temp
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp $f2b4
+	jmp label_f2b4
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1238,14 +1241,15 @@ label_f126:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3c9
-:	jmp $f2b4
+	jmp label_f3c9
+:	jmp label_f2b4
+label_f193:
 	lda #$00
 	sta temp
 	lda ram_b5
 	cmp temp
 	beq :+
-	jmp $f29b
+	jmp label_f29b
 :	lda ram_b4
 	asl a
 	asl a
@@ -1279,13 +1283,13 @@ label_f126:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3cf
+	jmp label_f3cf
 :	lda #$0f
 	sta temp
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp $f29b
+	jmp label_f29b
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1304,8 +1308,8 @@ label_f126:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3cf
-:	jmp $f29b
+	jmp label_f3cf
+:	jmp label_f29b
 label_f22e:
 	lda ram_b6
 	sec
@@ -1327,13 +1331,13 @@ label_f22e:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3cf
+	jmp label_f3cf
 :	lda #$0f
 	sta temp
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp $f29b
+	jmp label_f29b
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1352,8 +1356,9 @@ label_f22e:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3cf
-:	jmp $f29b
+	jmp label_f3cf
+:	jmp label_f29b
+label_f29b:
 	dec ram_b5
 	lda #$ff
 	sta temp
@@ -1364,6 +1369,7 @@ label_f22e:
 	sta ram_b5
 	dec ram_b4
 :	rts
+label_f2b4:
 	inc ram_b5
 	lda #$10
 	sta temp
@@ -1374,6 +1380,7 @@ label_f22e:
 	sta ram_b5
 	inc ram_b4
 :	rts
+label_f2cd:
 	lda ram_b4
 	asl a
 	asl a
@@ -1406,7 +1413,7 @@ label_f22e:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3d5
+	jmp label_f3d5
 :	lda #$00
 	sta ram_bb
 	lda #$04
@@ -1427,8 +1434,8 @@ label_f22e:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3d5
-:	jmp $f3be
+	jmp label_f3d5
+:	jmp label_f3be
 label_f350:
 	lda ram_b6
 	clc
@@ -1453,7 +1460,7 @@ label_f350:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3d5
+	jmp label_f3d5
 :	lda #$00
 	sta ram_bb
 	lda #$04
@@ -1474,22 +1481,27 @@ label_f350:
 	and ram_54
 	cmp temp
 	beq :+
-	jmp $f3d5
-:	jmp $f3be
+	jmp label_f3d5
+:	jmp label_f3be
+label_f3be:
 	lda ram_b6
 	clc
 	adc ram_62
 	sta ram_b6
 	rts
+label_f3c9:
 	lda #$01
 	sta ram_64
 	rts
+label_f3cf:
 	lda #$01
 	sta ram_67
 	rts
+label_f3d5:
 	lda #$01
 	sta ram_b7
 	rts
+label_f3db:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1544,6 +1556,7 @@ label_f350:
 	adc #$08
 	sta ram_22
 	rts
+label_f44f:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1598,7 +1611,8 @@ label_f350:
 	adc #$08
 	sta ram_22
 	rts
-	jsr $f3db
+label_f4c3:
+	jsr label_f3db
 	lda ram_6c
 	clc
 	adc #$10
@@ -1607,9 +1621,10 @@ label_f350:
 	clc
 	adc #$04
 	sta ram_6e
-	jsr $f3db
+	jsr label_f3db
 	rts
-	jsr $f44f
+label_f4dc:
+	jsr label_f44f
 	lda ram_6c
 	clc
 	adc #$10
@@ -1618,7 +1633,7 @@ label_f350:
 	clc
 	adc #$04
 	sta ram_6e
-	jsr $f44f
+	jsr label_f44f
 	rts
 label_f4f5:
 	ldx ram_22
@@ -1647,6 +1662,7 @@ label_f4f5:
 	adc #$04
 	sta ram_22
 	rts
+label_f52f:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1730,14 +1746,14 @@ label_f4f5:
 	sta ram_22
 	rts
 	label_f5dd:
-	jsr $db80
+	jsr label_db80
 	jsr label_db8e
-	jsr $c31d
-	jsr $dbc3
+	jsr label_c31d
+	jsr label_dbc3
 	jsr label_dbda
 	jsr label_db8e
 	jsr label_db8e
-	jsr $f6d3
+	jsr label_f6d3
 	lda #$00
 	sta ram_bc
 	lda #$5a
@@ -1754,17 +1770,18 @@ label_f4f5:
 	sta ram_5c
 	lda #$00
 	sta konami_code_active
-	jsr $f7e2
-	jsr $f7ee
-	jsr $f7e8
-	jsr $f7e2
-	jsr $f7ee
+label_f61d:
+	jsr label_f7e2
+	jsr label_f7ee
+	jsr label_f7e8
+	jsr label_f7e2
+	jsr label_f7ee
 	lda #$00
 	sta temp
 	lda konami_code_active
 	cmp temp
 	beq label_f698
-	jsr $f6e9
+	jsr label_f6e9
 	lda ram_be
 	clc
 	adc ram_bf
@@ -1810,7 +1827,7 @@ label_f698:
 	clc
 	adc #$07
 	sta ram_05
-	jsr $f836
+	jsr label_f836
 	lda #$00
 	sta temp
 	lda button_select_down
@@ -1823,17 +1840,20 @@ label_f698:
 	lda button_start_down
 	cmp temp
 	beq :+
-	jmp $f6d2
-:	jmp $f61d
+	jmp label_f6d2
+:	jmp label_f61d
+label_f6d2:
 	rts
+label_f6d3:
 	jsr label_dc26
 	jsr label_db8e
-	jsr $f71c
+	jsr label_f71c
 	jsr label_db8e
-	jsr $f7a8
+	jsr label_f7a8
 	jsr label_db8e
 	jsr label_db8e
 	rts
+label_f6e9:
 	; FIXME
 	lda #$00
 	sta $2003
@@ -1860,6 +1880,7 @@ label_f698:
 	cpy #$00
 	bne :-
 	rts
+label_f71c:
 	jsr label_db8e
 	lda #$20
 	sta PPU_VRAM_ADDR2
@@ -1921,12 +1942,14 @@ label_f698:
 	cpx #$40
 	bne :-
 	rts
+label_f7a8:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_66
+label_f7b7:
 	ldx ram_66
 	lda $e23a,x
 	sta PPU_VRAM_IO
@@ -1936,7 +1959,7 @@ label_f698:
 	lda ram_66
 	cmp temp
 	bpl :+
-	jmp $f7b7
+	jmp label_f7b7
 :	rts
 	; FIXME
 	ldy ram_11
@@ -1988,7 +2011,8 @@ label_f7f7:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
-	jsr $f8b1
+label_f836:
+	jsr label_f8b1
 	lda #$0a
 	sta temp
 	lda konami_code_correct_presses
@@ -2002,7 +2026,7 @@ label_f7f7:
 	rts
 :	lda #$01
 	sta ram_5c
-	jsr $d5d8
+	jsr label_d5d8
 	rts
 label_f85d:
 	lda #$00
@@ -2039,6 +2063,7 @@ label_f85d:
 :	lda #$00
 	sta konami_code_correct_presses
 	rts
+label_f8b1:
 	jsr get_controller_buttons
 	lda button_a_down
 	sta button_mask

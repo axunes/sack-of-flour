@@ -47,7 +47,7 @@
 	player_chunk_pos_fine: .res 1
 	player_chunk_pos_again: .res 1
 	player_chunk_pos_fine_again: .res 1
-	ram_22: .res 1
+	ram_22: .res 1 ; collision related
 	ram_23: .res 1
 	player_sprite: .res 1
 	player_anim_timer: .res 1
@@ -86,10 +86,13 @@
 	player_offset_y: .res 1
 	player_offset_x: .res 1
 	ram_6a: .res 1
+
+	; collision related
 	ram_6b: .res 1
 	ram_6c: .res 1
 	ram_6d: .res 1
 	ram_6e: .res 1
+
 	ram_6f: .res 1
 	ram_70: .res 1
 	ram_71: .res 1

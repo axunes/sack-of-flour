@@ -245,9 +245,9 @@ fuck = 1
 
 .ifdef fuck
 	.repeat $2000, I
-		.if .referenced(.ident(.sprintf("label_%04x", I + $c000))) && (.not .defined(.ident(.sprintf("label_%04x", I + $c000))))
-			.ident(.sprintf("label_%04x", I + $c000)) := I + $c000
-			.out .sprintf("label_%04x", I + $c000)
+		.if .referenced(.ident(.sprintf("label_%04x", I + $e000))) && (.not .defined(.ident(.sprintf("label_%04x", I + $e000))))
+			.ident(.sprintf("label_%04x", I + $e000)) := I + $e000
+			.out .sprintf("label_%04x", I + $e000)
 		.endif
 	.endrepeat
 .endif
