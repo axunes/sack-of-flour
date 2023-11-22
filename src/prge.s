@@ -1763,6 +1763,7 @@ label_d01a:
 	sta player_fall_state
 	jsr label_dc92
 	rts
+label_d023:
 	lda #$00
 	sta temp
 	lda player_health
@@ -1883,6 +1884,7 @@ label_d05d:
 :	lda #$00
 	sta ram_5d
 	rts
+label_d144:
 	lda player_position_y_again
 	clc
 	adc ram_62
@@ -2144,6 +2146,7 @@ label_d391:
 	bne :+
 	jmp label_d3a4
 :	jmp label_d43a
+label_d3a4:
 	ldx #$00
 	lda player_offset_y
 	sta $0300,x
@@ -2219,7 +2222,7 @@ label_d391:
 
 
 
-
+label_d43a:
 	lda ram_6a
 	clc
 	adc #$40
@@ -2287,8 +2290,10 @@ label_d391:
 	adc player_offset_x
 	sta $0300,x
 	rts
+label_d4d9:
 	lda #$00
 	sta idx
+label_d4de:
 	lda player_health
 	sta temp
 	lda idx
@@ -2363,6 +2368,7 @@ get_controller_buttons:
 	and #$01
 	sta button_right_down
 	rts
+label_d584:
 	lda #$9f
 	sta APU_PULSE2CTRL
 	lda #$8c
@@ -2391,7 +2397,7 @@ get_controller_buttons:
 	lda #$4b
 	sta $4003
 	rts
-
+label_d5c3:
 	lda #$0b
 	sta APU_NOISECTRL
 	lda #$ff
@@ -2401,6 +2407,7 @@ get_controller_buttons:
 	lda #$08
 	sta APU_NOISEFREQ2
 	rts
+label_d5d8:
 	; FIXME
 	lda #$0f
 	sta $400C
@@ -2427,6 +2434,7 @@ label_d5ed:
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
+label_d613:
 	lda player_chunk_pos
 	asl a
 	asl a
@@ -2440,6 +2448,7 @@ label_d5ed:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
+label_d629:
 	lda #$00
 	sta temp
 	lda ram_58
@@ -2484,6 +2493,7 @@ label_d639:
 :	lda #$00
 	sta ram_58
 	rts
+label_d696:
 	lda player_chunk_pos
 	sec
 	sbc #$01
@@ -2515,6 +2525,7 @@ label_d639:
 :	lda #$00
 	sta ram_58
 	rts
+label_d6e5:
 	lda $805b
 	sta temp
 	lda player_chunk_pos_again
@@ -2571,6 +2582,7 @@ label_d639:
 	lda #$05
 	sta ram_58
 :	rts
+label_d773:
 	lda #$00
 	sta temp
 	lda player_chunk_pos
@@ -2642,6 +2654,7 @@ label_d639:
 	lda #$0a
 	sta ram_58
 :	rts
+label_d825:
 	jsr label_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -2670,6 +2683,7 @@ label_d639:
 	sta PPU_VRAM_ADDR2
 	lda #$04
 	sta PPU_VRAM_ADDR2
+label_d869:
 	lda #$ee
 	sta PPU_VRAM_IO
 	lda #$ef
@@ -2687,6 +2701,7 @@ label_d639:
 	sta PPU_VRAM_ADDR2
 	lda #$24
 	sta PPU_VRAM_ADDR2
+label_d896:
 	lda #$fe
 	sta PPU_VRAM_IO
 	lda #$ff
@@ -2700,6 +2715,7 @@ label_d639:
 	jmp label_d896
 :	jsr label_db09
 	rts
+label_d8b7:
 	; FIXME
 	jsr label_dae9
 	jsr label_db8e
@@ -2709,6 +2725,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d8cc:
 	ldx idx
 	lda $e401,x
 	sta $2007
@@ -2726,6 +2743,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d8fa:
 	ldx idx
 	lda $e410,x
 	sta $2007
@@ -2743,6 +2761,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d928:
 	ldx idx
 	lda $e419,x
 	sta $2007
@@ -2760,6 +2779,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d956:
 	ldx idx
 	lda $e437,x
 	sta $2007
@@ -2777,6 +2797,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d984:
 	ldx idx
 	lda $e455,x
 	sta $2007
@@ -2794,6 +2815,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta idx
+label_d9b2:
 	ldx idx
 	lda $e473,x
 	sta $2007
