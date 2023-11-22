@@ -28,7 +28,7 @@ label_e5eb:
 		rts
 label_e62c:
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta ram_8e
 	clc
 	lda music_pointer
@@ -67,14 +67,14 @@ label_e679:
 	dec ram_8f
 	rts
 :	ldy #$00
-	lda ($02), y
+	lda (<music_pointer),y
 	cmp #$ff
 	beq label_e62c
 	cmp #$fe
 	beq label_e64c
 	sta ram_8f
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta ram_90
 	iny
 	lda #$00
@@ -92,16 +92,16 @@ label_e679:
 	bne :+
 	jmp :+
 	; this is some music shit right here I can tell you that much
-:	lda ($02), y
+:	lda (<music_pointer),y
 	sta APU_PULSE1CTRL
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE1RAMP
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE1FTUNE
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE1CTUNE
 	iny
 	lda #$00
@@ -118,16 +118,16 @@ label_e679:
 	cmp temp
 	bne :+
 	jmp :+
-:	lda ($02), y
+:	lda (<music_pointer),y
 	sta APU_PULSE2CTRL
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE2RAMP
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE2FTUNE
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_PULSE2STUNE
 	iny
 	lda #$00
@@ -144,16 +144,16 @@ label_e679:
 	cmp temp
 	bne :+
 	jmp :+
-:	lda ($02), y
+:	lda (<music_pointer),y
 	sta APU_TRICTRL1
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta $4009
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_TRIFREQ1
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_TRIFREQ2
 	iny
 	lda #$00
@@ -170,16 +170,16 @@ label_e679:
 	cmp temp
 	bne :+
 	jmp :+
-:	lda ($02), y
+:	lda (<music_pointer),y
 	sta APU_NOISECTRL
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta $400d
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_NOISEFREQ1
 	iny
-	lda ($02), y
+	lda (<music_pointer),y
 	sta APU_NOISEFREQ2
 	iny
 	tya

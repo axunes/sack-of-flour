@@ -109,6 +109,7 @@ label_c0f7:
 :	jsr label_d5c3
 	lda #$01
 	sta player_fall_state
+label_c118:
 	jsr label_db8e
 	jsr label_d2bb
 	jsr label_db61
@@ -125,6 +126,7 @@ label_c0f7:
 	jmp label_c118
 :	lda #$1e
 	sta idx
+label_c141:
 	jsr label_db8e
 	jsr label_d5ed
 	dec idx
@@ -135,6 +137,7 @@ label_c0f7:
 	beq :+
 	jmp label_c141
 :	jmp label_c15d
+label_c15d:
 	inc ram_06
 	lda #$05
 	sta temp
@@ -282,6 +285,7 @@ label_c24e:
 		adc #$01
 		sta $8001
 		rts
+label_c28b:
 	lda #$00
 	sta $8000
 	lda #$08
@@ -319,6 +323,7 @@ label_c24e:
 	adc #$03
 	sta $8001
 	rts
+label_c2e0: ; mapper shit
 	lda #$00
 	sta $8000
 	lda #$04
@@ -344,6 +349,7 @@ label_c24e:
 	lda #$07
 	sta $8001
 	rts
+label_c31d:
 	lda #$00
 	sta $8000
 	lda #$00
@@ -372,6 +378,7 @@ label_c24e:
 	label_c35a:
 		jmp label_c31d
 		rts
+label_c35e:
 	jsr label_dc6b
 	jsr label_db8e
 	jsr label_dbc3
@@ -395,6 +402,7 @@ label_c24e:
 	jsr label_db8e
 	lda #$07
 	sta ram_52
+label_c397:
 	jsr label_db8e
 	jsr label_c4b4
 	jsr label_db8e
@@ -410,6 +418,7 @@ label_c24e:
 	jmp label_c397
 :	lda #$00
 	sta ram_52
+label_c3c1:
 	jsr label_db8e
 	jsr label_c706
 	inc ram_52
@@ -444,6 +453,7 @@ label_c3eb:
 	rts
 :	jsr label_c44b
 	rts
+label_c414:
 	lda #$55
 	sta ram_54
 	lda #$00
@@ -454,6 +464,7 @@ label_c3eb:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
+label_c42d:
 	ldx idx
 	lda $8004,x
 	sta PPU_VRAM_IO
@@ -466,6 +477,7 @@ label_c3eb:
 	rts
 :	jmp label_c42d
 	rts
+label_c44b:
 	lda #$01
 	clc
 	adc ram_53
@@ -476,6 +488,7 @@ label_c3eb:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
+label_c463:
 	lda #$0e
 	sta PPU_VRAM_IO
 	inc idx
@@ -487,6 +500,7 @@ label_c3eb:
 	rts
 :	jmp label_c463
 	rts
+label_c47d:
 	lda #$aa
 	sta ram_54
 	lda #$02
@@ -497,6 +511,7 @@ label_c3eb:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
+label_c496:
 	ldx idx
 	lda $8024,x
 	sta PPU_VRAM_IO
@@ -541,26 +556,27 @@ label_c4b4:
 	sta ram_57
 	ldy #$00
 	ldx #$00
+label_c505:
 	lda ram_56
 	sta PPU_VRAM_ADDR2
 	lda ram_57
 	sta PPU_VRAM_ADDR2
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
@@ -578,25 +594,25 @@ label_c4b4:
 	sta PPU_VRAM_ADDR2
 	lda ram_57
 	sta PPU_VRAM_ADDR2
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
@@ -614,6 +630,7 @@ label_c4b4:
 	sta ram_56
 	jmp label_c505
 :	rts
+label_c5aa:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -645,26 +662,27 @@ label_c4b4:
 	sta ram_57
 	ldy #$20
 	ldx #$00
+label_c5fb:
 	lda ram_56
 	sta PPU_VRAM_ADDR2
 	lda ram_57
 	sta PPU_VRAM_ADDR2
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
@@ -682,25 +700,25 @@ label_c4b4:
 	sta PPU_VRAM_ADDR2
 	lda ram_57
 	sta PPU_VRAM_ADDR2
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	adc #$10
 	sta PPU_VRAM_IO
 	adc #$01
@@ -718,6 +736,7 @@ label_c4b4:
 	sta ram_56
 	jmp label_c5fb
 :	rts
+label_c6a0:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -740,14 +759,15 @@ label_c4b4:
 	lda $e132,x
 	sta ram_57
 	ldy #$3c
+label_c6dd:
 	lda ram_56
 	sta PPU_VRAM_ADDR2
 	lda ram_57
 	sta PPU_VRAM_ADDR2
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	iny
-	lda ($00),y
+	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	iny
 	cpy #$4c
@@ -758,6 +778,7 @@ label_c4b4:
 	sta ram_57
 	jmp label_c6dd
 :	rts
+label_c706:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -792,7 +813,7 @@ label_c4b4:
 	sta ram_26
 	tax
 label_c750:
-	lda ($00),y
+	lda (<ram_00),y
 	iny
 	sta ram_11
 	and #$03
@@ -831,7 +852,7 @@ label_c750:
 	sta ram_26
 	tax
 label_c7a2:
-	lda ($00),y
+	lda (<ram_00),y
 	iny
 	sta ram_11
 	and #$03
@@ -1054,7 +1075,7 @@ label_c984:
 
 
 
-
+label_c99e:
 	;FIXME
 	; pausing shit?
 	lda #$00
@@ -1085,19 +1106,19 @@ label_c9b6:
 	sta $4015
 	rts
 label_c9e2:
-	lda $805c
+	lda $805c ; FIXME
 	sta temp
 	lda player_pos_x1
 	cmp temp
 	bne :+
 	jmp label_ca36
-:	lda $805d
+:	lda $805d ; FIXME
 	sta temp
 	lda player_pos_x1
 	cmp temp
 	bne :+
 	jmp label_ca36
-:	lda $805e
+:	lda $805e ; FIXME
 	sta temp
 	lda player_pos_x1
 	cmp temp
@@ -1105,6 +1126,7 @@ label_c9e2:
 	jmp label_ca36
 :	lda #$00
 	sta idx
+label_ca1a:
 	jsr label_db8e
 	jsr label_d5ed
 	inc idx
@@ -1115,8 +1137,10 @@ label_c9e2:
 	beq :+
 	jmp label_ca1a
 :	jmp label_cab7
+label_ca36:
 	jsr label_dc26
-	lda $805f
+label_ca39:
+	lda $805f ; FIXME
 	sta temp
 	lda player_pos_x1
 	cmp temp
@@ -1203,6 +1227,7 @@ label_cabb:
 	jsr label_d825
 	lda #$00
 	sta ram_61
+label_cb0c:
 	jsr label_db8e
 	inc ram_61
 	lda #$78
@@ -1228,6 +1253,7 @@ label_cabb:
 	sta player_chunk_pos_again
 	lda #$00
 	sta player_chunk_pos_fine_again
+label_cb4e:
 	lda player_chunk_pos_again
 	sta temp
 	lda player_pos_x1
@@ -1253,6 +1279,7 @@ label_cb75:
 	sta player_anim_timer
 	jsr label_d2bb
 	rts
+label_cb8c:
 	ldx player_velocity
 	lda $e040,x
 	sta ram_62
@@ -1265,6 +1292,7 @@ label_cb75:
 	rts
 :	jmp label_d023
 	rts
+label_cbaa:
 	lda #$03
 	sta temp
 	lda player_pos_x2
@@ -1408,6 +1436,7 @@ label_cc97:
 	rts
 :	jsr label_d204
 	rts
+label_ccfa:
 	lda #$00
 	sta temp
 	lda player_pos_x2
@@ -1551,6 +1580,7 @@ label_cde7:
 	rts
 :	jmp label_d255
 	rts
+label_ce4a:
 	lda #$00
 	sta temp
 	lda player_position_y_again
@@ -1633,6 +1663,7 @@ label_ce9f:
 	sta ram_65
 label_cef7:
 	lda ram_63
+label_cefa:
 	clc
 	adc ram_65
 	sta ram_66
@@ -1688,6 +1719,7 @@ label_cef7:
 	lda #$00
 	sta player_fall_state
 :	rts
+label_cf71:
 	lda player_position_y_again
 	clc
 	adc #$79
