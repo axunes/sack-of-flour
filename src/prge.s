@@ -72,20 +72,18 @@ label_c0e9:
 	jsr label_e7f4
 	jmp :+
 :	jsr nesmus_shut_up
+
+; FOR LOOP
 	lda #$1e
 	sta idx
-label_c0f7:
-	jsr label_db8e
+:	jsr label_db8e
 	jsr label_d5ed
-;	dec idx
-;	lda #$00
-;	sta temp
-;	lda idx
-;	cmp temp
-;	beq :+
-;	jmp label_c0f7
-	dec idx
-	if (idx <> #0) jmp label_c0f7
+	if (dec idx : idx <> #0) jmp :-
+
+;	do
+; 	jsr label_db8e
+; 	jsr label_d5ed
+; 	while (dec idx : idx = #0)
 
 	jsr label_d5c3
 	lda #$01
