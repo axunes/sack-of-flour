@@ -92,18 +92,9 @@ label_c118:
 	jsr label_db8e
 	jsr label_d2bb
 	jsr label_db61
-	lda player_position_y_again
-	sec
-	sbc #$03
-	sta player_position_y_again
-	lda #$00
-	sta temp
-	lda player_position_y_again
-	and #$f8
-	cmp temp
-	beq :+
-	jmp label_c118
-:	lda #$1e
+	mb player_position_y_again := player_position_y_again - #03
+	if (player_position_y_again & #$f8 <> #0) jmp label_c118
+	lda #$1e
 	sta idx
 label_c141:
 	jsr label_db8e
