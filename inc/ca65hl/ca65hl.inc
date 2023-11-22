@@ -2561,7 +2561,13 @@
             ___error "'while' without 'do'"
         .endif
         FLOW_CONTROL_VALUES::INTERNAL_CALL .set 1
-        if { condition goto .ident( .sprintf( "DO_WHILE_%04X_START", DO_WHILE_STATEMENT_COUNT)) }, branchType
+        .if NBASIC
+            if condition
+                jmp .ident( .sprintf( "DO_WHILE_%04X_START", DO_WHILE_STATEMENT_COUNT))
+            endif
+        .else
+            if { condition goto .ident( .sprintf( "DO_WHILE_%04X_START", DO_WHILE_STATEMENT_COUNT)) }, branchType
+        .endif
         FLOW_CONTROL_VALUES::INTERNAL_CALL .set 0
         ___popLoopType
         ___generateBreakLabel DO_WHILE_STATEMENT_COUNT

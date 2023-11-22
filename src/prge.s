@@ -88,12 +88,14 @@ label_c0e9:
 	jsr label_d5c3
 	lda #$01
 	sta player_fall_state
-label_c118:
+
+do
 	jsr label_db8e
 	jsr label_d2bb
 	jsr label_db61
 	mb player_position_y_again := player_position_y_again - #03
-	if (player_position_y_again & #$f8 <> #0) jmp label_c118
+	while (player_position_y_again & #$f8 <> #0)
+	
 	lda #$1e
 	sta idx
 label_c141:
