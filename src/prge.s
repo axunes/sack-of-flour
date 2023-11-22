@@ -72,15 +72,11 @@ label_c0cd:
 	continue
 label_c0e9:
 	jsr label_e7f4
-	jmp :+
-:	jsr nesmus_shut_up
 
-; FOR LOOP
-;	lda #$1e
-;	sta idx
-;:	jsr label_db8e
-;	jsr label_d5ed
-;	if (dec idx : idx <> #0) jmp :-
+	jmp :+
+	:
+
+	jsr nesmus_shut_up
 
 	for (lda #$1e : sta idx, idx <> #0, dec idx)
 		jsr label_db8e
@@ -91,13 +87,13 @@ label_c0e9:
 	lda #$01
 	sta player_fall_state
 
-do
-	jsr label_db8e
-	jsr label_d2bb
-	jsr label_db61
-	mb player_position_y_again := player_position_y_again - #03
-	while (player_position_y_again & #$f8 <> #0)
-	
+	do
+		jsr label_db8e
+		jsr label_d2bb
+		jsr label_db61
+		mb player_position_y_again := player_position_y_again - #03
+	while (player_position_y_again & #$f8 <> #0) ; FIXME, combine and & sbc
+		
 	for (lda #$1e : sta idx, idx <> #0, dec idx)
 		jsr label_db8e
 		jsr label_d5ed
@@ -105,12 +101,14 @@ do
 
 	jmp :+
 	:
+
 	if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
 	jsr label_c26a
 	jsr label_c1c2
 	jsr label_dc71
 	jsr label_cabb
-	forever
+forever
+
 label_c17f:
 	lda ram_04
 	pha
@@ -848,6 +846,7 @@ label_c7a2:
 	nop
 	nop
 	rts
+
 label_c7ec: ; giant player process routine I think
 	lda #$00
 	sta ram_58
@@ -857,42 +856,16 @@ label_c7ec: ; giant player process routine I think
 	sta ram_12
 	lda #$00
 	sta ram_5a
-;	lda #$00
-;	sta temp
-;	lda button_start_down
-;	cmp temp
-;	beq :+
-;	jsr label_c99e
+
 	if (button_start_down <> #0) jsr label_c99e
-;	lda #$00
-;	sta temp
-;	lda button_up_down
-;	cmp temp
-;	beq :+
-;	jsr label_dd2d
 	if (button_up_down <> #0) jsr label_dd2d
-;	lda #$00
-;	sta temp
-;	lda player_health
-;	cmp temp
-;	bne label_c850
+
 	if (player_health = #00)
-	;	lda #$00
-	;	sta temp
-	;	lda player_direction
-	;	cmp temp
-	;	bne :+
-	;	jsr label_d204
 		if (player_direction = #0) jsr label_d204
-	;	lda #$01
-	;	sta temp
-	;	lda player_direction
-	;	cmp temp
-	;	bne :+
-	;	jsr label_d255
 		if (player_direction = #1) jsr label_d255
 		jmp label_c984
 	endif
+	
 label_c850:
 	lda #$00
 	sta temp
@@ -1961,7 +1934,7 @@ label_d1e1:
 	lda #$01
 	sta ram_5d
 	rts
-label_d204:
+label_d204: ; LOOK
 	lda $8058
 	sta temp
 	lda player_pos_x1
