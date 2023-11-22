@@ -104,6 +104,7 @@ label_e679:
 	lda (<music_pointer),y
 	sta APU_PULSE1CTUNE
 	iny
+label_e6dc:
 	lda #$00
 	sta temp
 	lda ram_90
@@ -130,6 +131,7 @@ label_e679:
 	lda (<music_pointer),y
 	sta APU_PULSE2STUNE
 	iny
+label_e718:
 	lda #$00
 	sta temp
 	lda ram_90
@@ -156,6 +158,7 @@ label_e679:
 	lda (<music_pointer),y
 	sta APU_TRIFREQ2
 	iny
+label_e754:
 	lda #$00
 	sta temp
 	lda ram_90
@@ -182,6 +185,7 @@ label_e679:
 	lda (<music_pointer),y
 	sta APU_NOISEFREQ2
 	iny
+label_e790:
 	tya
 	sta ram_11
 	clc
@@ -229,6 +233,7 @@ label_e679:
 label_e7f4:
 	lda #$00
 	sta idx
+label_e7f9:
 	ldx idx
 	lda #$00
 	sta enemy_type,x
@@ -249,6 +254,7 @@ label_e816:
 	rts
 :	lda #$00
 	sta idx
+label_e829:
 	ldx idx
 	lda enemy_type,x
 	sta ram_b1
@@ -270,6 +276,7 @@ label_e816:
 :	rts
 	lda #$00
 	sta idx
+label_e85e:
 	lda ram_05
 	and #$0f
 	sta ram_b1
@@ -331,6 +338,7 @@ label_e816:
 label_e8ed: ; process enemies
 	lda #$ff
 	sta which_enemy
+label_e8f2:
 	inc which_enemy
 	ldx which_enemy
 	lda enemy_type,x
@@ -372,6 +380,7 @@ label_e8ed: ; process enemies
 	bpl :+
 	jmp label_e8f2
 :	rts
+label_e960:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -495,6 +504,7 @@ label_ea41:
 	ldx which_enemy
 	lda ram_b6
 	sta enemy_pos_y,x
+label_ea9f:
 	lda #$08
 	sta temp
 	lda ram_b1
@@ -559,6 +569,7 @@ label_ea41:
 :	jmp label_f3db
 label_eb31:
 	rts
+label_eb32:
 	lda player_chunk_pos_again
 	sta temp
 	lda ram_b4
@@ -618,6 +629,7 @@ label_eb31:
 :	jmp label_f4c3
 label_ebb6:
 	rts
+label_ebb7:
 	lda #$02
 	sta ram_6d
 	lda #$02
@@ -660,6 +672,7 @@ label_ebb6:
 	jmp label_f4f5
 label_ec11:
 	rts
+label_ec12:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -838,6 +851,7 @@ label_edc1:
 	sta ram_6c
 	jmp label_f3db
 	rts
+label_edca:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -916,6 +930,7 @@ label_ee74:
 label_ee7e:
 	lda #$00
 	sta which_enemy
+label_ee83:
 	ldx which_enemy
 	lda enemy_type,x
 	sta ram_b1
