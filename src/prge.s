@@ -27,7 +27,7 @@ nmi:
 	sta player_lives
 	jsr label_dc71
 	jsr label_cabb
-label_c04a:
+do
 	jsr get_controller_buttons
 	jsr label_c7ec
 	jsr label_d2bb
@@ -47,7 +47,9 @@ label_c04a:
 
 	if (player_position_y_again & #$fc = #$fc)
 		jsr label_c9e2
-		if (player_position_y_again = #02) jmp label_c04a
+		if (player_position_y_again = #02)
+			continue
+		endif
 		jmp label_c0cd
 	endif
 
@@ -58,7 +60,7 @@ label_c04a:
 		endif
 	endif
 
-	jmp label_c04a
+	continue
 	
 label_c0cd:
 	if (player_lives = #0)
@@ -67,7 +69,7 @@ label_c0cd:
 		jmp reset
 	endif
 	jsr label_cabb
-	jmp label_c04a
+	continue
 label_c0e9:
 	jsr label_e7f4
 	jmp :+
@@ -108,7 +110,7 @@ do
 	jsr label_c1c2
 	jsr label_dc71
 	jsr label_cabb
-	jmp label_c04a
+	forever
 label_c17f:
 	lda ram_04
 	pha
