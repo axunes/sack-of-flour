@@ -2811,6 +2811,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta ram_0e
+label_d9e0:
 	ldx ram_0e
 	lda $e491,x
 	sta $2007
@@ -2828,6 +2829,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta ram_0e
+label_da0e:
 	ldx ram_0e
 	lda $e4af,x
 	sta $2007
@@ -2845,6 +2847,7 @@ label_d639:
 	sta $2006
 	lda #$00
 	sta ram_0e
+label_da3c:
 	ldx ram_0e
 	lda $e4cd,x
 	sta $2007
@@ -2861,6 +2864,7 @@ label_d639:
 	sta $2005
 	lda #$00
 	sta $2005
+label_da68:
 	jsr label_db8e
 	jsr get_controller_buttons
 	lda #$00
@@ -2869,6 +2873,7 @@ label_d639:
 	cmp temp
 	bne :+
 	jmp label_da68
+label_da7e:
 :	jsr label_db8e
 	jsr get_controller_buttons
 	lda #$00
@@ -2886,6 +2891,7 @@ label_da95:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_0e
+label_daa7:
 	ldx ram_0e
 	lda game_over_text,x
 	sta PPU_VRAM_IO
@@ -2902,6 +2908,7 @@ label_da95:
 	sta ram_71
 	jsr label_dad2
 	rts
+label_dad2:
 	jsr label_db8e
 	dec ram_71
 	lda #$00
@@ -2911,6 +2918,7 @@ label_da95:
 	beq :+
 	jmp label_dad2
 :	rts
+label_dae9:
 	jsr label_db80
 	jsr label_c2e0
 	jsr label_db8e
@@ -2923,12 +2931,14 @@ label_da95:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
+label_db09:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta ram_0e
+label_db18:
 	ldx ram_0e
 	lda $e25a,x
 	sta PPU_VRAM_IO
@@ -2947,6 +2957,7 @@ label_da95:
 	sta $2006
 	lda #$00
 	sta ram_0e
+label_db44:
 	ldx ram_0e
 	lda $e000,x
 	sta $2007
@@ -2972,6 +2983,7 @@ label_db61:
 	lda #$1c
 	sta $2001
 	rts
+label_db80:
 	jsr label_db8e
 	lda #$20
 	sta PPU_CTRL1
@@ -3039,6 +3051,7 @@ label_dbc3:
 	sta PPU_VRAM_ADDR2
 	jsr label_dc1b
 	rts
+label_dc1b:
 	ldx #$00
 :	sta PPU_VRAM_IO
 	inx
@@ -3050,6 +3063,7 @@ label_dbc3:
 		sta ram_66
 		lda #$00
 		sta PPU_SPR_ADDR
+	label_dc30:
 		lda #$f5
 		sta PPU_SPR_IO
 		inc ram_66
@@ -3063,6 +3077,7 @@ label_dbc3:
 	; FIXME
 	lda #$00
 	sta ram_66
+label_dc4e:
 	ldx ram_66
 	lda #$f5
 	sta OAM+0,x
