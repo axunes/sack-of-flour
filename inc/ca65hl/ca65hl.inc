@@ -275,10 +275,14 @@
 ;
 ;   Simulate a branch for 'G' flag clear: 'less or equal'
 
-; sacked
 .macro branchOnLessOrEqual label
-    bmi label
-    beq label
+    .if NBASIC
+        bmi label
+        beq label    
+    .else
+        beq label
+        bcc label
+    .endif     
 .endmacro
 
 ; --------------------------------------------------------------------------------------------
@@ -591,8 +595,10 @@
         .endif
     .endif
 
-    lda _RIGHT
-    sta temp
+    .if NBASIC
+        lda _RIGHT
+        sta temp
+    .endif
 
     ; no registers found, so first we will load a register, or eval an expression
     .if !left
@@ -631,13 +637,24 @@
        .exitmacro
     .endif
     
-    .if left = REGA
-        cmp temp
-    .elseif left = REGX
-        cpx _RIGHT
-    .elseif left = REGY
-        cpy _RIGHT
+    .if NBASIC
+        .if left = REGA
+            cmp temp
+        .elseif left = REGX
+            cpx temp
+        .elseif left = REGY
+            cpy temp
+        .endif
+    .else
+        .if left = REGA
+            cmp _RIGHT
+        .elseif left = REGX
+            cpx _RIGHT
+        .elseif left = REGY
+            cpy _RIGHT
+        .endif
     .endif
+
     .if ___compare::operator     = ___compare::GREATER
         ___setBranch G set
     .elseif ___compare::operator = ___compare::LESS
@@ -853,83 +870,162 @@
     
     .repeat .tcount({EXP}) - currentTokenNumber
     .if !EOT
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { + }
-            nextToken
-            .if !xmatchToken { c } ; c means WITH carry
-                clc
-            .else
-                nextToken ; skip the c
-            .endif
-            pos .set currentTokenNumber
-            ___mb_findNextOp
-            adc {.mid( pos, currentTokenNumber - pos, {EXP} )}
-        .endif
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { - }
-            nextToken
-            .if !xmatchToken { c } ; c means WITH carry
-                sec
-            .else
-                nextToken ; skip the c
-            .endif
-            pos .set currentTokenNumber
-            ___mb_findNextOp
-            sbc {.mid( pos, currentTokenNumber - pos, {EXP} )}
-        .endif        
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { & }
-            nextToken
-            pos .set currentTokenNumber
-            ___mb_findNextOp
-            ; removing the brackets works for some reason
-            and .mid( pos, currentTokenNumber - pos, {EXP} )
-        .endif
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { | }
-            nextToken
-            pos .set currentTokenNumber
-            ___mb_findNextOp
-            ora {.mid( pos, currentTokenNumber - pos, {EXP} )}
-        .endif
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { << }
-            nextToken
-            .if matchToken { 123 }
-                .repeat currentToken
-                    asl
-                .endrepeat
+        .if NBASIC
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { + }
                 nextToken
-                .if !EOT
-                    ___error "No addition operations allowed after shift."
+                .if !xmatchToken { c } ; c means WITH carry
+                    clc
+                .else
+                    nextToken ; skip the c
                 .endif
-            .else
-                ___error "Shift left requires constant value for number of shift operations."
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                adc {.mid( pos, currentTokenNumber - pos, {EXP} )}
             .endif
-            ;___mb_findNextOp
-        .endif
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { >> }
-            nextToken
-            .if matchToken { 123 }
-                .repeat currentToken
-                    lsr
-                .endrepeat
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { - }
                 nextToken
-                .if !EOT
-                    ___error "No addition operations allowed after shift."
+                .if !xmatchToken { c } ; c means WITH carry
+                    sec
+                .else
+                    nextToken ; skip the c
                 .endif
-            .else
-                ___error "Shift left requires constant value for number of shift operations."
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                sbc {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif        
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { & }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                and .mid( pos, currentTokenNumber - pos, {EXP} )
             .endif
-            ;___mb_findNextOp
-        .endif
-        ; --------------------------------------------------------------------------------------------
-        .if xmatchToken { ^ }
-            nextToken
-            pos .set currentTokenNumber
-            ___mb_findNextOp
-            eor {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { | }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                ora {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { << }
+                nextToken
+                .if matchToken { 123 }
+                    .repeat currentToken
+                        asl
+                    .endrepeat
+                    nextToken
+                    .if !EOT
+                        ___error "No addition operations allowed after shift."
+                    .endif
+                .else
+                    ___error "Shift left requires constant value for number of shift operations."
+                .endif
+                ;___mb_findNextOp
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { >> }
+                nextToken
+                .if matchToken { 123 }
+                    .repeat currentToken
+                        lsr
+                    .endrepeat
+                    nextToken
+                    .if !EOT
+                        ___error "No addition operations allowed after shift."
+                    .endif
+                .else
+                    ___error "Shift left requires constant value for number of shift operations."
+                .endif
+                ;___mb_findNextOp
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { ^ }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                eor {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
+        .else
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { + }
+                nextToken
+                .if !xmatchToken { c } ; c means WITH carry
+                    clc
+                .else
+                    nextToken ; skip the c
+                .endif
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                adc {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { - }
+                nextToken
+                .if !xmatchToken { c } ; c means WITH carry
+                    sec
+                .else
+                    nextToken ; skip the c
+                .endif
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                sbc {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif        
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { & }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                and {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { | }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                ora {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { << }
+                nextToken
+                .if matchToken { 123 }
+                    .repeat currentToken
+                        asl
+                    .endrepeat
+                    nextToken
+                    .if !EOT
+                        ___error "No addition operations allowed after shift."
+                    .endif
+                .else
+                    ___error "Shift left requires constant value for number of shift operations."
+                .endif
+                ;___mb_findNextOp
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { >> }
+                nextToken
+                .if matchToken { 123 }
+                    .repeat currentToken
+                        lsr
+                    .endrepeat
+                    nextToken
+                    .if !EOT
+                        ___error "No addition operations allowed after shift."
+                    .endif
+                .else
+                    ___error "Shift left requires constant value for number of shift operations."
+                .endif
+                ;___mb_findNextOp
+            .endif
+            ; --------------------------------------------------------------------------------------------
+            .if xmatchToken { ^ }
+                nextToken
+                pos .set currentTokenNumber
+                ___mb_findNextOp
+                eor {.mid( pos, currentTokenNumber - pos, {EXP} )}
+            .endif
         .endif
     .endif
     .endrepeat
@@ -1330,16 +1426,20 @@
             .endif
         .else 
             ; not a register, first save if it is an instruction or macro
-            ; what the fuck lol
-            ; .if ::CA65HL_USE_CUSTOM_SYNTAX
-            ;     .feature ubiquitous_idents -
-            ;     isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc) ; adc bug, fixed in recent builds of ca65
-            ;     isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
-            ;     .feature ubiquitous_idents +
-            ; .else
+            .if NBASIC
                 isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc)
                 isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
-            ; .endif
+            .else
+                .if ::CA65HL_USE_CUSTOM_SYNTAX
+                    .feature ubiquitous_idents -
+                    isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc) ; adc bug, fixed in recent builds of ca65
+                    isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
+                    .feature ubiquitous_idents +
+                .else
+                    isInstruction = .ismnemonic (.left (1,{S})) || .xmatch( .left (1,{S}), adc)
+                    isMacro       = .definedmacro ( .left(1,{S})) && (!isInstruction)
+                .endif
+            .endif
             ; is it a macro?
             .if isMacro
                 printTokenListDebugCA65HL {Macro: S}
