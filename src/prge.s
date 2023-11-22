@@ -74,16 +74,16 @@ label_c0e9:
 :	jsr nesmus_shut_up
 
 ; FOR LOOP
-	lda #$1e
-	sta idx
-:	jsr label_db8e
-	jsr label_d5ed
-	if (dec idx : idx <> #0) jmp :-
+;	lda #$1e
+;	sta idx
+;:	jsr label_db8e
+;	jsr label_d5ed
+;	if (dec idx : idx <> #0) jmp :-
 
-;	do
-; 	jsr label_db8e
-; 	jsr label_d5ed
-; 	while (dec idx : idx = #0)
+	for (lda #$1e : sta idx, idx <> #0, dec idx)
+		jsr label_db8e
+		jsr label_d5ed
+	next
 
 	jsr label_d5c3
 	lda #$01

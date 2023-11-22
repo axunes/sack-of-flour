@@ -2767,7 +2767,14 @@
 
     popTokenList "FOR_STATEMENT_CONDITION"
     FLOW_CONTROL_VALUES::INTERNAL_CALL .set 1
-    if { poppedTokenList goto .ident( .sprintf( "FOR_%04X_START", FOR_STATEMENT_COUNT)) }, branchType
+    .if NBASIC
+        if poppedTokenList
+            jmp .ident( .sprintf( "FOR_%04X_START", FOR_STATEMENT_COUNT))
+        endif
+    .else
+        if  poppedTokenList goto .ident( .sprintf( "FOR_%04X_START", FOR_STATEMENT_COUNT)) , branchType
+    .endif
+    
     FLOW_CONTROL_VALUES::INTERNAL_CALL .set 0
     ___popLoopType
     ___generateBreakLabel FOR_STATEMENT_COUNT
