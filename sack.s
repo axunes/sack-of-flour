@@ -45,12 +45,9 @@ setLongBranch -, -
 ; code
 
 .segment "PRGE"
-.org $c000
 	.include "src/prge.s"
-	.reloc
 	
 .segment "PRGF"
-.org $e000
 	weird_fucking_data: ; this only used to load as a palette somewhere
 	.byte $28, $38, $37, $08, $28, $21, $37, $38
 	.byte $28, $38, $01, $08, $28, $21, $37, $01
@@ -229,7 +226,6 @@ setLongBranch -, -
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
 	.include "src/prgf.s"
 	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
-.reloc
 .segment "VECTORS"
 	.addr nmi, reset, irq
 
