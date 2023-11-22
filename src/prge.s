@@ -77,14 +77,17 @@ label_c0e9:
 label_c0f7:
 	jsr label_db8e
 	jsr label_d5ed
+;	dec idx
+;	lda #$00
+;	sta temp
+;	lda idx
+;	cmp temp
+;	beq :+
+;	jmp label_c0f7
 	dec idx
-	lda #$00
-	sta temp
-	lda idx
-	cmp temp
-	beq :+
-	jmp label_c0f7
-:	jsr label_d5c3
+	if (idx <> #0) jmp label_c0f7
+
+	jsr label_d5c3
 	lda #$01
 	sta player_fall_state
 label_c118:
