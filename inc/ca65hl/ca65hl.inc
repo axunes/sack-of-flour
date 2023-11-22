@@ -881,7 +881,7 @@
                 .endif
                 pos .set currentTokenNumber
                 ___mb_findNextOp
-                adc {.mid( pos, currentTokenNumber - pos, {EXP} )}
+                adc .mid( pos, currentTokenNumber - pos, {EXP} )
             .endif
             ; --------------------------------------------------------------------------------------------
             .if xmatchToken { - }
@@ -893,7 +893,7 @@
                 .endif
                 pos .set currentTokenNumber
                 ___mb_findNextOp
-                sbc {.mid( pos, currentTokenNumber - pos, {EXP} )}
+                sbc .mid( pos, currentTokenNumber - pos, {EXP} )
             .endif        
             ; --------------------------------------------------------------------------------------------
             .if xmatchToken { & }
@@ -907,7 +907,7 @@
                 nextToken
                 pos .set currentTokenNumber
                 ___mb_findNextOp
-                ora {.mid( pos, currentTokenNumber - pos, {EXP} )}
+                ora .mid( pos, currentTokenNumber - pos, {EXP} )
             .endif
             ; --------------------------------------------------------------------------------------------
             .if xmatchToken { << }
@@ -946,7 +946,7 @@
                 nextToken
                 pos .set currentTokenNumber
                 ___mb_findNextOp
-                eor {.mid( pos, currentTokenNumber - pos, {EXP} )}
+                eor .mid( pos, currentTokenNumber - pos, {EXP} )
             .endif
         .else
             ; --------------------------------------------------------------------------------------------

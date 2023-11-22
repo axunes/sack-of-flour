@@ -63,18 +63,22 @@ label_c04a:
 	
 	
 label_c0aa:
-	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	bne label_c0ca
-	lda #$00
-	sta temp
-	lda i_frames
-	cmp temp
-	bne label_c0ca
-	jsr label_cab7
-	jmp label_c0cd
+;	lda #$00
+;	sta temp
+;	lda player_health
+;	cmp temp
+;	bne label_c0ca
+	if (player_health = #0)
+	;	lda #$00
+	;	sta temp
+	;	lda i_frames
+	;	cmp temp
+	;	bne label_c0ca
+		if (i_frames = #0)
+			jsr label_cab7
+			jmp label_c0cd
+		endif
+	endif
 label_c0ca:
 	jmp label_c04a
 label_c0cd:
@@ -1762,7 +1766,8 @@ label_cfa0:
 ;	beq :+
 ;	jmp label_d01a
 ;	:
-	; I THINK it can be optimized to (ram_67 & ram_54)
+	; optimization:
+	; if (ram_67 & ram_54 == zero), long
 	if (ram_67 & ram_54 = #0), long
 		lda #$00
 		sta ram_64
