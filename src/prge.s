@@ -1934,39 +1934,25 @@ label_d1e1:
 	lda #$01
 	sta ram_5d
 	rts
+
 label_d204: ; LOOK
-	lda $8058
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
+	if (player_pos_x1 = $8058) rts
+	if (player_pos_x1 = $8059)
+		lda #$01
+		sta ram_27
+	endif
+
+	inc player_pos_x2
+
+	if (player_pos_x2 = #16)
+		lda #$00
+		sta player_pos_x2
+		inc player_pos_x1
+	endif
+
+	if (player_pos_x1 - player_chunk_pos_again > #10) jsr label_d6e5
 	rts
-:	lda $8059
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	lda #$01
-	sta ram_27
-:	inc player_pos_x2
-	lda #$10
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_pos_x2
-	inc player_pos_x1
-:	lda #$0a
-	sta temp
-	lda player_pos_x1
-	sec
-	sbc player_chunk_pos_again
-	cmp temp
-	bmi :+
-	beq :+
-	jsr label_d6e5
-:	rts
+
 label_d255:
 	lda #$00
 	sta temp

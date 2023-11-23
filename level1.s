@@ -8,7 +8,7 @@
 	door_tiles_y: .byte $0C, $0B, $03, $0D, $07
 	; I don't know
 	player_x_values_fuck: .byte $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-	.byte $E3, $73
+	.byte $E3, $73 ; checkpoint?
 	level_end_x: .byte $D4, $D2
 	.byte $00, $00, $00, $00
 	enemies_to_spawn: .byte $02, $02, $02, $02, $02, $02, $02, $04, $04, $04, $04, $04, $04, $06, $06, $06
