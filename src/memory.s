@@ -153,3 +153,5 @@
 	collision_something: .res $100
 
 	OAM: .res $100
+
+	collision_something_else: .res $100

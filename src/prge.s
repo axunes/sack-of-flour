@@ -1955,11 +1955,7 @@ label_d204: ; LOOK
 
 label_d255: ; LOOK
 
-	if (player_pos_x1 = #0)
-		if (lda #$08 : sta temp : lda player_pos_x2 : cmp temp == negative) ; MAN FIX THIS SHIT
-			rts
-		endif
-	endif
+	if (player_pos_x1 = #0 && lda #$08 : sta temp : lda player_pos_x2 : cmp temp == negative) rts ; MAN FIX THIS SHIT
 
 	lda $805a
 	sta temp
