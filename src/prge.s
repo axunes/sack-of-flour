@@ -1953,19 +1953,15 @@ label_d204: ; LOOK
 	if (player_pos_x1 - player_chunk_pos_again > #10) jsr label_d6e5
 	rts
 
-label_d255:
-	lda #$00
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	lda #$08
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bpl :+
-	rts
-:	lda $805a
+label_d255: ; LOOK
+
+	if (player_pos_x1 = #0)
+		if (lda #$08 : sta temp : lda player_pos_x2 : cmp temp == negative) ; MAN FIX THIS SHIT
+			rts
+		endif
+	endif
+
+	lda $805a
 	sta temp
 	lda player_pos_x1
 	cmp temp
