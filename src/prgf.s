@@ -1175,7 +1175,7 @@ label_f083:
 	clc
 	adc ram_65
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_86
 	lda #$00
 	sta temp
@@ -1200,7 +1200,7 @@ label_f083:
 	clc
 	adc ram_11
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_bb
 	lda #$00
 	sta temp
@@ -1290,7 +1290,7 @@ label_f193:
 	clc
 	adc ram_65
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_86
 	lda #$00
 	sta temp
@@ -1315,7 +1315,7 @@ label_f193:
 	clc
 	adc ram_11
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_bb
 	lda #$00
 	sta temp
@@ -1420,7 +1420,7 @@ label_f2cd:
 	adc ram_65
 	sta ram_66
 	ldx ram_66
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_86
 	lda #$00
 	sta temp
@@ -1441,7 +1441,7 @@ label_f2cd:
 	clc
 	adc #$08
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_bb
 :	lda #$00
 	sta temp

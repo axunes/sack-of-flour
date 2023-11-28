@@ -154,69 +154,72 @@ label_c17f:
 
 
 	
-	label_c1c2:
-		lda #$00
-		sta button_a_down
-		lda #$00
-		sta button_b_down
-		lda #$00
-		sta button_up_down
-		lda #$00
-		sta button_down_down
-		lda #$00
-		sta button_right_down
-		lda #$00
-		sta button_left_down
-		lda #$00
-		sta button_select_down
-		lda #$00
-		sta button_start_down
-		lda #$00
-		sta ram_1b
-		lda #$01
-		sta player_direction
-		lda #$00
-		sta idx
-		lda #$00
-		sta title_screen_wave_timer
-		lda #$00
-		sta player_chunk_pos
-		lda #$00
-		sta player_chunk_pos_fine
-		lda #$00
-		sta player_chunk_pos_again
-		lda #$00
-		sta player_chunk_pos_fine_again
-		lda #$10
-		sta ram_22
-		lda #$00
-		sta ram_0b
-		lda #$00
-		sta ram_23
-		lda #$20
-		sta player_sprite
-		lda #$00
-		sta player_anim_timer
-		lda #$00
-		sta ram_26
-		lda #$00
-		sta ram_27
-		rts
-	label_c236:
-		lda #$00
-		sta APU_CHANCTRL
-		lda #$1f
-		sta APU_CHANCTRL
-		rts
+label_c1c2: ; ram init shit
+	lda #$00
+	sta button_a_down
+	lda #$00
+	sta button_b_down
+	lda #$00
+	sta button_up_down
+	lda #$00
+	sta button_down_down
+	lda #$00
+	sta button_right_down
+	lda #$00
+	sta button_left_down
+	lda #$00
+	sta button_select_down
+	lda #$00
+	sta button_start_down
+	lda #$00
+	sta ram_1b
+	lda #$01
+	sta player_direction
+	lda #$00
+	sta idx
+	lda #$00
+	sta title_screen_wave_timer
+	lda #$00
+	sta player_chunk_pos
+	lda #$00
+	sta player_chunk_pos_fine
+	lda #$00
+	sta player_chunk_pos_again
+	lda #$00
+	sta player_chunk_pos_fine_again
+	lda #$10
+	sta ram_22
+	lda #$00
+	sta ram_0b
+	lda #$00
+	sta ram_23
+	lda #$20
+	sta player_sprite
+	lda #$00
+	sta player_anim_timer
+	lda #$00
+	sta ram_26
+	lda #$00
+	sta ram_27
+	rts
+
+label_c236:
+	lda #$00
+	sta APU_CHANCTRL
+	lda #$1f
+	sta APU_CHANCTRL
+	rts
+
 nesmus_shut_up:
 ; zero out all apu registers
-	ldx #$00
-	lda #$00
+	ldx #0
+	lda #0
 :	sta APU_PULSE1CTRL,x
 	inx
-	cpx #$10
+	cpx #16
 	bne :-
 	rts
+
 label_c24e:
 	lda #$0f
 	sta temp
@@ -776,25 +779,25 @@ label_c750:
 	iny
 	sta ram_11
 	and #$03
-	sta $0400,x
+	sta collision_something_else,x
 	lsr ram_11
 	lsr ram_11
 	inx
 	lda ram_11
 	and #$03
-	sta $0400,x
+	sta collision_something_else,x
 	lsr ram_11
 	lsr ram_11
 	inx
 	lda ram_11
 	and #$03
-	sta $0400,x
+	sta collision_something_else,x
 	lsr ram_11
 	lsr ram_11
 	inx
 	lda ram_11
 	and #$03
-	sta $0400,x
+	sta collision_something_else,x
 	lsr ram_11
 	lsr ram_11
 	inx
@@ -860,6 +863,7 @@ label_c7ec: ; giant player process routine I think
 	if (button_start_down <> #0) jsr label_c99e
 	if (button_up_down <> #0) jsr label_dd2d
 
+	; fling player left or right on death
 	if (player_health = #00)
 		if (player_direction = #0) jsr label_d204
 		if (player_direction = #1) jsr label_d255
@@ -1271,7 +1275,7 @@ label_cbaa:
 	clc
 	adc #$06
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_64
 	lda #$00
 	sta temp
@@ -1298,7 +1302,7 @@ label_cc2b:
 	adc ram_65
 	sta ram_66
 	ldx ram_66
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_64
 	lda #$00
 	sta temp
@@ -1317,7 +1321,7 @@ label_cc2b:
 	sec
 	sbc #$01
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_64
 	lda #$00
 	sta temp
@@ -1415,7 +1419,7 @@ label_ccfa:
 	clc
 	adc #$06
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_67
 	lda #$00
 	sta temp
@@ -1442,7 +1446,7 @@ label_cd7b:
 	adc ram_65
 	sta ram_66
 	ldx ram_66
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_67
 	lda #$00
 	sta temp
@@ -1461,7 +1465,7 @@ label_cd7b:
 	sec
 	sbc #$01
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_67
 	lda #$00
 	sta temp
@@ -1603,7 +1607,7 @@ label_cefa:
 	adc ram_65
 	sta ram_66
 	ldx ram_66
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_67
 	lda #$00
 	sta temp
@@ -1624,14 +1628,14 @@ label_cefa:
 ;	clc
 ;	adc #$08
 ;	tax
-;	lda $0400,x
+;	lda collision_something_else,x
 ;	sta ram_64
 	if (player_pos_x2 > #04)
 		lda ram_66
 		clc
 		adc #$08
 		tax
-		lda $0400,x
+		lda collision_something_else,x
 		sta ram_64
 	endif
 	lda #$00
@@ -1802,7 +1806,7 @@ label_d05d:
 	adc ram_65
 	sta ram_66
 	ldx ram_66
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_67
 	lda #$00
 	sta temp
@@ -1823,7 +1827,7 @@ label_d05d:
 	clc
 	adc #$08
 	tax
-	lda $0400,x
+	lda collision_something_else,x
 	sta ram_64
 :	lda #$00
 	sta temp
