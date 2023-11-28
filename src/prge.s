@@ -27,87 +27,88 @@ nmi:
 	sta player_lives
 	jsr label_dc71
 	jsr label_cabb
-do
-	jsr get_controller_buttons
-	jsr label_c7ec
-	jsr label_d2bb
-	jsr label_e8ed
-	jsr label_c24e
-
-	; if player_health is 0, KILL?
-	; ^ I guess that's wrong
-	if (player_health <> #0) jsr label_e679
-
-	jsr label_c17f
-	jsr label_e816
-	jsr label_db8e
-	jsr label_db61
-
-	if (ram_0b <> #0) goto label_c0e9, long
-
-	if (player_position_y_again & #$fc = #$fc)
-		jsr label_c9e2
-		if (player_position_y_again = #02)
-			continue
-		endif
-		jmp label_c0cd
-	endif
-
-	if (player_health = #0)
-		if (i_frames = #0)
-			jsr label_cab7
-			jmp label_c0cd
-		endif
-	endif
-
-	continue
-	
-label_c0cd:
-	if (player_lives = #0)
-		jsr label_da95
-		jsr label_c3eb
-		jmp reset
-	endif
-	jsr label_cabb
-	continue
-label_c0e9:
-	jsr label_e7f4
-
-	jmp :+
-	:
-
-	jsr nesmus_shut_up
-
-	for (lda #$1e : sta idx, idx <> #0, dec idx)
-		jsr label_db8e
-		jsr label_d5ed
-	next
-
-	jsr label_d5c3
-	lda #$01
-	sta player_fall_state
 
 	do
-		jsr label_db8e
+		jsr get_controller_buttons
+		jsr label_c7ec
 		jsr label_d2bb
-		jsr label_db61
-		mb player_position_y_again := player_position_y_again - #03
-	while (player_position_y_again & #$f8 <> #0) ; FIXME, combine and & sbc
-		
-	for (lda #$1e : sta idx, idx <> #0, dec idx)
+		jsr label_e8ed
+		jsr label_c24e
+
+		; if player_health is 0, KILL?
+		; ^ I guess that's wrong
+		if (player_health <> #0) jsr label_e679
+
+		jsr label_c17f
+		jsr label_e816
 		jsr label_db8e
-		jsr label_d5ed
-	next
+		jsr label_db61
 
-	jmp :+
-	:
+		if (ram_0b <> #0) goto label_c0e9, long
 
-	if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
-	jsr label_c26a
-	jsr label_c1c2
-	jsr label_dc71
-	jsr label_cabb
-forever
+		if (player_position_y_again & #$fc = #$fc)
+			jsr label_c9e2
+			if (player_position_y_again = #02)
+				continue
+			endif
+			jmp label_c0cd
+		endif
+
+		if (player_health = #0)
+			if (i_frames = #0)
+				jsr label_cab7
+				jmp label_c0cd
+			endif
+		endif
+
+		continue
+		
+		label_c0cd:
+		if (player_lives = #0)
+			jsr label_da95
+			jsr label_c3eb
+			jmp reset
+		endif
+		jsr label_cabb
+		continue
+		label_c0e9:
+		jsr label_e7f4
+
+		jmp :+
+		:
+
+		jsr nesmus_shut_up
+
+		for (lda #$1e : sta idx, idx <> #0, dec idx)
+			jsr label_db8e
+			jsr label_d5ed
+		next
+
+		jsr label_d5c3
+		lda #$01
+		sta player_fall_state
+
+		do
+			jsr label_db8e
+			jsr label_d2bb
+			jsr label_db61
+			mb player_position_y_again := player_position_y_again - #03
+		while (player_position_y_again & #$f8 <> #0) ; FIXME, combine and & sbc
+			
+		for (lda #$1e : sta idx, idx <> #0, dec idx)
+			jsr label_db8e
+			jsr label_d5ed
+		next
+
+		jmp :+
+		:
+
+		if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
+		jsr label_c26a
+		jsr label_c1c2
+		jsr label_dc71
+		jsr label_cabb
+	forever
 
 label_c17f:
 	lda ram_04
@@ -397,24 +398,23 @@ label_c3c1:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
+
 label_c3eb:
 	jsr label_db8e
-	lda #$01
-	sta temp
-	lda ram_53
-	cmp temp
-	bne :+
-	jsr label_c47d
+	
+	if (ram_53 = #1)
+		jsr label_c47d
+		rts
+	endif
+
+	if (ram_53 = #3)
+		jsr label_c414
+		rts
+	endif
+
+	jsr label_c44b
 	rts
-:	lda #$03
-	sta temp
-	lda ram_53
-	cmp temp
-	bne :+
-	jsr label_c414
-	rts
-:	jsr label_c44b
-	rts
+
 label_c414:
 	lda #$55
 	sta ram_54
@@ -426,7 +426,7 @@ label_c414:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
-label_c42d:
+label_c42d: ; for
 	ldx idx
 	lda $8004,x
 	sta PPU_VRAM_IO
@@ -450,7 +450,7 @@ label_c44b:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
-label_c463:
+label_c463: ; for
 	lda #$0e
 	sta PPU_VRAM_IO
 	inc idx
@@ -473,7 +473,7 @@ label_c47d:
 	sta PPU_VRAM_ADDR2
 	lda #$00
 	sta idx
-label_c496:
+label_c496: ; for
 	ldx idx
 	lda $8024,x
 	sta PPU_VRAM_IO
@@ -486,6 +486,7 @@ label_c496:
 	rts
 :	jmp label_c496
 	rts
+
 label_c4b4:
 	lda ram_52
 	and #$07
@@ -493,13 +494,10 @@ label_c4b4:
 	ldx ram_55
 	lda ram_2a,x
 	sta ram_11
-	lda ram_52
-	sta temp
-	lda ram_11
-	cmp temp
-	bne :+
-	rts
-:	ldx ram_55
+
+	if (ram_11 = ram_52) rts
+
+	ldx ram_55
 	lda ram_52
 	sta ram_2a,x
 	lda ram_52
@@ -592,6 +590,7 @@ label_c505:
 	sta ram_56
 	jmp label_c505
 :	rts
+
 label_c5aa:
 	lda ram_52
 	and #$07
@@ -599,13 +598,10 @@ label_c5aa:
 	ldx ram_55
 	lda ram_32,x
 	sta ram_11
-	lda ram_52
-	sta temp
-	lda ram_11
-	cmp temp
-	bne :+
-	rts
-:	ldx ram_55
+
+	if (ram_11 = ram_52) rts
+
+	ldx ram_55
 	lda ram_52
 	sta ram_32,x
 	lda ram_52
@@ -705,13 +701,10 @@ label_c6a0:
 	ldx ram_55
 	lda ram_3a,x
 	sta ram_11
-	lda ram_52
-	sta temp
-	lda ram_11
-	cmp temp
-	bne :+
-	rts
-:	ldx ram_55
+	
+	if (ram_11 = ram_52) rts
+	
+	ldx ram_55
 	lda ram_52
 	sta ram_3a,x
 	ldx ram_55
@@ -747,13 +740,10 @@ label_c706:
 	ldx ram_55
 	lda ram_42,x
 	sta ram_11
-	lda ram_52
-	sta temp
-	lda ram_11
-	cmp temp
-	bne :+ ; we do some tile shit
-	rts
-:	ldx ram_55
+
+	if (ram_11 = ram_52) rts
+	
+	ldx ram_55
 	lda ram_52
 	sta ram_42,x
 	lda ram_52
@@ -926,25 +916,18 @@ label_c850:
 	sta ram_5b
 	jmp label_c984
 label_c8dd:
+	if (button_a_down <> #0 && ram_5c = #1)
+		lda #$23
+		sta player_velocity
+		lda #$01
+		sta player_fall_state
+		lda #$01
+		sta ram_5a
+		jsr label_d5d8
+		jmp label_c984
+	endif
+	
 	lda #$00
-	sta temp
-	lda button_a_down
-	cmp temp
-	beq :+
-	lda #$01
-	sta temp
-	lda ram_5c
-	cmp temp
-	bne :+
-	lda #$23
-	sta player_velocity
-	lda #$01
-	sta player_fall_state
-	lda #$01
-	sta ram_5a
-	jsr label_d5d8
-	jmp label_c984
-:	lda #$00
 	sta temp
 	lda button_a_down
 	cmp temp
@@ -971,14 +954,13 @@ label_c8dd:
 	sta player_fall_state
 	lda #$28
 	sta player_velocity
-	lda #$03
-	sta temp
-	lda ram_06
-	cmp temp
-	bne :+
-	lda #$2d
-	sta player_velocity
-:	lda #$00
+
+	if (ram_06 = #3)
+		lda #$2d
+		sta player_velocity
+	endif
+	
+	lda #$00
 	sta temp
 	lda ram_12
 	cmp temp
@@ -1027,12 +1009,9 @@ label_c99e:
 	jmp label_c99e
 label_c9b6:
 	jsr get_controller_buttons
-	lda #$00
-	sta temp
-	lda button_start_down
-	cmp temp
-	bne :+
-	jmp label_c9b6
+
+	if (button_start_down = #0) jmp label_c9b6
+
 :	jsr get_controller_buttons
 	lda #$00
 	sta temp
@@ -1044,25 +1023,11 @@ label_c9b6:
 	sta $4015
 	rts
 label_c9e2:
-	lda $805c ; FIXME
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	jmp label_ca36
-:	lda $805d ; FIXME
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	jmp label_ca36
-:	lda $805e ; FIXME
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	jmp label_ca36
-:	lda #$00
+	if (player_pos_x1 = $805c) jmp label_ca36
+	if (player_pos_x1 = $805d) jmp label_ca36
+	if (player_pos_x1 = $805e) jmp label_ca36
+
+	lda #$00 ; for
 	sta idx
 label_ca1a:
 	jsr label_db8e
@@ -1114,21 +1079,19 @@ label_ca72:
 	lda #$0a
 	sta player_velocity
 	dec player_health
-	lda #$ff
-	sta temp
-	lda player_health
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_health
-:	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	bne :+
-	lda #$37
-	sta player_velocity
-:	rts
+	
+	if (player_health = #$ff)
+		lda #$00
+		sta player_health
+	endif
+
+	if (player_health = #0)
+		lda #$37
+		sta player_velocity
+	endif
+	
+	rts
+
 label_cab7:
 	; take a life
 	dec player_lives
@@ -1150,14 +1113,13 @@ label_cabb:
 	sta player_pos_x2
 	lda #$02
 	sta player_pos_x1
-	lda #$01
-	sta temp
-	lda ram_27
-	cmp temp
-	bne :+
-	lda $8059
-	sta player_pos_x1
-:	lda #$00
+
+	if (ram_27 = #1)
+		lda $8059
+		sta player_pos_x1
+	endif
+
+	lda #$00
 	sta player_velocity
 	lda #$00
 	sta player_fall_state
@@ -1218,19 +1180,20 @@ label_cb75:
 	sta player_anim_timer
 	jsr label_d2bb
 	rts
+
 label_cb8c:
 	ldx player_velocity
-	lda $e040,x
+	lda player_gravity_table, x
 	sta ram_62
-	lda #$01
-	sta temp
-	lda player_fall_state
-	cmp temp
-	bne :+
-	jmp label_ce4a
+
+	if (player_fall_state = #1)
+		jmp label_ce4a
+		rts
+	endif
+
+	jmp label_d023
 	rts
-:	jmp label_d023
-	rts
+
 label_cbaa:
 	lda #$03
 	sta temp
