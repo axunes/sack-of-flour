@@ -1490,14 +1490,14 @@ label_ce4a:
 	cmp temp
 	bne label_ce6f
 	dec player_velocity
-	lda #$00
-	sta temp
-	lda player_velocity
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_fall_state
-:	rts
+	
+	if (player_velocity = #0)
+		lda #0
+		sta player_fall_state
+	endif
+
+	rts
+
 label_ce6f:
 	lda #$00
 	sta temp
@@ -1510,14 +1510,14 @@ label_ce6f:
 	sbc ram_62
 	sta player_position_y_again
 	dec player_velocity
-	lda #$00
-	sta temp
-	lda player_velocity
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_fall_state
-:	rts
+	
+	if (player_velocity = #0)
+		lda #$00
+		sta player_fall_state
+	endif
+
+	rts
+
 label_ce9f:
 	lda player_pos_x1
 	asl a
@@ -1613,14 +1613,14 @@ label_cefa:
 	sbc ram_62
 	sta player_position_y_again
 	dec player_velocity
-	lda #$00
-	sta temp
-	lda player_velocity
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_fall_state
-:	rts
+	
+	if (player_velocity = #0)
+		lda #$00
+		sta player_fall_state
+	endif
+
+	rts
+	
 label_cf71:
 	lda player_position_y_again
 	clc

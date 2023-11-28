@@ -1,9 +1,9 @@
+NBASIC = 1
 .include "inc/nes.inc"
 .include "inc/macros.inc"
 .include "src/memory.s"
 
 CA65HL_USE_CUSTOM_SYNTAX = 0
-NBASIC = 1
 .include "inc/ca65hl/ca65hl.inc"
 setLongBranch -, -
 

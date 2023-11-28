@@ -1,4 +1,8 @@
+.if NBASIC
 .segment "ZP"
+.else
+.segment "ZP": zp
+.endif
 	ram_00: .res 2 ; probably a pointer to level data or something
 	music_pointer: .res 2
 	ram_04: .res 1
