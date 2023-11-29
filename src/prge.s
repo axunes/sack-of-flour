@@ -873,9 +873,10 @@ label_c850:
 	sta player_direction
 	jsr label_cbaa
 
-	if (button_b_down = #0) goto label_fuck
-	jsr label_cbaa
-label_fuck:
+	if (button_b_down <> #0)
+		jsr label_cbaa
+	endif
+	
 	lda #$01
 	sta player_is_moving_h
 label_shit:
