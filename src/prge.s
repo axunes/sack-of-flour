@@ -2337,202 +2337,132 @@ label_d613:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
+
 label_d629:
 	if (ram_58 = #0) rts
 	if (ram_58 >= #6) jmp label_d696
-	
+
 	lda player_chunk_pos
 	clc
 	adc #$05
 	sta ram_52
-	lda #$01
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c4b4
-:	lda #$03
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c5aa
-:	lda #$04
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c6a0
-:	lda #$05
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c706
-:	lda #$00
+	
+	if (ram_58 = #1) jsr label_c4b4
+	if (ram_58 = #3) jsr label_c5aa
+	if (ram_58 = #4) jsr label_c6a0
+	if (ram_58 = #5) jsr label_c706
+
+	lda #0
 	sta ram_58
 	rts
+
 label_d696:
 	lda player_chunk_pos
 	sec
 	sbc #$01
 	sta ram_52
-	lda #$06
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c4b4
-:	lda #$08
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c5aa
-:	lda #$09
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c6a0
-:	lda #$0a
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	jsr label_c706
-:	lda #$00
+	
+	if (ram_58 = #6) jsr label_c4b4
+	if (ram_58 = #8) jsr label_c5aa
+	if (ram_58 = #9) jsr label_c6a0
+	if (ram_58 = #10) jsr label_c706
+
+	lda #0
 	sta ram_58
 	rts
+
 label_d6e5:
-	lda $805b
-	sta temp
-	lda player_chunk_pos_again
-	cmp temp
-	bne :+
-	lda #$01
-	sta ram_0b
+	if (player_chunk_pos_again = $805b)
+		lda #$01
+		sta ram_0b
+		rts
+	endif
+
+	inc player_chunk_pos_fine_again
+
+	if (player_chunk_pos_fine_again = #16)
+		lda #$00
+		sta player_chunk_pos_fine_again
+		inc player_chunk_pos_again
+	endif
+
+	if (player_chunk_pos_fine = #$3f)
+		lda #$00
+		sta player_chunk_pos_fine
+		inc player_chunk_pos
+		rts
+	endif
+
+	inc player_chunk_pos_fine
+
+	if (player_chunk_pos_fine = #10)
+		lda #$01
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #$1e)
+		lda #$03
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #$28)
+		lda #$04
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #50)
+		lda #$05
+		sta ram_58
+	endif
+
 	rts
-:	inc player_chunk_pos_fine_again
-	lda #$10
-	sta temp
-	lda player_chunk_pos_fine_again
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_chunk_pos_fine_again
-	inc player_chunk_pos_again
-:	lda #$3f
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_chunk_pos_fine
-	inc player_chunk_pos
-	rts
-:	inc player_chunk_pos_fine
-	lda #$0a
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$01
-	sta ram_58
-:	lda #$1e
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$03
-	sta ram_58
-:	lda #$28
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$04
-	sta ram_58
-:	lda #$32
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$05
-	sta ram_58
-:	rts
+	
 label_d773:
-	lda #$00
-	sta temp
-	lda player_chunk_pos
-	cmp temp
-	bne :+
-	lda #$01
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bpl :+
+	if (player_chunk_pos = #0 && player_chunk_pos_fine <= #1) rts
+
+	if (player_chunk_pos_again = $805b) rts
+
+	dec player_chunk_pos_fine_again
+
+	if (player_chunk_pos_fine_again = #$ff)
+		lda #$0f
+		sta player_chunk_pos_fine_again
+		dec player_chunk_pos_again
+	endif
+
+	if (player_chunk_pos_fine = #0)
+		lda #$3f
+		sta player_chunk_pos_fine
+		dec player_chunk_pos
+		rts
+	endif
+
+	dec player_chunk_pos_fine
+
+	if (player_chunk_pos = #0) rts
+
+	if (player_chunk_pos_fine = #8)
+		lda #$06
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #$1c)
+		lda #$08
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #$26)
+		lda #$09
+		sta ram_58
+	endif
+
+	if (player_chunk_pos_fine = #$30)
+		lda #$0a
+		sta ram_58
+	endif
+
 	rts
-:	lda $805b
-	sta temp
-	lda player_chunk_pos_again
-	cmp temp
-	bne :+
-	rts
-:	dec player_chunk_pos_fine_again
-	lda #$ff
-	sta temp
-	lda player_chunk_pos_fine_again
-	cmp temp
-	bne :+
-	lda #$0f
-	sta player_chunk_pos_fine_again
-	dec player_chunk_pos_again
-:	lda #$00
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$3f
-	sta player_chunk_pos_fine
-	dec player_chunk_pos
-	rts
-:	dec player_chunk_pos_fine
-	lda #$00
-	sta temp
-	lda player_chunk_pos
-	cmp temp
-	bne :+
-	rts
-:	lda #$08
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$06
-	sta ram_58
-:	lda #$1c
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$08
-	sta ram_58
-:	lda #$26
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$09
-	sta ram_58
-:	lda #$30
-	sta temp
-	lda player_chunk_pos_fine
-	cmp temp
-	bne :+
-	lda #$0a
-	sta ram_58
-:	rts
+
 label_d825:
 	jsr label_dae9
 	lda #$21
@@ -2768,14 +2698,9 @@ label_da3c:
 label_da68:
 	jsr label_db8e
 	jsr get_controller_buttons
-	lda #$00
-	sta temp
-	lda button_start_down
-	cmp temp
-	bne :+
-	jmp label_da68
+	if (button_start_down = #0) jmp label_da68
 label_da7e:
-:	jsr label_db8e
+	jsr label_db8e
 	jsr get_controller_buttons
 	lda #$00
 	sta temp
@@ -2840,7 +2765,7 @@ label_db09:
 	lda #$00
 	sta idx
 label_db18:
-	ldx idx
+	ldx idx ; for ?
 	lda $e25a,x
 	sta PPU_VRAM_IO
 	inc idx
@@ -2859,7 +2784,7 @@ label_db18:
 	lda #$00
 	sta idx
 label_db44:
-	ldx idx
+	ldx idx ; for ?
 	lda $e000,x
 	sta $2007
 	inc idx
@@ -3042,18 +2967,10 @@ label_dc97:
 	cmp temp
 	beq :+
 	jmp label_dd19
-:	lda ram_81
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	lda #$06
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bpl :+
-	jmp label_ddd8
-:	lda ram_81
+:	
+	if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
+
+	lda ram_81
 	sta temp
 	lda player_pos_x1
 	clc
@@ -3097,18 +3014,10 @@ label_dd32:
 	cmp temp
 	beq :+
 	jmp label_dd9b
-:	lda ram_84
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	lda #$04
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bpl :+
-	jmp label_ddb0
-:	lda ram_84
+:	
+	if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp label_ddb0
+	
+	lda ram_84
 	sta temp
 	lda player_pos_x1
 	clc
