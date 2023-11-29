@@ -372,26 +372,20 @@ label_c397:
 	jsr label_c5aa
 	jsr label_db8e
 	jsr label_c6a0
+
 	dec ram_52
-	lda #$ff
-	sta temp
-	lda ram_52
-	cmp temp
-	beq :+
-	jmp label_c397
-:	lda #$00
+
+	if (ram_52 <> #$ff) jmp label_c397
+	lda #$00
 	sta ram_52
 label_c3c1:
 	jsr label_db8e
 	jsr label_c706
 	inc ram_52
-	lda #$05
-	sta temp
-	lda ram_52
-	cmp temp
-	beq :+
-	jmp label_c3c1
-:	jsr label_db8e
+
+	if (ram_52 <> #5) jmp label_c3c1
+	
+	jsr label_db8e
 	jsr label_c414
 	lda #$00
 	sta PPU_VRAM_ADDR1
@@ -579,17 +573,19 @@ label_c505:
 	sta PPU_VRAM_IO
 	iny
 	clc
-	cpy #$20
-	beq :+
-	clc
-	lda ram_57
-	adc #$20
-	sta ram_57
-	lda ram_56
-	adc #$00
-	sta ram_56
-	jmp label_c505
-:	rts
+
+	if (cpy #$20 != equal)
+		clc
+		lda ram_57
+		adc #$20
+		sta ram_57
+		lda ram_56
+		adc #$00
+		sta ram_56
+		jmp label_c505
+	endif
+
+	rts
 
 label_c5aa:
 	lda ram_52
@@ -683,17 +679,20 @@ label_c5fb:
 	sta PPU_VRAM_IO
 	iny
 	clc
-	cpy #$3c
-	beq :+
-	clc
-	lda ram_57
-	adc #$20
-	sta ram_57
-	lda ram_56
-	adc #$00
-	sta ram_56
-	jmp label_c5fb
-:	rts
+
+	if (cpy #$3c != equal)
+		clc
+		lda ram_57
+		adc #$20
+		sta ram_57
+		lda ram_56
+		adc #$00
+		sta ram_56
+		jmp label_c5fb
+	endif
+
+	rts
+
 label_c6a0:
 	lda ram_52
 	and #$07
@@ -725,14 +724,17 @@ label_c6dd:
 	lda (<ram_00),y
 	sta PPU_VRAM_IO
 	iny
-	cpy #$4c
-	beq :+
-	clc
-	lda ram_57
-	adc #$08
-	sta ram_57
-	jmp label_c6dd
-:	rts
+
+	if (cpy #$4c != equal)
+		clc
+		lda ram_57
+		adc #$08
+		sta ram_57
+		jmp label_c6dd
+	endif
+
+	rts
+
 label_c706:
 	lda ram_52
 	and #$07
@@ -861,14 +863,12 @@ label_c7ec: ; giant player process routine I think
 	endif
 	
 label_c850:
+	if (button_down_down <> #0)
+		lda #$01
+		sta ram_12
+	endif
+
 	lda #$00
-	sta temp
-	lda button_down_down
-	cmp temp
-	beq :+
-	lda #$01
-	sta ram_12
-:	lda #$00
 	sta temp
 	lda button_right_down
 	cmp temp
@@ -3016,7 +3016,7 @@ label_dd32:
 	jmp label_dd9b
 :	
 	if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp label_ddb0
-	
+
 	lda ram_84
 	sta temp
 	lda player_pos_x1
