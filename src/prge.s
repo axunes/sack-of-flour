@@ -1007,41 +1007,35 @@ label_ca1a:
 label_ca36:
 	jsr label_dc26
 label_ca39:
-	lda $805f ; FIXME
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	beq label_ca6c
-	jsr label_e679
-	jsr label_d204
-	jsr label_d204
-	jsr label_d204
-	jsr label_db8e
-	lda #$00
-	sta temp
-	lda ram_58
-	cmp temp
-	beq :+
-	jsr label_d629
-:	jsr label_d5ed
-	jmp label_ca39
-label_ca6c:
+	if (player_pos_x1 <> $805f)
+		jsr label_e679
+		jsr label_d204
+		jsr label_d204
+		jsr label_d204
+		jsr label_db8e
+
+		if (ram_58 <> #0) jsr label_d629
+		
+		jsr label_d5ed
+		jmp label_ca39
+	endif
+
 	lda #$02
 	sta player_position_y_again
 	rts
+
 label_ca72:
-	lda #$00
-	sta temp
-	lda i_frames
-	cmp temp
-	beq :+
-	rts
-:	lda #$96
+	if (i_frames <> #0) rts
+
+	lda #$96
 	sta i_frames
+
 	lda #$01
 	sta player_fall_state
+
 	lda #$0a
 	sta player_velocity
+
 	dec player_health
 	
 	if (player_health = #$ff)
@@ -1127,13 +1121,10 @@ label_cb4e:
 	cmp temp
 	bmi label_cb75
 	jsr label_d6e5
-	lda #$00
-	sta temp
-	lda ram_58
-	cmp temp
-	beq :+
-	jsr label_d629
-:	jmp label_cb4e
+	
+	if (ram_58 <> #0) jsr label_d629
+
+	jmp label_cb4e
 label_cb75:
 	jsr label_c28b
 	jsr label_db8e
@@ -1185,33 +1176,21 @@ label_cbaa:
 	ldx ram_63
 	lda $0200,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d204
-:	lda ram_63
+	
+	if (ram_64 & ram_54 <> #0) rts
+	
+	if (ram_12 <> #0) jmp label_d204
+	
+	lda ram_63
 	clc
 	adc #$06
 	tax
 	lda collision_something_else,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	jmp label_d204
+
+	if (ram_64 & ram_54 <> #0) rts
+	
+	jmp label_d204
 label_cc2b:
 	lda #$7f
 	sta temp
@@ -1231,33 +1210,21 @@ label_cc2b:
 	ldx ram_66
 	lda collision_something_else,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d204
-:	lda ram_66
+
+	if (ram_64 & ram_54 <> #0) rts
+
+	if (ram_12 <> #0) jmp label_d204
+
+	lda ram_66
 	sec
 	sbc #$01
 	tax
 	lda collision_something_else,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	jmp label_d204
+
+	if (ram_64 & ram_54 <> #0) rts
+	
+	jmp label_d204
 label_cc97:
 	lda player_position_y_again
 	sec
@@ -1274,42 +1241,27 @@ label_cc97:
 	ldx ram_66
 	lda $0200,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d204
-:	lda ram_66
+
+	if (ram_64 & ram_54 <> #0) rts
+
+	if (ram_12 <> #0) jmp label_d204
+
+	lda ram_66
 	sec
 	sbc #$01
 	tax
 	lda $0200,x
 	sta ram_64
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
+
+	if (ram_64 & ram_54 <> #0) rts
+
+	jsr label_d204
 	rts
-:	jsr label_d204
-	rts
+
 label_ccfa:
-	lda #$00
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	beq :+
-	jmp label_d255
-:	lda player_pos_x1
+	if (player_pos_x2 <> #0) jmp label_d255
+
+	lda player_pos_x1
 	sec
 	sbc #$01
 	asl a
@@ -1329,33 +1281,21 @@ label_ccfa:
 	ldx ram_63
 	lda $0200,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d255
-:	lda ram_63
+	
+	if (ram_67 & ram_54 <> #0) rts
+
+	if (ram_12 <> #0) jmp label_d255
+
+	lda ram_63
 	clc
 	adc #$06
 	tax
 	lda collision_something_else,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	jmp label_d255
+
+	if (ram_67 & ram_54 <> #0) rts
+
+	jmp label_d255
 label_cd7b:
 	lda #$7f
 	sta temp
@@ -1375,33 +1315,21 @@ label_cd7b:
 	ldx ram_66
 	lda collision_something_else,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d255
-:	lda ram_66
+
+	if (ram_67 & ram_54 <> #0) rts
+
+	if (ram_12 <> #0) jmp label_d255
+
+	lda ram_66
 	sec
 	sbc #$01
 	tax
 	lda collision_something_else,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	jmp label_d255
+
+	if (ram_67 & ram_54 <> #0) rts
+
+	jmp label_d255
 label_cde7:
 	lda player_position_y_again
 	clc
@@ -1418,33 +1346,21 @@ label_cde7:
 	ldx ram_66
 	lda $0200,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	jmp label_d255
-:	lda ram_66
+
+	if (ram_67 & ram_54 <> #0) rts
+
+	if (ram_12 <> #0) jmp label_d255
+	
+	lda ram_66
 	sec
 	sbc #$01
 	tax
 	lda $0200,x
 	sta ram_67
-	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	rts
-:	jmp label_d255
+
+	if (ram_67 & ram_54 <> #0) rts
+
+	jmp label_d255
 	rts
 
 label_ce4a:
