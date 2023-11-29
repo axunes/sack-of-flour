@@ -1927,7 +1927,7 @@ label_d255: ; LOOK
 		dec player_pos_x1
 	endif
 
-	if (player_pos_x1 - player_chunk_pos_again >= #6) jsr label_d773
+	if (player_pos_x1 - player_chunk_pos_again < #6) jsr label_d773
 
 	rts
 	
@@ -2338,20 +2338,10 @@ label_d613:
 	sta PPU_VRAM_ADDR1
 	rts
 label_d629:
-	lda #$00
-	sta temp
-	lda ram_58
-	cmp temp
-	bne :+
-	rts
-:	lda #$06
-label_d639:
-	sta temp
-	lda ram_58
-	cmp temp
-	bmi :+
-	jmp label_d696
-:	lda player_chunk_pos
+	if (ram_58 = #0) rts
+	if (ram_58 >= #6) jmp label_d696
+	
+	lda player_chunk_pos
 	clc
 	adc #$05
 	sta ram_52

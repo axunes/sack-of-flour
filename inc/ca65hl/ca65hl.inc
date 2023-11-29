@@ -257,6 +257,10 @@
     beq label
 .endmacro
 
+.macro branchOnLess label
+    bmi label
+.endmacro
+
 ; --------------------------------------------------------------------------------------------
 ; Function: branchOnGreater
 ;
@@ -311,12 +315,18 @@
 ; Branch instructions:
 ; C, Z, N, V, G flag can be followed by the keyword 'set' or 'clear'.
 
-.define BranchOn_C_set   bcs
 .if NBASIC
-.define BranchOn_C_clear branchOnGreaterOrEqual
+    .define BranchOn_C_set   branchOnGreaterOrEqual
 .else
-.define BranchOn_C_clear bcc
+    .define BranchOn_C_set   bcs
 .endif
+
+.if NBASIC
+    .define BranchOn_C_clear branchOnLess
+.else
+    .define BranchOn_C_clear bcc
+.endif
+
 .define BranchOn_Z_set   beq
 .define BranchOn_Z_clear bne
 .define BranchOn_N_set   bmi
