@@ -1944,7 +1944,7 @@ label_d2bb: ; process player sprites, store in oam
 	lda #$28
 	sta player_sprite
 	:
-
+	
 	if (player_is_moving_h = #0)
 		lda #$00
 		sta player_anim_timer
@@ -2023,8 +2023,18 @@ label_d2bb: ; process player sprites, store in oam
 	sta ram_6e
 	jsr label_f4f5
 label_d391:
-	if (player_direction = #1) jmp label_d3a4
-	jmp label_d43a
+;	lda #$01
+;	sta temp
+;	lda player_direction
+;	cmp temp
+;	bne :+
+;	jmp label_d3a4
+;:	jmp label_d43a
+	if (player_direction <> #1)
+		
+	else
+		jmp label_d43a
+	endif
 label_d3a4:
 	ldx #$00
 	lda player_offset_y
