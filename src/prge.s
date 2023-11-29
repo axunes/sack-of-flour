@@ -2030,12 +2030,12 @@ label_d391:
 ;	bne :+
 ;	jmp label_d3a4
 ;:	jmp label_d43a
-	if (player_direction <> #1)
+	if (player_direction = #1) ; FIXME
 		
 	else
 		jmp label_d43a
 	endif
-label_d3a4:
+
 	ldx #$00
 	lda player_offset_y
 	sta $0300,x
