@@ -2904,39 +2904,24 @@ label_dc97:
 	ldx ram_7f
 	lda ram_72,x
 	sta ram_80
-	lda #$00
-	sta temp
-	lda ram_80
-	cmp temp
-	beq :+
-	jmp label_dd19
-:	ldx ram_7f
-	lda $8070,x
-	sta ram_81
-	ldx ram_7f
-	lda $807c,x
-	sta ram_82
-	lda ram_82
-	sta temp
-	lda player_position_y_again
-	sec
-	sbc #$20
-	lsr a
-	lsr a
-	lsr a
-	lsr a
-	cmp temp
-	beq :+
-	jmp label_dd19
-:	
-	if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
 
-	if (player_pos_x1 + #1 = ram_81)
-		if (player_pos_x2 >= #10) jmp label_ddd8
+	if (ram_80 = #0), long
+		ldx ram_7f
+		lda $8070,x
+		sta ram_81
+		ldx ram_7f
+		lda $807c,x
+		sta ram_82
+
+		if (player_position_y_again - #$20 >> 4 = ram_82), long
+			if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
+
+			if (player_pos_x1 + #1 = ram_81)
+				if (player_pos_x2 >= #10) jmp label_ddd8
+			endif
+		endif
 	endif
 	
-label_dd19:
-
 	inc ram_7f
 	lda #$0c
 	sta temp
@@ -2955,34 +2940,10 @@ label_dd32:
 	ldx ram_83
 	lda $8049,x
 	sta ram_85
-	lda ram_85
-	sta temp
-	lda player_position_y_again
-	sec
-	sbc #$02
-	lsr a
-	lsr a
-	lsr a
-	lsr a
-	cmp temp
-	beq :+
-	jmp label_dd9b
-:	
-	if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp label_ddb0
-
-	lda ram_84
-	sta temp
-	lda player_pos_x1
-	clc
-	adc #$01
-	cmp temp
-	bne label_dd9b
-	lda #$0c
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bmi label_dd9b
-	jmp label_ddb0
+	if (player_position_y_again - #2 >> 4 = ram_85), long
+		if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp label_ddb0
+		if (player_pos_x1 + #1 = ram_84 && player_pos_x2 >= #12) jmp label_ddb0
+	endif
 label_dd9b:
 	inc ram_83
 	lda ram_7e
