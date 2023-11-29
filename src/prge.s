@@ -766,8 +766,7 @@ label_c706:
 	asl a
 	sta ram_26
 	tax
-label_c750:
-	lda (<ram_00),y
+:	lda (<ram_00),y
 	iny
 	sta ram_11
 	and #$03
@@ -794,7 +793,7 @@ label_c750:
 	lsr ram_11
 	inx
 	cpy #$54
-	bne label_c750
+	bne :-
 	ldy #$54
 	clc
 	lda ram_52
@@ -805,8 +804,7 @@ label_c750:
 	asl a
 	sta ram_26
 	tax
-label_c7a2:
-	lda (<ram_00),y
+:	lda (<ram_00),y
 	iny
 	sta ram_11
 	and #$03
@@ -833,7 +831,7 @@ label_c7a2:
 	lsr ram_11
 	inx
 	cpy #$5c
-	bne label_c7a2
+	bne :-
 	nop
 	nop
 	nop
@@ -878,7 +876,7 @@ label_c850:
 		lda #$01
 		sta player_is_moving_h
 	endif
-	
+
 	if (button_left_down <> #0)
 		lda #$00
 		sta player_direction
@@ -890,22 +888,17 @@ label_c850:
 		sta player_is_moving_h
 	endif
 
-	lda #$00
-	sta temp
-	lda button_a_down
-	cmp temp
-	bne label_c8dd
-	lda #$00
-	sta temp
-	lda ram_5b
-	cmp temp
-	beq :+
-	lda #$0a
-	sta player_velocity
-:	lda #$00
-	sta ram_5b
-	jmp label_c984
-label_c8dd:
+	if (button_a_down = #0)
+		if (ram_5b <> #0)
+			lda #$0a
+			sta player_velocity
+		endif
+
+		lda #$00
+		sta ram_5b
+		jmp label_c984
+	endif
+
 	if (button_a_down <> #0 && ram_5c = #1)
 		lda #$23
 		sta player_velocity
@@ -917,19 +910,12 @@ label_c8dd:
 		jmp label_c984
 	endif
 	
+	if (button_a_down <> #0 && ram_5b <> #0)
+		dec ram_5b
+		jmp label_c984
+	endif
+
 	lda #$00
-	sta temp
-	lda button_a_down
-	cmp temp
-	beq :+
-	lda #$00
-	sta temp
-	lda ram_5b
-	cmp temp
-	beq :+
-	dec ram_5b
-	jmp label_c984
-:	lda #$00
 	sta temp
 	lda button_a_down
 	cmp temp
@@ -962,6 +948,7 @@ label_c8dd:
 	lda #$0f
 	sta ram_5b
 	jmp label_c984
+
 label_c984:
 	jsr label_cb8c
 	lda #$00
@@ -1472,43 +1459,35 @@ label_cde7:
 	rts
 :	jmp label_d255
 	rts
+
 label_ce4a:
-	lda #$00
-	sta temp
-	lda player_position_y_again
-	and #$f8
-	cmp temp
-	bne label_ce6f
-	dec player_velocity
-	
-	if (player_velocity = #0)
-		lda #0
-		sta player_fall_state
+	if (player_position_y_again & #$f8 = #0)
+		dec player_velocity
+		
+		if (player_velocity = #0)
+			lda #0
+			sta player_fall_state
+		endif
+
+		rts
 	endif
 
-	rts
+	if (player_health = #0)
+		jsr nesmus_shut_up
+		lda player_position_y_again
+		sec
+		sbc ram_62
+		sta player_position_y_again
+		dec player_velocity
+		
+		if (player_velocity = #0)
+			lda #$00
+			sta player_fall_state
+		endif
 
-label_ce6f:
-	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	bne label_ce9f
-	jsr nesmus_shut_up
-	lda player_position_y_again
-	sec
-	sbc ram_62
-	sta player_position_y_again
-	dec player_velocity
-	
-	if (player_velocity = #0)
-		lda #$00
-		sta player_fall_state
+		rts
 	endif
 
-	rts
-
-label_ce9f:
 	lda player_pos_x1
 	asl a
 	asl a
@@ -1689,30 +1668,22 @@ label_d01a:
 	jsr label_dc92
 	rts
 label_d023:
-	lda #$00
-	sta temp
-	lda player_health
-	cmp temp
-	bne label_d05d
-	lda player_position_y_again
-	clc
-	adc ram_62
-	sta player_position_y_again
-	lda #$00
-	sta temp
-	lda ram_62
-	cmp temp
-	beq :+
-	lda #$00
-	sta player_fall_state
-:	lda #$3c
-	sta temp
-	lda player_velocity
-	cmp temp
-	bpl :+
-	inc player_velocity
-:	rts
-label_d05d:
+	if (player_health = #0)
+		lda player_position_y_again
+		clc
+		adc ram_62
+		sta player_position_y_again
+
+		if (ram_62 <> #0)
+			lda #$00
+			sta player_fall_state
+		endif
+
+		if (player_velocity <= #$3c) inc player_velocity
+
+		rts
+	endif
+
 	lda player_pos_x1
 	asl a
 	asl a
@@ -2960,20 +2931,12 @@ label_dc97:
 :	
 	if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
 
-	lda ram_81
-	sta temp
-	lda player_pos_x1
-	clc
-	adc #$01
-	cmp temp
-	bne label_dd19
-	lda #$0a
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bmi label_dd19
-	jmp label_ddd8
+	if (player_pos_x1 + #1 = ram_81)
+		if (player_pos_x2 >= #10) jmp label_ddd8
+	endif
+	
 label_dd19:
+
 	inc ram_7f
 	lda #$0c
 	sta temp
