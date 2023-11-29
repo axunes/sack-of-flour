@@ -870,7 +870,7 @@
     
     .repeat .tcount({EXP}) - currentTokenNumber
     .if !EOT
-        .if NBASIC
+        .if !CA65HL_USE_CUSTOM_SYNTAX
             ; --------------------------------------------------------------------------------------------
             .if xmatchToken { + }
                 nextToken
