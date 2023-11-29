@@ -1929,7 +1929,7 @@ label_d255: ; LOOK
 		dec player_pos_x1
 	endif
 
-	if (player_pos_x1 - player_chunk_pos_again < #6) jsr label_d773
+	if (player_pos_x1 - player_chunk_pos_again >= #6) jsr label_d773
 
 	rts
 	
