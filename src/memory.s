@@ -20,7 +20,7 @@
 	player_fall_state: .res 1 ; (?) 2 = on ground, 1 = ascending, 0 = descending
 	player_velocity: .res 1
 	ram_11: .res 1
-	ram_12: .res 1 ; related to jumping?
+	ram_12: .res 1 ; related to jumping? NAME THIS
 
 	button_a_down: .res 1
 	button_b_down: .res 1

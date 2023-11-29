@@ -1416,26 +1416,24 @@ label_ce4a:
 	lsr a
 	lsr a
 	sta ram_65
-	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq label_cef7
-	lda player_position_y_again
-	pha
-	lda #$ef
-	sec
-	sbc ram_62
-	sta ram_11
-	pla
-	clc
-	adc ram_11
-	lsr a
-	lsr a
-	lsr a
-	lsr a
-	sta ram_65
-label_cef7:
+	
+	if (ram_12 <> #0)
+		lda player_position_y_again
+		pha
+		lda #$ef
+		sec
+		sbc ram_62
+		sta ram_11
+		pla
+		clc
+		adc ram_11
+		lsr a
+		lsr a
+		lsr a
+		lsr a
+		sta ram_65
+	endif
+
 	lda ram_63
 label_cefa:
 	clc
@@ -1444,27 +1442,12 @@ label_cefa:
 	ldx ram_66
 	lda collision_something_else,x
 	sta ram_67
+
+	if (ram_67 & ram_54 <> #0) jmp label_d01a
+
 	lda #$00
-	sta temp
-	lda ram_67
-	and ram_54
-	cmp temp
-	beq :+
-	jmp label_d01a
-:	lda #$00
 	sta ram_64
-;	lda #$04
-;	sta temp
-;	lda player_pos_x2
-;	cmp temp
-;	bmi :+
-;	beq :+
-;	lda ram_66
-;	clc
-;	adc #$08
-;	tax
-;	lda collision_something_else,x
-;	sta ram_64
+
 	if (player_pos_x2 > #04)
 		lda ram_66
 		clc
@@ -1473,14 +1456,10 @@ label_cefa:
 		lda collision_something_else,x
 		sta ram_64
 	endif
-	lda #$00
-	sta temp
-	lda ram_64
-	and ram_54
-	cmp temp
-	beq :+
-	jmp label_d01a
-:	lda player_position_y_again
+	
+	if (ram_64 & ram_54 <> #0) jmp label_d01a
+
+	lda player_position_y_again
 	sec
 	sbc ram_62
 	sta player_position_y_again
@@ -1504,22 +1483,20 @@ label_cf71:
 	lsr a
 	lsr a
 	sta ram_65
-	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq label_cfa0
-	lda player_position_y_again
-	clc
-	adc #$7f
-	sec
-	sbc ram_62
-	lsr a
-	lsr a
-	lsr a
-	lsr a
-	sta ram_65
-label_cfa0:
+	
+	if (ram_12 <> #0)
+		lda player_position_y_again
+		clc
+		adc #$7f
+		sec
+		sbc ram_62
+		lsr a
+		lsr a
+		lsr a
+		lsr a
+		sta ram_65
+	endif
+
 	lda ram_63
 	clc
 	adc ram_65
@@ -1527,14 +1504,7 @@ label_cfa0:
 	ldx ram_66
 	lda $0200,x
 	sta ram_67
-;	lda #$00
-;	sta temp
-;	lda ram_67
-;	and ram_54
-;	cmp temp
-;	beq :+
-;	jmp label_d01a
-;	:
+
 	; optimization:
 	; if (ram_67 & ram_54 == zero), long
 	if (ram_67 & ram_54 = #0), long
@@ -1570,6 +1540,7 @@ label_d01a:
 	sta player_fall_state
 	jsr label_dc92
 	rts
+	
 label_d023:
 	if (player_health = #0)
 		lda player_position_y_again
