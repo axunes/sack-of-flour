@@ -878,24 +878,19 @@ label_c850:
 		lda #$01
 		sta player_is_moving_h
 	endif
+	
+	if (button_left_down <> #0)
+		lda #$00
+		sta player_direction
+		jsr label_ccfa
+		
+		if (button_b_down <> #0) jsr label_ccfa
+
+		lda #$01
+		sta player_is_moving_h
+	endif
 
 	lda #$00
-	sta temp
-	lda button_left_down
-	cmp temp
-	beq :++
-	lda #$00
-	sta player_direction
-	jsr label_ccfa
-	lda #$00
-	sta temp
-	lda button_b_down
-	cmp temp
-	beq :+
-	jsr label_ccfa
-:	lda #$01
-	sta player_is_moving_h
-:	lda #$00
 	sta temp
 	lda button_a_down
 	cmp temp
