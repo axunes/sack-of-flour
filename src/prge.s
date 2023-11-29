@@ -915,16 +915,8 @@ label_c850:
 		jmp label_c984
 	endif
 
-	lda #$00
-	sta temp
-	lda button_a_down
-	cmp temp
-	beq label_c984
-	lda #$00
-	sta temp
-	lda ram_5d
-	cmp temp
-	beq label_c984
+	if (button_a_down = #0 || ram_5d = #0) goto label_c984
+
 	jsr label_d584
 	lda #$01
 	sta player_fall_state
