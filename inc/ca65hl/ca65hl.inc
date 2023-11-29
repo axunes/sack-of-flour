@@ -267,9 +267,13 @@
 ;   Simulate a branch for 'G' flag set: 'greater'
 
 .macro branchOnGreater label
-    beq :+
-    bcs label
-    :
+    .if NBASIC
+        bpl label
+    .else
+        beq :+
+        bcs label
+        :
+    .endif
 .endmacro
 
 ; --------------------------------------------------------------------------------------------

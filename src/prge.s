@@ -1916,10 +1916,8 @@ label_d204: ; LOOK
 	rts
 
 label_d255: ; LOOK
-
-	; MAN FIX THIS SHIT
-	if (player_pos_x1 = #0 && lda #8 : sta temp : lda player_pos_x2 : cmp temp == negative) rts
-	if (player_pos_x1 = $805a && lda #1 : sta temp : lda player_pos_x2 : cmp temp == negative) rts
+	if (player_pos_x1 = #0 && player_pos_x2 <= #8) rts
+	if (player_pos_x1 = $805a && player_pos_x2 <= #1) rts
 
 	dec player_pos_x2
 
