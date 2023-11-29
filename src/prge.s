@@ -1943,14 +1943,14 @@ label_d2bb: ; process player sprites, store in oam
 	beq :+
 	lda #$28
 	sta player_sprite
-:	lda #$00
-	sta temp
-	lda player_is_moving_h
-	cmp temp
-	bne :+
-	lda #$00
-	sta player_anim_timer
-:	lda #$02
+	:
+
+	if (player_is_moving_h = #0)
+		lda #$00
+		sta player_anim_timer
+	endif
+
+	lda #$02
 	sta temp
 	lda player_fall_state
 	cmp temp
@@ -2023,13 +2023,8 @@ label_d2bb: ; process player sprites, store in oam
 	sta ram_6e
 	jsr label_f4f5
 label_d391:
-	lda #$01
-	sta temp
-	lda player_direction
-	cmp temp
-	bne :+
-	jmp label_d3a4
-:	jmp label_d43a
+	if (player_direction = #1) jmp label_d3a4
+	jmp label_d43a
 label_d3a4:
 	ldx #$00
 	lda player_offset_y
