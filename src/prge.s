@@ -1396,13 +1396,10 @@ label_ce4a:
 	asl a
 	asl a
 	sta ram_63
-	lda #$97
-	sta temp
+
+	if (player_position_y_again >= #$97) jmp label_cf71
+	
 	lda player_position_y_again
-	cmp temp
-	bmi :+
-	jmp label_cf71
-:	lda player_position_y_again
 	pha
 	lda #$e8
 	sec
