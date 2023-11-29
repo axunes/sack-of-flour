@@ -850,7 +850,7 @@ label_c7ec: ; giant player process routine I think
 	lda #$00
 	sta ram_5a
 
-	if (button_start_down <> #0) jsr label_c99e
+	if (button_start_down <> #0) jsr pause_game
 	if (button_up_down <> #0) jsr label_dd2d
 
 	; fling player left or right on death
@@ -928,28 +928,25 @@ label_c850:
 		sta player_velocity
 	endif
 	
+	if (ram_12 <> #0)
+		lda #$26
+		sta player_velocity
+	endif
+
 	lda #$00
-	sta temp
-	lda ram_12
-	cmp temp
-	beq :+
-	lda #$26
-	sta player_velocity
-:	lda #$00
 	sta ram_5d
 	lda #$0f
 	sta ram_5b
-	jmp label_c984
+
+	jmp :+
+	:
 
 label_c984:
 	jsr label_cb8c
-	lda #$00
-	sta temp
-	lda i_frames
-	cmp temp
-	beq :+
-	dec i_frames
-:	jsr label_ee7e
+
+	if (i_frames <> #0) dec i_frames
+	
+	jsr label_ee7e
 	jsr label_d4d9
 	rts
 
@@ -964,33 +961,31 @@ label_c984:
 
 
 
-label_c99e:
+pause_game:
 	;FIXME
 	; pausing shit?
-	lda #$00
-	sta $4015
-	jsr get_controller_buttons
-	lda #$00
-	sta temp
-	lda button_start_down
-	cmp temp
-	beq label_c9b6
-	jmp label_c99e
-label_c9b6:
-	jsr get_controller_buttons
 
-	if (button_start_down = #0) jmp label_c9b6
+	; repeatedly mute all channels until start is lifted
+	do
+		lda #$00
+		sta $4015
+		jsr get_controller_buttons
+	while (button_start_down <> #0)
 
-:	jsr get_controller_buttons
-	lda #$00
-	sta temp
-	lda button_start_down
-	cmp temp
-	beq :+
-	jmp :-
-:	lda #$0f
+	; wait until start pressed
+	do
+		jsr get_controller_buttons
+	while (button_start_down = #0)
+
+	; wait until it's lifted again?
+	do
+		jsr get_controller_buttons
+	while (button_start_down <> #0)
+
+	lda #$0f
 	sta $4015
 	rts
+
 label_c9e2:
 	if (player_pos_x1 = $805c) jmp label_ca36
 	if (player_pos_x1 = $805d) jmp label_ca36
