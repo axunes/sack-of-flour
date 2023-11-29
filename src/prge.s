@@ -1435,7 +1435,6 @@ label_ce4a:
 	endif
 
 	lda ram_63
-label_cefa:
 	clc
 	adc ram_65
 	sta ram_66
@@ -1443,99 +1442,100 @@ label_cefa:
 	lda collision_something_else,x
 	sta ram_67
 
-	if (ram_67 & ram_54 <> #0) jmp label_d01a
-
-	lda #$00
-	sta ram_64
-
-	if (player_pos_x2 > #04)
-		lda ram_66
-		clc
-		adc #$08
-		tax
-		lda collision_something_else,x
-		sta ram_64
-	endif
-	
-	if (ram_64 & ram_54 <> #0) jmp label_d01a
-
-	lda player_position_y_again
-	sec
-	sbc ram_62
-	sta player_position_y_again
-	dec player_velocity
-	
-	if (player_velocity = #0)
-		lda #$00
-		sta player_fall_state
-	endif
-
-	rts
-
-label_cf71:
-	lda player_position_y_again
-	clc
-	adc #$79
-	sec
-	sbc ram_62
-	lsr a
-	lsr a
-	lsr a
-	lsr a
-	sta ram_65
-	
-	if (ram_12 <> #0)
-		lda player_position_y_again
-		clc
-		adc #$7f
-		sec
-		sbc ram_62
-		lsr a
-		lsr a
-		lsr a
-		lsr a
-		sta ram_65
-	endif
-
-	lda ram_63
-	clc
-	adc ram_65
-	sta ram_66
-	ldx ram_66
-	lda $0200,x
-	sta ram_67
-
-	; optimization:
-	; if (ram_67 & ram_54 == zero), long
 	if (ram_67 & ram_54 = #0), long
+
 		lda #$00
 		sta ram_64
-	
-		if (player_pos_x2 > #4)
+
+		if (player_pos_x2 > #04)
 			lda ram_66
 			clc
 			adc #$08
 			tax
-			lda $0200,x
+			lda collision_something_else,x
 			sta ram_64
 		endif
-
+		
 		if (ram_64 & ram_54 = #0), long
+
 			lda player_position_y_again
 			sec
 			sbc ram_62
 			sta player_position_y_again
 			dec player_velocity
-
+			
 			if (player_velocity = #0)
 				lda #$00
 				sta player_fall_state
 			endif
+
 			rts
+
+		label_cf71:
+			lda player_position_y_again
+			clc
+			adc #$79
+			sec
+			sbc ram_62
+			lsr a
+			lsr a
+			lsr a
+			lsr a
+			sta ram_65
+			
+			if (ram_12 <> #0)
+				lda player_position_y_again
+				clc
+				adc #$7f
+				sec
+				sbc ram_62
+				lsr a
+				lsr a
+				lsr a
+				lsr a
+				sta ram_65
+			endif
+
+			lda ram_63
+			clc
+			adc ram_65
+			sta ram_66
+			ldx ram_66
+			lda $0200,x
+			sta ram_67
+
+			; optimization:
+			; if (ram_67 & ram_54 == zero), long
+			if (ram_67 & ram_54 = #0), long
+				lda #$00
+				sta ram_64
+			
+				if (player_pos_x2 > #4)
+					lda ram_66
+					clc
+					adc #$08
+					tax
+					lda $0200,x
+					sta ram_64
+				endif
+
+				if (ram_64 & ram_54 = #0), long
+					lda player_position_y_again
+					sec
+					sbc ram_62
+					sta player_position_y_again
+					dec player_velocity
+
+					if (player_velocity = #0)
+						lda #$00
+						sta player_fall_state
+					endif
+					rts
+				endif
+			endif
 		endif
 	endif
 
-label_d01a:
 	lda #$00
 	sta player_fall_state
 	jsr label_dc92
