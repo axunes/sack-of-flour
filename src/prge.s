@@ -1620,7 +1620,7 @@ label_cefa:
 	endif
 
 	rts
-	
+
 label_cf71:
 	lda player_position_y_again
 	clc
@@ -1728,29 +1728,24 @@ label_d05d:
 	asl a
 	asl a
 	sta ram_63
-	lda #$e8
-	sta temp
-	lda player_position_y_again
-	and #$f8
-	cmp temp
-	bne :+
-	lda player_position_y_again
-	clc
-	adc ram_62
-	sta player_position_y_again
-	rts
-:	lda #$f0
-	sta temp
-	lda player_position_y_again
-	and #$f0
-	cmp temp
-	bne :+
-	lda player_position_y_again
-	clc
-	adc ram_62
-	sta player_position_y_again
-	rts
-:	lda #$7f
+
+	if (player_position_y_again & #$f8 = #$e8)
+		lda player_position_y_again
+		clc
+		adc ram_62
+		sta player_position_y_again
+		rts
+	endif
+
+	if (player_position_y_again & #$f0 = #$f0)
+		lda player_position_y_again
+		clc
+		adc ram_62
+		sta player_position_y_again
+		rts
+	endif
+
+	lda #$7f
 	sta temp
 	lda player_position_y_again
 	cmp temp
@@ -1922,44 +1917,22 @@ label_d204: ; LOOK
 
 label_d255: ; LOOK
 
-	if (player_pos_x1 = #0 && lda #$08 : sta temp : lda player_pos_x2 : cmp temp == negative) rts ; MAN FIX THIS SHIT
+	; MAN FIX THIS SHIT
+	if (player_pos_x1 = #0 && lda #8 : sta temp : lda player_pos_x2 : cmp temp == negative) rts
+	if (player_pos_x1 = $805a && lda #1 : sta temp : lda player_pos_x2 : cmp temp == negative) rts
 
-	lda $805a
-	sta temp
-	lda player_pos_x1
-	cmp temp
-	bne :+
-	lda #$01
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bpl :+
+	dec player_pos_x2
+
+	if (player_pos_x2 = #$ff)
+		lda #$0f
+		sta player_pos_x2
+		dec player_pos_x1
+	endif
+
+	if (player_pos_x1 - player_chunk_pos_again < #6) jsr label_d773
+
 	rts
-:	dec player_pos_x2
-	lda #$ff
-	sta temp
-	lda player_pos_x2
-	cmp temp
-	bne :+
-	lda #$0f
-	sta player_pos_x2
-	dec player_pos_x1
-:	lda #$06
-	sta temp
-	lda player_pos_x1
-
-	; subtract $20 from playerposx1
-	; compare playerposx1 and 6
-	; this is equal to subtracting playerposx1 by 6 but not storing
-	; if 
-
-	sec
-	sbc player_chunk_pos_again
-	cmp temp
-	bpl :+
-	beq :+
-	jsr label_d773
-:	rts
+	
 label_d2bb: ; process player sprites, store in oam
 	lda #$20
 	sta player_sprite

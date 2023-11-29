@@ -251,6 +251,12 @@
     .fatal "Halting"
 .endmacro
 
+
+.macro branchOnLess label
+    bpl label
+    beq label
+.endmacro
+
 ; --------------------------------------------------------------------------------------------
 ; Function: branchOnGreater
 ;
@@ -301,7 +307,11 @@
 ; Branch instructions:
 ; C, Z, N, V, G flag can be followed by the keyword 'set' or 'clear'.
 
+.if NBASIC
+.define BranchOn_C_set   branchOnLess
+.else
 .define BranchOn_C_set   bcs
+.endif
 .define BranchOn_C_clear bcc
 .define BranchOn_Z_set   beq
 .define BranchOn_Z_clear bne
