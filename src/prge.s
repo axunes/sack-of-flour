@@ -868,18 +868,17 @@ label_c850:
 		sta ram_12
 	endif
 
-	if (button_right_down = #0) goto label_shit
-	lda #$01
-	sta player_direction
-	jsr label_cbaa
-
-	if (button_b_down <> #0)
+	if (button_right_down <> #0)
+		lda #$01
+		sta player_direction
 		jsr label_cbaa
+		
+		if (button_b_down <> #0) jsr label_cbaa
+
+		lda #$01
+		sta player_is_moving_h
 	endif
-	
-	lda #$01
-	sta player_is_moving_h
-label_shit:
+
 	lda #$00
 	sta temp
 	lda button_left_down
