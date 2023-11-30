@@ -2195,7 +2195,8 @@
             ___Branch branchFlag, branchCondition, .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
             ___clearBranchSet
         .else
-            .refto .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
+            .if .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
+            .endif
         .endif
     .else
         jmp .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
@@ -2261,7 +2262,8 @@
             ___Branch branchFlag, branchCondition, .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
             ___clearBranchSet
         .else
-            .refto .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
+            .if .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
+            .endif
         .endif
     .else
         jmp .ident( .sprintf( "IF_STATEMENT_%04X_ELSE_ENDIF", IF_STATEMENT_COUNT ))
