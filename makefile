@@ -9,12 +9,8 @@
 # This file is offered as-is, without any warranty.
 #
 
-# These are used in the title of the NES program and the zip file.
 title = sack
 
-# Space-separated list of assembly language files that make up the
-# PRG ROM.  If it gets too long for one line, you can add a backslash
-# (the \ character) at the end of the line and continue on the next.
 objlist = sack level1 level2 level3 level4 level5 unused
 
 AS65 = ca65
@@ -28,8 +24,6 @@ all: $(title).nes
 
 clean:
 	-rm $(objdir)/*.o $(objdir)/*.s $(objdir)/*.chr
-
-# Rules for PRG ROM
 
 objlistntsc = $(foreach o,$(objlist),$(objdir)/$(o).o)
 
