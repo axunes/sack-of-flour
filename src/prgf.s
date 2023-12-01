@@ -1,3 +1,5 @@
+.include "global.inc"
+
 label_e5eb:
 		lda #$00
 		sta ram_8e

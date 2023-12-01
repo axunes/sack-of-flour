@@ -26,22 +26,6 @@ setLongBranch -, -
 
 ; levels
 
-.include "level1.s"
-.include "level2.s"
-.include "level3.s"
-.include "level4.s"
-.include "level5.s"
-
-; unused
-.segment "PRGA"
-	.include "prga.s"
-.segment "PRGB"
-	.include "prgb.s"
-.segment "PRGC"
-	.include "prga.s"
-.segment "PRGD"
-	.include "prgb.s"
-
 ; code
 
 .segment "PRGE"

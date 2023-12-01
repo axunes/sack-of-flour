@@ -1,0 +1,10 @@
+.include "macros.inc"
+
+.segment "PRGA"
+	.include "prga.s"
+.segment "PRGB"
+	.include "prgb.s"
+.segment "PRGC"
+	.include "prga.s"
+.segment "PRGD"
+	.include "prgb.s"

@@ -1,3 +1,5 @@
+.include "macros.inc"
+
 .segment "PRG2"
 	.addr level_2_music
 	.byte $26, $A1, $09, $2A, $1A, $1C

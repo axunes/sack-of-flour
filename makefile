@@ -15,7 +15,7 @@ title = sack
 # Space-separated list of assembly language files that make up the
 # PRG ROM.  If it gets too long for one line, you can add a backslash
 # (the \ character) at the end of the line and continue on the next.
-objlist = sack
+objlist = sack level1 level2 level3 level4 level5 unused
 
 AS65 = ca65
 LD65 = ld65
@@ -33,11 +33,8 @@ clean:
 
 objlistntsc = $(foreach o,$(objlist),$(objdir)/$(o).o)
 
-map.txt $(title).nes: config.cfg $(objlistntsc)
-	$(LD65) -o $(title).nes -m map.txt -C $^
+$(title).nes: config.cfg $(objlistntsc)
+	$(LD65) -o $(title).nes --dbgfile $(title).dbg -C $^
 
 $(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc
-	$(AS65) $(CFLAGS65) $< -o $@
-
-$(objdir)/%.o: $(objdir)/%.s
-	$(AS65) $(CFLAGS65) $< -o $@
+	$(AS65) -g $< -o $@

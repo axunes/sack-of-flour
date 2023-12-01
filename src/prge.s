@@ -1,3 +1,5 @@
+.include "global.inc"
+
 reset:
 nmi:
 	jsr label_c35a

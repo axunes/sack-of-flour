@@ -1,3 +1,6 @@
+.include "global.inc"
+.include "macros.inc"
+
 .segment "PRG0"
 	music_start: .addr level_1_music
 	.addr $9F18 ; maybe this could be the length of the whole thing?
