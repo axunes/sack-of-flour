@@ -2,9 +2,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "shell",
+			"type": "process",
 			"label": "Build NES ROM",
-			"command": "cl65 -g -Wl --dbgfile,sack.dbg sack.s -C config.cfg"
+			"command": "make"
 		},
 		{
 			"dependsOn": "Build NES ROM",

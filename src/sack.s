@@ -1,10 +1,10 @@
 NBASIC = 1
-.include "inc/nes.inc"
-.include "inc/macros.inc"
-.include "src/memory.s"
+.include "nes.inc"
+.include "macros.inc"
+.include "memory.s"
 
 CA65HL_USE_CUSTOM_SYNTAX = 0
-.include "inc/ca65hl/ca65hl.inc"
+.include "ca65hl/ca65hl.inc"
 setLongBranch -, -
 
 ; 0E = play, FE = loop?
@@ -20,7 +20,7 @@ setLongBranch -, -
 	INES_PRG_ROM_SIZE = $8
 	INES_CHR_ROM_SIZE = $4
 	INES_MIRROR = 1
-	.include "inc/header.inc"
+	.include "header.inc"
 
 
 
@@ -45,7 +45,7 @@ setLongBranch -, -
 ; code
 
 .segment "PRGE"
-	.include "src/prge.s"
+	.include "prge.s"
 	
 .segment "PRGF"
 	weird_fucking_data: ; this only used to load as a palette somewhere
@@ -224,7 +224,7 @@ setLongBranch -, -
 	.byte $02, $02, $02, $02, $02, $02, $02, $02
 	.byte $02, $02, $02, $02, $02, $02, $03, $03
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
-	.include "src/prgf.s"
+	.include "prgf.s"
 	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
 .segment "VECTORS"
 	.addr nmi, reset, irq
