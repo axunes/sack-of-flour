@@ -82,7 +82,12 @@
 
 ; Include macros to enable custom array syntax for instructions
 .ifndef ::CA65HL_USE_CUSTOM_SYNTAX
-    ::CA65HL_USE_CUSTOM_SYNTAX = 1
+    ::CA65HL_USE_CUSTOM_SYNTAX = 0
+.endif
+
+; shitty mode
+.ifndef ::NBASIC
+    ::NBASIC = 1
 .endif
 
 ; Warn in some cases if turned on:

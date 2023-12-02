@@ -1,4 +1,3 @@
-NBASIC = 1
 .include "nes.inc"
 .include "macros.inc"
 .include "memory.s"
