@@ -1,3 +1,5 @@
+.include "global.inc"
+
 .if NBASIC
 .segment "ZP"
 .else

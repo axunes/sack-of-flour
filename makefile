@@ -11,7 +11,7 @@
 
 title = sack
 
-objlist = sack level1 level2 level3 level4 level5 unused
+objlist = sack de0d level1 level2 level3 level4 level5 unused
 
 AS65 = ca65
 LD65 = ld65
