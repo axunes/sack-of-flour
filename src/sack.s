@@ -2,6 +2,7 @@ NBASIC = 1
 .include "nes.inc"
 .include "macros.inc"
 .include "memory.s"
+.include "global.inc"
 
 CA65HL_USE_CUSTOM_SYNTAX = 0
 .include "ca65hl/ca65hl.inc"

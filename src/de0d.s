@@ -1,4 +1,5 @@
 .include "global.inc"
+.include "nes.inc"
 NBASIC = 1
 CA65HL_USE_CUSTOM_SYNTAX = 0
 .include "ca65hl/ca65hl.inc"
@@ -10,5 +11,5 @@ label_de0d:
 		; nothing? lol
 		next
 	next
-	
+
 	rts
