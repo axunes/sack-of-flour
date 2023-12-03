@@ -2554,10 +2554,3 @@ label_dbc3:
 	sta PPU_VRAM_ADDR2
 	jsr label_dc1b
 	rts
-label_dc1b:
-	ldx #$00
-:	sta PPU_VRAM_IO
-	inx
-	cpx #$00
-	bne :-
-	rts
