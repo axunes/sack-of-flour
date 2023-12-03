@@ -18,6 +18,7 @@
 .global label_c9e2, label_db61, label_e816, label_e679, label_c24e
 .global label_e8ed, label_d2bb, label_c7ec, label_cabb, get_controller_buttons, label_dc71, label_e6eb
 .global label_c26a, label_c1c2, label_dc26, label_dbda, label_f5dd, label_e5eb
+.global label_dc92, label_dd2d
 
 
 .global ram_00
@@ -97,7 +98,7 @@
 .global ram_6f
 .global ram_70
 .global ram_71
-.global ram_722
+.global ram_72
 .global ram_7e
 .global ram_7f
 .global ram_80
