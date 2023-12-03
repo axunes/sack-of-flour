@@ -2598,18 +2598,3 @@ label_dc6b:
 	lda #$05
 	sta ram_7e
 	rts
-label_dc71:
-	lda #$00
-	sta idx
-label_dc76:
-	ldx idx
-	lda #$00
-	sta ram_72,x
-	inc idx
-	lda #$0c
-	sta temp
-	lda idx
-	cmp temp
-	beq :+
-	jmp label_dc76
-:	rts

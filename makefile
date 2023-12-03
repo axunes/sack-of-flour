@@ -11,7 +11,7 @@
 
 title = sack
 
-objlist = nmi sack dc92 de0d level1 level2 level3 level4 level5 unused
+objlist = nmi sack dc71 dc92 de0d level1 level2 level3 level4 level5 unused
 
 AS65 = ca65
 LD65 = ld65
