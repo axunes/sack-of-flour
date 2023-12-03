@@ -32,3 +32,5 @@ $(title).nes: config.cfg $(objlistntsc)
 
 $(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc
 	$(AS65) -g $< -o $@
+
+$(objdir)/sack.o: $(srcdir)/prge.s $(srcdir)/prgf.s
