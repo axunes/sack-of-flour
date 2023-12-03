@@ -5,39 +5,31 @@
 setLongBranch -, -
 
 .segment "PRGE"
+
 label_dc92:
-	lda #$00
-	sta ram_7f
-label_dc97:
-	ldx ram_7f
-	lda ram_72,x
-	sta ram_80
-
-	if (ram_80 = #0), long
+	for (lda #0 : sta ram_7f, ram_7f <> #12, inc ram_7f)
 		ldx ram_7f
-		lda $8070,x
-		sta ram_81
-		ldx ram_7f
-		lda $807c,x
-		sta ram_82
+		lda ram_72,x
+		sta ram_80
 
-		if (player_position_y_again - #$20 >> 4 = ram_82), long
-			if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
+		if (ram_80 = #0), long
+			ldx ram_7f
+			lda $8070,x
+			sta ram_81
+			ldx ram_7f
+			lda $807c,x
+			sta ram_82
 
-			if (player_pos_x1 + #1 = ram_81)
-				if (player_pos_x2 >= #10) jmp label_ddd8
+			if (player_position_y_again - #$20 >> 4 = ram_82), long
+				if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
+
+				if (player_pos_x1 + #1 = ram_81)
+					if (player_pos_x2 >= #10) jmp label_ddd8
+				endif
 			endif
 		endif
-	endif
-	
-	inc ram_7f
-	lda #$0c
-	sta temp
-	lda ram_7f
-	cmp temp
-	beq :+
-	jmp label_dc97
-:	rts
+	next
+	rts
 
 
 
