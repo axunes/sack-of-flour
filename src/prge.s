@@ -2561,34 +2561,3 @@ label_dc1b:
 	cpx #$00
 	bne :-
 	rts
-	label_dc26:
-		lda #$00
-		sta ram_66
-		lda #$00
-		sta PPU_SPR_ADDR
-	label_dc30:
-		lda #$f5
-		sta PPU_SPR_IO
-		inc ram_66
-		lda #$00
-		sta temp
-		lda ram_66
-		cmp temp
-		beq :+
-		jmp label_dc30
-	:	rts
-	; FIXME
-	lda #$00
-	sta ram_66
-label_dc4e:
-	ldx ram_66
-	lda #$f5
-	sta OAM+0,x
-	inc ram_66
-	lda #$00
-	sta temp
-	lda ram_66
-	cmp temp
-	beq :+
-	jmp label_dc4e
-:	rts
