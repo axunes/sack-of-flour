@@ -2592,9 +2592,3 @@ label_dc4e:
 	beq :+
 	jmp label_dc4e
 :	rts
-	irq:
-	rti
-label_dc6b:
-	lda #$05
-	sta ram_7e
-	rts

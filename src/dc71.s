@@ -6,7 +6,7 @@
 label_dc71:
 	for (lda #0 : sta idx, idx <> #12, inc idx)
 		ldx idx
-		lda #$0
+		lda #0
 		sta ram_72,x
 	next
 	rts
