@@ -17,7 +17,7 @@ nmi:
 	lda #$04
 	sta PPU_CTRL2
 	jsr label_dc26
-	jsr label_c1c2
+	jsr init_ram
 	jsr label_db8e
 	lda #$30
 	sta PPU_CTRL1
@@ -111,7 +111,7 @@ nmi:
 
 		if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
 		jsr label_c26a
-		jsr label_c1c2
+		jsr init_ram
 		jsr label_dc71
 		jsr label_cabb
 	forever

@@ -1,6 +1,6 @@
 .include "global.inc"
 
-label_c1c2: ; ram init shit
+init_ram:
 	lda #$00
 	sta button_a_down
 	lda #$00
