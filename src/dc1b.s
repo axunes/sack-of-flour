@@ -3,9 +3,9 @@
 
 .segment "PRGE"
 label_dc1b:
-	ldx #$00
+	ldx #0
 :	sta PPU_VRAM_IO
 	inx
-	cpx #$00
+	cpx #0
 	bne :-
 	rts
