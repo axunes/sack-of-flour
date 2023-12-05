@@ -1,5 +1,10 @@
 .include "global.inc"
+.include "nes.inc"
+.include "ca65hl/ca65hl.inc"
 
+setLongBranch -, -
+
+.segment "PRGE"
 init_ram:
 	lda #$00
 	sta button_a_down

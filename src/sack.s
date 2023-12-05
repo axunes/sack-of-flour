@@ -1,6 +1,5 @@
 .include "nes.inc"
 .include "macros.inc"
-.include "memory.s"
 .include "global.inc"
 
 CA65HL_USE_CUSTOM_SYNTAX = 0
@@ -28,8 +27,7 @@ setLongBranch -, -
 
 ; code
 
-.segment "PRGE"
-	.include "prge.s"
+
 	
 .segment "PRGF"
 	weird_fucking_data: ; this only used to load as a palette somewhere
@@ -208,8 +206,7 @@ setLongBranch -, -
 	.byte $02, $02, $02, $02, $02, $02, $02, $02
 	.byte $02, $02, $02, $02, $02, $02, $03, $03
 	.byte $03, $03, $03, $03, $03, $03, $03, $03
-	.include "prgf.s"
-	konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
+
 .segment "VECTORS"
 	.addr nmi, reset, irq
 

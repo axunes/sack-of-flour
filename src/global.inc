@@ -1,12 +1,13 @@
-; .enum EnemyType
-; 	none
-; 	goomba = 2
-; 	crocodile
-; 	cabbage
-; 	carrot = 6
-; 	heart = 8
-; .endenum
-; MAX_HEALTH = 5
+MAX_HEALTH = 5
+
+.enum EnemyType
+	none
+	goomba = 2
+	crocodile
+	cabbage
+	carrot = 6
+	heart = 8
+.endenum
 
 .global reset, nmi, irq
 .global music_start
@@ -19,6 +20,10 @@
 .global label_e8ed, label_d2bb, label_c7ec, label_cabb, get_controller_buttons, label_dc71, label_e6eb
 .global label_c26a, init_ram, label_dc26, label_dbda, label_f5dd, label_e5eb
 .global label_dc92, label_dd2d, label_dc6b, label_dc1b, label_dbc3
+.global game_over_text, player_gravity_table, tile_shit_1, tile_shit_2, tile_shit_3, tile_shit_4
+.global label_f4f5, label_ee7e, init_enemies
+.global konami_code_values
+.global label_d5d8, label_c31d, label_db80, label_ca72
 
 
 .global ram_00

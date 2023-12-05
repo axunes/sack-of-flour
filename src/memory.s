@@ -35,17 +35,6 @@ NBASIC = 1
 	button_select_down: .res 1
 	button_start_down: .res 1
 
-	MAX_HEALTH = 5
-
-	.enum EnemyType
-		none
-		goomba = 2
-		crocodile
-		cabbage
-		carrot = 6
-		heart = 8
-	.endenum
-
 	; man I hate all this res
 
 	ram_1b: .res 1

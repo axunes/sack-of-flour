@@ -1,5 +1,7 @@
 .include "global.inc"
-
+.include "nes.inc"
+.include "ca65hl/ca65hl.inc"
+.segment "PRGF"
 label_e5eb:
 		lda #$00
 		sta ram_8e
@@ -2120,3 +2122,5 @@ label_f8b1:
 	adc button_start_down
 	sta button_mask
 	rts
+
+konami_code_values: .byte $20, $20, $10, $10, $08, $04, $08, $04, $40, $80
