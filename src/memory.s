@@ -104,10 +104,8 @@ NBASIC = 1
 	ram_85: .res 1
 	ram_86: .res 1
 	ram_87: .res 1
-	ram_88: .res 1
-	ram_89: .res 1
-	ram_8a: .res 1
-	ram_8b: .res 1
+	ram_88: .res 2 ; related to music_pointer, probabably loop start
+	ram_8a: .res 2 ; probably loop end
 	ram_8c: .res 1
 	ram_8d: .res 1
 	ram_8e: .res 1

@@ -115,9 +115,7 @@ MAX_HEALTH = 5
 .global ram_86
 .global ram_87
 .global ram_88
-.global ram_89
 .global ram_8a
-.global ram_8b
 .global ram_8c
 .global ram_8d
 .global ram_8e

@@ -3,33 +3,34 @@
 .include "ca65hl/ca65hl.inc"
 .segment "PRGF"
 label_e5eb:
-		lda #$00
-		sta ram_8e
-		lda #$00
-		sta ram_8f
-		lda #$1f
-		sta APU_CHANCTRL
-		lda #$00
-		sta ram_90
-		lda ram_07
-		asl a
-		asl a
-		sta ram_91
-		ldx ram_91
-		lda music_start,x
-		sta ram_88
-		sta a: $02
-		inx
-		lda music_start,x
-		sta ram_89
-		sta music_pointer+1
-		inx
-		lda music_start,x
-		sta ram_8a
-		inx
-		lda music_start,x
-		sta ram_8b
-		rts
+	lda #$00
+	sta ram_8e
+	lda #$00
+	sta ram_8f
+	lda #$1f
+	sta APU_CHANCTRL
+	lda #$00
+	sta ram_90
+	lda ram_07
+	asl a
+	asl a
+	sta ram_91
+	ldx ram_91
+	lda music_start,x
+	sta ram_88+0
+	sta music_pointer
+	inx
+	lda music_start,x
+	sta ram_88+1
+	sta music_pointer+1
+	inx
+	lda music_start,x
+	sta ram_8a+0
+	inx
+	lda music_start,x
+	sta ram_8a+1
+	rts
+
 label_e62c:
 	iny
 	lda (<music_pointer),y
@@ -201,14 +202,14 @@ label_e790:
 	sta music_pointer+1
 	clc
 	lda music_pointer
-	cmp ram_8a
+	cmp ram_8a+0
 	bne :+
 	lda music_pointer+1
-	cmp ram_8b
+	cmp ram_8a+1
 	bne :+
-	lda ram_88
+	lda ram_88+0
 	sta music_pointer
-	lda ram_89
+	lda ram_88+1
 	sta music_pointer+1
 :	rts
 	init_enemies:
