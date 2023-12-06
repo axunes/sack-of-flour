@@ -60,11 +60,9 @@ nmi:
 			jmp label_c0cd
 		endif
 
-		if (player_health = #0)
-			if (i_frames = #0)
-				jsr label_cab7
-				jmp label_c0cd
-			endif
+		if (player_health = #0 && i_frames = #0)
+			jsr label_cab7
+			jmp label_c0cd
 		endif
 
 		continue
@@ -78,7 +76,7 @@ nmi:
 		jsr label_cabb
 		continue
 		label_c0e9:
-		jsr label_e7f4
+		jsr reset_enemies
 
 		jmp :+
 		:

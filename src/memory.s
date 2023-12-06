@@ -118,7 +118,7 @@ NBASIC = 1
 	enemy_pos_y: .res 6
 	enemy_type: .res 6
 	ram_aa: .res 6
-	ram_b0: .res 1 ; number of enemies? or maybe number of enemy slots free
+	num_enemy_slots: .res 1 ; this is always 5 and I don't know why it isn't a constant
 	ram_b1: .res 1
 	which_enemy: .res 1
 	ram_b3: .res 1

@@ -234,11 +234,11 @@ label_e790:
 		sta enemy_type,x
 
 		lda #5
-		sta ram_b0
+		sta num_enemy_slots
 		rts
 
-label_e7f4: ; LOOK
-	for (lda #0 : sta idx, idx <= ram_b0, inc idx)
+reset_enemies: ; LOOK
+	for (lda #0 : sta idx, idx <= num_enemy_slots, inc idx)
 		ldx idx
 		lda #0
 		sta enemy_type, x
@@ -265,7 +265,7 @@ label_e829:
 	bne :+
 	jmp label_e85e
 :	inc idx
-	lda ram_b0
+	lda num_enemy_slots
 	sta temp
 	lda idx
 	cmp temp
@@ -373,7 +373,7 @@ label_e8f2:
 	cmp temp
 	bne :+
 	jsr label_e960
-:	lda ram_b0
+:	lda num_enemy_slots
 	sta temp
 	lda which_enemy
 	cmp temp
@@ -1088,7 +1088,7 @@ label_ee83:
 	jmp label_f063
 label_f015:
 	inc which_enemy
-	lda ram_b0
+	lda num_enemy_slots
 	clc
 	adc #$01
 	sta temp
@@ -1128,17 +1128,14 @@ label_f067:
 	ldx which_enemy
 	lda #$00
 	sta enemy_type,x
+
 	; collect heart
 	inc player_health
 
 	; if player health becomes 6, decrement to max health of 5
-	lda #MAX_HEALTH + 1
-	sta temp
-	lda player_health
-	cmp temp
-	bne :+
-	dec player_health
-:	rts
+	if (player_health = #MAX_HEALTH + 1) dec player_health
+	rts
+
 label_f083:
 	lda #$02
 	sta temp
