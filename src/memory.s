@@ -104,10 +104,11 @@ NBASIC = 1
 	ram_85: .res 1
 	ram_86: .res 1
 	ram_87: .res 1
+
+	; MUSIC SHIT?
 	ram_88: .res 2 ; related to music_pointer, probabably loop start
 	ram_8a: .res 2 ; probably loop end
-	ram_8c: .res 1
-	ram_8d: .res 1
+	ram_8c: .res 2
 	ram_8e: .res 1
 	ram_8f: .res 1
 	ram_90: .res 1
@@ -117,7 +118,7 @@ NBASIC = 1
 	enemy_pos_y: .res 6
 	enemy_type: .res 6
 	ram_aa: .res 6
-	ram_b0: .res 1
+	ram_b0: .res 1 ; number of enemies? or maybe number of enemy slots free
 	ram_b1: .res 1
 	which_enemy: .res 1
 	ram_b3: .res 1

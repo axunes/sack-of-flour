@@ -2,7 +2,7 @@
 .include "nes.inc"
 .include "ca65hl/ca65hl.inc"
 .segment "PRGF"
-label_e5eb:
+label_e5eb: ; init music?
 	lda #$00
 	sta ram_8e
 	lda #$00
@@ -39,20 +39,20 @@ label_e62c:
 	lda music_pointer
 	adc #$02
 	sta music_pointer
-	sta ram_8c
+	sta ram_8c+0
 	lda music_pointer+1
 	adc #$00
 	sta music_pointer+1
-	sta ram_8d
+	sta ram_8c+1
 	jmp label_e679
 label_e64c:
 	dec ram_8e
 	lda ram_8e
 	cmp #$00
 	beq :+
-	lda ram_8c
+	lda ram_8c+0
 	sta music_pointer
-	lda ram_8d
+	lda ram_8c+1
 	sta music_pointer+1
 	jmp label_e679
 :	clc
@@ -214,42 +214,37 @@ label_e790:
 :	rts
 	init_enemies:
 		; set all enemy type slots to zero
-		ldx #$00
+		ldx #0
 		lda #EnemyType::none
 		sta enemy_type,x
-		ldx #$01
+		ldx #1
 		lda #EnemyType::none
 		sta enemy_type,x
-		ldx #$02
+		ldx #2
 		lda #EnemyType::none
 		sta enemy_type,x
-		ldx #$03
+		ldx #3
 		lda #EnemyType::none
 		sta enemy_type,x
-		ldx #$04
+		ldx #4
 		lda #EnemyType::none
 		sta enemy_type,x
-		ldx #$05
+		ldx #5
 		lda #EnemyType::none
 		sta enemy_type,x
-		lda #$05
+
+		lda #5
 		sta ram_b0
 		rts
-label_e7f4:
-	lda #$00
-	sta idx
-label_e7f9:
-	ldx idx
-	lda #$00
-	sta enemy_type,x
-	inc idx
-	lda ram_b0
-	sta temp
-	lda idx
-	cmp temp
-	bpl :+
-	jmp label_e7f9
-:	rts
+
+label_e7f4: ; LOOK
+	for (lda #0 : sta idx, idx <= ram_b0, inc idx)
+		ldx idx
+		lda #0
+		sta enemy_type, x
+	next
+	rts
+
 label_e816:
 	lda #$01
 	sta temp
