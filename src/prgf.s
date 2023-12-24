@@ -237,7 +237,7 @@ label_e790:
 		sta num_enemy_slots
 		rts
 
-reset_enemies: ; LOOK
+reset_enemies:
 	for (lda #0 : sta idx, idx <= num_enemy_slots, inc idx)
 		ldx idx
 		lda #0
