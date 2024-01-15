@@ -2005,19 +2005,11 @@ label_d5ed:
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
+
 label_d613:
-	lda player_chunk_pos
-	asl a
-	asl a
-	asl a
-	asl a
-	asl a
-	asl a
-	clc
-	adc player_chunk_pos_fine
-	sta PPU_VRAM_ADDR1
-	lda #$00
-	sta PPU_VRAM_ADDR1
+	mb a = player_chunk_pos << 6
+	mb PPU_VRAM_ADDR1 = a + player_chunk_pos_fine
+	mb PPU_VRAM_ADDR1 = #0
 	rts
 
 label_d629:
@@ -2377,10 +2369,10 @@ label_da3c:
 	sta $2005
 	lda #$00
 	sta $2005
-label_da68:
-	jsr label_db8e
-	jsr get_controller_buttons
-	if (button_start_down = #0) jmp label_da68
+	do
+		jsr label_db8e
+		jsr get_controller_buttons
+	while (button_start_down = #0)
 label_da7e:
 	jsr label_db8e
 	jsr get_controller_buttons
