@@ -2,7 +2,7 @@
 .include "nes.inc"
 
 .segment "PRGE"
-label_db8e:
+sub_db8e:
 :	lda PPU_STATUS
 	bpl :-
 :	lda PPU_STATUS

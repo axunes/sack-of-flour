@@ -2,7 +2,7 @@
 .include "nes.inc"
 
 .segment "PRGE"
-label_dc1b:
+sub_dc1b:
 	ldx #0
 :	sta PPU_VRAM_IO
 	inx

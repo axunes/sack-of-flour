@@ -6,54 +6,54 @@ setLongBranch -, -
 .segment "PRGE"
 reset:
 nmi:
-	jsr label_c35a
-	jsr label_c236
-	jsr label_db8e
-	jsr label_db8e
-	jsr label_f5dd
-	jsr label_dbda
+	jsr sub_c35a
+	jsr sub_c236
+	jsr sub_db8e
+	jsr sub_db8e
+	jsr sub_f5dd
+	jsr sub_dbda
 	lda #$30
 	sta PPU_CTRL1
 	lda #$04
 	sta PPU_CTRL2
-	jsr label_dc26
+	jsr sub_dc26
 	jsr init_ram
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$30
 	sta PPU_CTRL1
 	lda #$1c
 	sta PPU_CTRL2
 	lda #$00
 	sta ram_06
-	jsr label_c26a
+	jsr sub_c26a
 	lda #$00
 	sta ram_07
-	jsr label_e5eb
+	jsr sub_e5eb
 	lda #$03
 	sta player_lives
-	jsr label_dc71
-	jsr label_cabb
+	jsr sub_dc71
+	jsr sub_cabb
 
 	do
 		jsr get_controller_buttons
-		jsr label_c7ec
-		jsr label_d2bb
-		jsr label_e8ed
-		jsr label_c24e
+		jsr sub_c7ec
+		jsr sub_d2bb
+		jsr sub_e8ed
+		jsr sub_c24e
 
 		; if player_health is 0, KILL?
 		; ^ I guess that's wrong
-		if (player_health <> #0) jsr label_e679
+		if (player_health <> #0) jsr sub_e679
 
-		jsr label_c17f
-		jsr label_e816
-		jsr label_db8e
-		jsr label_db61
+		jsr sub_c17f
+		jsr sub_e816
+		jsr sub_db8e
+		jsr sub_db61
 
 		if (ram_0b <> #0) goto label_c0e9, long
 
 		if (player_position_y_again & #$fc = #$fc)
-			jsr label_c9e2
+			jsr sub_c9e2
 			if (player_position_y_again = #02)
 				continue
 			endif
@@ -61,7 +61,7 @@ nmi:
 		endif
 
 		if (player_health = #0 && i_frames = #0)
-			jsr label_cab7
+			jsr sub_cab7
 			jmp label_c0cd
 		endif
 
@@ -69,11 +69,11 @@ nmi:
 		
 		label_c0cd:
 		if (player_lives = #0)
-			jsr label_da95
-			jsr label_c3eb
+			jsr sub_da95
+			jsr sub_c3eb
 			jmp reset
 		endif
-		jsr label_cabb
+		jsr sub_cabb
 		continue
 		label_c0e9:
 		jsr reset_enemies
@@ -84,34 +84,34 @@ nmi:
 		jsr nesmus_shut_up
 
 		for (lda #$1e : sta idx, idx <> #0, dec idx)
-			jsr label_db8e
-			jsr label_d5ed
+			jsr sub_db8e
+			jsr sub_d5ed
 		next
 
-		jsr label_d5c3
+		jsr sub_d5c3
 		lda #$01
 		sta player_fall_state
 
 		do
-			jsr label_db8e
-			jsr label_d2bb
-			jsr label_db61
+			jsr sub_db8e
+			jsr sub_d2bb
+			jsr sub_db61
 			mb player_position_y_again := player_position_y_again - #03
 		while (player_position_y_again & #$f8 <> #0) ; FIXME, combine and & sbc
 			
 		for (lda #$1e : sta idx, idx <> #0, dec idx)
-			jsr label_db8e
-			jsr label_d5ed
+			jsr sub_db8e
+			jsr sub_d5ed
 		next
 
 		jmp :+
 		:
 
 		if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
-		jsr label_c26a
+		jsr sub_c26a
 		jsr init_ram
-		jsr label_dc71
-		jsr label_cabb
+		jsr sub_dc71
+		jsr sub_cabb
 	forever
 
 label_c17f:

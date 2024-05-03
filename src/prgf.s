@@ -333,7 +333,7 @@ label_e85e:
 	clc
 	adc #$0a
 	sta enemy_pos_x,x
-	jsr label_d5c3
+	jsr sub_d5c3
 	rts
 label_e8ed: ; process enemies
 	lda #$ff
@@ -348,31 +348,31 @@ label_e8f2:
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr label_e960
+	jsr sub_e960
 :	lda #$03
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr label_e960
+	jsr sub_e960
 :	lda #$04
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr label_ec12
+	jsr sub_ec12
 :	lda #$06
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr label_edca
+	jsr sub_edca
 :	lda #$08
 	sta temp
 	lda ram_b1
 	cmp temp
 	bne :+
-	jsr label_e960
+	jsr sub_e960
 :	lda num_enemy_slots
 	sta temp
 	lda which_enemy
@@ -413,7 +413,7 @@ label_e960:
 	sta ram_b7
 	lda #$03
 	sta ram_62
-	jsr label_f2cd
+	jsr sub_f2cd
 	lda #$00
 	sta temp
 	lda ram_1b
@@ -442,7 +442,7 @@ label_e9ed:
 	bne label_ea17
 	lda #$00
 	sta ram_64
-	jsr label_f083
+	jsr sub_f083
 	lda #$00
 	sta temp
 	lda ram_64
@@ -459,7 +459,7 @@ label_ea17:
 	bne label_ea41
 	lda #$00
 	sta ram_67
-	jsr label_f193
+	jsr sub_f193
 	lda #$00
 	sta temp
 	lda ram_67
@@ -705,7 +705,7 @@ label_ec12:
 	sta ram_b7
 	lda #$02
 	sta ram_62
-	jsr label_f2cd
+	jsr sub_f2cd
 	lda #$ff
 	sta temp
 	lda ram_b3
@@ -747,7 +747,7 @@ label_ec8d:
 	bne label_ece7
 	lda #$00
 	sta ram_64
-	jsr label_f083
+	jsr sub_f083
 	lda #$00
 	sta temp
 	lda ram_64
@@ -764,7 +764,7 @@ label_ece7:
 	bne label_ed11
 	lda #$00
 	sta ram_67
-	jsr label_f193
+	jsr sub_f193
 	lda #$00
 	sta temp
 	lda ram_67
@@ -872,8 +872,8 @@ label_edca:
 	cmp temp
 	bmi :+
 	jmp purge_enemy
-:	jsr label_f29b
-	jsr label_f29b
+:	jsr sub_f29b
+	jsr sub_f29b
 	ldx which_enemy
 	lda ram_b4
 	sta enemy_pos_x,x
@@ -1119,10 +1119,10 @@ label_f02d:
 	sta player_velocity
 :	rts
 label_f05f:
-	jsr label_ca72
+	jsr sub_ca72
 	rts
 label_f063:
-	jsr label_ca72
+	jsr sub_ca72
 	rts
 label_f067:
 	ldx which_enemy
@@ -1624,7 +1624,7 @@ label_f44f:
 	sta ram_22
 	rts
 label_f4c3:
-	jsr label_f3db
+	jsr sub_f3db
 	lda ram_6c
 	clc
 	adc #$10
@@ -1633,10 +1633,10 @@ label_f4c3:
 	clc
 	adc #$04
 	sta ram_6e
-	jsr label_f3db
+	jsr sub_f3db
 	rts
 label_f4dc:
-	jsr label_f44f
+	jsr sub_f44f
 	lda ram_6c
 	clc
 	adc #$10
@@ -1645,7 +1645,7 @@ label_f4dc:
 	clc
 	adc #$04
 	sta ram_6e
-	jsr label_f44f
+	jsr sub_f44f
 	rts
 label_f4f5:
 	ldx ram_22
@@ -1758,14 +1758,14 @@ label_f52f:
 	sta ram_22
 	rts
 	label_f5dd:
-	jsr label_db80
-	jsr label_db8e
-	jsr label_c31d
-	jsr label_dbc3
-	jsr label_dbda
-	jsr label_db8e
-	jsr label_db8e
-	jsr label_f6d3
+	jsr sub_db80
+	jsr sub_db8e
+	jsr sub_c31d
+	jsr sub_dbc3
+	jsr sub_dbda
+	jsr sub_db8e
+	jsr sub_db8e
+	jsr sub_f6d3
 	lda #$00
 	sta ram_bc
 	lda #$5a
@@ -1783,17 +1783,17 @@ label_f52f:
 	lda #$00
 	sta konami_code_active
 label_f61d:
-	jsr label_f7e2
-	jsr label_f7ee
-	jsr label_f7e8
-	jsr label_f7e2
-	jsr label_f7ee
+	jsr sub_f7e2
+	jsr sub_f7ee
+	jsr sub_f7e8
+	jsr sub_f7e2
+	jsr sub_f7ee
 	lda #$00
 	sta temp
 	lda konami_code_active
 	cmp temp
 	beq label_f698
-	jsr label_f6e9
+	jsr sub_f6e9
 	lda ram_be
 	clc
 	adc ram_bf
@@ -1839,7 +1839,7 @@ label_f698:
 	clc
 	adc #$07
 	sta ram_05
-	jsr label_f836
+	jsr sub_f836
 	lda #$00
 	sta temp
 	lda button_select_down
@@ -1857,13 +1857,13 @@ label_f698:
 label_f6d2:
 	rts
 label_f6d3:
-	jsr label_dc26
-	jsr label_db8e
-	jsr label_f71c
-	jsr label_db8e
-	jsr label_f7a8
-	jsr label_db8e
-	jsr label_db8e
+	jsr sub_dc26
+	jsr sub_db8e
+	jsr sub_f71c
+	jsr sub_db8e
+	jsr sub_f7a8
+	jsr sub_db8e
+	jsr sub_db8e
 	rts
 label_f6e9:
 	; FIXME
@@ -1893,7 +1893,7 @@ label_f6e9:
 	bne :-
 	rts
 label_f71c:
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$20
 	sta PPU_VRAM_ADDR2
 	lda #$c4
@@ -1904,7 +1904,7 @@ label_f71c:
 	inx
 	cpx #$80
 	bne :-
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$44
@@ -1915,7 +1915,7 @@ label_f71c:
 	inx
 	cpx #$b9
 	bne :-
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$ab
@@ -1926,7 +1926,7 @@ label_f71c:
 	inx
 	cpx #$80
 	bne :-
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$c9
@@ -1937,7 +1937,7 @@ label_f71c:
 	inx
 	cpx #$0d
 	bne :-
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$23
 	sta PPU_VRAM_ADDR2
 	lda #$c0
@@ -2024,7 +2024,7 @@ label_f7f7:
 	sta PPU_VRAM_ADDR1
 	rts
 label_f836:
-	jsr label_f8b1
+	jsr sub_f8b1
 	lda #$0a
 	sta temp
 	lda konami_code_correct_presses
@@ -2038,7 +2038,7 @@ label_f836:
 	rts
 :	lda #$01
 	sta ram_5c
-	jsr label_d5d8
+	jsr sub_d5d8
 	rts
 label_f85d:
 	lda #$00

@@ -13,18 +13,57 @@ MAX_HEALTH = 5
 .global music_start
 .global level_name
 .global level_title
-.global label_de0d
-.global label_d8b7, label_c35a, label_c236, label_db8e
-.global label_d5c3, label_d5ed, nesmus_shut_up, reset_enemies, label_c3eb, label_da95, label_cab7
-.global label_c9e2, label_db61, label_e816, label_e679, label_c24e
-.global label_e8ed, label_d2bb, label_c7ec, label_cabb, get_controller_buttons, label_dc71, label_e6eb
-.global label_c26a, init_ram, label_dc26, label_dbda, label_f5dd, label_e5eb
-.global label_dc92, label_dd2d, label_dc6b, label_dc1b, label_dbc3
+.global sub_de0d
+.global label_d8b7, sub_c35a, sub_c236, sub_db8e
+.global sub_d5c3, sub_d5ed, nesmus_shut_up, reset_enemies, sub_c3eb, sub_da95, sub_cab7
+.global sub_c9e2, sub_db61, sub_e816, sub_e679, sub_c24e
+.global sub_e8ed, sub_d2bb, sub_c7ec, sub_cabb, get_controller_buttons, sub_dc71, label_e6eb
+.global sub_c26a, init_ram, sub_dc26, sub_dbda, sub_f5dd, sub_e5eb
+.global sub_dc92, sub_dd2d, sub_dc6b, sub_dc1b, sub_dbc3
 .global game_over_text, player_gravity_table, tile_shit_1, tile_shit_2, tile_shit_3, tile_shit_4
-.global label_f4f5, label_ee7e, init_enemies
+.global sub_f4f5, sub_ee7e, init_enemies
 .global konami_code_values
-.global label_d5d8, label_c31d, label_db80, label_ca72
-
+.global sub_d5d8, sub_c31d, sub_db80, sub_ca72
+.global sub_c5aa
+.global sub_c6a0
+.global sub_c706
+.global sub_c414
+.global sub_c47d
+.global sub_c44b
+.global sub_d204
+.global sub_d255
+.global sub_cbaa
+.global sub_ccfa
+.global sub_d584
+.global sub_cb8c
+.global sub_d4d9
+.global sub_d629
+.global sub_d825
+.global sub_c35e
+.global sub_d6e5
+.global sub_c28b
+.global sub_d773
+.global sub_dae9
+.global sub_db09
+.global sub_c17f
+.global sub_f8b1
+.global sub_f7a8
+.global sub_f71c
+.global sub_f836
+.global sub_f6e9
+.global sub_e960
+.global sub_ec12
+.global sub_edca
+.global sub_f2cd
+.global sub_f083
+.global sub_f193
+.global sub_f29b
+.global sub_f3db
+.global sub_f7ee
+.global sub_f7e2
+.global sub_f7e8
+.global sub_f6d3
+.global sub_f44f
 
 .global ram_00
 .global music_pointer

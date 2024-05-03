@@ -136,7 +136,7 @@ label_c28b:
 	adc #$03
 	sta $8001
 	rts
-label_c2e0: ; mapper shit
+sub_c2e0: ; mapper shit
 	lda #$00
 	sta $8000
 	lda #$04
@@ -192,11 +192,11 @@ label_c31d:
 		jmp label_c31d
 		rts
 label_c35e:
-	jsr label_dc6b
-	jsr label_db8e
-	jsr label_dbc3
-	jsr label_dc26
-	jsr label_db8e
+	jsr sub_dc6b
+	jsr sub_db8e
+	jsr sub_dbc3
+	jsr sub_dc26
+	jsr sub_db8e
 	ldx #$00
 	lda #$f5
 :	
@@ -212,16 +212,16 @@ label_c35e:
 	sta ram_52
 	lda #$0b
 	sta ram_29
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$07
 	sta ram_52
 label_c397:
-	jsr label_db8e
-	jsr label_c4b4
-	jsr label_db8e
-	jsr label_c5aa
-	jsr label_db8e
-	jsr label_c6a0
+	jsr sub_db8e
+	jsr sub_c4b4
+	jsr sub_db8e
+	jsr sub_c5aa
+	jsr sub_db8e
+	jsr sub_c6a0
 
 	dec ram_52
 
@@ -229,14 +229,14 @@ label_c397:
 	lda #$00
 	sta ram_52
 label_c3c1:
-	jsr label_db8e
-	jsr label_c706
+	jsr sub_db8e
+	jsr sub_c706
 	inc ram_52
 
 	if (ram_52 <> #5) jmp label_c3c1
 	
-	jsr label_db8e
-	jsr label_c414
+	jsr sub_db8e
+	jsr sub_c414
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	lda #$00
@@ -244,19 +244,19 @@ label_c3c1:
 	rts
 
 label_c3eb:
-	jsr label_db8e
+	jsr sub_db8e
 	
 	if (ram_53 = #1)
-		jsr label_c47d
+		jsr sub_c47d
 		rts
 	endif
 
 	if (ram_53 = #3)
-		jsr label_c414
+		jsr sub_c414
 		rts
 	endif
 
-	jsr label_c44b
+	jsr sub_c44b
 	rts
 
 label_c414:
@@ -331,7 +331,7 @@ label_c496: ; for
 :	jmp label_c496
 	rts
 
-label_c4b4:
+sub_c4b4:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -701,12 +701,12 @@ label_c7ec: ; giant player process routine I think
 	sta ram_5a
 
 	if (button_start_down <> #0) jsr pause_game
-	if (button_up_down <> #0) jsr label_dd2d
+	if (button_up_down <> #0) jsr sub_dd2d
 
 	; fling player left or right on death
 	if (player_health = #00)
-		if (player_direction = #0) jsr label_d204
-		if (player_direction = #1) jsr label_d255
+		if (player_direction = #0) jsr sub_d204
+		if (player_direction = #1) jsr sub_d255
 		jmp label_c984
 	endif
 	
@@ -719,9 +719,9 @@ label_c850:
 	if (button_right_down <> #0)
 		lda #$01
 		sta player_direction
-		jsr label_cbaa
+		jsr sub_cbaa
 		
-		if (button_b_down <> #0) jsr label_cbaa
+		if (button_b_down <> #0) jsr sub_cbaa
 
 		lda #$01
 		sta player_is_moving_h
@@ -730,9 +730,9 @@ label_c850:
 	if (button_left_down <> #0)
 		lda #$00
 		sta player_direction
-		jsr label_ccfa
+		jsr sub_ccfa
 		
-		if (button_b_down <> #0) jsr label_ccfa
+		if (button_b_down <> #0) jsr sub_ccfa
 
 		lda #$01
 		sta player_is_moving_h
@@ -756,7 +756,7 @@ label_c850:
 		sta player_fall_state
 		lda #$01
 		sta ram_5a
-		jsr label_d5d8
+		jsr sub_d5d8
 		jmp label_c984
 	endif
 	
@@ -767,7 +767,7 @@ label_c850:
 
 	if (button_a_down = #0 || ram_5d = #0) goto label_c984
 
-	jsr label_d584
+	jsr sub_d584
 	lda #$01
 	sta player_fall_state
 	lda #$28
@@ -792,12 +792,12 @@ label_c850:
 	:
 
 label_c984:
-	jsr label_cb8c
+	jsr sub_cb8c
 
 	if (i_frames <> #0) dec i_frames
 	
-	jsr label_ee7e
-	jsr label_d4d9
+	jsr sub_ee7e
+	jsr sub_d4d9
 	rts
 
 
@@ -844,8 +844,8 @@ label_c9e2:
 	lda #$00 ; for
 	sta idx
 label_ca1a:
-	jsr label_db8e
-	jsr label_d5ed
+	jsr sub_db8e
+	jsr sub_d5ed
 	inc idx
 	lda #$1e
 	sta temp
@@ -855,18 +855,18 @@ label_ca1a:
 	jmp label_ca1a
 :	jmp label_cab7
 label_ca36:
-	jsr label_dc26
+	jsr sub_dc26
 label_ca39:
 	if (player_pos_x1 <> $805f)
-		jsr label_e679
-		jsr label_d204
-		jsr label_d204
-		jsr label_d204
-		jsr label_db8e
+		jsr sub_e679
+		jsr sub_d204
+		jsr sub_d204
+		jsr sub_d204
+		jsr sub_db8e
 
-		if (ram_58 <> #0) jsr label_d629
+		if (ram_58 <> #0) jsr sub_d629
 		
-		jsr label_d5ed
+		jsr sub_d5ed
 		jmp label_ca39
 	endif
 
@@ -906,8 +906,8 @@ label_cab7:
 	rts
 label_cabb:
 	jsr nesmus_shut_up
-	jsr label_dbc3
-	jsr label_dbda
+	jsr sub_dbc3
+	jsr sub_dbda
 	; set health to 3
 	lda #$03
 	sta player_health
@@ -933,11 +933,11 @@ label_cabb:
 	sta player_fall_state
 	lda #$ff
 	sta ram_60
-	jsr label_d825
+	jsr sub_d825
 	lda #$00
 	sta ram_61
 label_cb0c:
-	jsr label_db8e
+	jsr sub_db8e
 	inc ram_61
 	lda #$78
 	sta temp
@@ -947,11 +947,11 @@ label_cb0c:
 	jmp label_cb0c
 :	lda #$00
 	sta ram_61
-	jsr label_dbc3
-	jsr label_c35e
+	jsr sub_dbc3
+	jsr sub_c35e
 	lda #$00
 	sta ram_07
-	jsr label_e5eb
+	jsr sub_e5eb
 	lda #$0f
 	sta APU_CHANCTRL
 	lda #$00
@@ -970,20 +970,20 @@ label_cb4e:
 	sbc #$06
 	cmp temp
 	bmi label_cb75
-	jsr label_d6e5
+	jsr sub_d6e5
 	
-	if (ram_58 <> #0) jsr label_d629
+	if (ram_58 <> #0) jsr sub_d629
 
 	jmp label_cb4e
 label_cb75:
-	jsr label_c28b
-	jsr label_db8e
+	jsr sub_c28b
+	jsr sub_db8e
 	jsr init_enemies
 	lda #$00
 	sta ram_5d
 	lda #$00
 	sta player_anim_timer
-	jsr label_d2bb
+	jsr sub_d2bb
 	rts
 
 label_cb8c:
@@ -1105,7 +1105,7 @@ label_cc97:
 
 	if (ram_64 & ram_54 <> #0) rts
 
-	jsr label_d204
+	jsr sub_d204
 	rts
 
 label_ccfa:
@@ -1385,7 +1385,7 @@ label_ce4a:
 
 	lda #$00
 	sta player_fall_state
-	jsr label_dc92
+	jsr sub_dc92
 	rts
 	
 label_d023:
@@ -1594,7 +1594,7 @@ label_d204: ; LOOK
 		inc player_pos_x1
 	endif
 
-	if (player_pos_x1 - player_chunk_pos_again > #10) jsr label_d6e5
+	if (player_pos_x1 - player_chunk_pos_again > #10) jsr sub_d6e5
 	rts
 
 label_d255: ; LOOK
@@ -1609,7 +1609,7 @@ label_d255: ; LOOK
 		dec player_pos_x1
 	endif
 
-	if (player_pos_x1 - player_chunk_pos_again < #6) jsr label_d773
+	if (player_pos_x1 - player_chunk_pos_again < #6) jsr sub_d773
 
 	rts
 	
@@ -1703,7 +1703,7 @@ label_d2bb: ; process player sprites, store in oam
 	sta ram_6d
 :	lda #$1e
 	sta ram_6e
-	jsr label_f4f5
+	jsr sub_f4f5
 label_d391:
 ;	lda #$01
 ;	sta temp
@@ -2021,10 +2021,10 @@ label_d629:
 	adc #$05
 	sta ram_52
 	
-	if (ram_58 = #1) jsr label_c4b4
-	if (ram_58 = #3) jsr label_c5aa
-	if (ram_58 = #4) jsr label_c6a0
-	if (ram_58 = #5) jsr label_c706
+	if (ram_58 = #1) jsr sub_c4b4
+	if (ram_58 = #3) jsr sub_c5aa
+	if (ram_58 = #4) jsr sub_c6a0
+	if (ram_58 = #5) jsr sub_c706
 
 	lda #0
 	sta ram_58
@@ -2036,10 +2036,10 @@ label_d696:
 	sbc #$01
 	sta ram_52
 	
-	if (ram_58 = #6) jsr label_c4b4
-	if (ram_58 = #8) jsr label_c5aa
-	if (ram_58 = #9) jsr label_c6a0
-	if (ram_58 = #10) jsr label_c706
+	if (ram_58 = #6) jsr sub_c4b4
+	if (ram_58 = #8) jsr sub_c5aa
+	if (ram_58 = #9) jsr sub_c6a0
+	if (ram_58 = #10) jsr sub_c706
 
 	lda #0
 	sta ram_58
@@ -2138,7 +2138,7 @@ label_d773:
 	rts
 
 label_d825: ; do level title shit
-	jsr label_dae9
+	jsr sub_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$08
@@ -2159,7 +2159,7 @@ label_d825: ; do level title shit
 	inx
 	cpx #$20
 	bne :-
-	jsr label_db8e
+	jsr sub_db8e
 	lda player_lives
 	sta idx
 	lda #$22
@@ -2196,12 +2196,12 @@ label_d896:
 	cmp temp
 	beq :+
 	jmp label_d896
-:	jsr label_db09
+:	jsr sub_db09
 	rts
 label_d8b7:
 	; FIXME
-	jsr label_dae9
-	jsr label_db8e
+	jsr sub_dae9
+	jsr sub_db8e
 	lda #$20
 	sta $2006
 	lda #$48
@@ -2219,7 +2219,7 @@ label_d8cc:
 	cmp temp
 	beq :+
 	jmp label_d8cc
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$20
 	sta $2006
 	lda #$ab
@@ -2237,7 +2237,7 @@ label_d8fa:
 	cmp temp
 	beq :+
 	jmp label_d8fa
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$21
 	sta $2006
 	lda #$01
@@ -2255,7 +2255,7 @@ label_d928:
 	cmp temp
 	beq :+
 	jmp label_d928
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$21
 	sta $2006
 	lda #$61
@@ -2273,7 +2273,7 @@ label_d956:
 	cmp temp
 	beq :+
 	jmp label_d956
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$21
 	sta $2006
 	lda #$a1
@@ -2291,7 +2291,7 @@ label_d984:
 	cmp temp
 	beq :+
 	jmp label_d984
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$21
 	sta $2006
 	lda #$e1
@@ -2309,7 +2309,7 @@ label_d9b2:
 	cmp temp
 	beq :+
 	jmp label_d9b2
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$22
 	sta $2006
 	lda #$21
@@ -2327,7 +2327,7 @@ label_d9e0:
 	cmp temp
 	beq :+
 	jmp label_d9e0
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$22
 	sta $2006
 	lda #$61
@@ -2345,7 +2345,7 @@ label_da0e:
 	cmp temp
 	beq :+
 	jmp label_da0e
-:	jsr label_db8e
+:	jsr sub_db8e
 	lda #$22
 	sta $2006
 	lda #$a1
@@ -2363,18 +2363,18 @@ label_da3c:
 	cmp temp
 	beq :+
 	jmp label_da3c
-:	jsr label_db09
+:	jsr sub_db09
 	jsr nesmus_shut_up
 	lda #$00
 	sta $2005
 	lda #$00
 	sta $2005
 	do
-		jsr label_db8e
+		jsr sub_db8e
 		jsr get_controller_buttons
 	while (button_start_down = #0)
 label_da7e:
-	jsr label_db8e
+	jsr sub_db8e
 	jsr get_controller_buttons
 	lda #$00
 	sta temp
@@ -2384,7 +2384,7 @@ label_da7e:
 	jmp label_da7e
 :	rts
 label_da95:
-	jsr label_dae9
+	jsr sub_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$08
@@ -2402,30 +2402,31 @@ label_daa7:
 	cmp temp
 	beq :+
 	jmp label_daa7
-:	jsr label_db09
+:	jsr sub_db09
 	jsr nesmus_shut_up
 	lda #$c8
 	sta ram_71
-	jsr label_dad2
+	jsr sub_dad2
 	rts
-label_dad2:
-	jsr label_db8e
+sub_dad2:
+	:
+	jsr sub_db8e
 	dec ram_71
 	lda #$00
 	sta temp
 	lda ram_71
 	cmp temp
 	beq :+
-	jmp label_dad2
+	jmp :-
 :	rts
 label_dae9:
-	jsr label_db80
-	jsr label_c2e0
-	jsr label_db8e
-	jsr label_dbda
-	jsr label_db8e
-	jsr label_dc26
-	jsr label_db8e
+	jsr sub_db80
+	jsr sub_c2e0
+	jsr sub_db8e
+	jsr sub_dbda
+	jsr sub_db8e
+	jsr sub_dc26
+	jsr sub_db8e
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	lda #$00
@@ -2470,21 +2471,21 @@ label_db44:
 	rts
 :	jmp label_db44
 label_db61:
-	jsr label_d629
-	jsr label_d5ed
+	jsr sub_d629
+	jsr sub_d5ed
 	lda #$03
 	sta APU_SPR_DMA
 	lda #$10
 	sta ram_22
 	rts ; FIXME
-	jsr label_db8e
+	jsr sub_db8e
 	lda #$30
 	sta $2000
 	lda #$1c
 	sta $2001
 	rts
-label_db80:
-	jsr label_db8e
+sub_db80:
+	jsr sub_db8e
 	lda #$20
 	sta PPU_CTRL1
 	lda #$1c

@@ -58,14 +58,14 @@ label_dd2d:
 	rts
 
 label_ddb0:
-	jsr label_c3eb
+	jsr sub_c3eb
 	for (lda #0 : sta ram_86, ram_86 <> #21, inc ram_86)
-		jsr label_db8e
-		jsr label_e679
-		jsr label_de0d
+		jsr sub_db8e
+		jsr sub_e679
+		jsr sub_de0d
 	next
 
-	jsr label_c3eb
+	jsr sub_c3eb
 	rts
 
 label_ddd8:
