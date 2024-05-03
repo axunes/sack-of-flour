@@ -28,7 +28,7 @@ clean:
 objlistntsc = $(foreach o,$(objlist),$(objdir)/$(o).o)
 
 $(title).nes: config.cfg $(objlistntsc)
-	$(LD65) -o $(title).nes --dbgfile $(title).dbg -C $^
+	$(LD65) -o $(title).nes --dbgfile $(title).dbg -m $(title).map.txt -C $^
 
 $(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc
 	$(AS65) -g $< -o $@

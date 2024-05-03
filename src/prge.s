@@ -2137,7 +2137,7 @@ label_d773:
 
 	rts
 
-label_d825:
+label_d825: ; do level title shit
 	jsr label_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
