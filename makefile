@@ -9,8 +9,6 @@
 # This file is offered as-is, without any warranty.
 #
 
-title = sack
-
 objlist = \
 	memory\
 	nmi\
@@ -37,22 +35,31 @@ objlist = \
 	level5\
 	unused\
 
-AS65 = ca65
-LD65 = ld65
-objdir = obj/nes
-srcdir = src
+title = sack
 
-.PHONY: run debug all dist zip clean
+objdir = obj
+srcdir = src
+incdir = inc
+
+.PHONY: all clean
 
 all: $(title).nes
 
-clean:
-	-rm $(objdir)/*.o $(objdir)/*.s $(objdir)/*.chr
-
 objlistntsc = $(foreach o,$(objlist),$(objdir)/$(o).o)
+dirlist := $(sort $(dir $(objlistntsc)))
 
 $(title).nes: config.cfg $(objlistntsc)
-	$(LD65) -o $(title).nes --dbgfile $(title).dbg -m $(title).map.txt -C $^
+	ld65 -o $(title).nes --dbgfile $(title).dbg -m $(title).map.txt -C $^
 
-$(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc
-	$(AS65) -g $< -o $@
+config.cfg: $(dirlist)
+
+$(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc $(srcdir)/macros.inc
+	ca65 $< -o $@ -g -I $(incdir) --bin-include-dir $(incdir)
+
+$(objdir)/$(title).o: $(srcdir)/header.inc
+
+$(dirlist):
+	mkdir -p $@
+
+clean:
+	-rm -rf $(objdir)
