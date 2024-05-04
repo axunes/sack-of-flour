@@ -2,7 +2,7 @@
 .include "nes.inc"
 
 .segment "PRGE"
-label_dbc3:
+sub_dbc3:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00

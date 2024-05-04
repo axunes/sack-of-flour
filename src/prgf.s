@@ -2,7 +2,7 @@
 .include "nes.inc"
 .include "ca65hl/ca65hl.inc"
 .segment "PRGF"
-label_e5eb: ; init music?
+sub_e5eb: ; init music?
 	lda #$00
 	sta ram_8e
 	lda #$00
@@ -64,6 +64,7 @@ label_e64c:
 	sta music_pointer+1
 	jmp label_e679
 label_e679:
+sub_e679:
 	lda #$00
 	sta temp
 	lda ram_8f
@@ -245,7 +246,7 @@ reset_enemies:
 	next
 	rts
 
-label_e816:
+sub_e816:
 	lda #$01
 	sta temp
 	lda ram_04
@@ -335,7 +336,7 @@ label_e85e:
 	sta enemy_pos_x,x
 	jsr sub_d5c3
 	rts
-label_e8ed: ; process enemies
+sub_e8ed: ; process enemies
 	lda #$ff
 	sta which_enemy
 label_e8f2:
@@ -380,7 +381,7 @@ label_e8f2:
 	bpl :+
 	jmp label_e8f2
 :	rts
-label_e960:
+sub_e960:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -564,9 +565,9 @@ label_ea9f:
 	beq :+
 	lda #$42
 	sta ram_6d
-	jmp label_f44f
+	jmp sub_f44f ; weird
 	rts
-:	jmp label_f3db
+:	jmp sub_f3db ; weird
 label_eb31:
 	rts
 label_eb32:
@@ -669,10 +670,10 @@ label_ebb7:
 	clc
 	adc ram_11
 	sta ram_6b
-	jmp label_f4f5
+	jmp sub_f4f5 ; weird
 label_ec11:
 	rts
-label_ec12:
+sub_ec12:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -843,15 +844,15 @@ label_ed11:
 	bne :+
 	lda #$40
 	sta ram_6d
-	jmp label_f44f
+	jmp sub_f44f ; weird
 	rts
-:	jmp label_f3db
+:	jmp sub_f3db ; weird
 label_edc1:
 	lda #$f5
 	sta ram_6c
-	jmp label_f3db
+	jmp sub_f3db ; weird
 	rts
-label_edca:
+sub_edca:
 	ldx which_enemy
 	lda ram_aa,x
 	sta ram_b3
@@ -927,7 +928,7 @@ label_ee74:
 		lda #$00
 		sta enemy_type,x
 		rts
-label_ee7e:
+sub_ee7e:
 	lda #$00
 	sta which_enemy
 label_ee83:
@@ -1136,7 +1137,7 @@ label_f067:
 	if (player_health = #MAX_HEALTH + 1) dec player_health
 	rts
 
-label_f083:
+sub_f083:
 	lda #$02
 	sta temp
 	lda ram_b5
@@ -1255,13 +1256,13 @@ label_f126:
 	beq :+
 	jmp label_f3c9
 :	jmp label_f2b4
-label_f193:
+sub_f193:
 	lda #$00
 	sta temp
 	lda ram_b5
 	cmp temp
 	beq :+
-	jmp label_f29b
+	jmp sub_f29b
 :	lda ram_b4
 	asl a
 	asl a
@@ -1301,7 +1302,7 @@ label_f193:
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp label_f29b
+	jmp sub_f29b
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1321,7 +1322,7 @@ label_f193:
 	cmp temp
 	beq :+
 	jmp label_f3cf
-:	jmp label_f29b
+:	jmp sub_f29b
 label_f22e:
 	lda ram_b6
 	sec
@@ -1349,7 +1350,7 @@ label_f22e:
 	lda ram_ba
 	cmp temp
 	bne :+
-	jmp label_f29b
+	jmp sub_f29b
 :	lda ram_63
 	pha
 	lda ram_65
@@ -1369,8 +1370,8 @@ label_f22e:
 	cmp temp
 	beq :+
 	jmp label_f3cf
-:	jmp label_f29b
-label_f29b:
+:	jmp sub_f29b
+sub_f29b:
 	dec ram_b5
 	lda #$ff
 	sta temp
@@ -1392,7 +1393,7 @@ label_f2b4:
 	sta ram_b5
 	inc ram_b4
 :	rts
-label_f2cd:
+sub_f2cd:
 	lda ram_b4
 	asl a
 	asl a
@@ -1513,7 +1514,7 @@ label_f3d5:
 	lda #$01
 	sta ram_b7
 	rts
-label_f3db:
+sub_f3db:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1568,7 +1569,7 @@ label_f3db:
 	adc #$08
 	sta ram_22
 	rts
-label_f44f:
+sub_f44f:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1647,7 +1648,7 @@ label_f4dc:
 	sta ram_6e
 	jsr sub_f44f
 	rts
-label_f4f5:
+sub_f4f5:
 	ldx ram_22
 	lda ram_6c
 	sta $0300,x
@@ -1757,7 +1758,7 @@ label_f52f:
 	adc #$0c
 	sta ram_22
 	rts
-	label_f5dd:
+sub_f5dd:
 	jsr sub_db80
 	jsr sub_db8e
 	jsr sub_c31d
@@ -1856,7 +1857,7 @@ label_f698:
 :	jmp label_f61d
 label_f6d2:
 	rts
-label_f6d3:
+sub_f6d3:
 	jsr sub_dc26
 	jsr sub_db8e
 	jsr sub_f71c
@@ -1865,7 +1866,7 @@ label_f6d3:
 	jsr sub_db8e
 	jsr sub_db8e
 	rts
-label_f6e9:
+sub_f6e9:
 	; FIXME
 	lda #$00
 	sta $2003
@@ -1892,7 +1893,7 @@ label_f6e9:
 	cpy #$00
 	bne :-
 	rts
-label_f71c:
+sub_f71c:
 	jsr sub_db8e
 	lda #$20
 	sta PPU_VRAM_ADDR2
@@ -1954,7 +1955,7 @@ label_f71c:
 	cpx #$40
 	bne :-
 	rts
-label_f7a8:
+sub_f7a8:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00
@@ -1981,15 +1982,15 @@ label_f7b7:
 	cpy #$00
 	bne :-
 	rts
-label_f7e2:
+sub_f7e2:
 :	lda PPU_STATUS
 	bpl :-
 	rts
-label_f7e8:
+sub_f7e8:
 :	lda PPU_STATUS
 	bmi :-
 	rts
-label_f7ee:
+sub_f7ee:
 :	lda PPU_STATUS
 	and #$10
 	bne :-
@@ -2023,7 +2024,7 @@ label_f7f7:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
-label_f836:
+sub_f836:
 	jsr sub_f8b1
 	lda #$0a
 	sta temp
@@ -2075,7 +2076,7 @@ label_f85d:
 :	lda #$00
 	sta konami_code_correct_presses
 	rts
-label_f8b1:
+sub_f8b1:
 	jsr get_controller_buttons
 	lda button_a_down
 	sta button_mask

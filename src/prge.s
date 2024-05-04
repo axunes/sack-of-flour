@@ -54,7 +54,7 @@ init_ram:
 	sta ram_27
 	rts
 
-label_c236:
+sub_c236:
 	lda #$00
 	sta APU_CHANCTRL
 	lda #$1f
@@ -70,8 +70,7 @@ nesmus_shut_up:
 	cpx #16
 	bne :-
 	rts
-
-label_c24e:
+sub_c24e:
 	lda #$0f
 	sta temp
 	lda ram_22
@@ -82,8 +81,8 @@ label_c24e:
 	lda #$f5
 	sta $0300,x
 	inc ram_22
-	jmp label_c24e
-	label_c26a:
+	jmp sub_c24e
+	sub_c26a:
 		lda ram_06
 		asl a
 		sta ram_28
@@ -98,7 +97,7 @@ label_c24e:
 		adc #$01
 		sta $8001
 		rts
-label_c28b:
+sub_c28b:
 	lda #$00
 	sta $8000
 	lda #$08
@@ -162,7 +161,7 @@ sub_c2e0: ; mapper shit
 	lda #$07
 	sta $8001
 	rts
-label_c31d:
+sub_c31d:
 	lda #$00
 	sta $8000
 	lda #$00
@@ -188,10 +187,10 @@ label_c31d:
 	lda #$03
 	sta $8001
 	rts
-	label_c35a:
-		jmp label_c31d
+	sub_c35a:
+		jmp sub_c31d ; weird
 		rts
-label_c35e:
+sub_c35e:
 	jsr sub_dc6b
 	jsr sub_db8e
 	jsr sub_dbc3
@@ -243,7 +242,7 @@ label_c3c1:
 	sta PPU_VRAM_ADDR1
 	rts
 
-label_c3eb:
+sub_c3eb:
 	jsr sub_db8e
 	
 	if (ram_53 = #1)
@@ -259,7 +258,7 @@ label_c3eb:
 	jsr sub_c44b
 	rts
 
-label_c414:
+sub_c414:
 	lda #$55
 	sta ram_54
 	lda #$00
@@ -283,7 +282,7 @@ label_c42d: ; for
 	rts
 :	jmp label_c42d
 	rts
-label_c44b:
+sub_c44b:
 	lda #$01
 	clc
 	adc ram_53
@@ -306,7 +305,7 @@ label_c463: ; for
 	rts
 :	jmp label_c463
 	rts
-label_c47d:
+sub_c47d:
 	lda #$aa
 	sta ram_54
 	lda #$02
@@ -437,7 +436,7 @@ label_c505:
 
 	rts
 
-label_c5aa:
+sub_c5aa:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -543,7 +542,7 @@ label_c5fb:
 
 	rts
 
-label_c6a0:
+sub_c6a0:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -585,7 +584,7 @@ label_c6dd:
 
 	rts
 
-label_c706:
+sub_c706:
 	lda ram_52
 	and #$07
 	sta ram_55
@@ -690,7 +689,7 @@ label_c706:
 	nop
 	rts
 
-label_c7ec: ; giant player process routine I think
+sub_c7ec: ; giant player process routine I think
 	lda #$00
 	sta ram_58
 	lda #$00
@@ -836,7 +835,7 @@ pause_game:
 	sta $4015
 	rts
 
-label_c9e2:
+sub_c9e2:
 	if (player_pos_x1 = $805c) jmp label_ca36
 	if (player_pos_x1 = $805d) jmp label_ca36
 	if (player_pos_x1 = $805e) jmp label_ca36
@@ -853,7 +852,7 @@ label_ca1a:
 	cmp temp
 	beq :+
 	jmp label_ca1a
-:	jmp label_cab7
+:	jmp sub_cab7
 label_ca36:
 	jsr sub_dc26
 label_ca39:
@@ -874,7 +873,7 @@ label_ca39:
 	sta player_position_y_again
 	rts
 
-label_ca72:
+sub_ca72:
 	if (i_frames <> #0) rts
 
 	lda #$96
@@ -900,11 +899,11 @@ label_ca72:
 	
 	rts
 
-label_cab7:
+sub_cab7:
 	; take a life
 	dec player_lives
 	rts
-label_cabb:
+sub_cabb:
 	jsr nesmus_shut_up
 	jsr sub_dbc3
 	jsr sub_dbda
@@ -986,7 +985,7 @@ label_cb75:
 	jsr sub_d2bb
 	rts
 
-label_cb8c:
+sub_cb8c:
 	ldx player_velocity
 	lda player_gravity_table, x
 	sta ram_62
@@ -999,13 +998,13 @@ label_cb8c:
 	jmp label_d023
 	rts
 
-label_cbaa:
+sub_cbaa:
 	lda #$03
 	sta temp
 	lda player_pos_x2
 	cmp temp
 	bpl :+
-	jmp label_d204
+	jmp sub_d204 ; weird
 :	lda player_pos_x1
 	asl a
 	asl a
@@ -1029,7 +1028,7 @@ label_cbaa:
 	
 	if (ram_64 & ram_54 <> #0) rts
 	
-	if (ram_12 <> #0) jmp label_d204
+	if (ram_12 <> #0) jmp sub_d204
 	
 	lda ram_63
 	clc
@@ -1040,7 +1039,7 @@ label_cbaa:
 
 	if (ram_64 & ram_54 <> #0) rts
 	
-	jmp label_d204
+	jmp sub_d204
 label_cc2b:
 	lda #$7f
 	sta temp
@@ -1063,7 +1062,7 @@ label_cc2b:
 
 	if (ram_64 & ram_54 <> #0) rts
 
-	if (ram_12 <> #0) jmp label_d204
+	if (ram_12 <> #0) jmp sub_d204
 
 	lda ram_66
 	sec
@@ -1074,7 +1073,7 @@ label_cc2b:
 
 	if (ram_64 & ram_54 <> #0) rts
 	
-	jmp label_d204
+	jmp sub_d204
 label_cc97:
 	lda player_position_y_again
 	sec
@@ -1094,7 +1093,7 @@ label_cc97:
 
 	if (ram_64 & ram_54 <> #0) rts
 
-	if (ram_12 <> #0) jmp label_d204
+	if (ram_12 <> #0) jmp sub_d204
 
 	lda ram_66
 	sec
@@ -1108,8 +1107,8 @@ label_cc97:
 	jsr sub_d204
 	rts
 
-label_ccfa:
-	if (player_pos_x2 <> #0) jmp label_d255
+sub_ccfa:
+	if (player_pos_x2 <> #0) jmp sub_d255
 
 	lda player_pos_x1
 	sec
@@ -1134,7 +1133,7 @@ label_ccfa:
 	
 	if (ram_67 & ram_54 <> #0) rts
 
-	if (ram_12 <> #0) jmp label_d255
+	if (ram_12 <> #0) jmp sub_d255
 
 	lda ram_63
 	clc
@@ -1145,7 +1144,7 @@ label_ccfa:
 
 	if (ram_67 & ram_54 <> #0) rts
 
-	jmp label_d255
+	jmp sub_d255
 label_cd7b:
 	lda #$7f
 	sta temp
@@ -1168,7 +1167,7 @@ label_cd7b:
 
 	if (ram_67 & ram_54 <> #0) rts
 
-	if (ram_12 <> #0) jmp label_d255
+	if (ram_12 <> #0) jmp sub_d255
 
 	lda ram_66
 	sec
@@ -1179,7 +1178,7 @@ label_cd7b:
 
 	if (ram_67 & ram_54 <> #0) rts
 
-	jmp label_d255
+	jmp sub_d255
 label_cde7:
 	lda player_position_y_again
 	clc
@@ -1199,7 +1198,7 @@ label_cde7:
 
 	if (ram_67 & ram_54 <> #0) rts
 
-	if (ram_12 <> #0) jmp label_d255
+	if (ram_12 <> #0) jmp sub_d255
 	
 	lda ram_66
 	sec
@@ -1210,7 +1209,7 @@ label_cde7:
 
 	if (ram_67 & ram_54 <> #0) rts
 
-	jmp label_d255
+	jmp sub_d255
 	rts
 
 label_ce4a:
@@ -1579,7 +1578,7 @@ label_d1e1:
 	sta ram_5d
 	rts
 
-label_d204: ; LOOK
+sub_d204: ; LOOK
 	if (player_pos_x1 = $8058) rts
 	if (player_pos_x1 = $8059)
 		lda #$01
@@ -1597,7 +1596,7 @@ label_d204: ; LOOK
 	if (player_pos_x1 - player_chunk_pos_again > #10) jsr sub_d6e5
 	rts
 
-label_d255: ; LOOK
+sub_d255: ; LOOK
 	if (player_pos_x1 = #0 && player_pos_x2 <= #8) rts
 	if (player_pos_x1 = $805a && player_pos_x2 <= #1) rts
 
@@ -1613,7 +1612,7 @@ label_d255: ; LOOK
 
 	rts
 	
-label_d2bb: ; process player sprites, store in oam
+sub_d2bb: ; process player sprites, store in oam
 	lda #$20
 	sta player_sprite
 	inc player_anim_timer
@@ -1861,7 +1860,7 @@ label_d43a:
 	adc player_offset_x
 	sta $0300,x
 	rts
-label_d4d9:
+sub_d4d9:
 	lda #$00
 	sta idx
 label_d4de:
@@ -1939,7 +1938,7 @@ get_controller_buttons:
 	and #$01
 	sta button_right_down
 	rts
-label_d584:
+sub_d584:
 	lda #$9f
 	sta APU_PULSE2CTRL
 	lda #$8c
@@ -1968,7 +1967,7 @@ label_d584:
 	lda #$4b
 	sta $4003
 	rts
-label_d5c3:
+sub_d5c3:
 	lda #$0b
 	sta APU_NOISECTRL
 	lda #$ff
@@ -1978,7 +1977,7 @@ label_d5c3:
 	lda #$08
 	sta APU_NOISEFREQ2
 	rts
-label_d5d8:
+sub_d5d8:
 	; FIXME
 	lda #$0f
 	sta $400C
@@ -1989,7 +1988,7 @@ label_d5d8:
 	lda #$08
 	sta $400F
 	rts
-label_d5ed:
+sub_d5ed:
 	lda #$00
 	sta temp
 	lda player_chunk_pos
@@ -2012,7 +2011,7 @@ label_d613:
 	mb PPU_VRAM_ADDR1 = #0
 	rts
 
-label_d629:
+sub_d629:
 	if (ram_58 = #0) rts
 	if (ram_58 >= #6) jmp label_d696
 
@@ -2045,7 +2044,7 @@ label_d696:
 	sta ram_58
 	rts
 
-label_d6e5:
+sub_d6e5:
 	if (player_chunk_pos_again = $805b)
 		lda #$01
 		sta ram_0b
@@ -2091,7 +2090,7 @@ label_d6e5:
 
 	rts
 	
-label_d773:
+sub_d773:
 	if (player_chunk_pos = #0 && player_chunk_pos_fine <= #1) rts
 
 	if (player_chunk_pos_again = $805b) rts
@@ -2137,7 +2136,7 @@ label_d773:
 
 	rts
 
-label_d825: ; do level title shit
+sub_d825: ; do level title shit
 	jsr sub_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -2383,7 +2382,7 @@ label_da7e:
 	beq :+
 	jmp label_da7e
 :	rts
-label_da95:
+sub_da95:
 	jsr sub_dae9
 	lda #$21
 	sta PPU_VRAM_ADDR2
@@ -2419,7 +2418,7 @@ sub_dad2:
 	beq :+
 	jmp :-
 :	rts
-label_dae9:
+sub_dae9:
 	jsr sub_db80
 	jsr sub_c2e0
 	jsr sub_db8e
@@ -2432,7 +2431,7 @@ label_dae9:
 	lda #$00
 	sta PPU_VRAM_ADDR1
 	rts
-label_db09:
+sub_db09:
 	lda #$3f
 	sta PPU_VRAM_ADDR2
 	lda #$00
@@ -2470,7 +2469,7 @@ label_db44:
 	bne :+
 	rts
 :	jmp label_db44
-label_db61:
+sub_db61:
 	jsr sub_d629
 	jsr sub_d5ed
 	lda #$03

@@ -2,7 +2,7 @@
 .include "nes.inc"
 .segment "PRGE"
 
-label_dbda:
+sub_dbda:
 	jsr sub_db8e
 	lda #$20
 	sta PPU_VRAM_ADDR2

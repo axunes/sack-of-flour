@@ -114,7 +114,7 @@ nmi:
 		jsr sub_cabb
 	forever
 
-label_c17f:
+sub_c17f:
 	lda ram_04
 	pha
 	lda #$0d

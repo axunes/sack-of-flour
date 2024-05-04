@@ -6,7 +6,7 @@ setLongBranch -, -
 
 .segment "PRGE"
 
-label_dc92:
+sub_dc92:
 	for (lda #0 : sta ram_7f, ram_7f <> #12, inc ram_7f)
 		ldx ram_7f
 		lda ram_72,x
@@ -41,7 +41,7 @@ label_dc92:
 
 
 
-label_dd2d:
+sub_dd2d:
 	for (lda #0 : sta ram_83, ram_83 <= ram_7e, inc ram_83)
 		ldx ram_83
 		lda $8044,x
