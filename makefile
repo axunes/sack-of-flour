@@ -14,8 +14,16 @@ objlist = \
 	nmi\
 	sack\
 	init_ram\
-	c326\
+	c236\
 	nesmus_shut_up\
+	c24e\
+	c26a\
+	c28b\
+	c2e0\
+	c31d\
+	c35e\
+	c3eb\
+	c414\
 	prge\
 	db8e\
 	dbc3\

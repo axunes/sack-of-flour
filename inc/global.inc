@@ -17,7 +17,7 @@ MAX_HEALTH = 5
 .global label_d8b7, sub_c35a, sub_c236, sub_db8e
 .global sub_d5c3, sub_d5ed, nesmus_shut_up, reset_enemies, sub_c3eb, sub_da95, sub_cab7
 .global sub_c9e2, sub_db61, sub_e816, sub_e679, sub_c24e
-.global sub_e8ed, sub_d2bb, sub_c7ec, sub_cabb, get_controller_buttons, sub_dc71, label_e6eb
+.global sub_e8ed, sub_d2bb, sub_c7ec, sub_cabb, get_controller_buttons, sub_dc71
 .global sub_c26a, init_ram, sub_dc26, sub_dbda, sub_f5dd, sub_e5eb
 .global sub_dc92, sub_dd2d, sub_dc6b, sub_dc1b, sub_dbc3
 .global game_over_text, player_gravity_table, tile_shit_1, tile_shit_2, tile_shit_3, tile_shit_4
@@ -30,6 +30,7 @@ MAX_HEALTH = 5
 .global sub_c414
 .global sub_c47d
 .global sub_c44b
+.global sub_c4b4
 .global sub_d204
 .global sub_d255
 .global sub_cbaa
@@ -42,6 +43,7 @@ MAX_HEALTH = 5
 .global sub_c35e
 .global sub_d6e5
 .global sub_c28b
+.global sub_c2e0
 .global sub_d773
 .global sub_dae9
 .global sub_db09
