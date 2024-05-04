@@ -24,6 +24,20 @@ objlist = \
 	c35e\
 	c3eb\
 	c414\
+	c44b\
+	c47d\
+	c4b4\
+	c5aa\
+	c6a0\
+	c706\
+	c7ec\
+	pause_game\
+	c9e2\
+	cabb\
+	cb8c\
+	cbaa\
+	ccfa\
+	ce4a\
 	prge\
 	db8e\
 	dbc3\
@@ -64,7 +78,7 @@ config.cfg: $(dirlist)
 $(objdir)/%.o: $(srcdir)/%.s $(incdir)/nes.inc $(incdir)/global.inc $(incdir)/macros.inc
 	ca65 $< -o $@ -g -I $(incdir) --bin-include-dir $(incdir)
 
-$(objdir)/$(title).o: $(incdir)/header.inc
+$(objdir)/sack.o: $(incdir)/header.inc
 
 $(dirlist):
 	mkdir -p $@

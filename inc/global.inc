@@ -31,6 +31,9 @@ MAX_HEALTH = 5
 .global sub_c47d
 .global sub_c44b
 .global sub_c4b4
+.global pause_game
+.global sub_d023
+.global sub_ce4a
 .global sub_d204
 .global sub_d255
 .global sub_cbaa

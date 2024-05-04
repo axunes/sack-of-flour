@@ -21,10 +21,10 @@ sub_dc92:
 			sta ram_82
 
 			if (player_position_y_again - #$20 >> 4 = ram_82), long
-				if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp label_ddd8
+				if (player_pos_x1 = ram_81 && player_pos_x2 <= #6) jmp sub_ddd8
 
 				if (player_pos_x1 + #1 = ram_81)
-					if (player_pos_x2 >= #10) jmp label_ddd8
+					if (player_pos_x2 >= #10) jmp sub_ddd8
 				endif
 			endif
 		endif
@@ -51,13 +51,13 @@ sub_dd2d:
 		sta ram_85
 
 		if (player_position_y_again - #2 >> 4 = ram_85), long
-			if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp label_ddb0
-			if (player_pos_x1 + #1 = ram_84 && player_pos_x2 >= #12) jmp label_ddb0
+			if (player_pos_x1 = ram_84 && player_pos_x2 <= #4) jmp sub_ddb0
+			if (player_pos_x1 + #1 = ram_84 && player_pos_x2 >= #12) jmp sub_ddb0
 		endif
 	next
 	rts
 
-label_ddb0:
+sub_ddb0:
 	jsr sub_c3eb
 	for (lda #0 : sta ram_86, ram_86 <> #21, inc ram_86)
 		jsr sub_db8e
@@ -68,7 +68,7 @@ label_ddb0:
 	jsr sub_c3eb
 	rts
 
-label_ddd8:
+sub_ddd8:
 	ldx ram_7f
 	lda #$01
 	sta ram_72,x
