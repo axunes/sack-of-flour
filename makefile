@@ -11,7 +11,7 @@
 
 title = sack
 
-objlist = memory nmi sack prge db8e dbc3 dbda dc1b dc26 irq dc6b dc71 dc92 de0d prgf level1 level2 level3 level4 level5 unused
+objlist = memory nmi sack init_ram prge db8e dbc3 dbda dc1b dc26 irq dc6b dc71 dc92 de0d prgf level1 level2 level3 level4 level5 unused
 
 AS65 = ca65
 LD65 = ld65
