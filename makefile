@@ -53,10 +53,10 @@ $(title).nes: config.cfg $(objlistntsc)
 
 config.cfg: $(dirlist)
 
-$(objdir)/%.o: $(srcdir)/%.s $(srcdir)/nes.inc $(srcdir)/global.inc $(srcdir)/macros.inc
+$(objdir)/%.o: $(srcdir)/%.s $(incdir)/nes.inc $(incdir)/global.inc $(incdir)/macros.inc
 	ca65 $< -o $@ -g -I $(incdir) --bin-include-dir $(incdir)
 
-$(objdir)/$(title).o: $(srcdir)/header.inc
+$(objdir)/$(title).o: $(incdir)/header.inc
 
 $(dirlist):
 	mkdir -p $@

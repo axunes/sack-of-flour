@@ -211,10 +211,10 @@ setLongBranch -, -
 	.addr nmi, reset, irq
 
 .segment "CHR0"
-	.incbin "0.chr"
+	.incbin "assets/0.chr"
 .segment "CHR1"
-	.incbin "1.chr"
+	.incbin "assets/1.chr"
 .segment "CHR2"
-	.incbin "2.chr"
+	.incbin "assets/2.chr"
 .segment "CHR3"
-	.incbin "3.chr"
+	.incbin "assets/3.chr"
