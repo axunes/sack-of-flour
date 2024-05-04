@@ -6,22 +6,6 @@ setLongBranch -, -
 
 .segment "PRGE"
 
-sub_c236:
-	lda #$00
-	sta APU_CHANCTRL
-	lda #$1f
-	sta APU_CHANCTRL
-	rts
-
-nesmus_shut_up:
-; zero out all apu registers
-	ldx #0
-	lda #0
-:	sta APU_PULSE1CTRL,x
-	inx
-	cpx #16
-	bne :-
-	rts
 sub_c24e:
 	lda #$0f
 	sta temp
