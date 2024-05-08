@@ -60,7 +60,7 @@ sub_dd2d:
 sub_ddb0:
 	jsr sub_c3eb
 	for (lda #0 : sta ram_86, ram_86 <> #21, inc ram_86)
-		jsr sub_db8e
+		jsr vsync
 		jsr sub_e679
 		jsr sub_de0d
 	next

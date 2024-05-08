@@ -28,7 +28,7 @@ sub_d825: ; do level title shit
 	inx
 	cpx #$20
 	bne :-
-	jsr sub_db8e
+	jsr vsync
 	lda player_lives
 	sta idx
 	lda #$22

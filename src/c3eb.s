@@ -7,7 +7,7 @@ setLongBranch -, -
 .segment "PRGE"
 
 sub_c3eb:
-	jsr sub_db8e
+	jsr vsync
 	
 	if (ram_53 = #1)
 		jsr sub_c47d

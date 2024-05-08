@@ -39,7 +39,7 @@ sub_cabb:
 	lda #$00
 	sta ram_61
 label_cb0c:
-	jsr sub_db8e
+	jsr vsync
 	inc ram_61
 	lda #$78
 	sta temp
@@ -79,7 +79,7 @@ label_cb4e:
 	jmp label_cb4e
 label_cb75:
 	jsr sub_c28b
-	jsr sub_db8e
+	jsr vsync
 	jsr init_enemies
 	lda #$00
 	sta ram_5d

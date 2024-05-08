@@ -9,7 +9,7 @@ setLongBranch -, -
 sub_d8b7:
 	; FIXME
 	jsr sub_dae9
-	jsr sub_db8e
+	jsr vsync
 	lda #$20
 	sta $2006
 	lda #$48
@@ -27,7 +27,7 @@ label_d8cc:
 	cmp temp
 	beq :+
 	jmp label_d8cc
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$20
 	sta $2006
 	lda #$ab
@@ -45,7 +45,7 @@ label_d8fa:
 	cmp temp
 	beq :+
 	jmp label_d8fa
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$21
 	sta $2006
 	lda #$01
@@ -63,7 +63,7 @@ label_d928:
 	cmp temp
 	beq :+
 	jmp label_d928
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$21
 	sta $2006
 	lda #$61
@@ -81,7 +81,7 @@ label_d956:
 	cmp temp
 	beq :+
 	jmp label_d956
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$21
 	sta $2006
 	lda #$a1
@@ -99,7 +99,7 @@ label_d984:
 	cmp temp
 	beq :+
 	jmp label_d984
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$21
 	sta $2006
 	lda #$e1
@@ -117,7 +117,7 @@ label_d9b2:
 	cmp temp
 	beq :+
 	jmp label_d9b2
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$22
 	sta $2006
 	lda #$21
@@ -135,7 +135,7 @@ label_d9e0:
 	cmp temp
 	beq :+
 	jmp label_d9e0
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$22
 	sta $2006
 	lda #$61
@@ -153,7 +153,7 @@ label_da0e:
 	cmp temp
 	beq :+
 	jmp label_da0e
-:	jsr sub_db8e
+:	jsr vsync
 	lda #$22
 	sta $2006
 	lda #$a1
@@ -178,11 +178,11 @@ label_da3c:
 	lda #$00
 	sta $2005
 	do
-		jsr sub_db8e
+		jsr vsync
 		jsr get_controller_buttons
 	while (button_start_down = #0)
 label_da7e:
-	jsr sub_db8e
+	jsr vsync
 	jsr get_controller_buttons
 	lda #$00
 	sta temp

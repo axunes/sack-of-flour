@@ -8,9 +8,9 @@ reset:
 nmi:
 	jsr sub_c35a
 	jsr sub_c236
-	jsr sub_db8e
-	jsr sub_db8e
-	jsr sub_f5dd
+	jsr vsync
+	jsr vsync
+	jsr sub_f5dd ; uncomment and title screen skips
 	jsr sub_dbda
 	lda #$30
 	sta PPU_CTRL1
@@ -18,7 +18,7 @@ nmi:
 	sta PPU_CTRL2
 	jsr sub_dc26
 	jsr init_ram
-	jsr sub_db8e
+	jsr vsync
 	lda #$30
 	sta PPU_CTRL1
 	lda #$1c
@@ -32,23 +32,23 @@ nmi:
 	lda #$03
 	sta player_lives
 	jsr sub_dc71
-	jsr sub_cabb
+	jsr sub_cabb ; commenting this just makes shit not load everywhere
 
 	do
 		jsr get_controller_buttons
-		jsr sub_c7ec
-		jsr sub_d2bb
-		jsr sub_e8ed
-		jsr sub_c24e
+		jsr sub_c7ec ; commenting makes sack not appear
+		jsr sub_d2bb ; commenting makes sack not appear
+		jsr sub_e8ed ; commenting makes hearts not spawn
+		jsr sub_c24e ; commenting fucks with enemy unloading
 
 		; if player_health is 0, KILL?
 		; ^ I guess that's wrong
 		if (player_health <> #0) jsr sub_e679
 
-		jsr sub_c17f
-		jsr sub_e816
-		jsr sub_db8e
-		jsr sub_db61
+		jsr sub_c17f ; commenting makes enemies not spawn (?)
+		jsr sub_e816 ; commenting makes enemies not spawn (?)
+		jsr vsync ; commenting makes game too fast
+		jsr sub_db61 ; commenting makes tiles not load
 
 		if (ram_0b <> #0) goto label_c0e9, long
 
@@ -84,7 +84,7 @@ nmi:
 		jsr nesmus_shut_up
 
 		for (lda #$1e : sta idx, idx <> #0, dec idx)
-			jsr sub_db8e
+			jsr vsync
 			jsr sub_d5ed
 		next
 
@@ -92,15 +92,16 @@ nmi:
 		lda #$01
 		sta player_fall_state
 
+		; yeet player upwards into next level
 		do
-			jsr sub_db8e
+			jsr vsync
 			jsr sub_d2bb
 			jsr sub_db61
 			mb player_position_y_again := player_position_y_again - #03
 		while (player_position_y_again & #$f8 <> #0) ; FIXME, combine and & sbc
 			
 		for (lda #$1e : sta idx, idx <> #0, dec idx)
-			jsr sub_db8e
+			jsr vsync
 			jsr sub_d5ed
 		next
 

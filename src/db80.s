@@ -7,7 +7,7 @@ setLongBranch -, -
 .segment "PRGE"
 
 sub_db80:
-	jsr sub_db8e
+	jsr vsync
 	lda #$20
 	sta PPU_CTRL1
 	lda #$1c

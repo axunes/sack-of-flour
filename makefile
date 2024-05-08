@@ -59,7 +59,7 @@ objlist = \
 	db09\
 	db61\
 	db80\
-	db8e\
+	vsync\
 	dbc3\
 	dbda\
 	dc1b\
@@ -69,6 +69,7 @@ objlist = \
 	dc71\
 	dc92\
 	de0d\
+	e5eb\
 	prgf\
 	level1\
 	level2\

@@ -8,10 +8,10 @@ setLongBranch -, -
 
 sub_c35e:
 	jsr sub_dc6b
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_dbc3
 	jsr sub_dc26
-	jsr sub_db8e
+	jsr vsync
 	ldx #$00
 	lda #$f5
 :	
@@ -27,15 +27,15 @@ sub_c35e:
 	sta ram_52
 	lda #$0b
 	sta ram_29
-	jsr sub_db8e
+	jsr vsync
 	lda #$07
 	sta ram_52
 label_c397:
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c4b4
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c5aa
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c6a0
 
 	dec ram_52
@@ -44,13 +44,13 @@ label_c397:
 	lda #$00
 	sta ram_52
 label_c3c1:
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c706
 	inc ram_52
 
 	if (ram_52 <> #5) jmp label_c3c1
 	
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c414
 	lda #$00
 	sta PPU_VRAM_ADDR1

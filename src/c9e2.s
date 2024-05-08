@@ -14,7 +14,7 @@ sub_c9e2:
 	lda #$00 ; for
 	sta idx
 label_ca1a:
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_d5ed
 	inc idx
 	lda #$1e
@@ -32,7 +32,7 @@ label_ca39:
 		jsr sub_d204
 		jsr sub_d204
 		jsr sub_d204
-		jsr sub_db8e
+		jsr vsync
 
 		if (ram_58 <> #0) jsr sub_d629
 		

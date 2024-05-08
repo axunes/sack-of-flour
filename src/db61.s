@@ -16,7 +16,7 @@ sub_db61:
 	rts ; FIXME
 	
 	; dead code?
-	jsr sub_db8e
+	jsr vsync
 	lda #$30
 	sta $2000
 	lda #$1c

@@ -8,7 +8,7 @@ setLongBranch -, -
 
 sub_dad2:
 	:
-	jsr sub_db8e
+	jsr vsync
 	dec ram_71
 	lda #$00
 	sta temp

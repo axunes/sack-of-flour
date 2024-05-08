@@ -1,35 +1,10 @@
 .include "global.inc"
 .include "nes.inc"
 .include "ca65hl/ca65hl.inc"
+
+setLongBranch -, -
+
 .segment "PRGF"
-sub_e5eb: ; init music?
-	lda #$00
-	sta ram_8e
-	lda #$00
-	sta ram_8f
-	lda #$1f
-	sta APU_CHANCTRL
-	lda #$00
-	sta ram_90
-	lda ram_07
-	asl a
-	asl a
-	sta ram_91
-	ldx ram_91
-	lda music_start,x
-	sta ram_88+0
-	sta music_pointer
-	inx
-	lda music_start,x
-	sta ram_88+1
-	sta music_pointer+1
-	inx
-	lda music_start,x
-	sta ram_8a+0
-	inx
-	lda music_start,x
-	sta ram_8a+1
-	rts
 
 label_e62c:
 	iny
@@ -1760,12 +1735,12 @@ label_f52f:
 	rts
 sub_f5dd:
 	jsr sub_db80
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_c31d
 	jsr sub_dbc3
 	jsr sub_dbda
-	jsr sub_db8e
-	jsr sub_db8e
+	jsr vsync
+	jsr vsync
 	jsr sub_f6d3
 	lda #$00
 	sta ram_bc
@@ -1859,12 +1834,12 @@ label_f6d2:
 	rts
 sub_f6d3:
 	jsr sub_dc26
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_f71c
-	jsr sub_db8e
+	jsr vsync
 	jsr sub_f7a8
-	jsr sub_db8e
-	jsr sub_db8e
+	jsr vsync
+	jsr vsync
 	rts
 sub_f6e9:
 	; FIXME
@@ -1894,7 +1869,7 @@ sub_f6e9:
 	bne :-
 	rts
 sub_f71c:
-	jsr sub_db8e
+	jsr vsync
 	lda #$20
 	sta PPU_VRAM_ADDR2
 	lda #$c4
@@ -1905,7 +1880,7 @@ sub_f71c:
 	inx
 	cpx #$80
 	bne :-
-	jsr sub_db8e
+	jsr vsync
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$44
@@ -1916,7 +1891,7 @@ sub_f71c:
 	inx
 	cpx #$b9
 	bne :-
-	jsr sub_db8e
+	jsr vsync
 	lda #$21
 	sta PPU_VRAM_ADDR2
 	lda #$ab
@@ -1927,7 +1902,7 @@ sub_f71c:
 	inx
 	cpx #$80
 	bne :-
-	jsr sub_db8e
+	jsr vsync
 	lda #$22
 	sta PPU_VRAM_ADDR2
 	lda #$c9
@@ -1938,7 +1913,7 @@ sub_f71c:
 	inx
 	cpx #$0d
 	bne :-
-	jsr sub_db8e
+	jsr vsync
 	lda #$23
 	sta PPU_VRAM_ADDR2
 	lda #$c0
