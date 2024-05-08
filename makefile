@@ -52,7 +52,13 @@ objlist = \
 	d6e5\
 	d773\
 	d825\
-	prge\
+	d8b7\
+	da95\
+	dad2\
+	dae9\
+	db09\
+	db61\
+	db80\
 	db8e\
 	dbc3\
 	dbda\
