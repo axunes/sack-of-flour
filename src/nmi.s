@@ -107,7 +107,7 @@ nmi:
 		jmp :+
 		:
 
-		if (inc ram_06 : ram_06 = #05) goto label_d8b7, long
+		if (inc ram_06 : ram_06 = #05) goto sub_d8b7, long
 		jsr sub_c26a
 		jsr init_ram
 		jsr sub_dc71

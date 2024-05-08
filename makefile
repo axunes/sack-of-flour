@@ -38,6 +38,20 @@ objlist = \
 	cbaa\
 	ccfa\
 	ce4a\
+	d023\
+	d204\
+	d255\
+	d2bb\
+	d4d9\
+	get_controller_buttons\
+	d584\
+	d5c3\
+	d5d8\
+	d5ed\
+	d629\
+	d6e5\
+	d773\
+	d825\
 	prge\
 	db8e\
 	dbc3\
