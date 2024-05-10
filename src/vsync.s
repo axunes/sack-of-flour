@@ -2,7 +2,7 @@
 .include "nes.inc"
 
 .segment "PRGE"
-vsync: ; this suckss
+vsync: ; this sucks
 :	lda PPU_STATUS
 	bpl :-
 :	lda PPU_STATUS
