@@ -69,7 +69,7 @@ objlist = \
 	dc71\
 	dc92\
 	de0d\
-	e5eb\
+	nesmus\
 	prgf\
 	level1\
 	level2\
