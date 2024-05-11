@@ -71,6 +71,10 @@ MAX_HEALTH = 5
 .global sub_f7e8
 .global sub_f6d3
 .global sub_f44f
+.global label_f067
+.global label_f52f
+.global label_f4c3
+.global label_f4dc
 
 .global ram_00
 .global music_pointer

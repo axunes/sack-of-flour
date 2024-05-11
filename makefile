@@ -70,6 +70,7 @@ objlist = \
 	dc92\
 	de0d\
 	nesmus\
+	enemy\
 	prgf\
 	level1\
 	level2\
