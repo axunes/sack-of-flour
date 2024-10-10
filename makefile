@@ -14,7 +14,7 @@ objlist = \
 	nmi\
 	sack\
 	init_ram\
-	c236\
+	enable_sound_channels\
 	nesmus_shut_up\
 	c24e\
 	c26a\

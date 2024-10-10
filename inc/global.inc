@@ -16,7 +16,7 @@ MAX_HEALTH = 5
 .global level_end_x
 .global sub_de0d
 .global sub_dad2
-.global sub_d8b7, sub_c35a, sub_c236, vsync
+.global sub_d8b7, sub_c35a, enable_sound_channels, vsync
 .global sub_d5c3, sub_d5ed, nesmus_shut_up, reset_enemies, sub_c3eb, sub_da95, sub_cab7
 .global sub_c9e2, sub_db61, sub_e816, sub_e679, sub_c24e
 .global sub_e8ed, sub_d2bb, sub_c7ec, sub_cabb, get_controller_buttons, sub_dc71

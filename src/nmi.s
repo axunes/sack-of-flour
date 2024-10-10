@@ -7,7 +7,7 @@ setLongBranch -, -
 reset:
 nmi:
 	jsr sub_c35a
-	jsr sub_c236
+	jsr enable_sound_channels
 	jsr vsync
 	jsr vsync
 	jsr sub_f5dd ; uncomment and title screen skips
