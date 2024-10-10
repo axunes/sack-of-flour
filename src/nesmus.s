@@ -6,213 +6,167 @@ setLongBranch -, -
 
 .segment "PRGF"
 
-sub_e5eb: ; init music?
-	lda #$00
-	sta ram_8e
-	lda #$00
-	sta ram_8f
-	lda #$1f
-	sta APU_CHANCTRL
-	lda #$00
-	sta ram_90
-	lda ram_07
-	asl a
-	asl a
-	sta ram_91
-	ldx ram_91
-	lda music_start,x
-	sta ram_88+0
-	sta music_pointer
+; manually converted from nesmus music.bas
+
+load_music:
+	mb music_repeat = #0 
+	mb music_wait = #0
+	mb APU_CHANCTRL = #STATUS_ENABLE_MASK
+	mb music_id = #0
+	mb x_base = ram_07 << 2
+
+	ldx x_base
+	lda rom_start,x
+	sta music_start+0
+	sta music_pos
 	inx
-	lda music_start,x
-	sta ram_88+1
-	sta music_pointer+1
+	lda rom_start,x
+	sta music_start+1
+	sta music_pos+1
 	inx
-	lda music_start,x
-	sta ram_8a+0
+
+	lda rom_start,x
+	sta music_end+0
 	inx
-	lda music_start,x
-	sta ram_8a+1
+	lda rom_start,x
+	sta music_end+1
 	rts
 
-label_e62c: ; this is some weird ass flow control
+music_loop_start_loop:
 	iny
-	lda (<music_pointer),y
-	sta ram_8e
+	lda (<music_pos),y
+	sta music_repeat
 	clc
-	lda music_pointer
-	adc #$02
-	sta music_pointer
-	sta ram_8c+0
-	lda music_pointer+1
-	adc #$00
-	sta music_pointer+1
-	sta ram_8c+1
-	jmp sub_e679
-label_e64c:
-	dec ram_8e
-	lda ram_8e
-	cmp #$00
-	beq :+
-	lda ram_8c+0
-	sta music_pointer
-	lda ram_8c+1
-	sta music_pointer+1
-	jmp sub_e679
-:	clc
-	lda music_pointer
-	adc #$01
-	sta music_pointer
-	lda music_pointer+1
-	adc #$00
-	sta music_pointer+1
-	jmp sub_e679
-sub_e679:
-	lda #$00
-	sta temp
-	lda ram_8f
-	cmp temp
-	beq :+
-	dec ram_8f
-	rts
-:	ldy #$00
-	lda (<music_pointer),y
+	lda music_pos
+	adc #2
+	sta music_pos
+	sta music_stack+0
+	lda music_pos+1
+	adc #0
+	sta music_pos+1
+	sta music_stack+1
+	jmp music_loop
+music_loop_end_loop:
+	dec music_repeat
+	lda music_repeat
+	cmp #0
+	beq music_loop_end_loop_last_time
+	lda music_stack+0
+	sta music_pos
+	lda music_stack+1
+	sta music_pos+1
+	jmp music_loop
+music_loop_end_loop_last_time:
+	clc
+	lda music_pos
+	adc #1
+	sta music_pos
+	lda music_pos+1
+	adc #0
+	sta music_pos+1
+	jmp music_loop
+music_loop:
+	if (music_wait <> #0)
+		dec music_wait
+		rts
+	endif
+
+	ldy #0
+	lda (<music_pos),y
 	cmp #$ff
-	beq label_e62c
+	beq music_loop_start_loop
 	cmp #$fe
-	beq label_e64c
-	sta ram_8f
+	beq music_loop_end_loop
+	sta music_wait
 	iny
-	lda (<music_pointer),y
-	sta ram_90
+	lda (<music_pos),y
+	sta music_id
 	iny
-	lda #$00
-	sta temp
-	lda ram_90
-	and #$03
-	cmp temp
-	bne :+
-	jmp label_e6dc
-:	lda #$03
-	sta temp
-	lda ram_90
-	and #$03
-	cmp temp
-	bne :+
-	jmp :+
-	; this is some music shit right here I can tell you that much
-:	lda (<music_pointer),y
+music_loop_c0:
+	if (music_id & #%11 = #0) goto music_loop_c1, long
+	if (music_id & #%11 = #%11) goto music_loop_c0_full, long
+music_loop_c0_full:
+	lda (<music_pos),y
 	sta APU_PULSE1CTRL
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE1RAMP
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE1FTUNE
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE1CTUNE
 	iny
-label_e6dc:
-	lda #$00
-	sta temp
-	lda ram_90
-	and #$0c
-	cmp temp
-	bne :+
-	jmp label_e718
-:	lda #$0c
-	sta temp
-	lda ram_90
-	and #$0c
-	cmp temp
-	bne :+
-	jmp :+
-:	lda (<music_pointer),y
+music_loop_c1:
+	if (music_id & #%1100 = #0) goto music_loop_c2, long
+	if (music_id & #%1100 = #%1100) goto music_loop_c1_full, long
+music_loop_c1_full:
+	lda (<music_pos),y
 	sta APU_PULSE2CTRL
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE2RAMP
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE2FTUNE
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_PULSE2STUNE
 	iny
-label_e718:
-	lda #$00
-	sta temp
-	lda ram_90
-	and #$30
-	cmp temp
-	bne :+
-	jmp label_e754
-:	lda #$30
-	sta temp
-	lda ram_90
-	and #$30
-	cmp temp
-	bne :+
-	jmp :+
-:	lda (<music_pointer),y
+music_loop_c2:
+	if (music_id & #%110000 = #0) goto music_loop_c3, long
+	if (music_id & #%110000 = #%110000) goto music_loop_c2_full, long
+music_loop_c2_full:
+	lda (<music_pos),y
 	sta APU_TRICTRL1
 	iny
-	lda (<music_pointer),y
-	sta $4009
+	lda (<music_pos),y
+	sta APU_TRICTRL2
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_TRIFREQ1
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_TRIFREQ2
 	iny
-label_e754:
-	lda #$00
-	sta temp
-	lda ram_90
-	and #$c0
-	cmp temp
-	bne :+
-	jmp label_e790
-:	lda #$c0
-	sta temp
-	lda ram_90
-	and #$c0
-	cmp temp
-	bne :+
-	jmp :+
-:	lda (<music_pointer),y
+music_loop_c3:
+	if (music_id & #%11000000 = #0) goto music_loop_increment, long
+	if (music_id & #%11000000 = #%11000000) goto music_loop_c3_full, long
+music_loop_c3_full:
+	lda (<music_pos),y
 	sta APU_NOISECTRL
 	iny
-	lda (<music_pointer),y
-	sta $400d
+	lda (<music_pos),y
+	sta $400d ; lol
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_NOISEFREQ1
 	iny
-	lda (<music_pointer),y
+	lda (<music_pos),y
 	sta APU_NOISEFREQ2
 	iny
-label_e790:
+music_loop_increment:
 	tya
-	sta ram_11
+	sta nbasic_temp
 	clc
-	lda music_pointer
-	adc ram_11
-	sta music_pointer
-	lda music_pointer+1
-	adc #$00
-	sta music_pointer+1
+	lda music_pos
+	adc nbasic_temp
+	sta music_pos
+	lda music_pos+1
+	adc #0
+	sta music_pos+1
+music_loop_increment_2:
 	clc
-	lda music_pointer
-	cmp ram_8a+0
-	bne :+
-	lda music_pointer+1
-	cmp ram_8a+1
-	bne :+
-	lda ram_88+0
-	sta music_pointer
-	lda ram_88+1
-	sta music_pointer+1
-:	rts
+	lda music_pos
+	cmp music_end+0
+	bne music_loop_end
+	lda music_pos+1
+	cmp music_end+1
+	bne music_loop_end
+	lda music_start+0
+	sta music_pos
+	lda music_start+1
+	sta music_pos+1
+music_loop_end:
+	rts

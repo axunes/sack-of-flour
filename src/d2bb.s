@@ -54,10 +54,10 @@ sub_d2bb: ; process player sprites, store in oam
 	lda player_pos_x2
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sec
 	sbc #$01
 	sta player_offset_x

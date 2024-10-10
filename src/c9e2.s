@@ -28,7 +28,7 @@ label_ca36:
 	jsr sub_dc26
 label_ca39:
 	if (player_pos_x1 <> $805f)
-		jsr sub_e679
+		jsr music_loop
 		jsr sub_d204
 		jsr sub_d204
 		jsr sub_d204

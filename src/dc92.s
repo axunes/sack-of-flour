@@ -61,7 +61,7 @@ sub_ddb0:
 	jsr sub_c3eb
 	for (lda #0 : sta ram_86, ram_86 <> #21, inc ram_86)
 		jsr vsync
-		jsr sub_e679
+		jsr music_loop
 		jsr sub_de0d
 	next
 

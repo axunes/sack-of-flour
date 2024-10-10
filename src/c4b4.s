@@ -12,9 +12,9 @@ sub_c4b4:
 	sta ram_55
 	ldx ram_55
 	lda ram_2a,x
-	sta ram_11
+	sta nbasic_temp
 
-	if (ram_11 = ram_52) rts
+	if (nbasic_temp = ram_52) rts
 
 	ldx ram_55
 	lda ram_52

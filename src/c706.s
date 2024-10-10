@@ -12,9 +12,9 @@ sub_c706:
 	sta ram_55
 	ldx ram_55
 	lda ram_42,x
-	sta ram_11
+	sta nbasic_temp
 
-	if (ram_11 = ram_52) rts
+	if (nbasic_temp = ram_52) rts
 	
 	ldx ram_55
 	lda ram_52
@@ -39,29 +39,29 @@ sub_c706:
 	tax
 :	lda (<ram_00),y
 	iny
-	sta ram_11
+	sta nbasic_temp
 	and #$03
 	sta collision_something_else,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta collision_something_else,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta collision_something_else,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta collision_something_else,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
 	cpy #$54
 	bne :-
@@ -77,29 +77,29 @@ sub_c706:
 	tax
 :	lda (<ram_00),y
 	iny
-	sta ram_11
+	sta nbasic_temp
 	and #$03
 	sta $0200,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta $0200,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta $0200,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
-	lda ram_11
+	lda nbasic_temp
 	and #$03
 	sta $0200,x
-	lsr ram_11
-	lsr ram_11
+	lsr nbasic_temp
+	lsr nbasic_temp
 	inx
 	cpy #$5c
 	bne :-

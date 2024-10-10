@@ -31,10 +31,10 @@ sub_f083:
 	asl a
 	asl a
 	asl a
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_63
 	lda ram_b6
 	and #$0f
@@ -74,10 +74,10 @@ sub_f083:
 	lda ram_65
 	sec
 	sbc #$01
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	tax
 	lda collision_something_else,x
 	sta ram_bb
@@ -122,10 +122,10 @@ label_f126:
 	lda ram_65
 	sec
 	sbc #$01
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	tax
 	lda $0200,x
 	sta ram_bb
@@ -189,10 +189,10 @@ sub_f193:
 	lda ram_65
 	sec
 	sbc #$01
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	tax
 	lda collision_something_else,x
 	sta ram_bb
@@ -237,10 +237,10 @@ label_f22e:
 	lda ram_65
 	sec
 	sbc #$01
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	tax
 	lda $0200,x
 	sta ram_bb
@@ -856,7 +856,7 @@ label_f7b7:
 	jmp label_f7b7
 :	rts
 	; FIXME
-	ldy ram_11
+	ldy nbasic_temp
 	lda #$00
 :	sta $2007
 	dey

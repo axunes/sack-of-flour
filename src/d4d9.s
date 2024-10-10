@@ -41,10 +41,10 @@ label_d4de:
 	asl a
 	asl a
 	asl a
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta $0300,x
 	lda ram_22
 	clc

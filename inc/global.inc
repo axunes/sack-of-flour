@@ -10,7 +10,7 @@ MAX_HEALTH = 5
 .endenum
 
 .global reset, nmi, irq
-.global music_start
+.global rom_start
 .global level_name
 .global level_title
 .global level_end_x
@@ -18,9 +18,9 @@ MAX_HEALTH = 5
 .global sub_dad2
 .global sub_d8b7, sub_c35a, enable_sound_channels, vsync
 .global sub_d5c3, sub_d5ed, nesmus_shut_up, reset_enemies, sub_c3eb, sub_da95, sub_cab7
-.global sub_c9e2, sub_db61, sub_e816, sub_e679, sub_c24e
+.global sub_c9e2, sub_db61, sub_e816, music_loop, sub_c24e
 .global sub_e8ed, sub_d2bb, sub_c7ec, sub_cabb, get_controller_buttons, sub_dc71
-.global sub_c26a, init_ram, sub_dc26, sub_dbda, sub_f5dd, sub_e5eb
+.global sub_c26a, init_ram, sub_dc26, sub_dbda, sub_f5dd, load_music
 .global sub_dc92, sub_dd2d, sub_dc6b, sub_dc1b, sub_dbc3
 .global game_over_text, player_gravity_table, tile_shit_1, tile_shit_2, tile_shit_3, tile_shit_4
 .global sub_f4f5, sub_ee7e, init_enemies
@@ -77,7 +77,7 @@ MAX_HEALTH = 5
 .global label_f4dc
 
 .global ram_00
-.global music_pointer
+.global music_pos
 .global ram_04
 .global ram_05
 .global ram_06
@@ -91,7 +91,7 @@ MAX_HEALTH = 5
 .global idx
 .global player_fall_state
 .global player_velocity
-.global ram_11
+.global nbasic_temp
 .global ram_12
 .global button_a_down
 .global button_b_down
@@ -164,13 +164,13 @@ MAX_HEALTH = 5
 .global ram_85
 .global ram_86
 .global ram_87
-.global ram_88
-.global ram_8a
-.global ram_8c
-.global ram_8e
-.global ram_8f
-.global ram_90
-.global ram_91
+.global music_start
+.global music_end
+.global music_stack
+.global music_repeat
+.global music_wait
+.global music_id
+.global x_base
 .global enemy_pos_x
 .global enemy_pos_x2
 .global enemy_pos_y

@@ -28,7 +28,7 @@ nmi:
 	jsr sub_c26a
 	lda #$00
 	sta ram_07
-	jsr sub_e5eb
+	jsr load_music
 	lda #$03
 	sta player_lives
 	jsr sub_dc71
@@ -43,7 +43,7 @@ nmi:
 
 		; if player_health is 0, KILL?
 		; ^ I guess that's wrong
-		if (player_health <> #0) jsr sub_e679
+		if (player_health <> #0) jsr music_loop
 
 		jsr sub_c17f ; commenting makes enemies not spawn (?)
 		jsr sub_e816 ; commenting makes enemies not spawn (?)
@@ -123,14 +123,14 @@ sub_c17f:
 	lda player_velocity
 	clc
 	adc ram_86
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
-	sta ram_11
+	adc nbasic_temp
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_04
 	lda ram_05
 	pha
@@ -139,13 +139,13 @@ sub_c17f:
 	lda ram_12
 	clc
 	adc ram_5b
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
-	sta ram_11
+	adc nbasic_temp
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_05
 	rts

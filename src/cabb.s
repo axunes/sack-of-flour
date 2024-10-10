@@ -53,9 +53,9 @@ label_cb0c:
 	jsr sub_c35e
 	lda #$00
 	sta ram_07
-	jsr sub_e5eb
-	lda #$0f
-	sta APU_CHANCTRL
+	jsr load_music
+	; turn off dmc
+	mb APU_CHANCTRL = #(STATUS_NOISE_ENABLED | STATUS_TRIANGLE_ENABLED | STATUS_PULSE2_ENABLED | STATUS_PULSE1_ENABLED)
 	lda #$00
 	sta player_chunk_pos
 	lda #$00

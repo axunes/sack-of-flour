@@ -8,7 +8,7 @@ NBASIC = 1
 .segment "ZP": zp
 .endif
 	ram_00: .res 2 ; probably a pointer to level data or something
-	music_pointer: .res 2
+	music_pos: .res 2
 	ram_04: .res 1
 	ram_05: .res 1
 	ram_06: .res 1
@@ -23,7 +23,7 @@ NBASIC = 1
 
 	player_fall_state: .res 1 ; (?) 2 = on ground, 1 = ascending, 0 = descending
 	player_velocity: .res 1
-	ram_11: .res 1
+	nbasic_temp: .res 1
 	ram_12: .res 1 ; related to jumping? NAME THIS
 
 	button_a_down: .res 1
@@ -106,13 +106,13 @@ NBASIC = 1
 	ram_87: .res 1
 
 	; MUSIC SHIT?
-	ram_88: .res 2 ; related to music_pointer, probabably loop start
-	ram_8a: .res 2 ; probably loop end
-	ram_8c: .res 2
-	ram_8e: .res 1
-	ram_8f: .res 1
-	ram_90: .res 1
-	ram_91: .res 1
+	music_start: .res 2 ; related to music_pos, probabably loop start
+	music_end: .res 2 ; probably loop end
+	music_stack: .res 2
+	music_repeat: .res 1
+	music_wait: .res 1
+	music_id: .res 1
+	x_base: .res 1
 	enemy_pos_x: .res 6
 	enemy_pos_x2: .res 6
 	enemy_pos_y: .res 6

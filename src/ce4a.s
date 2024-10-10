@@ -47,10 +47,10 @@ sub_ce4a:
 	lda #$e8
 	sec
 	sbc ram_62
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	lsr a
 	lsr a
 	lsr a
@@ -63,10 +63,10 @@ sub_ce4a:
 		lda #$ef
 		sec
 		sbc ram_62
-		sta ram_11
+		sta nbasic_temp
 		pla
 		clc
-		adc ram_11
+		adc nbasic_temp
 		lsr a
 		lsr a
 		lsr a

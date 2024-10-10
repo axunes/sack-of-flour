@@ -347,10 +347,10 @@ label_ea9f:
 	lda ram_b5
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_6b
 	lda #$00
 	sta temp
@@ -408,10 +408,10 @@ label_eb32:
 	lda ram_b5
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_6b
 	lda #$01
 	sta temp
@@ -460,10 +460,10 @@ label_ebb7:
 	lda ram_b5
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_6b
 	jmp sub_f4f5 ; weird
 label_ec11:
@@ -627,10 +627,10 @@ label_ed11:
 	lda ram_b5
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_6b
 	lda #$01
 	sta temp
@@ -710,10 +710,10 @@ sub_edca:
 	lda ram_b5
 	sec
 	sbc player_chunk_pos_fine_again
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	sta ram_6b
 	jmp label_f52f
 label_ee74:
@@ -844,10 +844,10 @@ label_ee83:
 	lda ram_b8
 	sec
 	sbc #$05
-	sta ram_11
+	sta nbasic_temp
 	pla
 	clc
-	adc ram_11
+	adc nbasic_temp
 	cmp temp
 	bpl :+
 	lda #$01
